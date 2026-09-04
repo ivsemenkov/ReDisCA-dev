@@ -1,7 +1,7 @@
 # Reproduction matrix (overnight integration review)
 
 Ossadtchi et al., *NeuroImage* 301 (2024) 120868.
-Evidence snapshot: `paper` branch commit `SNAPSHOT_SHA` (Tracks A–F at
+Evidence snapshot: `paper` branch commit `ffae685` (Tracks A–F at
 `38466de`). Reviewer: overnight integration. Statuses are from committed
 JSON/code, not TRACK_REPORT claims.
 

@@ -10,7 +10,7 @@ permanent `paper` branch. The lightweight public library remains on `main`.
 Do not merge `paper` into `main`. Do not change library semantics on this
 branch merely to improve figure match.
 
-Overnight integration review snapshot: commit `SNAPSHOT_SHA` (Tracks A–F
+Overnight integration review snapshot: commit `ffae685` (Tracks A–F
 merged at `38466de`; this commit records independent numerical review).
 Statuses below are from committed JSON and reports, not from TRACK_REPORT
 prose.
