@@ -217,7 +217,9 @@ class TestParameterTypesAndYConstraints:
             ReDisCA(n_components=0).fit(X, y)
         with pytest.raises(ValueError, match="rank"):
             ReDisCA(rank=-1).fit(X, y)
-        for rank_tol in (0.0, -1.0, np.nan, np.inf):
+        with pytest.raises(TypeError, match="rank_tol"):
+            ReDisCA(rank_tol=True).fit(X, y)
+        for rank_tol in (1.0, 1.5, 0.0, -1.0, np.nan, np.inf):
             with pytest.raises(ValueError, match="rank_tol"):
                 ReDisCA(rank_tol=rank_tol).fit(X, y)
 

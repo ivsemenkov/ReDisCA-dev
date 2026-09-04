@@ -56,11 +56,18 @@ def validate_estimator_params(
     if rank is not None:
         rank = validate_positive_int(rank, name="rank")
 
-    rank_tol = float(rank_tol)
-    if not np.isfinite(rank_tol) or rank_tol <= 0.0:
+    _reject_bool(rank_tol, name="rank_tol")
+    try:
+        rank_tol = float(rank_tol)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(
+            "rank_tol must be a finite real scalar satisfying "
+            f"0 < rank_tol < 1, got {type(rank_tol).__name__}."
+        ) from exc
+    if not np.isfinite(rank_tol) or not (0.0 < rank_tol < 1.0):
         raise ValueError(
-            "rank_tol must be a finite number > 0, "
-            f"got {rank_tol}."
+            "rank_tol must be a finite real scalar satisfying "
+            f"0 < rank_tol < 1, got {rank_tol}."
         )
     return n_components, demean_time, rank, rank_tol
 

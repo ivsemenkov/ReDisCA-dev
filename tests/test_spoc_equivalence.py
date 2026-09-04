@@ -1,7 +1,12 @@
-"""Independent SPoC-equivalence tests for the deterministic ReDisCA core.
+"""Independent SPoC-style MATLAB-cov equivalence tests for the deterministic ReDisCA core.
 
 These tests reimplement MATLAB-cov pair construction and the SPoC whitening
 GEP without calling ``redisca._core.pair_matrix`` / ``pair_matrices``.
+
+They validate SPoC-style MATLAB-cov covariance/whitening semantics under the
+approved canonical unique unordered ``i < j`` pair representation. They are
+not literal AIRI end-to-end numerical parity: the AIRI MATLAB script uses
+directed duplicated pairs ``i != j``.
 """
 
 from __future__ import annotations
@@ -88,6 +93,8 @@ def _structured_problem(seed: int = 0):
 
 
 class TestIndependentSPoCEquivalence:
+    """SPoC-style MATLAB-cov/whitening check on unique ``i < j`` pairs, not AIRI."""
+
     def test_demean_time_true_matches_independent_spoc(self):
         X, y = _structured_problem()
         n_times = X.shape[-1]
