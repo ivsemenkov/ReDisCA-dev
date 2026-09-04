@@ -1,19 +1,140 @@
 {
-  "note": "Source-audit worker expands this file. Hashes below are from primary remotes cloned into the gitignored cache and/or the published OSF API.",
+  "note": "Verified 2026-09-04 from primary remotes, local clones, OSF API, and on-disk SHA-256. Do not vendor full paper text, AIRI, SPoC, or raw datasets.",
   "library_main_commit": "5a5c8658452172e4011445c9a394c1cbbd3c5f7e",
+  "paper_branch_commit": "4e53170",
   "paper_branch_policy": "permanent scientific branch; do not merge into main",
+  "audit_branch": "cursor/paper-source-audit-f368",
+  "forensics_branch_read_only": "cursor/forensics-airi-matlab-0370",
   "airi": {
     "url": "https://github.com/AIRI-Institute/ReDisCA",
-    "commit": "15bc19cdc76989da202714b257f6de4d26a42c51"
+    "commit": "15bc19cdc76989da202714b257f6de4d26a42c51",
+    "commit_date": "2024-11-20 20:28:24 +0300",
+    "files": {
+      "Redisca_tools_faces_3_random_norm_correct.m": {
+        "git_blob": "f5e339c2945cc70d1f7686b7edb347c87c08c587",
+        "sha256": "44af60c421bbcc6321c5e65f73fedf8f2a9cd81dd776f094935585cdf7ab17f2"
+      },
+      "Redisca_source_loc_for_tools_faces_3_random_.m": {
+        "sha256": "e7270939bb8fe052d23189b471dfde8f31d8b902456e272746983caad178dcb9"
+      },
+      "README.md": {
+        "sha256": "a0b2265a4466d365b3edf68b3f4c579d5591645a1c5625c966ac20945cbbfa04"
+      }
+    }
   },
   "stock_spoc": {
     "url": "https://github.com/svendaehne/matlab_SPoC",
-    "commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90"
+    "commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+    "commit_date": "2016-04-04 12:19:29 +0200",
+    "bbci_import_zip": "https://github.com/svendaehne/matlab_SPoC/archive/master.zip",
+    "bbci_public_commit_seen_in_forensics": "2e6fe9481537dcfee702e74544191dcf737f02ce",
+    "files_sha256": {
+      "SPoC/spoc.m": "0979006739b43b9d74e3a9321f3fc232374930b69fc69045a02d6e49173eadd2",
+      "utils/create_Cxxz.m": "7d8cd5e964da92811c27a36405dc1b74e1ea43bd3e317430c25343f36a80c711",
+      "utils/whiten_data.m": "6c12f2cbe4ba2bb46f40d25a9d18d5ea3bfe0667f85d5de855e561bfc28defce",
+      "utils/random_phase_surrogate.m": "0229289ee0bb0a87d9f5cce31360e0b846f8a7acc08212ab58f8fd4ddc69431f",
+      "utils/my_zscore.m": "2db31d939139dcb64259423b1355e1603f2b83590f38c07c65da468c8f7925cb",
+      "utils/propertylist2struct.m": "fc70782003cc27d0f7439f08b1237c5ebb3e0d26955fa98d9a50e280644ec686",
+      "utils/set_defaults.m": "0416538a6aa865d298fa3feb6703edb8cabef8d04eec277d89057e7b54a26f2d",
+      "utils/get_var_features.m": "1830daff9b6e926c4e38332b8b159b10f51e9960ee087552e08588fe74a578c0"
+    }
+  },
+  "erp_core_scripts": {
+    "url": "https://github.com/lucklab/ERP_CORE",
+    "commit_local_clone": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+    "note": "scripts-only clone; ICA xlsx and subject ERPs are on OSF pfde9 All Data package"
   },
   "paper": {
-    "citation": "Ossadtchi et al., NeuroImage 301 (2024) 120868",
+    "citation": "Ossadtchi, A., Semenkov, I., Zhuravleva, A., Kozunov, V., Serikov, O., & Voloshina, E. (2024). Representational dissimilarity component analysis (ReDisCA). NeuroImage, 301, 120868.",
     "doi": "10.1016/j.neuroimage.2024.120868",
+    "url": "https://doi.org/10.1016/j.neuroimage.2024.120868",
     "dataset_landing_page": "https://osf.io/pfde9/",
-    "airi_data": "https://osf.io/8rk67/"
+    "dataset_landing_page_is": "ERP CORE N170 node (parent thsqg), not MEG",
+    "airi_data": "https://osf.io/8rk67/",
+    "erp_core_parent": "https://osf.io/thsqg/",
+    "erp_core_ethics_doi": "10.18115/D5JW4R",
+    "kozunov_2018": "https://doi.org/10.3389/fnhum.2017.00650",
+    "extracted_published_text_sha256": "2b208a183b7f4cafe959464ded67b8105a094b68e830a04ed7e577e17ffa08a4",
+    "extracted_biorxiv_text_sha256": "92aa3a629bfe4a95748c20dc04e0b71637f9132521f24b5fc8feec870ed4e1ea",
+    "published_pdf_forensics_reported": {
+      "url": "https://megmoscow.ru/wp-content/uploads/pubs/10.1016_j.neuroimage.2024.120868.pdf",
+      "sha256": "018478c993ab34b46b732b2b00a573a9e342101e6ae80e190f97a904967a3208",
+      "pages": 25,
+      "rehashed_this_audit": false
+    },
+    "biorxiv_pdf_forensics_reported": {
+      "url": "https://www.biorxiv.org/content/10.1101/2024.02.01.578343.full.pdf",
+      "sha256": "e9ffb81aab830febd3b31aca1e72848a62c0b956c057f19231faf9dedc59a394",
+      "rehashed_this_audit": false
+    }
+  },
+  "osf_8rk67": {
+    "api": "https://api.osf.io/v2/nodes/8rk67/files/osfstorage/?filter[kind]=file",
+    "files": {
+      "MEG_AD_run1.mat": {
+        "download": "https://osf.io/download/h9zpq/",
+        "sha256": "0eca2756c9190ce637a3e14abd24e7cf975d758d3ccea03107963e8b5841a4f6",
+        "size_bytes": 1243214548,
+        "matlab_shape": [207, 1501, 880],
+        "planars_used": "1:204"
+      },
+      "ibfctfprespm8_AD_run1_raw_tsss_mc.mat": {
+        "download": "https://osf.io/download/673e184585d2961fe2886e03/",
+        "sha256": "87890337c385e81c718c421d7be35e54423ca9ceb985e047b276b02018334950",
+        "size_bytes": 62701,
+        "Fsample": 1000,
+        "Nsamples": 1501,
+        "timeOnset_s": -0.5,
+        "n_trials": 880
+      },
+      "ibfctfprespm8_AD_run1_raw_tsss_mc.dat": {
+        "download": "https://osf.io/download/352dp/",
+        "sha256": "d609567ff25eb88055fa26713d7debc4a6c359770835c148fe358bcb97c408e8",
+        "size_bytes": 1093688640,
+        "required_for_airi_main": false
+      },
+      "topo_face_vs_tool_correct_filt15.mat": {
+        "download": "https://osf.io/download/gxbe5/",
+        "sha256": "b18be3e159164846c0e9d82e3d7dd62e1f01e53d00b511b10f11bd1f8b3b7328",
+        "size_bytes": 105738,
+        "A1_shape": [204, 67],
+        "comps_order": [1, 2, 3, 4]
+      },
+      "headmodel_surf_os_meg.mat": {
+        "download": "https://osf.io/download/2afzg/",
+        "sha256": "a365912cae29c3ddda7be90b4bb3830f4ce081e7d4de1206d0c1406985ec439c",
+        "size_bytes": 35957600,
+        "Gain_shape": [322, 15006],
+        "GridLoc_shape": [5002, 3],
+        "MEGMethod": "os_meg"
+      },
+      "results_sLORETA_MEG_GRAD_MEG_MAG_KERNEL_150924_1824.mat": {
+        "download": "https://osf.io/download/673e19715cbaa22c0a75e832/",
+        "sha256": "794043eb34f588a14186b297721d78e71ac9a08187938f611bdf0a0e0a92a1d3",
+        "size_bytes": 13203960,
+        "ImagingKernel_shape": [5002, 306],
+        "nComponents": 1,
+        "Function": "sloreta"
+      },
+      "tess_cortex_pial_low.mat": {
+        "download": "https://osf.io/download/673e1974b0f7255a4475e61b/",
+        "sha256": "40502997c4c21d89a4c7ea207ab77c1c458a005d74e7cb78e6e0e2beb578cad1",
+        "size_bytes": 481530,
+        "Vertices_shape": [5002, 3]
+      }
+    }
+  },
+  "osf_pfde9_n170": {
+    "url": "https://osf.io/pfde9/",
+    "parent": "https://osf.io/thsqg/",
+    "all_data_folder": "N170 All Data and Scripts",
+    "ica_components_xlsx": {
+      "name": "ICA_Components_N170.xlsx",
+      "download": "https://osf.io/download/f9r7c/",
+      "sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+      "size_bytes": 9904,
+      "subject_1_components": [2, 7]
+    },
+    "subject_1_preferred_erp": "N170 All Data and Scripts/1/1_N170_erp_ar.erp"
   }
 }
