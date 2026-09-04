@@ -1,0 +1,373 @@
+{
+  "algorithm": "AIRI_music_SVD_scan_P_eq_eye_Nsns_nRAP1",
+  "artifacts": {
+    "npz": "paper/results/source_localization/maps/airi_music_eyeNsns_A1_col4.npz",
+    "png": "paper/results/source_localization/figures/airi_music_eyeNsns_A1_col4.png"
+  },
+  "claimed_region_maxima": [
+    {
+      "atlas": "Mindboggle",
+      "label": "fusiform R",
+      "max_scan": 0.4803135733016665,
+      "n_vertices": 70,
+      "vertex_index_0based": 3123,
+      "xyz_m": [
+        -0.025685739654333767,
+        -0.03848541689536955,
+        0.02670842868588187
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "fusiform L",
+      "max_scan": 0.529047253333614,
+      "n_vertices": 70,
+      "vertex_index_0based": 278,
+      "xyz_m": [
+        -0.05961178639203235,
+        0.011033587640830983,
+        0.0322545151734384
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "insula R",
+      "max_scan": 0.3291182552611876,
+      "n_vertices": 57,
+      "vertex_index_0based": 3683,
+      "xyz_m": [
+        0.0006388494128795053,
+        -0.032994448407442784,
+        0.04769495894641902
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "insula L",
+      "max_scan": 0.31430685216712345,
+      "n_vertices": 54,
+      "vertex_index_0based": 1266,
+      "xyz_m": [
+        -0.002606642951637539,
+        0.03245642042021084,
+        0.06691522896263692
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "S_intrapariet_and_P_trans L",
+      "max_scan": 0.2914757206110151,
+      "n_vertices": 35,
+      "vertex_index_0based": 856,
+      "xyz_m": [
+        -0.021682010367464005,
+        0.03393359522934081,
+        0.0864465890797302
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "S_intrapariet_and_P_trans R",
+      "max_scan": 0.46335164374661725,
+      "n_vertices": 57,
+      "vertex_index_0based": 2854,
+      "xyz_m": [
+        -0.043283388180338195,
+        -0.03374645788189842,
+        0.08396944655211723
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_oc-temp_lat-fusifor R",
+      "max_scan": 0.4803135733016665,
+      "n_vertices": 30,
+      "vertex_index_0based": 3123,
+      "xyz_m": [
+        -0.025685739654333767,
+        -0.03848541689536955,
+        0.02670842868588187
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_precentral L",
+      "max_scan": 0.38843605509368306,
+      "n_vertices": 45,
+      "vertex_index_0based": 1669,
+      "xyz_m": [
+        0.015981356242873446,
+        0.03868228983890641,
+        0.09829887759533211
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_precentral R",
+      "max_scan": 0.3187243103335442,
+      "n_vertices": 52,
+      "vertex_index_0based": 3958,
+      "xyz_m": [
+        0.0156912815057742,
+        -0.012342341361773368,
+        0.115298109128904
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_and_S_subcentral L",
+      "max_scan": 0.3197741542131314,
+      "n_vertices": 30,
+      "vertex_index_0based": 1222,
+      "xyz_m": [
+        -0.0043781252130545845,
+        0.04111631649499972,
+        0.06687028208009736
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_and_S_subcentral R",
+      "max_scan": 0.22253436652706862,
+      "n_vertices": 29,
+      "vertex_index_0based": 3624,
+      "xyz_m": [
+        0.001551828536197064,
+        -0.037596550181586724,
+        0.0615972029027405
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "cuneus L",
+      "max_scan": 0.41934443833288093,
+      "n_vertices": 66,
+      "vertex_index_0based": 335,
+      "xyz_m": [
+        -0.049338312265811646,
+        0.016139270167024544,
+        0.06730069013822627
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "lingual L",
+      "max_scan": 0.5761843662839256,
+      "n_vertices": 92,
+      "vertex_index_0based": 294,
+      "xyz_m": [
+        -0.05812146219845879,
+        0.0024499443977832325,
+        0.03068493621992667
+      ]
+    }
+  ],
+  "figure": null,
+  "forward": {
+    "gain_rows": "204 MEG GRAD via AIRI megplanarbst on this file",
+    "headmodel": "headmodel_surf_os_meg.mat",
+    "meg_method": "os_meg",
+    "n_vertices": 5002,
+    "not_fsaverage": true,
+    "surface_comment": "cortex_5002V",
+    "tess": "tess_cortex_pial_low.mat"
+  },
+  "id": "airi-music-eye-Nsns-fix-A1-col4",
+  "is_fig18": false,
+  "nRAP": 1,
+  "n_vertices": 5002,
+  "note": "Obvious eye(Nsns) fix of the AIRI music branch, still a single topography A1(:,4), nRAP=1 so RAP never deflates the scan. Equals Eq. 14 with K=1 on the author-saved fourth component. Not Fig. 18 (Fig. 18 is the multi-component Fig. 17 subspace).",
+  "path_label": "airi_executable_music_fix",
+  "peak": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_oc-temp_med-Lingual L",
+    "Mindboggle": "lingual L",
+    "hemisphere": "Cortex L",
+    "rank": 1,
+    "scan_value": 0.5761843662839256,
+    "vertex_index_0based": 294,
+    "vertex_index_1based_matlab": 295,
+    "xyz_m": [
+      -0.05812146219845879,
+      0.0024499443977832325,
+      0.03068493621992667
+    ]
+  },
+  "principal_angle_rad_at_peak": 0.9567438320465584,
+  "scan_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      0.27536131890049653,
+      0.3591192306876549,
+      0.34375074730364047,
+      0.3794501709677562,
+      0.2725677568718775,
+      0.3422150031395475,
+      0.424963838070066,
+      0.38819015379696525
+    ],
+    "max": 0.5761843662839256,
+    "mean": 0.2202138545705007,
+    "min": 0.0031900968354534615,
+    "n_finite": 5002,
+    "n_nonfinite": 0,
+    "shape": [
+      5002
+    ],
+    "std": 0.1279840055365465
+  },
+  "status": "approximate",
+  "top_peaks": [
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 1,
+      "scan_value": 0.5761843662839256,
+      "vertex_index_0based": 294,
+      "vertex_index_1based_matlab": 295,
+      "xyz_m": [
+        -0.05812146219845879,
+        0.0024499443977832325,
+        0.03068493621992667
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 2,
+      "scan_value": 0.5660367980115638,
+      "vertex_index_0based": 176,
+      "vertex_index_1based_matlab": 177,
+      "xyz_m": [
+        -0.06430498376115718,
+        0.004053295336423068,
+        0.030055794144796213
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 3,
+      "scan_value": 0.5586350000317716,
+      "vertex_index_0based": 255,
+      "vertex_index_1based_matlab": 256,
+      "xyz_m": [
+        -0.06052951864080963,
+        0.0011292286287217235,
+        0.03605514102517382
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 4,
+      "scan_value": 0.5529329748987017,
+      "vertex_index_0based": 169,
+      "vertex_index_1based_matlab": 170,
+      "xyz_m": [
+        -0.06553526998001494,
+        -0.005266526311554609,
+        0.03167122017447173
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 5,
+      "scan_value": 0.550761235616316,
+      "vertex_index_0based": 237,
+      "vertex_index_1based_matlab": 238,
+      "xyz_m": [
+        -0.06117199617182137,
+        -0.0030589798743307084,
+        0.03494537223404594
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 6,
+      "scan_value": 0.5435583392820766,
+      "vertex_index_0based": 149,
+      "vertex_index_1based_matlab": 150,
+      "xyz_m": [
+        -0.0687030307373081,
+        0.005362476586265902,
+        0.03133212081347128
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 7,
+      "scan_value": 0.5434367869659203,
+      "vertex_index_0based": 134,
+      "vertex_index_1based_matlab": 135,
+      "xyz_m": [
+        -0.0651011268838444,
+        0.007458818256871003,
+        0.031619090504325695
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "S_collat_transv_post L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 8,
+      "scan_value": 0.5433906671888385,
+      "vertex_index_0based": 305,
+      "vertex_index_1based_matlab": 306,
+      "xyz_m": [
+        -0.05237758580696314,
+        0.005969877847555677,
+        0.03782849671720773
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 9,
+      "scan_value": 0.5326477055758978,
+      "vertex_index_0based": 313,
+      "vertex_index_1based_matlab": 314,
+      "xyz_m": [
+        -0.054028727524778414,
+        0.006835700955148322,
+        0.04166125931568436
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "S_collat_transv_post L",
+      "Mindboggle": "fusiform L",
+      "hemisphere": "Cortex L",
+      "rank": 10,
+      "scan_value": 0.529047253333614,
+      "vertex_index_0based": 278,
+      "vertex_index_1based_matlab": 279,
+      "xyz_m": [
+        -0.05961178639203235,
+        0.011033587640830983,
+        0.0322545151734384
+      ]
+    }
+  ],
+  "topography_matlab_column": 4
+}

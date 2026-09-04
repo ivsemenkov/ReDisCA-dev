@@ -1,0 +1,60 @@
+{
+  "d9_note": "MEG GEP rank is ~67 < 204, so paper A=W^{-1} is undefined. Haufe/SPoC patterns are used.",
+  "eigenvalues_head": [
+    0.847654414509476,
+    0.8311743538745601,
+    0.8099339276131413,
+    0.7819994246805728,
+    0.7454987134691423,
+    0.6925238548790121,
+    0.6108574596011285,
+    0.5841117423579678
+  ],
+  "estimator": "common.source_faithful.fit_condition_averages",
+  "haufe_patterns": true,
+  "inference": "none_bootstrap_skipped_for_localization",
+  "label": "airi_executable",
+  "matrix_mode": "matlab_cov",
+  "n_channels": 204,
+  "n_patterns": 68,
+  "n_times": 901,
+  "pair_mode": "airi_directed",
+  "patterns_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      2.327021780696985e-13,
+      1.4984228794365836e-13,
+      1.0032401749759966e-13,
+      1.4995270257985998e-13,
+      -9.662768333118217e-15,
+      4.695323314707528e-13,
+      4.277325845611243e-14,
+      2.7509620739376e-13
+    ],
+    "max": 1.0540795964708372e-12,
+    "mean": 8.839954639462194e-16,
+    "min": -7.817078281573725e-13,
+    "n_finite": 13872,
+    "n_nonfinite": 0,
+    "shape": [
+      68,
+      204
+    ],
+    "std": 1.076155654463889e-13
+  },
+  "permutation_B": null,
+  "preprocessing": {
+    "bandpass": "butter3_0.25_20_filtfilt_scipy",
+    "window": "matlab_600_1500_99_to_999_ms"
+  },
+  "rdm_name": "facevstool",
+  "selected_component_indices_0based": [
+    0,
+    1,
+    2
+  ],
+  "time_window_s": [
+    0.09899999999999998,
+    0.9990000000000001
+  ]
+}
