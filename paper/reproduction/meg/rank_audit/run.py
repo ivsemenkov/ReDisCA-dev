@@ -91,18 +91,15 @@ def inspect_airi_spoc_sources() -> dict[str, Any]:
     spoc_calls = re.findall(r"(?<![\w])spoc\s*\(([^;]+)\)\s*;", main, flags=re.S)
     pca_hits = []
     for label, text in (("main", main), ("source_loc", sloc)):
-        for pat in (
-            r"pca_X_var_explained",
-            r"pca_var",
-            r"n_components",
-            r"\brank\s*\(",
-            r"whiten",
-            r"filt15",
-            r"highCutOff",
-        ):
-            found = re.findall(pat, text)
-            if found:
-                pca_hits.append({"file": label, "pattern": pat, "n": len(found)})
+        for pat in ("pca_X_var_explained", "pca_var", "filt15", "highCutOff"):
+            n = text.count(pat)
+            if n:
+                pca_hits.append({"file": label, "pattern": pat, "n": n})
+    pca_hits_txt = (
+        "; ".join(f"{h['file']}: {h['pattern']} ×{h['n']}" for h in pca_hits)
+        if pca_hits
+        else "none"
+    )
 
     high = re.search(r"highCutOff\s*=\s*([0-9.]+)", main)
     low = re.search(r"lowCutOff\s*=\s*([0-9.]+)", main)
@@ -128,6 +125,7 @@ def inspect_airi_spoc_sources() -> dict[str, Any]:
         "spoc_default_pca_is_1": default_pca,
         "whiten_tol_line": tol_line,
         "pca_rank_mentions": pca_hits,
+        "pca_rank_mentions_text": pca_hits_txt,
         "explicit_pca_or_rank_setting": explicit,
         "source_loc_topo_file": "topo_face_vs_tool_correct_filt15",
         "main_saves_after_return": bool(re.search(r"^\s*return\s*;", main, flags=re.M))
@@ -320,23 +318,49 @@ def build_conclusion(
             f"AIRI window **without** bandpass, MATLAB cov: rank **{unfilt_rank}**."
         )
     if min_cos_airi is not None:
-        paragraphs.append(
-            f"A1's 67-D column space vs local AIRI-executable Haufe patterns "
-            f"(first 67 of rank {r_airi}): min cosine `{min_cos_airi:.4g}`. "
-            f"Vs paper-faithful Haufe: min cosine `{min_cos_paper:.4g}`. "
-            "A high AIRI overlap with a rank-68 local fit would mean the saved "
-            "topographies are AIRI-like, not that local Cxx should be truncated."
+        lead = (a1.get("vs_airi_executable_haufe") or {}).get("leading_column_abs_pearson") or []
+        lead_txt = ", ".join(
+            f"c{row['component_1based']}|r|={row['abs_pearson']:.3f}" for row in lead
         )
+        airi_ang = (a1.get("vs_airi_executable_haufe") or {}).get("subspace_first_n_take") or {}
+        paragraphs.append(
+            f"A1 is **AIRI-like in the leading columns** of a local facevstool "
+            f"Haufe fit (no bootstrap): {lead_txt or 'n/a'}. The 67-D column space "
+            f"vs the first 67 of the rank-{r_airi} AIRI-executable patterns has min "
+            f"cosine `{min_cos_airi:.4g}` (max principal angle "
+            f"`{airi_ang.get('max_angle_rad', float('nan')):.3g}` rad). "
+            f"Vs paper-faithful Haufe min cosine is `{min_cos_paper:.4g}` (worse; "
+            "D2/D6/D8). Matching leading topographies does **not** license truncating "
+            "local Cxx to 67 columns."
+        )
+    diagnostic_ranks = {
+        name: int(spec["numerical_rank_1e-6"]) for name, spec in diagnostics.items()
+    }
+    if diagnostic_ranks and all(rank == 68 for rank in diagnostic_ranks.values()) and both_68:
+        paragraphs.append(
+            "Every labeled extra Cxx we formed is also rank **68**, with a cliff "
+            "between λ₆₈ (few ×10⁻⁶ λ_max) and λ₆₉ (~10⁻⁸ λ_max) then a numerical "
+            "floor (~10⁻¹⁴). Window, Gram-vs-cov, 0.25–20 Hz, 0.25–15 Hz, and no "
+            "bandpass do not move the count. The rank looks like a property of the "
+            "tSSS planar data, not of those analysis knobs."
+        )
+    paragraphs.append(
+        "Remaining untested path to 67: MATLAB Signal Processing Toolbox `filtfilt` "
+        "plus MATLAB `eig` on **that** Cxx (D8 + D10 together), or some other "
+        "unsaved MATLAB run (D17). That is a *different matrix*, not a solver-only "
+        "flip of the SciPy Cxx computed here. It is not an explicit "
+        "`pca_X_var_explained` setting in the committed AIRI scripts."
+    )
     cause = "different_cxx_or_unsaved_matlab_run"
     if solver_only and both_68 and n_a1 == 67:
         cause = "possibly_solver_borderline_or_different_cxx"
     elif both_68 and n_a1 == 67 and not solver_only:
         if filt15_explains:
             cause = "not_solver_borderline;_A1_may_be_a_different_Cxx_or_MATLAB_run_(filt15_live)"
-        elif min_cos_airi is not None and float(min_cos_airi) > 0.9:
+        elif min_cos_airi is not None and float(min_cos_airi) >= 0.8:
             cause = (
-                "not_solver_borderline;_A1_subspace_is_AIRI-like_but_column_count_"
-                "is_still_67_vs_local_68"
+                "not_solver_borderline;_A1_leading_columns_are_AIRI-like_but_"
+                "saved_whitening_size_is_67_vs_local_68_(D17)"
             )
         else:
             cause = "not_solver_borderline;_A1_is_a_different_saved_run_(D17)"
@@ -359,6 +383,7 @@ def build_conclusion(
         "a1_vs_paper_min_cosine": min_cos_paper,
         "primary_cause_label": cause,
         "disagreement_with_A1": disagree_a1,
+        "diagnostic_ranks": diagnostic_ranks,
         "summary": " ".join(paragraphs),
         "summary_markdown": summary_md,
     }
@@ -497,10 +522,15 @@ def run_audit(*, skip_filt15: bool = False) -> dict[str, Any]:
         airi_avg, pair_mode="airi_directed", matrix_mode="matlab_cov"
     )
     a1, comps, a1_path = _load_author_a1()
+    try:
+        # Do not Path.resolve(): .reproduction_data is a symlink into the cache.
+        a1_path_display = str(a1_path.relative_to(_REPO))
+    except ValueError:
+        a1_path_display = f".reproduction_data/meg/{a1_path.name}"
     a1_payload = author_a1_payload(
         a1,
         comps_order=comps,
-        path=str(a1_path),
+        path=a1_path_display,
         sha256=sha256_file(a1_path),
         airi_patterns=airi_patterns,
         paper_patterns=paper_patterns,

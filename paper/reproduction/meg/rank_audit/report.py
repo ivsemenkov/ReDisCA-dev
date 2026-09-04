@@ -54,9 +54,10 @@ def _path_section(spec: dict[str, Any]) -> str:
         band_txt = "none"
     else:
         band_txt = (
-            f"butter({band.get('order')}) {band.get('low_hz')}–{band.get('high_hz')} Hz "
-            f"{band.get('note', 'scipy filtfilt')}"
+            f"butter({band.get('order')}) {band.get('low_hz')}–{band.get('high_hz')} Hz"
         )
+        if band.get("note"):
+            band_txt += f". Note: {band['note']}"
     win = spec.get("window_ms", [None, None])
     solvers = spec["solver_comparison"]
     ranks = solvers["ranks"]
@@ -181,12 +182,30 @@ def render_rank_audit_md(payload: dict[str, Any]) -> str:
         f"| MATLAB-eig-only flip (paper path) | {paths['paper_faithful']['matlab_eig_flip']['verdict']} |",
         f"| MATLAB-eig-only flip (AIRI path) | {paths['airi_executable']['matlab_eig_flip']['verdict']} |",
         f"| Explicit AIRI PCA setting for 67? | {airi_src['explicit_pca_or_rank_setting']} |",
-        "",
-        "## Cxx / Rbar spectra",
-        "",
-        _path_section(paths["paper_faithful"]),
-        _path_section(paths["airi_executable"]),
     ]
+    extra_rank_lines = [
+        f"| `{name}` | {spec['numerical_rank_1e-6']} |" for name, spec in extras.items()
+    ]
+    if extra_rank_lines:
+        lines.extend(
+            [
+                "",
+                "Labeled extras (still not a reason to force rank 67):",
+                "",
+                "| extra Cxx | rank at 1e-6 |",
+                "| --- | --- |",
+                *extra_rank_lines,
+            ]
+        )
+    lines.extend(
+        [
+            "",
+            "## Cxx / Rbar spectra",
+            "",
+            _path_section(paths["paper_faithful"]),
+            _path_section(paths["airi_executable"]),
+        ]
+    )
 
     if extras:
         lines.extend(["## Diagnostic Cxx (labeled extras; not the two owned paths)", ""])
@@ -224,8 +243,8 @@ def render_rank_audit_md(payload: dict[str, Any]) -> str:
             f"- SPoC pin: `{airi_src.get('spoc_commit')}`.",
             f"- Main-script `spoc(...)` kwargs: `{airi_src.get('spoc_call')}`.",
             f"- `highCutOff` in main script: `{airi_src.get('high_cutoff_hz')}`.",
-            f"- `pca_X_var_explained` / `rank(` / `n_components` in AIRI `.m`: "
-            f"{airi_src.get('pca_rank_mentions')}.",
+            f"- `pca_X_var_explained` / `filt15` / `highCutOff` mentions in AIRI `.m`: "
+            f"{airi_src.get('pca_rank_mentions_text') or airi_src.get('pca_rank_mentions')}.",
             f"- Source-loc loads `{airi_src.get('source_loc_topo_file')}` "
             f"(not produced by a vanilla run of the committed main script).",
             f"- Plot `cfg.ylim=[15 20]` present: {airi_src.get('plot_ylim_15_20')} "
