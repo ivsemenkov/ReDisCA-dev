@@ -265,6 +265,24 @@ class TestParameterTypesAndYConstraints:
         with pytest.raises(ValueError, match="uninformative"):
             ReDisCA().fit(X, constant)
 
+    @pytest.mark.parametrize("scale", [1.0, 1e-15, 1e-100, 1e15, 1e100])
+    def test_scaled_target_rdm_gives_equivalent_decomposition(self, scale):
+        X, y = _structured_data()
+        baseline = ReDisCA().fit(X, y)
+        scaled = ReDisCA().fit(X, scale * y)
+        assert_allclose(
+            scaled.eigenvalues_,
+            baseline.eigenvalues_,
+            rtol=1e-8,
+            atol=1e-10,
+        )
+        assert scaled.rank_ == baseline.rank_
+        aligned = scaled.filters_.copy()
+        for index in range(aligned.shape[0]):
+            if np.dot(baseline.filters_[index], aligned[index]) < 0:
+                aligned[index] *= -1
+        assert_allclose(aligned, baseline.filters_, rtol=1e-6, atol=1e-8)
+
     def test_demean_time_true_requires_two_samples(self):
         rng = np.random.default_rng(4)
         X = rng.standard_normal((3, 4, 1))
