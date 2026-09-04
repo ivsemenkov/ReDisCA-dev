@@ -121,7 +121,8 @@ def _fit_payload(
     fit,
     *,
     rdm,
-    labels: list[str],
+    condition_labels: list[str],
+    channel_labels: list[str],
     times_full_ms: np.ndarray,
     window_meta: dict[str, Any],
     exact_null: dict[str, Any] | None,
@@ -136,10 +137,10 @@ def _fit_payload(
     components = []
     for k in range(n_keep):
         peaks = {
-            labels[c]: _peak_report(
+            condition_labels[c]: _peak_report(
                 times_full_ms, fit.traces_full[c, k, :], 80.0, 250.0
             )
-            for c in range(len(labels))
+            for c in range(len(condition_labels))
         }
         components.append(
             {
@@ -153,7 +154,7 @@ def _fit_payload(
                     if exact_null is None
                     else float(exact_null["p_strict_greater"][k])
                 ),
-                "pattern": _pattern_summary(fit.patterns[k], labels),
+                "pattern": _pattern_summary(fit.patterns[k], channel_labels),
                 "peaks_80_250ms": peaks,
                 "empirical_rdm_window": fit.empirical_rdm_window[k],
             }
@@ -252,7 +253,8 @@ def _run_window_analysis(
     payload = _fit_payload(
         fit,
         rdm=rdm,
-        labels=list(CONDITION_LABELS),
+        condition_labels=list(CONDITION_LABELS),
+        channel_labels=labels,
         times_full_ms=times,
         window_meta=win,
         exact_null=exact,
