@@ -56,7 +56,11 @@ Canonical deterministic runs use `from redisca import ReDisCA`.
 
 Historical AIRI/SPoC reconstruction uses
 `paper/reproduction/common/source_faithful.py` and must not call `redisca`
-internally.
+internally. PRIMARY historical inference is stock-SPoC random-phase
+(`inference="spoc_random_phase"`, `max|λ|`, `p=count/B`, B=1000);
+paper §2.3 condition-label permutation is secondary — see
+`paper/HISTORICAL_INVESTIGATION.md`. Do not treat §2.3 as the historical
+oracle.
 
 ## Coordination contract
 

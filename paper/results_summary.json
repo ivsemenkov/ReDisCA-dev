@@ -2,22 +2,42 @@
   "paper": {
     "citation": "Ossadtchi, A., Semenkov, I., Zhuravleva, A., Kozunov, V., Serikov, O., & Voloshina, E. (2024). Representational dissimilarity component analysis (ReDisCA). NeuroImage, 301, 120868.",
     "doi": "10.1016/j.neuroimage.2024.120868",
-    "evidence_commit": "4813b38",
+    "evidence_commit": "SNAPSHOT_SHA",
     "library_commit": "5a5c8658452172e4011445c9a394c1cbbd3c5f7e",
     "airi_commit": "15bc19cdc76989da202714b257f6de4d26a42c51",
-    "spoc_commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90"
+    "spoc_commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+    "tracks_merged_commit": "38466de",
+    "prior_integration_commit_treated_section_23_as_oracle": "4813b38"
   },
   "review": {
-    "reviewer": "integration",
+    "reviewer": "overnight-integration",
     "date_utc": "2026-09-04",
     "matlab_parity_claimed": false,
+    "primary_historical_inference": "spoc_random_phase",
+    "secondary_printed_inference": "condition_label_permutation",
+    "leading_historical_candidate": {
+      "pair_mode": "airi_directed",
+      "matrix_mode": "matlab_cov",
+      "inference": "spoc_random_phase",
+      "B": 1000,
+      "data_file": "1_N170_erp_ar.erp",
+      "n_channels": 28,
+      "face_variant_id": "face_c200_d100_airi_directed_matlab_cov",
+      "car_variant_id": "car_c170_d100_airi_directed_matlab_cov",
+      "joint_candidate_id": "airi_directed__matlab_cov__car170",
+      "face_window": "T=100 ms centered at 200 ms",
+      "car_window": "T=100 ms centered at 170 ms",
+      "executable": "common.source_faithful.fit_condition_averages",
+      "freeze_file": "paper/results/n170/historical/leading_candidate.json"
+    },
     "source_faithful_imports_redisca": false,
+    "canonical_library_bug": false,
+    "canonical_library_note": "D1-D9 are documented design differences (unique pairs, optional demean, mean aggregation, no inference, Haufe). Default demean_time=True is not the printed Gram. Unique+Gram library lambda matches source_faithful unique+gram to ~1e-15 (face 1.55e-15; car 7.8e-16 / 8.9e-16). Near-perfect 6-entry two-level RDM correlation is the expected GEP optimum, not a bug. Target SD ddof=1 matches MATLAB (D3), not a bug.",
     "student_code_used_as_oracle": false,
     "hidden_parameter_tuning": false,
     "paper_airi_path_mixing_in_figures": false,
-    "canonical_library_bug": false,
-    "canonical_library_note": "D1-D9 are documented design differences (unique pairs, optional demean, mean aggregation, no inference, Haufe). Default demean_time=True is not the printed Gram; paper-faithful fits set False. Target SD ddof=1 matches MATLAB (D3), not a bug.",
     "any_paper_figure_reproduced_numerically": false,
+    "prior_integration_error": "4813b38 treated paper section 2.3 condition-label permutation as the historical oracle. PRIMARY historical inference is stock-SPoC random-phase.",
     "status_vocabulary": [
       "reproduced numerically",
       "reproduced qualitatively",
@@ -26,11 +46,29 @@
       "paper/code discrepancy",
       "stochastic mismatch",
       "not yet reproduced"
+    ],
+    "unresolved": [
+      "Fig. 10 observed-theoretical RDM corr 0.82",
+      "MEG 2 vs 3 significant components on the paper epoch without AIRI extras",
+      "D11 ICA wording (paper three vs subject-1 components 2 and 7)",
+      "Fig. 18 anatomy (left cuneus vs paper right FG / insula / left IPS)"
     ]
   },
   "qc": {
-    "n170_condition_order": ["faces", "cars", "scrambled_faces", "scrambled_cars"],
-    "meg_condition_order": ["face1", "face2", "tool1", "tool2", "nons1", "nons2"],
+    "n170_condition_order": [
+      "faces",
+      "cars",
+      "scrambled_faces",
+      "scrambled_cars"
+    ],
+    "meg_condition_order": [
+      "face1",
+      "face2",
+      "tool1",
+      "tool2",
+      "nons1",
+      "nons2"
+    ],
     "n170_windows": {
       "meaning_duration_ms": 150,
       "sliding_step_ms": 25,
@@ -39,20 +77,30 @@
       "car": "T=100 ms centered at 170 ms (duration not restated in paper)"
     },
     "meg_windows": {
-      "paper_faithful_ms": [-500, 1000],
+      "paper_faithful_ms": [
+        -500,
+        1000
+      ],
       "paper_faithful_n_times": 1501,
-      "airi_executable_ms": [99, 999],
+      "airi_executable_ms": [
+        99,
+        999
+      ],
       "airi_executable_n_times": 901
     },
     "n170_permutation_floors": {
       "meaning_2_2": 0.3333333333333333,
       "face_or_car_one_vs_three": 0.25,
-      "note": "Paper Fig.7 p<0.05 and Fig.11 p<0.01 are incompatible with exact condition-label permutation of C=4 averages."
+      "note": "Paper Fig.7 p<0.05 and Fig.11 p<0.01 are incompatible with exact condition-label permutation of C=4 averages. That test is SECONDARY. PRIMARY random-phase can produce p=0.018 at 400 ms and p2 around 0.009."
     },
     "meg_sign_subspace": {
       "comparison_file": "paper/results/meg/comparison/paper_vs_airi.json",
       "signs_aligned_before_pearson": true,
-      "face_filter_pearson_c1c3": [0.4202520023059674, 0.2438571267800279, 0.17751238081817816],
+      "face_filter_pearson_c1c3": [
+        0.4202520023059674,
+        0.2438571267800279,
+        0.17751238081817816
+      ],
       "tool_filter_subspace_min_cosine": 0.009452567989432354,
       "note": "Low cosine is a real path disagreement (D2+D6+D8), not a sign-alignment bug."
     },
@@ -63,6 +111,31 @@
       "meg_cli": 20240904,
       "meg_streams": "permutation seed+1, FWER seed+2, AIRI seed+3, pair-order seed+10",
       "source_loc_permutation": 20240915
+    },
+    "historical_freeze": {
+      "pair_mode": "airi_directed",
+      "matrix_mode": "matlab_cov",
+      "inference": "spoc_random_phase",
+      "B": 1000,
+      "data_file": "1_N170_erp_ar.erp",
+      "n_channels": 28
+    },
+    "rank_audit": {
+      "paper_faithful_cxx_rank": 68,
+      "airi_executable_cxx_rank": 68,
+      "author_saved_A1_shape": [
+        204,
+        67
+      ],
+      "matlab_eig_flip_plausible": false,
+      "do_not_force_rank_67": true,
+      "evidence": "paper/results/meg/rank_audit/summary.json"
+    },
+    "library_unique_gram_vs_source_faithful": {
+      "face_delta_lambda1": 1.5543122344752192e-15,
+      "car_delta_lambda1": 7.771561172376096e-16,
+      "car_delta_lambda2": 8.881784197001252e-16,
+      "canonical_library_bug": false
     }
   },
   "items": [
@@ -230,44 +303,101 @@
     {
       "id": "fig07-n170-meaning-pmap",
       "figure": "Fig. 7",
-      "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "status": "approximate",
+      "path": "historical",
       "quantitative_metrics_vs_paper": {
         "paper": "uncorrected p<0.05 around t=400 ms, occipital",
-        "p_exact24_at_400ms": 0.3333333333333333,
-        "p_strict_greater_at_400ms": 0.0,
-        "rdm_corr_window_at_400ms": 0.9998054976368955,
-        "max_abs_channel_at_400ms": "PO8",
-        "occipital_energy_fraction_at_400ms": 0.6098100580699337,
-        "n_windows_p_lt_0.05": 0,
-        "sliding_step_ms": 25.0
+        "deterministic": {
+          "lambda1_at_400ms": 0.6358730548202157,
+          "rdm_corr_wTRw_at_400ms": 0.9910479600447496,
+          "max_abs_channel_at_400ms": "Pz",
+          "occipital_energy_fraction_at_400ms": 0.218396129862992,
+          "sliding_step_ms": 25.0
+        },
+        "primary_random_phase": {
+          "p1_at_400ms": 0.018,
+          "p1_at_375ms": 0.076,
+          "p1_at_425ms": 0.05,
+          "n_windows_p_lt_0.05": 1,
+          "isolated_center_only": true,
+          "p_lt_0.05_at_400ms": true
+        },
+        "secondary_condition_label": {
+          "p_exact24_at_400ms": 0.3333333333333333,
+          "still_8_of_24": true
+        },
+        "preprocessing": "official 1_N170_erp_ar.erp, 28 scalp, ICA 2 and 7 only",
+        "printed_vs_executable": "section 2.3 exact-24 cannot reach p<0.05; PRIMARY random-phase can at 400 ms only"
       },
       "blocked_reasons": [
         "sliding step not printed (25 ms documented)",
-        "unpublished permutation B / p formula"
+        "unpublished permutation B / p formula in the paper text"
       ],
-      "inference": "paper condition-label permutation, exact 24, P(lambda* >= lambda). Meaning 2-2 partition floor 8/24. SPoC random-phase exploratory p=0.547 at 400 ms (also not p<0.05).",
+      "inference": "PRIMARY spoc_random_phase B=1000 p=count/B. SECONDARY exact-24 condition-label P(lambda* >= lambda). Meaning 2-2 partition floor 8/24.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/n170/fig07_meaning_pmap.json"
+      "evidence": {
+        "historical_apply": "paper/results/n170/historical_apply/fig07_meaning_pmap.json",
+        "library_path_kept": "paper/results/n170/fig07_meaning_pmap.json"
+      },
+      "notes_split": {
+        "deterministic_match": "pattern max-abs Pz not occipital; corr ~0.991",
+        "stochastic_primary": "p1=0.018 at 400 ms only; neighbors 0.076/0.050",
+        "secondary_printed_method": "exact-24 still 8/24",
+        "preprocessing_uncertainty": "official ERP kept; D11 unresolved",
+        "printed_vs_executable": "section 2.3 vs stock SPoC random-phase"
+      }
     },
     {
       "id": "fig08-n170-meaning-patterns",
       "figure": "Fig. 8",
       "status": "reproduced qualitatively",
-      "path": "paper_faithful",
+      "path": "historical",
       "quantitative_metrics_vs_paper": {
         "paper": "three adjacent windows ~400 ms",
-        "centers_ms": [375.0, 400.0, 425.0],
-        "rdm_corr_window": [0.9998129121047074, 0.9998054976368955, 0.999905197614563],
-        "max_abs_channel": ["PO4", "PO8", "Oz"],
-        "p_exact24": 0.3333333333333333
+        "centers_ms": [
+          375.0,
+          400.0,
+          425.0
+        ],
+        "lambda1": [
+          0.6161661516147023,
+          0.6358730548202157,
+          0.6201556315136004
+        ],
+        "rdm_corr_wTRw": [
+          0.9839737984953704,
+          0.9910479600447496,
+          0.9967962932308196
+        ],
+        "max_abs_channel": [
+          "Oz",
+          "Pz",
+          "Pz"
+        ],
+        "primary_p1": [
+          0.076,
+          0.018,
+          0.05
+        ],
+        "secondary_exact24_p1": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ]
       },
       "blocked_reasons": [
         "sliding step not printed"
       ],
-      "inference": "same C=4 floor as Fig. 7; this figure is patterns/traces, not the p-map",
+      "inference": "PRIMARY random-phase; secondary C=4 floor. This figure is patterns/traces, not the p-map.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/n170/fig08_meaning_windows.json"
+      "evidence": "paper/results/n170/historical_apply/fig08_meaning_windows.json",
+      "notes_split": {
+        "deterministic_match": "adjacent 375/400/425 ms; max-abs Oz/Pz/Pz (400 ms not occipital)",
+        "stochastic_primary": "p1=0.076/0.018/0.050",
+        "secondary_printed_method": "8/24 at all three centers",
+        "preprocessing_uncertainty": "official ERP kept",
+        "printed_vs_executable": "same freeze as Fig. 7"
+      }
     },
     {
       "id": "fig09-n170-face-car-rdms",
@@ -290,52 +420,105 @@
       "id": "fig10-n170-face",
       "figure": "Fig. 10",
       "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "path": "historical",
       "quantitative_metrics_vs_paper": {
+        "paper_lambda1": 0.87209,
+        "observed_lambda1_freeze": 0.8801033884402201,
+        "delta_lambda1": 0.008013388440220037,
         "paper_rdm_corr": 0.82,
-        "observed_rdm_corr_window": 0.9998814542043535,
-        "observed_rdm_corr_full_epoch": 0.9446641853385273,
-        "paper_n_significant": 1,
-        "observed_n_p_lt_0.05_exact24": 0,
-        "p_exact24_comp0": 0.75,
-        "p_mc_B1000_comp0": 0.741,
+        "observed_rdm_corr_wTRw": 0.9985772109512765,
+        "observed_rdm_corr_trace_sq_undemeaned": 0.9481886189820606,
+        "library_unique_gram_window_corr": 0.9998814542043535,
+        "paper_p1": 0.0,
+        "primary_p1_track_a": 0.0,
+        "primary_p1_track_b_n20_p0": 20,
+        "secondary_exact24_p1_signed_ge": 0.5,
+        "library_exact24_p1": 0.75,
         "paper_face_burst_ms": 170,
-        "observed_faces_peak_ms": 171.875,
-        "max_abs_channel": "P7",
-        "occipital_energy_fraction": 0.5315590816601398,
-        "tuned_toward_0.82": false
+        "observed_faces_peak_ms": 167.96875,
+        "tuned_toward_0.82": false,
+        "upgraded_to_numerical": false
       },
       "blocked_reasons": [
         "unpublished permutation B",
-        "channel list unnamed; P9/P10 absent from official ERP"
+        "channel list unnamed; P9/P10 absent from official ERP",
+        "D11 ICA wording unresolved"
       ],
-      "inference": "exact-24 condition-label P(lambda* >= lambda)=0.75. Random-phase exploratory p=0.000 is D5, not the paper N170 test.",
-      "canonical_library_issues": "GEP on 28 ch x ~26 samples can match a 6-entry two-level RDM almost perfectly; not treated as a library bug",
-      "evidence": "paper/results/n170/fig10_face.json"
+      "inference": "PRIMARY spoc_random_phase p1=0 in 20/20 seeds (historical test, not section 2.3). SECONDARY exact-24 p1=0.50. Printed p1=0 is the historical SPoC fingerprint, not a claim that Fig. 10 is numerically reproduced.",
+      "canonical_library_issues": "GEP on 28 ch x ~26 samples can match a 6-entry two-level RDM almost perfectly; expected optimum, not a library bug. unique+Gram library vs source_faithful unique+gram lambda delta 1.55e-15.",
+      "evidence": {
+        "freeze": "paper/results/n170/historical/leading_candidate.json",
+        "track_a": "paper/results/n170/historical/track_a_table.json",
+        "track_b": "paper/results/n170/historical/track_b.json",
+        "rdm_correlation": "paper/results/n170/rdm_correlation/summary.json",
+        "library_path_kept": "paper/results/n170/fig10_face.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda1 0.88010 vs 0.87209 (close); window corr ~0.999/0.948 NOT 0.82; peak 168 vs 170 ms",
+        "stochastic_primary": "p1=0 in 20/20 seeds",
+        "secondary_printed_method": "exact-24 p1=0.50 (not significant)",
+        "preprocessing_uncertainty": "keep 1_N170_erp_ar.erp; no named correlation on this ERP is 0.82",
+        "printed_vs_executable": "p1=0 is stock SPoC random-phase, not section 2.3"
+      }
     },
     {
       "id": "fig11-n170-car",
       "figure": "Fig. 11",
-      "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "status": "approximate",
+      "path": "historical",
       "quantitative_metrics_vs_paper": {
+        "paper_lambda1": 0.91639,
+        "paper_lambda2": 0.77036,
+        "observed_lambda1_freeze": 0.913121776391964,
+        "observed_lambda2_freeze": 0.7904341887053492,
         "paper_rdm_corr": ">0.99",
-        "observed_rdm_corr_window_comp0": 0.9999190189565106,
-        "observed_rdm_corr_window_comp1": 0.9996781244822817,
+        "observed_rdm_corr_wTRw": 0.9990898730962013,
         "corr_meets_gt_0.99": true,
+        "paper_p1": 0.0,
+        "paper_p2": 0.009,
+        "primary_p1_track_b_n20_p0": 20,
+        "primary_p2_track_a": 0.003,
+        "primary_p2_track_b": {
+          "n": 20,
+          "mean": 0.007400000000000001,
+          "median": 0.0075,
+          "min": 0.003,
+          "max": 0.014,
+          "n_equal_0.009": 2,
+          "printed_inside_min_max": true,
+          "printed_inside_q05_q95": true
+        },
+        "unique_pair_car_p2_does_not_match": {
+          "unique_gram_p2": 0.141,
+          "unique_cov_p2": 0.115,
+          "note": "unique-pair random-phase car p2 ~0.12-0.14 does NOT match printed 0.009"
+        },
+        "secondary_exact24_p": [
+          0.25,
+          0.25
+        ],
         "paper_n_comps_p_lt_0.01": 2,
-        "observed_n_p_lt_0.01_exact24": 0,
-        "p_exact24_comp0_comp1": [0.25, 0.25],
-        "p_strict_greater_comp0_comp1": [0.0, 0.0],
-        "observed_cars_peak_ms_comp0": 136.71875,
-        "max_abs_channel_comp0_comp1": ["O1", "Pz"]
+        "upgraded_to_numerical": false
       },
       "blocked_reasons": [
-        "car-window duration not restated (100 ms used)"
+        "car-window duration not restated (100 ms used)",
+        "MATLAB eig/rand unavailable"
       ],
-      "inference": "exact-24 floor 6/24=0.25; paper p<0.01 unreachable. Strict-'exceeds' p=0 for comps 1-2 (uniquely best detector) is stored as an extra reading, not used to claim significance.",
+      "inference": "PRIMARY spoc_random_phase. Track B p2 envelope contains printed 0.009 (2/20 exact). SECONDARY exact-24 floor 6/24=0.25 cannot equal 0.009.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/n170/fig11_car.json"
+      "evidence": {
+        "freeze": "paper/results/n170/historical/leading_candidate.json",
+        "track_a": "paper/results/n170/historical/track_a_table.json",
+        "track_b": "paper/results/n170/historical/track_b.json",
+        "library_path_kept": "paper/results/n170/fig11_car.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda1 0.91312 vs 0.91639; lambda2 0.79043 vs 0.77036 (delta +0.020); corr 0.999>0.99",
+        "stochastic_primary": "p1=0 in 20/20; p2 mean 0.0074 min 0.003 max 0.014; 2/20 exactly 0.009",
+        "secondary_printed_method": "0.25/0.25 floor; cannot produce 0.009",
+        "preprocessing_uncertainty": "official ERP kept",
+        "printed_vs_executable": "directed-pair SPoC null recovers p2 neighborhood; unique-pair (~0.12) does not; section 2.3 cannot"
+      }
     },
     {
       "id": "fig12-meg-theoretical-rdms",
@@ -344,7 +527,10 @@
       "path": "paper_faithful",
       "quantitative_metrics_vs_paper": {
         "paper": "face / tool / meaning theoretical RDMs as images",
-        "emitted": ["binary 0/1", "AIRI 0.1/1"]
+        "emitted": [
+          "binary 0/1",
+          "AIRI 0.1/1"
+        ]
       },
       "blocked_reasons": [
         "exact 0 vs 0.1 fill unreadable from figures"
@@ -358,87 +544,211 @@
       "id": "fig13-meg-face",
       "figure": "Fig. 13",
       "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "path": "historical_paper_epoch",
       "quantitative_metrics_vs_paper": {
         "paper": "three significant components; from 65 ms; peak 160 ms; again from 311 ms",
-        "paper_faithful": {
-          "eigenvalues_head": [0.8773291120521899, 0.7859658514095855, 0.690929955642079],
-          "p_maxabs": [0.0, 1.0, 1.0],
-          "empirical_rdm_pearson_comp1": 0.9994606192824319,
-          "fwer_onset_ms_comp1": 107.0,
-          "contrast_peak_ms_comp1": 308.0,
-          "n_p_lt_0.05_maxabs": 1
+        "historical_paper_epoch_no_airi_extras": {
+          "eigenvalues_head": [
+            0.8618763046920177,
+            0.7958508612051723,
+            0.6939134091625939
+          ],
+          "primary_p": [
+            0.006,
+            0.019,
+            0.114,
+            0.142
+          ],
+          "n_first3_p_lt_0.05": 2,
+          "contrast_peak_ms_comp1": 309.0,
+          "secondary_labelperm_p_maxabs_head": [
+            0.0,
+            0.8666666666666667,
+            1.0,
+            1.0
+          ]
         },
+        "three_significant_components_under_paper_epoch_freeze": false,
         "airi_executable_not_paper_methods": {
-          "p_spoc": [0.006, 0.008, 0.014, 0.032],
-          "contrast_peak_ms_comp1": 319.0,
+          "p_spoc": [
+            0.006,
+            0.008,
+            0.014,
+            0.032
+          ],
+          "n_first3_p_lt_0.05": 3,
           "overlap_mean_trace_peak_ms_comp1": 160.0
         },
-        "three_significant_components_under_paper_test": false
+        "library_paper_faithful_section_23": {
+          "p_maxabs": [
+            0.0,
+            1.0,
+            1.0
+          ],
+          "n_p_lt_0.05_maxabs": 1,
+          "contrast_peak_ms_comp1": 308.0
+        },
+        "rank": 68
       },
       "blocked_reasons": [
         "FieldTrip / prepare4topoNMG helmet topographies missing",
-        "paper permutation B unspecified (used 500)"
+        "AIRI extras (99-999 ms, 0.25-20 Hz) are not paper methods"
       ],
-      "inference": "paper_faithful: condition-label permutation, primary max|lambda| B=500, FWER time Nmc=200. AIRI: random-phase B=1000 (D5) and half-split Nmc=100 (D5b). Do not compare asterisks.",
+      "inference": "PRIMARY historical: spoc_random_phase B=1000 on paper epoch (no AIRI crop/filter) yields 2 components p<0.05, not 3. SECONDARY exact-720 condition-label does not yield 3. AIRI-executable extras yield 3 first components p<0.05 and are not paper methods.",
       "canonical_library_issues": null,
       "evidence": {
-        "paper_faithful": "paper/results/meg/paper_faithful/fig13_face.json",
-        "airi_executable": "paper/results/meg/airi_executable/fig13_face.json",
-        "comparison": "paper/results/meg/comparison/paper_vs_airi.json"
+        "historical_candidate": "paper/results/meg/historical_candidate/summary.json",
+        "historical_paper_epoch": "paper/results/meg/historical_candidate/paper_epoch_face.json",
+        "airi_executable_reuse": "paper/results/meg/airi_executable/fig13_face.json",
+        "paper_faithful_library": "paper/results/meg/paper_faithful/fig13_face.json",
+        "comparison": "paper/results/meg/comparison/paper_vs_airi.json",
+        "rank_audit": "paper/results/meg/rank_audit/summary.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda recorded; face contrast peak ~309 ms vs paper 160 ms",
+        "stochastic_primary": "2 components p<0.05, not 3",
+        "secondary_printed_method": "condition-label max|lambda| does not yield 3 significant components",
+        "preprocessing_uncertainty": "tSSS planar file as published OSF; rank 68 vs A1 67",
+        "printed_vs_executable": "AIRI extras (D6+D8) recover 3-comp count; not paper methods"
       }
     },
     {
       "id": "fig14-meg-tool",
       "figure": "Fig. 14",
       "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "path": "historical_paper_epoch",
       "quantitative_metrics_vs_paper": {
         "paper": "210 ms; three components implied",
-        "paper_faithful": {
-          "eigenvalues_head": [0.8572775946508424, 0.789106662143932, 0.7232611327600093],
-          "p_maxabs": [0.478, 1.0, 1.0],
-          "empirical_rdm_pearson_comp1": 0.9998890168922655,
-          "fwer_onset_ms_comp1": 165.0,
+        "historical_paper_epoch_no_airi_extras": {
+          "eigenvalues_head": [
+            0.8183471094394918,
+            0.8049816476576809,
+            0.7377569827401571
+          ],
+          "primary_p": [
+            0.006,
+            0.01,
+            0.057,
+            0.107
+          ],
+          "n_first3_p_lt_0.05": 2,
+          "contrast_peak_ms_comp1": 392.0,
+          "secondary_labelperm_p_maxabs_head": [
+            0.5333333333333333,
+            0.8,
+            1.0,
+            1.0
+          ]
+        },
+        "three_significant_components_under_paper_epoch_freeze": false,
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [
+            0.001,
+            0.003,
+            0.008,
+            0.01
+          ],
+          "n_first3_p_lt_0.05": 3
+        },
+        "library_paper_faithful_section_23": {
+          "p_maxabs": [
+            0.478,
+            1.0,
+            1.0
+          ],
+          "n_p_lt_0.05_maxabs": 0,
           "contrast_peak_ms_comp1": 384.0
         },
-        "airi_executable_not_paper_methods": {
-          "p_spoc": [0.001, 0.003, 0.008, 0.01],
-          "contrast_peak_ms_comp1": 424.0
-        }
+        "rank": 68
       },
       "blocked_reasons": [
-        "FieldTrip helmet topographies missing"
+        "FieldTrip / prepare4topoNMG helmet topographies missing",
+        "AIRI extras (99-999 ms, 0.25-20 Hz) are not paper methods"
       ],
-      "inference": "paper_faithful max|lambda| does not yield p<0.05 for any of the first three components",
+      "inference": "PRIMARY historical: spoc_random_phase B=1000 on paper epoch (no AIRI crop/filter) yields 2 components p<0.05, not 3. SECONDARY exact-720 condition-label does not yield 3. AIRI-executable extras yield 3 first components p<0.05 and are not paper methods.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/meg/paper_faithful/fig14_tool.json"
+      "evidence": {
+        "historical_candidate": "paper/results/meg/historical_candidate/summary.json",
+        "historical_paper_epoch": "paper/results/meg/historical_candidate/paper_epoch_tool.json",
+        "airi_executable_reuse": "paper/results/meg/airi_executable/fig14_tool.json",
+        "paper_faithful_library": "paper/results/meg/paper_faithful/fig14_tool.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda recorded; face contrast peak ~309 ms vs paper 160 ms",
+        "stochastic_primary": "2 components p<0.05, not 3",
+        "secondary_printed_method": "condition-label max|lambda| does not yield 3 significant components",
+        "preprocessing_uncertainty": "tSSS planar file as published OSF; rank 68 vs A1 67",
+        "printed_vs_executable": "AIRI extras (D6+D8) recover 3-comp count; not paper methods"
+      }
     },
     {
       "id": "fig15-meg-meaning",
       "figure": "Fig. 15",
       "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "path": "historical_paper_epoch",
       "quantitative_metrics_vs_paper": {
-        "paper": "from 160 ms",
-        "paper_faithful": {
-          "eigenvalues_head": [0.870068550975931, 0.7747401147009165, 0.7168806331445672],
-          "p_maxabs": [0.204, 1.0, 1.0],
-          "empirical_rdm_pearson_comp1": 0.9995852902580858,
-          "fwer_onset_ms_comp1": 128.0,
+        "paper": "from 160 ms; three components implied",
+        "historical_paper_epoch_no_airi_extras": {
+          "eigenvalues_head": [
+            0.8449866831248929,
+            0.787213331768332,
+            0.7305427251575697
+          ],
+          "primary_p": [
+            0.001,
+            0.018,
+            0.061,
+            0.171
+          ],
+          "n_first3_p_lt_0.05": 2,
+          "contrast_peak_ms_comp1": 315.0,
+          "secondary_labelperm_p_maxabs_head": [
+            0.13333333333333333,
+            0.8666666666666667,
+            1.0,
+            1.0
+          ]
+        },
+        "three_significant_components_under_paper_epoch_freeze": false,
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [
+            0.005,
+            0.012,
+            0.018,
+            0.026
+          ],
+          "n_first3_p_lt_0.05": 3
+        },
+        "library_paper_faithful_section_23": {
+          "p_maxabs": [
+            0.204,
+            1.0,
+            1.0
+          ],
+          "n_p_lt_0.05_maxabs": 0,
           "contrast_peak_ms_comp1": 315.0
         },
-        "airi_executable_not_paper_methods": {
-          "p_spoc": [0.005, 0.012, 0.018, 0.026],
-          "contrast_peak_ms_comp1": 499.0
-        }
+        "rank": 68
       },
       "blocked_reasons": [
-        "FieldTrip helmet topographies missing"
+        "FieldTrip / prepare4topoNMG helmet topographies missing",
+        "AIRI extras (99-999 ms, 0.25-20 Hz) are not paper methods"
       ],
-      "inference": "paper_faithful max|lambda| does not yield three p<0.05 components",
+      "inference": "PRIMARY historical: spoc_random_phase B=1000 on paper epoch (no AIRI crop/filter) yields 2 components p<0.05, not 3. SECONDARY exact-720 condition-label does not yield 3. AIRI-executable extras yield 3 first components p<0.05 and are not paper methods.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/meg/paper_faithful/fig15_meaning.json"
+      "evidence": {
+        "historical_candidate": "paper/results/meg/historical_candidate/summary.json",
+        "historical_paper_epoch": "paper/results/meg/historical_candidate/paper_epoch_meaning.json",
+        "airi_executable_reuse": "paper/results/meg/airi_executable/fig15_meaning.json",
+        "paper_faithful_library": "paper/results/meg/paper_faithful/fig15_meaning.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda recorded; face contrast peak ~309 ms vs paper 160 ms",
+        "stochastic_primary": "2 components p<0.05, not 3",
+        "secondary_printed_method": "condition-label max|lambda| does not yield 3 significant components",
+        "preprocessing_uncertainty": "tSSS planar file as published OSF; rank 68 vs A1 67",
+        "printed_vs_executable": "AIRI extras (D6+D8) recover 3-comp count; not paper methods"
+      }
     },
     {
       "id": "fig16-meg-nonbinary-rdm",
@@ -447,7 +757,11 @@
       "path": "airi_executable",
       "quantitative_metrics_vs_paper": {
         "paper": "non-binary geometry as images",
-        "airi_facevstool_fill": [0.1, 0.5, 1.0]
+        "airi_facevstool_fill": [
+          0.1,
+          0.5,
+          1.0
+        ]
       },
       "blocked_reasons": [],
       "inference": null,
@@ -459,28 +773,71 @@
       "id": "fig17-meg-nonbinary-components",
       "figure": "Fig. 17",
       "status": "paper/code discrepancy",
-      "path": "paper_faithful",
+      "path": "historical_paper_epoch",
       "quantitative_metrics_vs_paper": {
-        "paper": "tools vs faces from 202 ms; face-specific peak ~160 ms",
-        "paper_faithful": {
-          "eigenvalues_head": [0.83599407422755, 0.752597935799578, 0.6836016635573615],
-          "p_maxabs": [0.302, 1.0, 1.0],
-          "empirical_rdm_pearson_comp1": 0.9659650062147465,
-          "fwer_onset_ms_comp1": 113.0,
+        "paper": "tools vs faces from 202 ms; face-specific peak ~160 ms; three components",
+        "historical_paper_epoch_no_airi_extras": {
+          "eigenvalues_head": [
+            0.8076453502568317,
+            0.7658216648708985,
+            0.6967841822308736
+          ],
+          "primary_p": [
+            0.01,
+            0.024,
+            0.104,
+            0.191
+          ],
+          "n_first3_p_lt_0.05": 2,
+          "contrast_peak_ms_comp1": 566.0,
+          "secondary_labelperm_p_maxabs_head": [
+            0.26666666666666666,
+            0.9333333333333333,
+            1.0,
+            1.0
+          ]
+        },
+        "three_significant_components_under_paper_epoch_freeze": false,
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [
+            0.016,
+            0.019,
+            0.028,
+            0.054
+          ],
+          "n_first3_p_lt_0.05": 3,
+          "class2_tools_peak_ms": 161.0
+        },
+        "library_paper_faithful_section_23": {
+          "p_maxabs": [
+            0.302,
+            1.0,
+            1.0
+          ],
+          "n_p_lt_0.05_maxabs": 0,
           "contrast_peak_ms_comp1": 564.0
         },
-        "airi_executable_not_paper_methods": {
-          "p_spoc": [0.016, 0.019, 0.028, 0.054],
-          "contrast_peak_ms_comp1": 321.0,
-          "class2_tools_peak_ms": 161.0
-        }
+        "rank": 68
       },
       "blocked_reasons": [
-        "FieldTrip helmet topographies missing"
+        "FieldTrip / prepare4topoNMG helmet topographies missing",
+        "AIRI extras (99-999 ms, 0.25-20 Hz) are not paper methods"
       ],
-      "inference": "paper_faithful max|lambda| p=(0.302,1,1). AIRI random-phase first three p<0.05 is D5, not section 2.3.",
+      "inference": "PRIMARY historical: spoc_random_phase B=1000 on paper epoch (no AIRI crop/filter) yields 2 components p<0.05, not 3. SECONDARY exact-720 condition-label does not yield 3. AIRI-executable extras yield 3 first components p<0.05 and are not paper methods.",
       "canonical_library_issues": null,
-      "evidence": "paper/results/meg/paper_faithful/fig17_nonbinary_components.json"
+      "evidence": {
+        "historical_candidate": "paper/results/meg/historical_candidate/summary.json",
+        "historical_paper_epoch": "paper/results/meg/historical_candidate/paper_epoch_facevstool.json",
+        "airi_executable_reuse": "paper/results/meg/airi_executable/fig16_17_facevstool.json",
+        "paper_faithful_library": "paper/results/meg/paper_faithful/fig17_nonbinary_components.json"
+      },
+      "notes_split": {
+        "deterministic_match": "lambda recorded; face contrast peak ~309 ms vs paper 160 ms",
+        "stochastic_primary": "2 components p<0.05, not 3",
+        "secondary_printed_method": "condition-label max|lambda| does not yield 3 significant components",
+        "preprocessing_uncertainty": "tSSS planar file as published OSF; rank 68 vs A1 67",
+        "printed_vs_executable": "AIRI extras (D6+D8) recover 3-comp count; not paper methods"
+      }
     },
     {
       "id": "airi-executable-meg-facevstool",
@@ -488,17 +845,28 @@
       "status": "approximate",
       "path": "airi_executable",
       "quantitative_metrics_vs_paper": {
-        "lambda_head": [0.8476544145094776, 0.8311743538745514, 0.8099339276131384, 0.7819994246805684],
-        "p_spoc": [0.016, 0.019, 0.028, 0.054],
+        "lambda_head": [
+          0.8476544145094776,
+          0.8311743538745514,
+          0.8099339276131384,
+          0.7819994246805684
+        ],
+        "p_spoc": [
+          0.016,
+          0.019,
+          0.028,
+          0.054
+        ],
         "empirical_rdm_pearson_comp1": 0.9646308681575568
       },
       "blocked_reasons": [
         "SciPy filtfilt / eigh / Generator are not MATLAB parity"
       ],
-      "inference": "SPoC random-phase B=1000; pair-order diagnostic shows p moves with the accidental FFT of the length-30 z sequence",
+      "inference": "SPoC random-phase B=1000 on AIRI window+filter (D6+D8). NOT paper methods. First three p<0.05 (c4=0.054). Pair-order diagnostic shows p moves with the FFT of z.",
       "canonical_library_issues": null,
       "evidence": "paper/results/meg/airi_executable/airi_executable_meg_facevstool.json",
-      "estimator": "common.source_faithful.fit_condition_averages (does not import redisca)"
+      "estimator": "common.source_faithful.fit_condition_averages (does not import redisca)",
+      "note": "Do not call AIRI extras paper methods. Same estimator as the N170 freeze plus 99-999 ms and 0.25-20 Hz."
     },
     {
       "id": "fig18-meg-music",
@@ -527,7 +895,14 @@
       "inference": "local facevstool ReDisCA(demean_time=False) full epoch; condition-label max|lambda| B=200 p=(0.325,1,1); three leading components used as the Fig. 17 analog, not claimed significant",
       "canonical_library_issues": "Haufe (D9); invert-W undefined",
       "evidence": "paper/results/source_localization/fig18_meg_music.json",
-      "fsaverage_used": false
+      "fsaverage_used": false,
+      "notes_split": {
+        "deterministic_match": "argmax left cuneus / V2 L, not paper right FG / insula / left IPS",
+        "stochastic_primary": "n/a (MUSIC of subspace; local fit label-perm p=(0.325,1,1))",
+        "secondary_printed_method": "condition-label max|lambda| B=200, no component p<0.05",
+        "preprocessing_uncertainty": "public AD Gain not individual T1",
+        "printed_vs_executable": "AIRI default is sLORETA of A1(:,4), not Fig. 18 MUSIC"
+      }
     },
     {
       "id": "airi-source-loc-precomp",
@@ -582,88 +957,64 @@
   ],
   "track_self_report_deltas": [
     {
-      "id": "fig08-n170-meaning-patterns",
-      "track": "ran",
-      "integration": "reproduced qualitatively",
-      "change": "upgrade of ran to qualitative (windows/patterns only)"
-    },
-    {
-      "id": "fig09-n170-face-car-rdms",
-      "track": "encoded",
-      "integration": "reproduced qualitatively",
-      "change": "upgrade of encoded to qualitative; not numeric fill"
-    },
-    {
-      "id": "fig11-n170-car",
-      "track": "ran; corr agrees >0.99",
-      "integration": "paper/code discrepancy",
-      "change": "downgrade vs reading the corr match as figure reproduction; two comps p<0.01 not recovered"
+      "id": "fig07-n170-meaning-pmap",
+      "prior_integration_4813b38": "paper/code discrepancy (exact-24 p=0.333)",
+      "integration": "approximate",
+      "change": "hierarchy correction: PRIMARY random-phase p1=0.018 at 400 ms only; secondary still 8/24; pattern Pz not occipital"
     },
     {
       "id": "fig10-n170-face",
-      "track": "ran; report 0.99988 vs 0.82",
+      "prior_integration_4813b38": "paper/code discrepancy",
       "integration": "paper/code discrepancy",
-      "change": "classified; not upgraded to qualitative despite 171.9 ms peak"
+      "change": "kept overall; PRIMARY p1=0 now matches printed p1 under historical test; corr 0.82 still unmatched; NOT upgraded to numerical"
     },
     {
-      "id": "fig07-n170-meaning-pmap",
-      "track": "ran; p<0.05 not obtained",
-      "integration": "paper/code discrepancy",
-      "change": "classified, not upgraded"
-    },
-    {
-      "id": "fig12-meg-theoretical-rdms",
-      "track": "emitted",
-      "integration": "reproduced qualitatively",
-      "change": "upgrade of emitted"
-    },
-    {
-      "id": "fig16-meg-nonbinary-rdm",
-      "track": "emitted",
-      "integration": "reproduced qualitatively",
-      "change": "upgrade of emitted"
+      "id": "fig11-n170-car",
+      "prior_integration_4813b38": "paper/code discrepancy",
+      "integration": "approximate",
+      "change": "PRIMARY p2 envelope contains 0.009; unique-pair p2 ~0.12 does not; lambda2 still +0.020; not numerical"
     },
     {
       "id": "fig13-meg-face",
-      "track": "partial / AIRI numeric run complete",
+      "prior_integration_4813b38": "paper/code discrepancy (paper_faithful 1 comp)",
       "integration": "paper/code discrepancy",
-      "change": "downgrade of partial; AIRI path is approximate not paper reproduction"
+      "change": "paper-epoch freeze got 2 comps p<0.05 not 3; AIRI extras got 3 and are not paper methods; NOT upgraded to numerical"
     },
     {
       "id": "fig14-meg-tool",
-      "track": "partial",
+      "prior_integration_4813b38": "paper/code discrepancy",
       "integration": "paper/code discrepancy",
-      "change": "downgrade of partial"
+      "change": "paper-epoch freeze 2 comps not 3"
     },
     {
       "id": "fig15-meg-meaning",
-      "track": "partial",
+      "prior_integration_4813b38": "paper/code discrepancy",
       "integration": "paper/code discrepancy",
-      "change": "downgrade of partial"
+      "change": "paper-epoch freeze 2 comps not 3"
     },
     {
       "id": "fig17-meg-nonbinary-components",
-      "track": "partial / closest AIRI run",
+      "prior_integration_4813b38": "paper/code discrepancy",
       "integration": "paper/code discrepancy",
-      "change": "downgrade of partial; AIRI significance count is D5"
+      "change": "paper-epoch freeze 2 comps not 3; AIRI extras first 3"
     },
     {
       "id": "fig03-fig06-simulations",
-      "track": "approximate / blocked",
+      "prior_integration_4813b38": "approximate",
       "integration": "approximate",
-      "change": "kept; 85% / <1 cm / <2 cm claims not upgraded to qualitative reproduction"
+      "change": "kept; JSON unchanged"
     },
     {
       "id": "fig18-meg-music",
-      "track": "approximate",
+      "prior_integration_4813b38": "approximate",
       "integration": "approximate",
-      "change": "kept"
+      "change": "kept; anatomy unresolved"
     },
     {
-      "id": "airi-source-loc-precomp",
-      "track": "approximate; numeric map reproduced",
-      "integration": "reproduced numerically",
-      "change": "upgrade of the AIRI map formula only; still not Fig. 18"
+      "id": "canonical-library-bug",
+      "prior_integration_4813b38": false,
+      "integration": false,
+      "change": "kept false; added ~1e-15 unique+Gram identity vs source_faithful"
     }
   ]
 }
