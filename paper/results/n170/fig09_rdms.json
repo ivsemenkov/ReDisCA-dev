@@ -1,0 +1,191 @@
+{
+  "binary_0_1": {
+    "car": [
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "face": [
+      [
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "meaning": [
+      [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "condition_labels": [
+    "Faces",
+    "Cars",
+    "Scrambled Faces",
+    "Scrambled Cars"
+  ],
+  "condition_order": [
+    "faces",
+    "cars",
+    "scrambled_faces",
+    "scrambled_cars"
+  ],
+  "id": "fig09-n170-face-car-rdms",
+  "paper_vs_this": "Paper Figs 7a/9a/9b are images; entries are not printed. Structure follows \u00a74.2.1 prose.",
+  "within_0.1_labeled_extra": {
+    "car": [
+      [
+        0.0,
+        1.0,
+        0.1,
+        0.1
+      ],
+      [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        0.1,
+        1.0,
+        0.0,
+        0.1
+      ],
+      [
+        0.1,
+        1.0,
+        0.1,
+        0.0
+      ]
+    ],
+    "face": [
+      [
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.1,
+        0.1
+      ],
+      [
+        1.0,
+        0.1,
+        0.0,
+        0.1
+      ],
+      [
+        1.0,
+        0.1,
+        0.1,
+        0.0
+      ]
+    ],
+    "meaning": [
+      [
+        0.0,
+        0.1,
+        1.0,
+        1.0
+      ],
+      [
+        0.1,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0,
+        0.1
+      ],
+      [
+        1.0,
+        1.0,
+        0.1,
+        0.0
+      ]
+    ],
+    "note": "0.1-within is an AIRI-style fill, not printed in the N170 figures. After sample-SD z-scoring of unique pairs it is identical to 0/1 for these two-level RDMs, so ReDisCA eigenvalues/filters match.",
+    "zscore_equivalence_to_binary": {
+      "car": {
+        "equivalent_after_zscore": true,
+        "max_abs_z_diff_0_vs_0.1": 2.220446049250313e-16
+      },
+      "face": {
+        "equivalent_after_zscore": true,
+        "max_abs_z_diff_0_vs_0.1": 2.220446049250313e-16
+      },
+      "meaning": {
+        "equivalent_after_zscore": true,
+        "max_abs_z_diff_0_vs_0.1": 3.3306690738754696e-16
+      }
+    }
+  }
+}
