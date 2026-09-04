@@ -1,0 +1,48 @@
+{
+  "paper": {
+    "face": 0.82,
+    "car": ">0.99"
+  },
+  "face_T100_at_200ms_unique_pairs": {
+    "library_unscaled_gram": {
+      "lambda1": 0.8800598487297501,
+      "paper_lambda1": 0.87209,
+      "1_window_traces_sqeuclidean_pearson": 0.9998814542043535,
+      "2_full_epoch_traces_sqeuclidean_pearson": 0.9446641853385273,
+      "3_wTRw_unscaled_gram_window": 0.9998814542043533,
+      "4_wTRw_matlab_cov_window": 0.9993153220304666,
+      "5_eq2_standardized_pearson": 0.9998814542043534,
+      "eq2_printed_inner_product_sample_sd": 0.8332345451702944,
+      "6_airi_matlab_grown_corrcoef_window": 0.9997722851287222,
+      "possible_misread_full_4x4_flatten": 0.9997970467005677,
+      "possible_misread_triu_including_diagonal": 0.9997782958067535,
+      "airi_instantaneous_unique_at_171.875ms": 0.994742602390261,
+      "airi_instantaneous_unique_at_199.219ms": 0.9757532430445811,
+      "within0.1_target_equals_binary": true
+    },
+    "source_faithful_matlab_cov": {
+      "lambda1": 0.8391456555460317,
+      "1_window_traces_undemeaned_pearson": 0.9481886189820438,
+      "2_full_epoch_undemeaned_pearson": 0.48907402445925785,
+      "3_wTRw_unscaled_gram_window": 0.9481886189820433,
+      "4_wTRw_matlab_cov_window": 0.9985772109512765,
+      "5_eq2_standardized_pearson_of_undemeaned_window": 0.948188618982044,
+      "eq2_printed_inner_product_sample_sd": 0.7901571824850364,
+      "6_airi_matlab_grown_corrcoef_window": 0.9648083673781574,
+      "airi_instantaneous_unique_at_171.875ms": 0.9635037898036853,
+      "airi_instantaneous_airi_grown_at_199.219ms": 0.8286981720180666,
+      "airi_instantaneous_triu_incl_diag_at_199.219ms": 0.8158615222502227
+    }
+  },
+  "car_T100_at_170ms_unique_pairs_library_gram": {
+    "lambda1": 0.8869090680968623,
+    "lambda2": 0.791703535919934,
+    "comp0_window_pearson": 0.9999190189565107,
+    "comp1_window_pearson": 0.9996781244822815,
+    "comp0_full_epoch_pearson": 0.485941490977726,
+    "comp0_eq2_sample_inner": 0.8332658491304259,
+    "comp0_airi_grown_window": 0.9998537003150922
+  },
+  "classification": "unresolved_historical_preprocessing_or_implementation",
+  "canonical_library_bug": false
+}

@@ -1,0 +1,97 @@
+{
+  "canonical_library_bug": false,
+  "classification": "unresolved_historical_preprocessing_or_implementation",
+  "erp_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+  "id": "n170-rdm-correlation-track-D",
+  "lambda1": {
+    "car_library_gram": [
+      0.8869090680968623,
+      0.791703535919934
+    ],
+    "face_library_gram": 0.8800598487297501,
+    "face_source_faithful_gram": 0.8800598487297516,
+    "face_source_faithful_matlab_cov": 0.8391456555460317,
+    "paper_car": [
+      0.91639,
+      0.77036
+    ],
+    "paper_face": 0.87209
+  },
+  "table": {
+    "car_library_gram_comp0": {
+      "airi_grown_corrcoef_window": 0.9998537003150922,
+      "eq2_printed_inner_product_sample_sd_window": 0.8332658491304259,
+      "item1_window_unique_pearson": 0.9999190189565107,
+      "item2_full_epoch_unique_pearson": 0.485941490977726,
+      "item3_wTRw_gram_unique_pearson": 0.9999190189565107,
+      "item4_wTRw_matlab_cov_unique_pearson": 0.9993657027141617,
+      "item5_eq2_standardized_pearson": 0.9999190189565109,
+      "possible_misread_full_flatten_window": 0.9998682316648678,
+      "possible_misread_triu_incl_diag_window": 0.9998571446244984
+    },
+    "car_library_gram_comp1": {
+      "airi_grown_corrcoef_window": 0.9974593078314435,
+      "eq2_printed_inner_product_sample_sd_window": 0.8330651037352348,
+      "item1_window_unique_pearson": 0.9996781244822815,
+      "item2_full_epoch_unique_pearson": 0.6795969618948596,
+      "item3_wTRw_gram_unique_pearson": 0.9996781244822818,
+      "item4_wTRw_matlab_cov_unique_pearson": 0.998822053433241,
+      "item5_eq2_standardized_pearson": 0.999678124482282,
+      "possible_misread_full_flatten_window": 0.9979992696634964,
+      "possible_misread_triu_incl_diag_window": 0.9976034434436587
+    },
+    "face_library_gram_comp0": {
+      "airi_grown_corrcoef_window": 0.9997722851287222,
+      "eq2_printed_inner_product_sample_sd_window": 0.8332345451702944,
+      "item1_window_unique_pearson": 0.9998814542043535,
+      "item2_full_epoch_unique_pearson": 0.9446641853385273,
+      "item3_wTRw_gram_unique_pearson": 0.9998814542043533,
+      "item4_wTRw_matlab_cov_unique_pearson": 0.9993153220304666,
+      "item5_eq2_standardized_pearson": 0.9998814542043534,
+      "possible_misread_full_flatten_window": 0.9997970467005677,
+      "possible_misread_triu_incl_diag_window": 0.9997782958067535
+    },
+    "face_source_faithful_matlab_cov_comp0": {
+      "airi_grown_corrcoef_window": 0.9648083673781574,
+      "eq2_printed_inner_product_sample_sd_window": 0.7901571824850364,
+      "item1_window_unique_pearson": 0.9481886189820438,
+      "item2_full_epoch_unique_pearson": 0.48907402445925785,
+      "item3_wTRw_gram_unique_pearson": 0.9481886189820433,
+      "item4_wTRw_matlab_cov_unique_pearson": 0.9985772109512765,
+      "item5_eq2_standardized_pearson": 0.948188618982044,
+      "possible_misread_full_flatten_window": 0.9580497616526193,
+      "possible_misread_triu_incl_diag_window": 0.9623798307485282
+    },
+    "paper": {
+      "car": ">0.99",
+      "face": 0.82
+    }
+  },
+  "verdict": {
+    "airi_n170": "N170 has no AIRI script (D12). The MEG plotting Q(c,i) analog applied to windowed N170 RDMs still yields ~1, not 0.82.",
+    "canonical_library_bug": false,
+    "car_library_gram": {
+      "full_epoch_unique_pearson_comp0": 0.485941490977726,
+      "lambda1": 0.8869090680968623,
+      "lambda2": 0.791703535919934,
+      "paper": ">0.99",
+      "window_unique_pearson_comp0": 0.9999190189565107,
+      "window_unique_pearson_comp1": 0.9996781244822815
+    },
+    "classification": "unresolved_historical_preprocessing_or_implementation",
+    "eq2_sample_inner_note": "Eq. 2 RHS with MATLAB sample SD is (n-1)/n * r = 5/6 * r. Face window \u2192 0.83323 (closest paper-formula number to 0.82). The same formula on the car window is 0.83327, which cannot be the published >0.99. Therefore this reading is not how both figures were computed.",
+    "eq2_sample_inner_product_ruled_out_by_car_control": true,
+    "expectedness": "ReDisCA/SPoC maximizes a covariance proxy of corr(w^T R_ij w, d_ij) over 28 channels and ~26 window samples. A 6-entry two-level target (3 between, 3 within) is a low-dimensional constraint; a leading component that isolates one condition from the other three routinely drives unique-triangle Pearson to ~1. A library GEP that matches that target near-perfectly is the expected optimum, not a bug.",
+    "face_library_gram_comp0": {
+      "full_epoch_unique_pearson": 0.9446641853385273,
+      "lambda1": 0.8800598487297501,
+      "paper": 0.82,
+      "paper_lambda1": 0.87209,
+      "window_unique_pearson": 0.9998814542043535
+    },
+    "near_perfect_two_level_match_is_expected": true,
+    "none_of_the_endorsed_definitions_yield_0.82": true,
+    "opposite_full_epoch_pattern": "Official averages: face full-epoch unique Pearson 0.94466 > car full-epoch 0.48594. Paper: face 0.82 < car >0.99. Windowed unique Pearson is ~1 for both contrasts.",
+    "stock_spoc": "Stock SPoC does not compute an RDM correlation (stock_spoc.md: SPoC does not know about RDMs)."
+  }
+}
