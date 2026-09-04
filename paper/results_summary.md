@@ -1,7 +1,7 @@
 # Reproduction matrix (integration review)
 
 Ossadtchi et al., *NeuroImage* 301 (2024) 120868.
-Evidence snapshot: `paper` HEAD `0a2d9ed`. Reviewer: integration worker.
+Evidence snapshot: `paper` HEAD `4813b38`. Reviewer: integration worker.
 Statuses are from committed JSON/code, not TRACK_REPORT claims.
 
 Status vocabulary: `reproduced numerically` | `reproduced qualitatively` |

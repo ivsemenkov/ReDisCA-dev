@@ -10,8 +10,8 @@ permanent `paper` branch. The lightweight public library remains on `main`.
 Do not merge `paper` into `main`. Do not change library semantics on this
 branch merely to improve figure match.
 
-Integration review snapshot: merge commit `0a2d9ed` (N170, MEG, simulations,
-and source-localization tracks). Statuses below are from committed JSON and
+Integration review snapshot: commit `4813b38` (tracks merged; independent
+numerical review recorded). Statuses below are from committed JSON and
 code, not from TRACK_REPORT prose.
 
 **No MATLAB parity is claimed.** Historical AIRI/SPoC numerics are a
