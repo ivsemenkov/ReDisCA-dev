@@ -35,6 +35,13 @@ dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
 ]
+paper = [
+    "matplotlib>=3.7",
+    "h5py>=3.8",
+    "mne>=1.6",
+    "pandas>=2.0",
+    "tqdm>=4.0",
+]
 
 [project.urls]
 Repository = "https://github.com/arthast/ReDisCA"
@@ -43,5 +50,5 @@ Repository = "https://github.com/arthast/ReDisCA"
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "paper/reproduction/common/tests"]
 python_files = "test_*.py"

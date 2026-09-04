@@ -56,6 +56,24 @@ examples/n170/prepared/
 examples/n170/work/
 examples/n170/outputs/
 
+# Paper-reproduction cache (datasets, upstream clones, generated heavy outputs)
+.reproduction_data/
+paper/.reproduction_data/
+
+# Generated heavy paper-reproduction artifacts (keep compact json/md/csv)
+paper/results/**/*.png
+paper/results/**/*.pdf
+paper/results/**/*.npy
+paper/results/**/*.npz
+paper/results/**/*.mat
+paper/results/**/*.fif
+paper/results/**/*.h5
+paper/results/**/*.hdf5
+paper/results/**/*.pkl
+paper/results/**/*.pickle
+paper/reproduction/**/outputs/
+paper/reproduction/**/__pycache__/
+
 main.py
 .main.py
 /main.py
