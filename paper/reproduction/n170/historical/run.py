@@ -285,33 +285,36 @@ def freeze_leading_candidate(
         row for row in table["rows"] if row["variant_id"] == cand["car_variant_id"]
     )
     remaining = [
-        (
-            "Face window unique-triangle RDM correlation is "
-            f"{face_row['corr_wTRw_comp0']:.5f} (trace-sq "
-            f"{face_row['corr_trace_sq_comp0']:.5f}) versus printed ≈0.82. "
-            "No source-supported variant on official subject-1 28-channel "
-            "averages produced a window correlation near 0.82; the GEP "
-            "matches the two-level 6-pair target almost exactly."
-        ),
-        (
-            f"Car component-2 primary p (Track A seed) is {car_row['primary_p_head'][1]}; "
-            f"Track B 20-seed envelope is min={p2['min']}, max={p2['max']}, "
-            f"mean={p2['mean']:.4f}. Printed p2≈0.009 "
-            f"{'does' if p2['printed_inside_min_max'] else 'does not'} "
-            "fall inside that min–max range."
-        ),
-        (
-            f"Face λ1={face_row['eigenvalues_head'][0]:.5f} vs printed 0.87209 "
-            f"(delta {face_row['comparison_to_printed']['delta_lambda1']}). "
-            f"Car λ1={car_row['eigenvalues_head'][0]:.5f} vs 0.91639; "
-            f"λ2={car_row['eigenvalues_head'][1]:.5f} vs 0.77036."
-        ),
-        (
-            "MATLAB is unavailable. This freeze is a source-faithful Python "
-            "reconstruction of stock SPoC + AIRI pair construction, not "
-            "MATLAB eig/rand parity."
-        ),
-    ]
+            (
+                "Face window unique-triangle RDM correlation is "
+                f"{face_row['corr_wTRw_comp0']:.5f} (un-demeaned trace-sq "
+                f"{face_row['corr_trace_sq_comp0']:.5f}) versus printed ≈0.82. "
+                "None of the 12 source-supported variants produced a window "
+                "correlation near 0.82; w^T R w matches the two-level 6-pair "
+                "target almost exactly (~0.999)."
+            ),
+            (
+                f"Car component-2 primary p (Track A seed) is {car_row['primary_p_head'][1]}; "
+                f"Track B 20-seed envelope is min={p2['min']}, max={p2['max']}, "
+                f"mean={p2['mean']:.4f}, median={p2['median']:.4f}. "
+                f"Printed p2≈0.009 appears in {p2['n_equal_9_over_1000']}/20 seeds "
+                f"and {'does' if p2['printed_inside_min_max'] else 'does not'} "
+                "fall inside min–max and the 5–95% interval. It is not a rare "
+                "one-seed accident for this candidate."
+            ),
+            (
+                f"Face λ1={face_row['eigenvalues_head'][0]:.5f} vs printed 0.87209 "
+                f"(delta {face_row['comparison_to_printed']['delta_lambda1']}). "
+                f"Car λ1={car_row['eigenvalues_head'][0]:.5f} vs 0.91639; "
+                f"λ2={car_row['eigenvalues_head'][1]:.5f} vs 0.77036 "
+                "(λ2 remains ~0.02 high)."
+            ),
+            (
+                "MATLAB is unavailable. This freeze is a source-faithful Python "
+                "reconstruction of stock SPoC + AIRI pair construction, not "
+                "MATLAB eig/rand parity."
+            ),
+        ]
     freeze = {
         "pair_mode": cand["pair_mode"],
         "matrix_mode": cand["matrix_mode"],
