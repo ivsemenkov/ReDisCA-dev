@@ -1,0 +1,125 @@
+{
+  "B": 1000,
+  "car_variant_id": "car_c170_d100_airi_directed_matlab_cov",
+  "car_window": {
+    "center_ms": 170.0,
+    "duration_ms": 100.0
+  },
+  "channels": {
+    "count": 28,
+    "labels": [
+      "FP1",
+      "F3",
+      "F7",
+      "FC3",
+      "C3",
+      "C5",
+      "P3",
+      "P7",
+      "PO7",
+      "PO3",
+      "O1",
+      "Oz",
+      "Pz",
+      "CPz",
+      "FP2",
+      "Fz",
+      "F4",
+      "F8",
+      "FC4",
+      "FCz",
+      "Cz",
+      "C4",
+      "C6",
+      "P4",
+      "P8",
+      "PO8",
+      "PO4",
+      "O2"
+    ],
+    "set": "28 scalp EEG; EOG/bipolar dropped; P9/P10 not in ERP"
+  },
+  "data_file": "1_N170_erp_ar.erp",
+  "data_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+  "face_variant_id": "face_c200_d100_airi_directed_matlab_cov",
+  "face_window": {
+    "center_ms": 200.0,
+    "duration_ms": 100.0
+  },
+  "imports_redisca": false,
+  "inference": "spoc_random_phase",
+  "joint_candidate_id": "airi_directed__matlab_cov__car170",
+  "matlab": null,
+  "matrix_mode": "matlab_cov",
+  "pair_mode": "airi_directed",
+  "rdm_fill": "binary 0/1 (within=0, between=1, diagonal=0)",
+  "remaining_mismatches": [
+    "Face window unique-triangle RDM correlation is 0.99858 (un-demeaned trace-sq 0.94819) versus printed \u22480.82. None of the 12 source-supported variants produced a window correlation near 0.82; w^T R w matches the two-level 6-pair target almost exactly (~0.999).",
+    "Car component-2 primary p (Track A seed) is 0.003; Track B 20-seed envelope is min=0.003, max=0.014, mean=0.0074, median=0.0075. Printed p2\u22480.009 appears in 2/20 seeds and does fall inside min\u2013max and the 5\u201395% interval. It is not a rare one-seed accident for this candidate.",
+    "Face \u03bb1=0.88010 vs printed 0.87209 (delta 0.008013388440220037). Car \u03bb1=0.91312 vs 0.91639; \u03bb2=0.79043 vs 0.77036 (\u03bb2 remains ~0.02 high).",
+    "MATLAB is unavailable. This freeze is a source-faithful Python reconstruction of stock SPoC + AIRI pair construction, not MATLAB eig/rand parity."
+  ],
+  "second_plausible_candidate_id": "airi_directed__unscaled_gram__car170",
+  "seed_policy": {
+    "bit_generator": "PCG64",
+    "master_seed": 20240904,
+    "track_a": "PCG64(master_seed + variant_offset); offsets in variants.py",
+    "track_b": "PCG64(MASTER_SEED+10000+i + variant_offset) for i in 0..19"
+  },
+  "track_a_point_estimates": {
+    "car_corr_wTRw": 0.9990898730962013,
+    "car_lambda_head": [
+      0.913121776391964,
+      0.7904341887053492,
+      0.7040364026147775,
+      0.5857759020814175,
+      0.5407669767284489,
+      0.517044579298519,
+      0.39607617162480196,
+      0.330554187027076
+    ],
+    "car_primary_p_head": [
+      0.0,
+      0.003,
+      0.053,
+      0.31,
+      0.456,
+      0.538,
+      0.84,
+      0.947
+    ],
+    "face_corr_trace_sq": 0.9481886189820606,
+    "face_corr_wTRw": 0.9985772109512765,
+    "face_lambda_head": [
+      0.8801033884402201,
+      0.7138182656496248,
+      0.6678245419374782,
+      0.5388760657979141,
+      0.44163890597373706,
+      0.4224868504897843,
+      0.3953187057570023,
+      0.12480782842146579
+    ],
+    "face_primary_p_head": [
+      0.0,
+      0.058,
+      0.138,
+      0.428,
+      0.67,
+      0.707,
+      0.788,
+      1.0
+    ]
+  },
+  "track_b_p2_envelope": {
+    "fraction_p0": 0.0,
+    "max": 0.014,
+    "mean": 0.007400000000000001,
+    "median": 0.0075,
+    "min": 0.003,
+    "printed_p2_inside_min_max": true,
+    "q05": 0.00395,
+    "q95": 0.011150000000000002
+  },
+  "why_chosen": "Lexicographic qualitative rule on source-supported variants only: prefer PRIMARY face and car p1==0, then the printed Fig. 11 car application time 170 ms, then car \u03bb1 nearer 0.91639, then car p2 nearer 0.009, then car \u03bb2 nearer 0.77036, then face \u03bb1 nearer 0.87209. Face corr vs 0.82 was not used as a discard rule. This is the least-bad jointly close setting under that rule, not a claim of printed-figure parity."
+}
