@@ -57,4 +57,5 @@ a paper statement. See `TRACK_REPORT.md`.
 ## Outputs
 
 Compact JSON under `paper/results/simulations/`. Every file repeats the
-assumed-value table and `status: approximate`.
+assumed-value table and `status: approximate`. After a full 100-MC run,
+numeric tables live in `TRACK_REPORT.md`.

@@ -54,27 +54,60 @@ python paper/reproduction/simulations/run.py --quick
 python paper/reproduction/simulations/run.py
 ```
 
-## Numeric results
+## Numeric results (approximate; 100 MC; seed 20240904)
 
-Filled after `run.py` completes. See `paper/results/simulations/summary.json`.
+See `paper/results/simulations/summary.json`. Runtime: `python3 paper/reproduction/simulations/run.py` (~108 min, 4 cores). RSA was **not** reduced (100 MC × 5002 vertices). Zero ReDisCA fit failures. These are **not** published-panel numbers.
 
-### Fig. 4 AUC / TPR (placeholder until run)
+### Fig. 4 ROC (C=5)
 
-| Run | Method | AUC | TPR@FPR≤0.01 |
-| --- | --- | --- | --- |
-| (pending) | | | |
+Canonical path: `redisca_demean_false`. `demean_time=True` is a labeled extra.
 
-### Fig. 5 mean median error (m)
+| SNR | Method | AUC | TPR@FPR=0 | TPR@FPR≤0.01 | median error (cm) |
+| --- | --- | --- | --- | --- | --- |
+| 0.2 (preprint overlay) | ReDisCA `demean_time=False` | 0.880 | 0.002 | 0.397 | 0.61 |
+| 0.2 | ReDisCA `demean_time=True` (extra) | 0.528 | 0.000 | 0.016 | 7.90 |
+| 0.2 | MNE S.T. | 0.695 | 0.000 | 0.000 | 7.28 |
+| 0.2 | MNE AV | 0.625 | 0.000 | 0.000 | 8.16 |
+| 0.2 | BF S.T. | 0.509 | 0.000 | 0.009 | 7.39 |
+| 0.2 | BF AV | 0.528 | 0.000 | 0.020 | 8.32 |
+| 0.1 (published c,d) | ReDisCA `demean_time=False` | 0.874 | 0.000 | 0.381 | 0.86 |
+| 0.1 | ReDisCA `demean_time=True` (extra) | 0.500 | 0.000 | 0.007 | 6.74 |
+| 0.1 | MNE S.T. | 0.693 | 0.000 | 0.000 | 7.44 |
+| 0.1 | MNE AV | 0.688 | 0.000 | 0.000 | 8.52 |
+| 0.1 | BF S.T. | 0.478 | 0.000 | 0.008 | 7.40 |
+| 0.1 | BF AV | 0.516 | 0.000 | 0.014 | 7.52 |
 
-| SNR | C | ReDisCA | MNE S.T. | BF S.T. |
+Secondary seed `20240915`, 20 MC, ReDisCA-only, SNR=0.1: AUC **0.845** (primary 100 MC: 0.874). The ReDisCA–RSA gap is large on both seeds. The published ~85% hit @ ~0 FA is **not** reproduced (TPR at FPR≤0.01 ≈ 0.38). Not tuned.
+
+`demean_time=True` is near chance: 6th-order 2 Hz ERPs are near-DC, so temporal centering of pair differences removes most of the signal. That extra is **not** the paper Gram.
+
+Qualitative: printed-Gram ReDisCA dominates all four RSA versions (paper ranking), not the 85% operating point.
+
+### Fig. 5 four-source (P=4; C=5 and C=6 from the same C=6 draws)
+
+Mean of per-MC medians over the four sources.
+
+| SNR | C | ReDisCA mean median (cm) | frac <1 cm | median corr(a,g) | corr(w,g) | corr(RDM) | MNE S.T. (cm) | BF S.T. (cm) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.4 | 5 | 4.14 | 0.233 | 0.294 | 0.001 | 0.955 | 6.93 | 8.10 |
+| 0.4 | 6 | 3.77 | 0.242 | 0.304 | 0.001 | 0.953 | 6.77 | 7.77 |
+| 0.2 | 5 | 3.85 | 0.250 | 0.287 | ~0 | 0.959 | 7.02 | 8.04 |
+| 0.2 | 6 | 3.56 | 0.263 | 0.311 | 0.000 | 0.954 | 6.83 | 7.73 |
+
+Qualitative matches: ReDisCA better than MNE/BF S.T.; patterns align better than weights; empirical RDMs highly correlated with targets. The paper’s “largest mass <1 cm” is **not** reproduced (≈24–26% <1 cm).
+
+### Fig. 6 mean median error vs C (SNR **assumed 0.2**)
+
+Paper claim: ReDisCA best at all C; mean median **< 2 cm at C=6**.
+
+| C | ReDisCA mean median (cm) | frac <2 cm | MNE S.T. (cm) | BF S.T. (cm) |
 | --- | --- | --- | --- | --- |
-| (pending) | | | | |
+| 3 | 5.42 | 0.300 | 7.85 | 7.86 |
+| 4 | 4.32 | 0.357 | 7.60 | 7.60 |
+| 5 | 4.13 | 0.405 | 7.03 | 7.54 |
+| 6 | **3.36** | 0.482 | 6.95 | 7.51 |
 
-### Fig. 6 mean median error (m)
-
-| C | ReDisCA | MNE S.T. | BF S.T. |
-| --- | --- | --- | --- |
-| (pending) | | | |
+ReDisCA is best at every C and improves with C. The **< 2 cm at C=6** claim is **not** met (3.36 cm). Approximate; not tuned.
 
 ## What would unblock exact numbers
 
