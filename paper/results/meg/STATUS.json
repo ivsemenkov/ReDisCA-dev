@@ -1,0 +1,48 @@
+{
+  "track": "meg",
+  "command": "python paper/reproduction/meg/run.py all",
+  "seed": 20240904,
+  "paper_B": 500,
+  "paper_Nmc": 200,
+  "airi_B": 1000,
+  "airi_Nmc": 100,
+  "airi_B_reduced": false,
+  "rank": 68,
+  "n_planars": 204,
+  "n_times_paper": 1501,
+  "n_times_airi": 901,
+  "items": {
+    "fig12-meg-theoretical-rdms": "emitted_binary_and_airi_numeric",
+    "fig13-meg-face": {
+      "paper_faithful": "partial_one_component_maxabs_p0",
+      "airi_executable": "ran_spoc_p_lt_0.05_first_four"
+    },
+    "fig14-meg-tool": {
+      "paper_faithful": "partial_maxabs_p_0.478",
+      "airi_executable": "ran_spoc_p_lt_0.05_first_four"
+    },
+    "fig15-meg-meaning": {
+      "paper_faithful": "partial_maxabs_p_0.204",
+      "airi_executable": "ran_spoc_p_lt_0.05_first_four"
+    },
+    "fig16-meg-nonbinary-rdm": "emitted_airi_facevstool_0.1_0.5_1",
+    "fig17-meg-nonbinary-components": {
+      "paper_faithful": "partial_maxabs_p_0.302",
+      "airi_executable": "ran_not_identical_to_paper"
+    },
+    "airi-executable-meg-facevstool": "ran_B1000"
+  },
+  "paper_faithful_p_maxabs_comp1": {
+    "face": 0.0,
+    "tool": 0.478,
+    "meaning": 0.204,
+    "facevstool": 0.302
+  },
+  "airi_spoc_p_comp1_to_4": {
+    "face": [0.006, 0.008, 0.014, 0.032],
+    "tool": [0.001, 0.003, 0.008, 0.01],
+    "meaning": [0.005, 0.012, 0.018, 0.026],
+    "facevstool": [0.016, 0.019, 0.028, 0.054]
+  },
+  "note": "Never mix paper_faithful and airi_executable in one figure. D5: paper permutation max|lambda| does not yield three p<0.05 components; AIRI random-phase does."
+}

@@ -73,6 +73,9 @@ paper/results/meg/comparison/         paper_vs_airi.json (metrics only; no mixed
 PNG figures are generated beside the JSON (`figures/`) but are gitignored by
 the paper-branch policy. Arrays (`.npz`) are gitignored.
 
+After `run.py all`, compact numbers and statuses are in
+`TRACK_REPORT.md` and `paper/results/meg/**/*.json`.
+
 ## RDMs
 
 AIRI names (`source_faithful.airi_rdm`): `face`, `tool`, `meaning`, `facevstool`.

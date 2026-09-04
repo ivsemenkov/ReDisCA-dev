@@ -1,0 +1,360 @@
+{
+  "bandpass": null,
+  "d4_note": "Library aggregates with a mean (D4). Sum scale is n_pairs * mean lambda; filter rays unchanged.",
+  "eigenvalues": [
+    0.83599407422755,
+    0.752597935799578,
+    0.6836016635573615,
+    0.6554552546697031,
+    0.5933354011181567,
+    0.5510723485489283,
+    0.46576939925688854,
+    0.4409670577249549
+  ],
+  "eigenvalues_paper_eq7_sum_scale": [
+    12.53991111341325,
+    11.28896903699367,
+    10.254024953360423,
+    9.831828820045546,
+    8.90003101677235,
+    8.266085228233925,
+    6.986540988853328,
+    6.614505865874324
+  ],
+  "empirical_rdm_pearson": [
+    {
+      "component": 1,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          0.04884310754133025,
+          2.4363106657820284,
+          2.409357765320289,
+          0.6550789157581799,
+          0.6653312661801072,
+          0.04884310754133025,
+          0.0
+        ],
+        "max": 2.4647367700408433,
+        "mean": 0.8333333333333337,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 0.9114368468534065
+      },
+      "pearson_unique_triangle": 0.9659650062147465
+    },
+    {
+      "component": 2,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          0.16945286780518792,
+          2.2781060130666,
+          2.2517262083858935,
+          0.5989784442949794,
+          0.7231599813473768,
+          0.16945286780518792,
+          0.0
+        ],
+        "max": 2.3394927406798964,
+        "mean": 0.833333333333333,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 0.8398088022880309
+      },
+      "pearson_unique_triangle": 0.9617013206194713
+    },
+    {
+      "component": 3,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          0.2808603692918864,
+          1.9763108231340663,
+          2.0314078743982575,
+          0.6306466847080938,
+          0.5117472980540431,
+          0.2808603692918864,
+          0.0
+        ],
+        "max": 2.381449550834882,
+        "mean": 0.8333333333333356,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 0.7846864304747665
+      },
+      "pearson_unique_triangle": 0.9526598266506787
+    }
+  ],
+  "estimator": "redisca.ReDisCA",
+  "filter_fingerprints": [
+    {
+      "dtype": "float64",
+      "head": [
+        9794612012.27201,
+        -4023490622.8185296,
+        -9722835355.482374,
+        6784123741.048175,
+        1815074478.8870366,
+        1720936848.8306642,
+        640181460.3532263,
+        -1139996441.8144772
+      ],
+      "max": 19693566521.84972,
+      "mean": -50712128.20838474,
+      "min": -10029204504.990913,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 4059280885.589789
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        2186037263.606639,
+        -10983456909.167933,
+        -13668185015.898787,
+        8448884620.492573,
+        6685880872.482136,
+        -1426821337.8390348,
+        -1788296383.544289,
+        21865242839.008293
+      ],
+      "max": 45447329306.79386,
+      "mean": 40114213.586943045,
+      "min": -32466825159.97542,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 9371958824.062508
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -44483293655.09867,
+        -238764819.41343987,
+        12136155933.89445,
+        -3991654385.934552,
+        -1007052885.4688299,
+        -3358846923.4846196,
+        -11536167983.218817,
+        39949563148.95397
+      ],
+      "max": 39949563148.95397,
+      "mean": 108662226.9532449,
+      "min": -44483293655.09867,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 9554987915.789524
+    }
+  ],
+  "inference_component": {
+    "B": 500,
+    "inference": "paper_condition_label_permutation",
+    "matrix_mode": "unscaled_gram",
+    "note": "Primary p-values use a family-wise max|lambda| null (SPoC-style). Matched-component p-values are exploratory; the paper does not specify which. D4 sum-vs-mean is a global scale and cancels in this ranking.",
+    "null_statistic_primary": "max_abs_lambda",
+    "p_formula": "count/B (p=0 possible; no +1 continuity correction)",
+    "pair_mode": "unique_unordered"
+  },
+  "inference_time": {
+    "Nmc": 200,
+    "alpha": 0.05,
+    "class1": [
+      0,
+      1
+    ],
+    "class2": [
+      2,
+      3
+    ],
+    "class_convention": "paper",
+    "fwer_threshold": [
+      0.027940417480446324,
+      0.04813607792822098,
+      0.06315489503632318
+    ],
+    "name": "paper_subcategory_label_permutation_fwer_max_stat"
+  },
+  "item_id": "fig17-meg-nonbinary-components",
+  "n_planars": 204,
+  "n_plot": 3,
+  "n_samples": 1501,
+  "n_significant_time_samples": [
+    854,
+    460,
+    133
+  ],
+  "onsets": [
+    {
+      "first_cluster10_ms": 113.0,
+      "first_significant_ms": 113.0
+    },
+    {
+      "first_cluster10_ms": 286.0,
+      "first_significant_ms": 286.0
+    },
+    {
+      "first_cluster10_ms": 222.0,
+      "first_significant_ms": 222.0
+    }
+  ],
+  "p_component_matched_exploratory": [
+    0.302,
+    0.116,
+    0.13,
+    0.068,
+    0.048,
+    0.09,
+    0.194,
+    0.062
+  ],
+  "p_component_maxabs": [
+    0.302,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pair_matrix": "unscaled_gram_ReDisCA_demean_time_False",
+  "pairs": "unique_unordered",
+  "paper_qualitative_onsets": {
+    "comp1": "tools vs faces from 202 ms; left parietal / sensory-motor",
+    "comp2": "visual / FG-like late ~260\u2013350 ms for tools",
+    "comp3": "face-specific peak ~160 ms"
+  },
+  "path_label": "paper_faithful",
+  "pattern_fingerprints": [
+    {
+      "dtype": "float64",
+      "head": [
+        -1.4697410126208102e-11,
+        -1.4677448571772014e-11,
+        -2.2483555643229306e-12,
+        -5.24230907693149e-12,
+        3.7979660583350867e-13,
+        -2.644861425342217e-11,
+        -4.936918615913317e-12,
+        -1.3031789842251277e-11
+      ],
+      "max": 6.47340592658382e-11,
+      "mean": -1.3920000014069992e-12,
+      "min": -6.598483547268326e-11,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 1.498116836026895e-11
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        8.669804358649344e-12,
+        1.7404617638384112e-12,
+        5.781097952861514e-12,
+        -6.452716073072449e-13,
+        4.1765250805010235e-12,
+        1.1107240845060592e-11,
+        2.982101076491203e-12,
+        5.0744456580091835e-12
+      ],
+      "max": 2.6380784561764265e-11,
+      "mean": 9.375212961773438e-14,
+      "min": -1.6857542835385246e-11,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 6.485907337849438e-12
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -7.450605382874107e-12,
+        3.062141585445848e-12,
+        -6.734604834215825e-12,
+        9.80069212915593e-12,
+        -1.1855356928886948e-11,
+        8.14410767396675e-12,
+        -8.951982350055868e-12,
+        4.37482526205651e-12
+      ],
+      "max": 1.621615709591002e-11,
+      "mean": -1.052273091138459e-12,
+      "min": -2.0846452432170316e-11,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 7.34168837310639e-12
+    }
+  ],
+  "patterns": "Haufe (library); invert-W does not apply at MEG rank < 204 (D9)",
+  "peaks": [
+    {
+      "class1_peak_amp": 0.037588263555305104,
+      "class1_peak_ms": 968.0,
+      "class2_peak_amp": -0.05173290303565575,
+      "class2_peak_ms": 244.0,
+      "component": 1,
+      "contrast_peak_amp": -0.0671746948603092,
+      "contrast_peak_ms": 564.0
+    },
+    {
+      "class1_peak_amp": 0.061760876107138624,
+      "class1_peak_ms": 280.0,
+      "class2_peak_amp": 0.1083345867123428,
+      "class2_peak_ms": 285.0,
+      "component": 2,
+      "contrast_peak_amp": -0.08787551423287898,
+      "contrast_peak_ms": 804.0
+    },
+    {
+      "class1_peak_amp": 0.05242527662977688,
+      "class1_peak_ms": 410.0,
+      "class2_peak_amp": -0.09649759209560194,
+      "class2_peak_ms": 140.0,
+      "component": 3,
+      "contrast_peak_amp": 0.14129590006094672,
+      "contrast_peak_ms": 290.0
+    }
+  ],
+  "rank": 68,
+  "rdm_fill": "airi",
+  "rdm_name": "facevstool",
+  "window_ms": [
+    -500.0,
+    1000.0
+  ]
+}
