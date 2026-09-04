@@ -4,9 +4,8 @@ Track owner: N170 worker. Branch: `cursor/paper-n170-f368`.
 Working directory: `/tmp/redisca-worktrees/n170`.
 
 This report records source evidence, decisions, commands, environment,
-numbers, discrepancies, and blocked items. Headline numbers are filled after
-`python paper/reproduction/n170/run.py`. See `paper/results/n170/summary.json`
-for the compact machine copy.
+numbers, discrepancies, and blocked items. Compact machine copy:
+`paper/results/n170/summary.json`. Production run 2026-09-04.
 
 ## Source evidence
 
@@ -74,38 +73,70 @@ components, epoch [−200, +800] ms, interpolate + AR, average good trials.
 ## Commands
 
 ```bash
-cd /tmp/redisca-worktrees/n170
-python -m pytest paper/reproduction/n170/test_n170.py -q
-python paper/reproduction/n170/run.py --B 1000 --step-ms 25 --seed 20240904
+cd /tmp/redisca-worktrees/n170   # or the repository root
+python3 -m pytest paper/reproduction/n170/test_n170.py -q
+python3 paper/reproduction/n170/run.py --B 1000 --step-ms 25 --seed 20240904
 ```
 
-Rerun from repo root:
-
-```bash
-python paper/reproduction/n170/run.py
-```
+Production run (this report): 2026-09-04T18:06:57Z, ~13 s; tests 6 passed.
 
 ## Environment
 
-Filled after the run from `paper/results/n170/environment.json`.
+From `paper/results/n170/environment.json` after the production run:
 
-- Python, numpy, scipy, scikit-learn, matplotlib, redisca
-- MATLAB: not used (and not required)
-- ERP SHA-256: filled after the run
+| Item | Value |
+| --- | --- |
+| Python | 3.12.3 |
+| numpy | 2.4.4 |
+| scipy | 1.18.1 |
+| scikit-learn | 1.9.0 |
+| matplotlib | 3.11.1 |
+| redisca | 0.1.0 (`ReDisCA`, default `demean_time=True`) |
+| MATLAB | not used |
+| RNG | numpy PCG64, seed `20240904` |
+| ERP | `1_N170_erp_ar.erp` SHA-256 `53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72` |
+| Times | −199.21875 … 796.875 ms, n=256, fs=256 Hz |
+| Accepted trials | 52 / 38 / 49 / 52 (faces / cars / scr. faces / scr. cars), total 191 |
 
 ## Quantitative numbers vs paper
 
-Filled after the run. Placeholders:
+Primary path: 28 scalp channels, `ReDisCA(demean_time=False)`, binary 0/1 RDMs,
+T as in the table, step 25 ms for the meaning scan. Pearson unique-triangle
+RDM correlations are **not** tuned toward 0.82 / 0.99.
 
 | Target | Paper | This run (`demean_time=False`) |
 | --- | --- | --- |
-| Fig 10 face RDM corr | 0.82 | *run* |
-| Fig 10 n significant | 1 | *run* |
-| Fig 10 face burst | ~170 ms | *run* |
-| Fig 11 car RDM corr | >0.99 | *run* |
-| Fig 11 n comps p<0.01 | 2 | *run* |
-| Fig 7 p<0.05 around 400 ms | yes, uncorrected, comp 1 | *run; expect discrete floor ~0.333* |
-| Fig 7 topography | occipital | *run* |
+| Fig 10 face RDM corr (window) | 0.82 | **0.99988** |
+| Fig 10 face RDM corr (full epoch, same w) | — | 0.94466 |
+| Fig 10 n significant (p<0.05, exact-24 `≥`) | 1 | **0** (comp 1 p=0.75; floor 0.25) |
+| Fig 10 face burst | ~170 ms | **171.875 ms** (Faces, \|peak\| in 80–250 ms) |
+| Fig 10 topography | right-FG-like | max \|a\| at **P7**; occipital energy 0.53 |
+| Fig 11 car RDM corr (window, comp 1) | >0.99 | **0.99992** (meets >0.99) |
+| Fig 11 car RDM corr (window, comp 2) | — | **0.99968** |
+| Fig 11 n comps p<0.01 (exact-24 `≥`) | 2 | **0** (comp 1–2 p=0.25 = discrete floor) |
+| Fig 11 car deflection | ~150 ms | **136.72 ms** (Cars, comp 1, 80–250 ms) |
+| Fig 11 topography | lower occipital then dorsal | comp 1 max \|a\| **O1**; comp 2 **Pz** |
+| Fig 7 p<0.05 around 400 ms | uncorrected, comp 1 | **no**: p=`8/24≈0.333` at 400 ms; no p<0.05 segment |
+| Fig 7 topography @ 400 ms | highly occipital | max \|a\| **PO8**; occipital energy **0.61**; O2>O1 |
+| Fig 7 meaning RDM corr @ 400 ms | visual resemblance | **0.99981** |
+| Fig 8 windows | three adjacent ~400 ms | 375 / 400 / 425 ms; corr 0.9998 / 0.9998 / 0.9999; PO4 / PO8 / Oz |
+
+`demean_time=True` extra (not mixed into primary plots): face window corr 0.99858
+(PO4); car 0.99909 / 0.99650 (P8 / PO8); meaning @ 400 ms corr 0.99105 with
+max \|a\| at Pz (less occipital than the paper Gram).
+
+Monte Carlo B=1000 condition-label p-values agree with the exact-24 table
+(face comp 1 p=0.741 vs 0.75; car 0.244 vs 0.25; meaning 0.331 vs 0.333).
+
+Exploratory (explicitly **not** the paper N170 test):
+
+| Null | Face c1 p | Car c1, c2 p | Meaning @400 c1 p |
+| --- | --- | --- | --- |
+| Pair-vector shuffle B=1000 `≥` | 0.151 | 0.044, 0.044 | 0.050 |
+| SPoC random-phase B=1000 `≥` | **0.000** | **0.000, 0.000** | 0.547 |
+
+Random-phase would call face/car components “significant” and would **not**
+recover Fig 7’s p<0.05 at 400 ms. Stored only as a D5 diagnostic.
 
 ## Discrepancies encountered
 
@@ -150,7 +181,15 @@ paper/reproduction/n170/run.py
 paper/reproduction/n170/README.md
 paper/reproduction/n170/test_n170.py
 paper/reproduction/n170/TRACK_REPORT.md
-paper/results/n170/*.json
+paper/results/n170/summary.json
+paper/results/n170/fingerprints.json
+paper/results/n170/channel_selection.json
+paper/results/n170/environment.json
+paper/results/n170/fig07_meaning_pmap.json
+paper/results/n170/fig08_meaning_windows.json
+paper/results/n170/fig09_rdms.json
+paper/results/n170/fig10_face.json
+paper/results/n170/fig11_car.json
 ```
 
 PNG under `paper/results/n170/` is gitignored.
@@ -159,8 +198,16 @@ PNG under `paper/results/n170/` is gitignored.
 
 | ID | Status |
 | --- | --- |
-| `fig07-n170-meaning-pmap` | implemented; see JSON after run |
-| `fig08-n170-meaning-patterns` | implemented; 375/400/425 ms |
-| `fig09-n170-face-car-rdms` | encoded 0/1 + 0.1-within extra |
-| `fig10-n170-face` | implemented; actual corr vs 0.82 |
-| `fig11-n170-car` | implemented; actual corr vs >0.99 |
+| `fig07-n170-meaning-pmap` | **ran**. T=150 ms, step 25 ms, 33 windows (−100…700 ms). Comp-1 p(t) under condition-label permutation sits on the 8/24 floor for 27/33 windows (including 400 ms). Occipital pattern at 400 ms (PO8). Uncorrected p<0.05 around 400 ms **not reproduced** under the paper-described null. |
+| `fig08-n170-meaning-patterns` | **ran**. Three adjacent windows 375/400/425 ms; traces + empirical RDMs; occipital topographies. |
+| `fig09-n170-face-car-rdms` | **encoded** 0/1 meaning/face/car plus labeled 0.1-within extra (z-score equivalent). |
+| `fig10-n170-face` | **ran**. Window corr **0.99988** vs paper **0.82**. Face peak **171.9 ms**. One significant component **not** obtained under exact-24 `≥` (p=0.75). |
+| `fig11-n170-car` | **ran**. Window corr **0.99992** vs paper **>0.99** (match on correlation). Two comps p<0.01 **not** obtained under exact-24 `≥` (p=0.25 = floor); both comps have p_strict=0 (uniquely best detector). |
+
+PNG copies are gitignored under `paper/results/n170/*.png`.
+
+## Headline vs 0.82 / >0.99
+
+- Face (Fig 10, paper Gram, window empirical RDM): **0.99988** (paper 0.82). Difference +0.18. Not tuned.
+- Car (Fig 11, paper Gram, window empirical RDM, component 1): **0.99992** (paper >0.99). **Agrees** with the >0.99 claim.
+- Likely reason the face number is near 1: 28 spatial degrees of freedom vs a two-level 6-pair target in a 26-sample window. The GEP can match D almost exactly. Paper 0.82 is not recovered from official subject-1 averages with the documented choices above. Full-epoch traces with the same filter give 0.945, still above 0.82.

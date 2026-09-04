@@ -1,0 +1,137 @@
+{
+  "B_exact_condition_label": 24,
+  "B_monte_carlo": 1000,
+  "channel_labels": [
+    "FP1",
+    "F3",
+    "F7",
+    "FC3",
+    "C3",
+    "C5",
+    "P3",
+    "P7",
+    "PO7",
+    "PO3",
+    "O1",
+    "Oz",
+    "Pz",
+    "CPz",
+    "FP2",
+    "Fz",
+    "F4",
+    "F8",
+    "FC4",
+    "FCz",
+    "Cz",
+    "C4",
+    "C6",
+    "P4",
+    "P8",
+    "PO8",
+    "PO4",
+    "O2"
+  ],
+  "environment": {
+    "captured_at_utc": "2026-09-04T18:06:57.376527+00:00",
+    "machine": "x86_64",
+    "matlab": null,
+    "note": "This is a source-faithful Python reconstruction environment. MATLAB is not assumed to be available; results are not MATLAB parity.",
+    "packages": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.4",
+      "redisca": "0.1.0",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.1"
+    },
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "redisca_import": {
+      "class": "ReDisCA",
+      "demean_time_default": true,
+      "module": "redisca._redisca"
+    }
+  },
+  "erp_file": "/tmp/redisca-worktrees/n170/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar.erp",
+  "erp_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+  "figure_status": {
+    "fig07-n170-meaning-pmap": "ran; p<0.05 around 400 ms not obtained under condition-label permutation (C=4 discrete floor)",
+    "fig08-n170-meaning-patterns": "ran; three adjacent windows 375/400/425 ms",
+    "fig09-n170-face-car-rdms": "encoded 0/1 plus labeled 0.1-within extra",
+    "fig10-n170-face": "ran; report actual RDM corr (not tuned to 0.82)",
+    "fig11-n170-car": "ran; report actual RDM corr (not tuned to >0.99)"
+  },
+  "ica": {
+    "applied_in_this_script": false,
+    "erpcore_subject_1_components_1based": [
+      2,
+      7
+    ],
+    "note": "ICA correction is already present in the official precomputed ERP. Subject 1 list is components 2 and 7 (ocular), not three ocular+cardiac components (discrepancy D11).",
+    "paper_claim": "three components ocular+cardiac"
+  },
+  "library": {
+    "class": "ReDisCA",
+    "demean_time_default": true,
+    "module": "redisca._redisca"
+  },
+  "lpfilt": false,
+  "n_accepted": [
+    52,
+    38,
+    49,
+    52
+  ],
+  "n_channels": 28,
+  "n_times": 256,
+  "numbers_paper_gram_demean_time_false": {
+    "car_T100_c170": {
+      "eigenvalue_comp0": 0.8869090680968623,
+      "eigenvalue_comp1": 0.791703535919934,
+      "max_abs_channel_comp0": "O1",
+      "max_abs_channel_comp1": "Pz",
+      "n_comp_p_ge_lt_0.01": 0,
+      "p_exact24_greater_equal_comp0": 0.25,
+      "p_exact24_greater_equal_comp1": 0.25,
+      "paper_rdm_corr": ">0.99",
+      "peak_cars_comp0_ms": 136.71875,
+      "rdm_corr_window_comp0": 0.9999190189565106,
+      "rdm_corr_window_comp1": 0.9996781244822817
+    },
+    "face_T100_c200": {
+      "eigenvalue_comp0": 0.8800598487297501,
+      "max_abs_channel": "P7",
+      "p_exact24_greater_equal_comp0": 0.75,
+      "p_exact24_strict_greater_comp0": 0.5,
+      "paper_rdm_corr": 0.82,
+      "peak_faces_ms": 171.875,
+      "rdm_corr_full_epoch_comp0": 0.9446641853385273,
+      "rdm_corr_window_comp0": 0.9998814542043535
+    },
+    "meaning_T150_c400": {
+      "eigenvalue_comp0": 0.6353021157049161,
+      "max_abs_channel": "PO8",
+      "occipital_energy_fraction": 0.6098100580699337,
+      "p_exact24_greater_equal_comp0": 0.3333333333333333,
+      "p_exact24_strict_greater_comp0": 0.0,
+      "rdm_corr_window_comp0": 0.9998054976368955
+    }
+  },
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20240904
+  },
+  "seed": 20240904,
+  "sliding_step_in_paper": false,
+  "sliding_step_ms": 25.0,
+  "srate_hz": 256.0,
+  "subject": "1",
+  "times_ms_span": [
+    -199.21875,
+    796.875
+  ],
+  "track": "n170"
+}

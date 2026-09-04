@@ -1,0 +1,41 @@
+{
+  "commands": {
+    "run": "python paper/reproduction/n170/run.py",
+    "run_from_repo_root": true,
+    "working_directory_cloud": "/tmp/redisca-worktrees/n170"
+  },
+  "data": {
+    "epoch_note": "Paper: epoch [-200, 800] ms at 256 Hz. Official ERPLAB times are -199.21875 \u2026 796.87500 ms (n=256, dt=1000/256 ms) after 26 ms event shift + resample.",
+    "erp": "/tmp/redisca-worktrees/n170/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar.erp",
+    "lpfilt": false,
+    "sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72"
+  },
+  "environment": {
+    "captured_at_utc": "2026-09-04T18:06:57.376527+00:00",
+    "machine": "x86_64",
+    "matlab": null,
+    "note": "This is a source-faithful Python reconstruction environment. MATLAB is not assumed to be available; results are not MATLAB parity.",
+    "packages": {
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.4",
+      "redisca": "0.1.0",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.1"
+    },
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "redisca_import": {
+      "class": "ReDisCA",
+      "demean_time_default": true,
+      "module": "redisca._redisca"
+    }
+  },
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20240904
+  }
+}

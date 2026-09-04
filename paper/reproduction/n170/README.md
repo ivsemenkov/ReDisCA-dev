@@ -13,9 +13,9 @@ paper N170 test.
 From the repository root (cloud worktree: `/tmp/redisca-worktrees/n170`):
 
 ```bash
-python paper/reproduction/n170/run.py
-python paper/reproduction/n170/run.py --B 1000 --step-ms 25 --seed 20240904
-python -m pytest paper/reproduction/n170/test_n170.py -q
+python3 paper/reproduction/n170/run.py
+python3 paper/reproduction/n170/run.py --B 1000 --step-ms 25 --seed 20240904
+python3 -m pytest paper/reproduction/n170/test_n170.py -q
 ```
 
 Compact JSON goes to `paper/results/n170/`. PNG figures are written there too
@@ -63,3 +63,12 @@ Do not reuse deleted student N170 examples as an oracle.
 - `fingerprints.json` — compact regression numbers
 - `channel_selection.json`, `environment.json`
 - `TRACK_REPORT.md` — source evidence, commands, discrepancies, blocked items
+
+## Headline numbers (paper Gram, `demean_time=False`, production run)
+
+| Figure | Paper | This run |
+| --- | --- | --- |
+| Fig 10 face RDM corr | 0.82 | **0.99988** (not tuned) |
+| Fig 11 car RDM corr | >0.99 | **0.99992** (agrees) |
+| Fig 7 p<0.05 @ 400 ms | uncorrected, comp 1 | **p = 8/24 ≈ 0.333** (C=4 discrete floor) |
+
