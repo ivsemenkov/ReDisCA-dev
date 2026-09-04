@@ -7,7 +7,11 @@ The library finds spatial components whose condition-to-condition
 dissimilarity structure matches a user-defined target representational
 dissimilarity matrix (RDM).
 
-The public interface is the scikit-learn estimator `ReDisCA`.
+The public interface is the scikit-learn estimator `ReDisCA`. This package
+currently provides the deterministic scientific core only: `fit`, `transform`,
+and `inverse_transform`. Statistical inference, sliding-window analysis, and
+MNE adapters are not included. Paper reproduction is maintained separately
+from this lightweight library.
 
 ## Installation
 
@@ -68,6 +72,8 @@ print(model.eigenvalues_)
 print(model.filters_.shape, model.patterns_.shape)
 ```
 
+A runnable copy of this workflow is `examples/basic_usage.py`.
+
 Fitted arrays use components as rows:
 
 ```text
@@ -79,20 +85,12 @@ patterns_.shape == (rank_, n_channels)
 `n_components` only slices `transform` / `inverse_transform`; the full
 decomposition remains in `filters_`, `patterns_`, and `eigenvalues_`.
 
-## Scope of this package version
+## Current limitations
 
-This release is the deterministic scientific core and the sklearn estimator.
-
-The following are not implemented here and the scripts under `examples/` still
-call the previous student API, so they are stale until a later migration:
+This release does not include:
 
 - statistical inference / permutation tests
 - sliding-window analysis
-- MNE adapters and plotting
+- MNE adapters or plotting
 - report / export helpers
-- N170, MEG, and synthetic paper-reproduction examples
-
-## Examples
-
-See [examples/README.md](examples/README.md). Those workflows have not been
-migrated to `ReDisCA` yet.
+- paper-reproduction workflows

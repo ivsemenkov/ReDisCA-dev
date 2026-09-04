@@ -67,27 +67,43 @@ def vectorize_rdm(
     )
 
 
-def standardize_target(
-    values: NDArray[np.floating],
-    *,
-    abs_tol: float = 1e-15,
-    rel_tol: float = 1e-12,
-) -> NDArray[np.floating]:
+def standardize_target(values: NDArray[np.floating]) -> NDArray[np.floating]:
     """Z-score a pair vector with the MATLAB/SPoC sample standard deviation.
 
-    Uses ``ddof=1``. A constant or numerically uninformative vector raises.
+    Uses ``ddof=1``. The implementation is scale-free: for any finite
+    non-constant vector ``v`` and positive finite scalar ``c``,
+    ``standardize_target(c * v)`` matches ``standardize_target(v)`` up to
+    floating-point error. A genuinely constant vector raises.
     """
     values = np.asarray(values, dtype=np.float64)
-    scale = float(np.std(values, ddof=1))
-    max_abs = float(np.max(np.abs(values))) if values.size else 0.0
-    floor = max(abs_tol, rel_tol * max(1.0, max_abs))
-    if not np.isfinite(scale) or scale <= floor:
+    if values.size == 0:
+        raise ValueError("Target RDM pair vector must not be empty.")
+    if not np.all(np.isfinite(values)):
+        raise ValueError("Target RDM pair vector contains non-finite values.")
+
+    centered = values - np.mean(values)
+    if not np.all(np.isfinite(centered)):
+        raise ValueError("Target RDM pair vector is not finite after centering.")
+
+    amplitude = float(np.max(np.abs(centered)))
+    if not np.isfinite(amplitude):
+        raise ValueError("Target RDM pair vector amplitude is not finite.")
+    if amplitude == 0.0:
         raise ValueError(
             "Standard deviation of the target RDM pair vector is close to zero. "
             "The target RDM is uninformative (all unique pair entries are "
             "nearly equal)."
         )
-    return (values - np.mean(values)) / scale
+
+    scaled = centered / amplitude
+    scale = float(np.std(scaled, ddof=1))
+    if not np.isfinite(scale) or scale == 0.0:
+        raise ValueError(
+            "Standard deviation of the target RDM pair vector is close to zero. "
+            "The target RDM is uninformative (all unique pair entries are "
+            "nearly equal)."
+        )
+    return scaled / scale
 
 
 def mean_pair_matrix(pair_stack: NDArray[np.floating]) -> NDArray[np.floating]:

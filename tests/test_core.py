@@ -147,6 +147,15 @@ class TestRDMVectorAndStandardization:
         with pytest.raises(ValueError, match="uninformative"):
             standardize_target(np.ones(6))
 
+    @pytest.mark.parametrize("scale", [1.0, 1e-15, 1e-100, 1e15, 1e100])
+    def test_scale_invariance(self, scale):
+        values = np.array([0.0, 1.0, 1.0, 2.0, 0.0, 0.0])
+        baseline = standardize_target(values)
+        scaled = standardize_target(scale * values)
+        assert_allclose(scaled, baseline, rtol=1e-10, atol=1e-12)
+        assert_allclose(np.mean(scaled), 0.0, atol=1e-12)
+        assert_allclose(np.std(scaled, ddof=1), 1.0, atol=1e-12)
+
 
 class TestRBarAndRBarD:
     def test_hand_computed_means(self):
