@@ -1,0 +1,131 @@
+{
+  "airi_music_fix_peak": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_oc-temp_med-Lingual L",
+    "Mindboggle": "lingual L",
+    "hemisphere": "Cortex L",
+    "rank": 1,
+    "scan_value": 0.5761843662839256,
+    "vertex_index_0based": 294,
+    "vertex_index_1based_matlab": 295,
+    "xyz_m": [
+      -0.05812146219845879,
+      0.0024499443977832325,
+      0.03068493621992667
+    ]
+  },
+  "airi_music_literal_bug_status": "blocked",
+  "airi_precomp_numeric_map": "reproduced",
+  "airi_precomp_peak": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_oc-temp_med-Lingual L",
+    "Mindboggle": "lingual L",
+    "hemisphere": "Cortex L",
+    "rank": 1,
+    "scan_value": 8.496596003180272e-11,
+    "vertex_index_0based": 394,
+    "vertex_index_1based_matlab": 395,
+    "xyz_m": [
+      -0.05011885348040854,
+      0.0031734268152973644,
+      0.04179429798010234
+    ]
+  },
+  "airi_precomp_status": "approximate",
+  "asset_sha256": {
+    "headmodel_surf_os_meg.mat": "a365912cae29c3ddda7be90b4bb3830f4ce081e7d4de1206d0c1406985ec439c",
+    "results_sLORETA_MEG_GRAD_MEG_MAG_KERNEL_150924_1824.mat": "794043eb34f588a14186b297721d78e71ac9a08187938f611bdf0a0e0a92a1d3",
+    "tess_cortex_pial_low.mat": "40502997c4c21d89a4c7ea207ab77c1c458a005d74e7cb78e6e0e2beb578cad1",
+    "topo_face_vs_tool_correct_filt15.mat": "b18be3e159164846c0e9d82e3d7dd62e1f01e53d00b511b10f11bd1f8b3b7328"
+  },
+  "commands": [
+    "PYTHONPATH=src:paper/reproduction python3 paper/reproduction/source_localization/run.py",
+    "PYTHONPATH=src:paper/reproduction python3 paper/reproduction/source_localization/run.py --permutation-b 200",
+    "python3 -m pytest paper/reproduction/source_localization/tests -q"
+  ],
+  "fig18_peak": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_occipital_sup L",
+    "Mindboggle": "cuneus L",
+    "hemisphere": "Cortex L",
+    "rank": 1,
+    "scan_value": 0.82120811334584,
+    "vertex_index_0based": 117,
+    "vertex_index_1based_matlab": 118,
+    "xyz_m": [
+      -0.06805910798856149,
+      -0.0019425743414275276,
+      0.06321290597804215
+    ]
+  },
+  "fig18_status": "approximate",
+  "ids": [
+    "airi-executable-local-fit-music-k3",
+    "airi-music-eye-Nsns-fix-A1-col4",
+    "airi-music-literal-bug",
+    "airi-precomp-d15-mag-plus-first-grad",
+    "airi-source-loc-precomp",
+    "author-saved-A1-cols1-3-music",
+    "author-saved-A1-cols1-4-music",
+    "eq13-cosine-author-A1-col4-constrained",
+    "fig18-meg-music"
+  ],
+  "index_audit": {
+    "airi_megplanarbst_is_both_planars_on_this_file": true,
+    "airi_megplanarbst_n": 204,
+    "airi_megplanarbst_n_grad": 204,
+    "airi_megplanarbst_n_mag": 0,
+    "d15_same_integers_as_megplanarbst_if_one_assumes_MAG_first": true,
+    "d15_this_file_grad1_plus_mag_counts": {
+      "MEG GRAD": 102,
+      "MEG MAG": 102
+    },
+    "note": "D15 is an ordering hazard on the same MATLAB index vector. On this OSF kernel ChannelTypes are GRAD, GRAD, MAG, so AIRI megplanarbst selects 204 planars. A MAG+GRAD mix on this file uses a different index set (GRAD1+MAG) and is a labeled negative control, not Fig. 18.",
+    "triplet_order_verified": [
+      "MEG GRAD",
+      "MEG GRAD",
+      "MEG MAG"
+    ]
+  },
+  "meg_fit_error": null,
+  "permutation_B": 200,
+  "provenance": {
+    "environment": {
+      "captured_at_utc": "2026-09-04T18:10:54.018921+00:00",
+      "machine": "x86_64",
+      "matlab": null,
+      "note": "This is a source-faithful Python reconstruction environment. MATLAB is not assumed to be available; results are not MATLAB parity.",
+      "packages": {
+        "numpy": "2.4.4",
+        "redisca": "0.1.0",
+        "scikit-learn": "1.9.0",
+        "scipy": "1.18.1"
+      },
+      "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+    },
+    "extra": {
+      "permutation_b": 200,
+      "skip_meg_fit": false
+    },
+    "path_label": "paper_faithful+airi_executable",
+    "rng": {
+      "bit_generator": "PCG64",
+      "extra": {
+        "api": "numpy.random.default_rng"
+      },
+      "library": "numpy",
+      "seed": 20240915
+    },
+    "track": "source_localization"
+  },
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20240915
+  },
+  "track": "source_localization"
+}

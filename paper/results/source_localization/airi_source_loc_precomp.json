@@ -1,0 +1,417 @@
+{
+  "algorithm": "constrained_sloreta_precomp_abs_W_times_A1_col4",
+  "artifacts": {
+    "npz": "paper/results/source_localization/maps/airi_precomp_A1_col4.npz",
+    "png": "paper/results/source_localization/figures/airi_precomp_A1_col4.png"
+  },
+  "blocked_visual_reason": "show_on_cortex / prepare4topoNMG / FieldTrip are not in the AIRI repo.",
+  "claimed_region_maxima": [
+    {
+      "atlas": "Mindboggle",
+      "label": "fusiform R",
+      "max_scan": 6.882070848301602e-11,
+      "n_vertices": 70,
+      "vertex_index_0based": 3027,
+      "xyz_m": [
+        -0.03635046971169659,
+        -0.04129346055542463,
+        0.028013100038469643
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "fusiform L",
+      "max_scan": 4.578132321460697e-11,
+      "n_vertices": 70,
+      "vertex_index_0based": 473,
+      "xyz_m": [
+        -0.038340182845825216,
+        0.01700314952408083,
+        0.04013553332953153
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "insula R",
+      "max_scan": 2.4443209490266397e-11,
+      "n_vertices": 57,
+      "vertex_index_0based": 4424,
+      "xyz_m": [
+        0.03698679222965315,
+        -0.024673491348864762,
+        0.037507609316328364
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "insula L",
+      "max_scan": 4.525583854216315e-11,
+      "n_vertices": 54,
+      "vertex_index_0based": 1439,
+      "xyz_m": [
+        0.008608384642263545,
+        0.03914812911799857,
+        0.04242955752798187
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "S_intrapariet_and_P_trans L",
+      "max_scan": 2.7844810180196342e-11,
+      "n_vertices": 35,
+      "vertex_index_0based": 630,
+      "xyz_m": [
+        -0.032931232062499094,
+        0.015406919266465369,
+        0.09889492718679153
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "S_intrapariet_and_P_trans R",
+      "max_scan": 5.092561551203095e-11,
+      "n_vertices": 57,
+      "vertex_index_0based": 3146,
+      "xyz_m": [
+        -0.028384533723778943,
+        -0.029999587880643414,
+        0.09285879853768915
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_oc-temp_lat-fusifor R",
+      "max_scan": 6.882070848301602e-11,
+      "n_vertices": 30,
+      "vertex_index_0based": 3027,
+      "xyz_m": [
+        -0.03635046971169659,
+        -0.04129346055542463,
+        0.028013100038469643
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_precentral L",
+      "max_scan": 5.843270562823295e-11,
+      "n_vertices": 45,
+      "vertex_index_0based": 1634,
+      "xyz_m": [
+        0.015099127890983804,
+        0.044292186579570125,
+        0.09605474659570064
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_precentral R",
+      "max_scan": 3.715458102795517e-11,
+      "n_vertices": 52,
+      "vertex_index_0based": 3834,
+      "xyz_m": [
+        0.008997617456714041,
+        -0.022504812611163938,
+        0.1070478334880657
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_and_S_subcentral L",
+      "max_scan": 2.9633145741523377e-11,
+      "n_vertices": 30,
+      "vertex_index_0based": 1490,
+      "xyz_m": [
+        0.012458278526863709,
+        0.060105363521901184,
+        0.07277696080075409
+      ]
+    },
+    {
+      "atlas": "Destrieux",
+      "label": "G_and_S_subcentral R",
+      "max_scan": 1.921061331752007e-11,
+      "n_vertices": 29,
+      "vertex_index_0based": 4038,
+      "xyz_m": [
+        0.018007573212339784,
+        -0.052912169912395,
+        0.04970304511107067
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "cuneus L",
+      "max_scan": 5.673842337724327e-11,
+      "n_vertices": 66,
+      "vertex_index_0based": 128,
+      "xyz_m": [
+        -0.07046822950059817,
+        -0.005917068963210925,
+        0.048345946210725285
+      ]
+    },
+    {
+      "atlas": "Mindboggle",
+      "label": "lingual L",
+      "max_scan": 8.496596003180272e-11,
+      "n_vertices": 92,
+      "vertex_index_0based": 394,
+      "xyz_m": [
+        -0.05011885348040854,
+        0.0031734268152973644,
+        0.04179429798010234
+      ]
+    }
+  ],
+  "d17": "Author-saved OSF topo_face_vs_tool_correct_filt15.mat (D17). The committed AIRI main script returns before save. This is not a local SPoC run and is not a Fig. 18 subspace by itself.",
+  "figure": "AIRI-executable source loc (not Fig. 18)",
+  "forward": {
+    "gain_rows": "204 MEG GRAD via AIRI megplanarbst on this file",
+    "headmodel": "headmodel_surf_os_meg.mat",
+    "meg_method": "os_meg",
+    "n_vertices": 5002,
+    "not_fsaverage": true,
+    "surface_comment": "cortex_5002V",
+    "tess": "tess_cortex_pial_low.mat"
+  },
+  "id": "airi-source-loc-precomp",
+  "index_audit": {
+    "airi_megplanarbst_is_both_planars_on_this_file": true,
+    "airi_megplanarbst_n": 204,
+    "airi_megplanarbst_n_grad": 204,
+    "airi_megplanarbst_n_mag": 0,
+    "d15_same_integers_as_megplanarbst_if_one_assumes_MAG_first": true,
+    "d15_this_file_grad1_plus_mag_counts": {
+      "MEG GRAD": 102,
+      "MEG MAG": 102
+    },
+    "note": "D15 is an ordering hazard on the same MATLAB index vector. On this OSF kernel ChannelTypes are GRAD, GRAD, MAG, so AIRI megplanarbst selects 204 planars. A MAG+GRAD mix on this file uses a different index set (GRAD1+MAG) and is a labeled negative control, not Fig. 18.",
+    "triplet_order_verified": [
+      "MEG GRAD",
+      "MEG GRAD",
+      "MEG MAG"
+    ]
+  },
+  "kernel": {
+    "columns": "ImagingKernel[:, megplanarbst] (0-based)",
+    "comment": "sLORETA: MEG ALL(Constr)",
+    "function": "sloreta",
+    "shape": [
+      5002,
+      306
+    ]
+  },
+  "n_vertices": 5002,
+  "numeric_map": "reproduced",
+  "paper_claimed_regions": [
+    "right fusiform",
+    "right insula",
+    "left IPS",
+    "anterior central gyrus"
+  ],
+  "path_label": "airi_executable",
+  "peak": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_oc-temp_med-Lingual L",
+    "Mindboggle": "lingual L",
+    "hemisphere": "Cortex L",
+    "rank": 1,
+    "scan_value": 8.496596003180272e-11,
+    "vertex_index_0based": 394,
+    "vertex_index_1based_matlab": 395,
+    "xyz_m": [
+      -0.05011885348040854,
+      0.0031734268152973644,
+      0.04179429798010234
+    ]
+  },
+  "principal_angle_rad_at_peak": 1.5707963267099307,
+  "region_note": "Those regions are the paper Fig. 18 claim. This map is AIRI sLORETA of component 4, not that claim.",
+  "scan_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      2.201236690273589e-11,
+      1.1081578904618803e-11,
+      4.831934454468098e-13,
+      1.5537137049826853e-11,
+      1.165672581143586e-11,
+      3.023763260870562e-12,
+      3.58357426100403e-11,
+      1.699319845453772e-11
+    ],
+    "max": 8.496596003180272e-11,
+    "mean": 1.73851567854356e-11,
+    "min": 1.673945230809591e-15,
+    "n_finite": 5002,
+    "n_nonfinite": 0,
+    "shape": [
+      5002
+    ],
+    "std": 1.3865407276946117e-11
+  },
+  "status": "approximate",
+  "top_peaks": [
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 1,
+      "scan_value": 8.496596003180272e-11,
+      "vertex_index_0based": 394,
+      "vertex_index_1based_matlab": 395,
+      "xyz_m": [
+        -0.05011885348040854,
+        0.0031734268152973644,
+        0.04179429798010234
+      ]
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 2,
+      "scan_value": 8.383243961370833e-11,
+      "vertex_index_0based": 2557,
+      "vertex_index_1based_matlab": 2558,
+      "xyz_m": [
+        -0.06978342538131865,
+        -0.034919093783028515,
+        0.045625626441169256
+      ]
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "G_oc-temp_med-Lingual R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 3,
+      "scan_value": 8.357542727443358e-11,
+      "vertex_index_0based": 2689,
+      "vertex_index_1based_matlab": 2690,
+      "xyz_m": [
+        -0.05746055646056737,
+        -0.00824706731671282,
+        0.038815193679205925
+      ]
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "G_oc-temp_med-Lingual R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 4,
+      "scan_value": 8.31741304061803e-11,
+      "vertex_index_0based": 2556,
+      "vertex_index_1based_matlab": 2557,
+      "xyz_m": [
+        -0.06547868665164386,
+        -0.009512193091968074,
+        0.03592487115258465
+      ]
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "G_occipital_middle R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 5,
+      "scan_value": 8.213809730474655e-11,
+      "vertex_index_0based": 2561,
+      "vertex_index_1based_matlab": 2562,
+      "xyz_m": [
+        -0.06774674741804895,
+        -0.03793856211224639,
+        0.04545276921497121
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 6,
+      "scan_value": 8.192728537134613e-11,
+      "vertex_index_0based": 207,
+      "vertex_index_1based_matlab": 208,
+      "xyz_m": [
+        -0.05669672353411016,
+        -0.0019441048365518854,
+        0.04446448720006482
+      ]
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "G_and_S_occipital_inf R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 7,
+      "scan_value": 8.084882138587658e-11,
+      "vertex_index_0based": 2583,
+      "vertex_index_1based_matlab": 2584,
+      "xyz_m": [
+        -0.06341667948375349,
+        -0.03300707928940294,
+        0.04675590655109882
+      ]
+    },
+    {
+      "Brodmann": "V1 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 8,
+      "scan_value": 7.680269764015418e-11,
+      "vertex_index_0based": 2519,
+      "vertex_index_1based_matlab": 2520,
+      "xyz_m": [
+        -0.07424961991032288,
+        -0.028698766826932592,
+        0.04899080233858637
+      ]
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "G_occipital_middle R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 9,
+      "scan_value": 7.669119060370058e-11,
+      "vertex_index_0based": 2660,
+      "vertex_index_1based_matlab": 2661,
+      "xyz_m": [
+        -0.061735046375431146,
+        -0.04234444004362323,
+        0.04351543908379908
+      ]
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_oc-temp_med-Lingual L",
+      "Mindboggle": "lingual L",
+      "hemisphere": "Cortex L",
+      "rank": 10,
+      "scan_value": 7.659638981652146e-11,
+      "vertex_index_0based": 327,
+      "vertex_index_1based_matlab": 328,
+      "xyz_m": [
+        -0.04888599215064149,
+        0.002665444607881373,
+        0.045501054545413186
+      ]
+    }
+  ],
+  "topography": {
+    "comps_order": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "matlab_column": 4,
+    "source": "OSF_author_saved_A1",
+    "zero_based_column": 3
+  },
+  "visual_screenshot": "blocked"
+}

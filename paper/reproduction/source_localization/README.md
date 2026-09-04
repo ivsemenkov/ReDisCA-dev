@@ -66,4 +66,5 @@ Vertex maps as `.npz` and matplotlib 3-view Vertex scatters as `.png`
 Missing by construction: `show_on_cortex`, `prepare4topoNMG`, FieldTrip,
 individual T1. Do not claim screenshot parity with Fig. 18’s A/P/S/L/R views.
 
-See `TRACK_REPORT.md` for statuses and peak vertices.
+See `TRACK_REPORT.md` for statuses, peak vertices, D15 audit, and the Fig. 18
+vs AIRI-precomp split. Compact JSON: `paper/results/source_localization/`.

@@ -126,45 +126,60 @@ def prepare_condition_averages(
     path: Literal["paper_faithful", "airi_executable"],
 ) -> tuple[NDArray[np.float64], dict[str, Any]]:
     """Build 6 condition averages for one labeled MEG path."""
+    both = prepare_both_path_averages(meg_mat, spm_mat)
+    if path == "paper_faithful":
+        return both["paper_faithful"]
+    if path == "airi_executable":
+        return both["airi_executable"]
+    raise ValueError(f"Unknown path {path!r}")
+
+
+def prepare_both_path_averages(
+    meg_mat: Path,
+    spm_mat: Path,
+) -> dict[str, tuple[NDArray[np.float64], dict[str, Any]]]:
+    """Load the MEG cube once; return paper-faithful and AIRI-executable averages."""
     indices = load_condition_trial_indices(spm_mat)
     counts = {name: int(indices[name].size) for name in CONDITION_ORDER}
     planars = load_meg_planars(meg_mat)
     time_s = sample_time_s(planars.shape[1])
-    if path == "paper_faithful":
-        X = condition_averages_from_planars(planars, indices)
-        meta = {
-            "path": path,
-            "n_times": int(X.shape[2]),
-            "time_window_s": (float(time_s[0]), float(time_s[-1])),
-            "bandpass": None,
-            "trial_counts": counts,
-            "n_samples_note": "OSF is 1501 samples; paper prints 1500 (D16).",
-        }
-        return X, meta
-    if path == "airi_executable":
-        used = np.unique(np.concatenate([indices[name] for name in CONDITION_ORDER]))
-        filtered = np.zeros_like(planars)
-        filtered[:, :, used] = _bandpass_airi(planars[:, :, used])
-        X_full = condition_averages_from_planars(filtered, indices)
-        sl = airi_time_slice_0based()
-        X = X_full[:, :, sl]
-        t_win = sample_time_s(planars.shape[1])[sl]
-        meta = {
-            "path": path,
-            "n_times": int(X.shape[2]),
-            "time_window_s": (float(t_win[0]), float(t_win[-1])),
-            "bandpass": {
-                "order": 3,
-                "low_hz": 0.25,
-                "high_hz": 20.0,
-                "fs": FS_HZ,
-                "note": "SciPy filtfilt; not MATLAB bit-parity (D8).",
-            },
-            "trange_1based": list(AIRI_TRANGE_1BASED),
-            "trial_counts": counts,
-        }
-        return X, meta
-    raise ValueError(f"Unknown path {path!r}")
+    x_paper = condition_averages_from_planars(planars, indices)
+    meta_paper = {
+        "path": "paper_faithful",
+        "n_times": int(x_paper.shape[2]),
+        "time_window_s": (float(time_s[0]), float(time_s[-1])),
+        "bandpass": None,
+        "trial_counts": counts,
+        "n_samples_note": "OSF is 1501 samples; paper prints 1500 (D16).",
+    }
+    used = np.unique(np.concatenate([indices[name] for name in CONDITION_ORDER]))
+    filtered_used = _bandpass_airi(planars[:, :, used])
+    filtered = np.zeros_like(planars)
+    filtered[:, :, used] = filtered_used
+    del filtered_used
+    x_full = condition_averages_from_planars(filtered, indices)
+    del planars, filtered
+    sl = airi_time_slice_0based()
+    x_airi = x_full[:, :, sl]
+    t_win = time_s[sl]
+    meta_airi = {
+        "path": "airi_executable",
+        "n_times": int(x_airi.shape[2]),
+        "time_window_s": (float(t_win[0]), float(t_win[-1])),
+        "bandpass": {
+            "order": 3,
+            "low_hz": 0.25,
+            "high_hz": 20.0,
+            "fs": FS_HZ,
+            "note": "SciPy filtfilt; not MATLAB bit-parity (D8).",
+        },
+        "trange_1based": list(AIRI_TRANGE_1BASED),
+        "trial_counts": counts,
+    }
+    return {
+        "paper_faithful": (x_paper, meta_paper),
+        "airi_executable": (x_airi, meta_airi),
+    }
 
 
 def fit_paper_faithful(

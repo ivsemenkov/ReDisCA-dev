@@ -37,7 +37,7 @@ from source_localization.meg_patterns import (
     PatternFit,
     fit_airi_executable,
     fit_paper_faithful,
-    prepare_condition_averages,
+    prepare_both_path_averages,
     theoretical_rdm,
     three_lowest_p_indices,
 )
@@ -54,6 +54,69 @@ from source_localization.sloreta import precomp_abs_kernel_map
 N_TOP = 10
 FIG18_K = 3
 AUTHOR_COMP4_0BASED = 3  # MATLAB A1(:,4)
+
+FIG18_REGION_QUERIES: tuple[tuple[str, str], ...] = (
+    ("Mindboggle", "fusiform R"),
+    ("Mindboggle", "fusiform L"),
+    ("Mindboggle", "insula R"),
+    ("Mindboggle", "insula L"),
+    ("Destrieux", "S_intrapariet_and_P_trans L"),
+    ("Destrieux", "S_intrapariet_and_P_trans R"),
+    ("Destrieux", "G_oc-temp_lat-fusifor R"),
+    ("Destrieux", "G_precentral L"),
+    ("Destrieux", "G_precentral R"),
+    ("Destrieux", "G_and_S_subcentral L"),
+    ("Destrieux", "G_and_S_subcentral R"),
+    ("Mindboggle", "cuneus L"),
+    ("Mindboggle", "lingual L"),
+)
+
+
+def _repo_relative(path: Path) -> str:
+    resolved = Path(path).resolve()
+    try:
+        return str(resolved.relative_to(_REPO))
+    except ValueError:
+        return str(resolved)
+
+
+def scout_maxima(
+    scan: NDArray[np.floating],
+    model: SourceModel,
+    queries: tuple[tuple[str, str], ...],
+) -> list[dict[str, Any]]:
+    """Max scan inside named atlas scouts (atlas_name, exact scout label)."""
+    scan = np.asarray(scan, dtype=np.float64).ravel()
+    out: list[dict[str, Any]] = []
+    for atlas_name, label in queries:
+        labels = model.atlas_labels.get(atlas_name)
+        if labels is None:
+            continue
+        mask = np.array([lab == label for lab in labels])
+        if not mask.any():
+            out.append(
+                {
+                    "atlas": atlas_name,
+                    "label": label,
+                    "n_vertices": 0,
+                    "max_scan": None,
+                }
+            )
+            continue
+        idx = np.flatnonzero(mask)
+        local = scan[idx]
+        best_local = int(idx[int(np.argmax(local))])
+        out.append(
+            {
+                "atlas": atlas_name,
+                "label": label,
+                "n_vertices": int(idx.size),
+                "max_scan": float(scan[best_local]),
+                "vertex_index_0based": best_local,
+                "xyz_m": [float(x) for x in model.vertices[best_local]],
+            }
+        )
+    return out
 
 
 def _load_author_topo(path: Path) -> dict[str, Any]:
@@ -110,8 +173,7 @@ def _scan_record(
 ) -> dict[str, Any]:
     peaks = _top_peaks(scan, model)
     peak = peaks[0]
-    angle = first_principal_angle_rad(scan)
-    return {
+    payload: dict[str, Any] = {
         "id": scan_id,
         "figure": figure,
         "status": status,
@@ -121,7 +183,7 @@ def _scan_record(
         "peak": peak,
         "top_peaks": peaks,
         "scan_fingerprint": array_fingerprint(scan),
-        "principal_angle_rad_at_peak": float(angle[peak["vertex_index_0based"]]),
+        "claimed_region_maxima": scout_maxima(scan, model, FIG18_REGION_QUERIES),
         "forward": {
             "headmodel": "headmodel_surf_os_meg.mat",
             "tess": "tess_cortex_pial_low.mat",
@@ -133,6 +195,12 @@ def _scan_record(
         },
         **extra,
     }
+    finite = np.asarray(scan, dtype=np.float64)
+    finite = finite[np.isfinite(finite)]
+    if finite.size and float(np.min(finite)) >= -1e-12 and float(np.max(finite)) <= 1.0 + 1e-12:
+        angle = first_principal_angle_rad(scan)
+        payload["principal_angle_rad_at_peak"] = float(angle[peak["vertex_index_0based"]])
+    return payload
 
 
 def _write_map(
@@ -155,7 +223,7 @@ def _write_map(
         title=title,
         peak_index=peak_index,
     )
-    return {"npz": str(npz_path), "png": str(png_path)}
+    return {"npz": _repo_relative(npz_path), "png": _repo_relative(png_path)}
 
 
 def _pattern_json(fit: PatternFit, k_index: NDArray[np.integer]) -> dict[str, Any]:
@@ -203,9 +271,8 @@ def _try_local_fits(
     }
     try:
         rdm = theoretical_rdm("facevstool")
-        X_paper, _meta_p = prepare_condition_averages(
-            meg_mat, spm_mat, path="paper_faithful"
-        )
+        both = prepare_both_path_averages(meg_mat, spm_mat)
+        X_paper, _meta_p = both["paper_faithful"]
         out["paper_faithful"] = fit_paper_faithful(
             X_paper,
             rdm,
@@ -215,9 +282,7 @@ def _try_local_fits(
             rdm_name="facevstool",
         )
         del X_paper
-        X_airi, _meta_a = prepare_condition_averages(
-            meg_mat, spm_mat, path="airi_executable"
-        )
+        X_airi, _meta_a = both["airi_executable"]
         out["airi_executable"] = fit_airi_executable(X_airi, rdm, rdm_name="facevstool")
         del X_airi
     except Exception as exc:  # noqa: BLE001 — record and continue with author-saved topo
@@ -631,8 +696,9 @@ def run(
         "rng": rng_record.to_dict(),
         "asset_sha256": asset_hashes,
         "commands": [
-            "PYTHONPATH=src:paper/reproduction python paper/reproduction/source_localization/run.py",
-            "python -m pytest paper/reproduction/source_localization/tests -q",
+            "PYTHONPATH=src:paper/reproduction python3 paper/reproduction/source_localization/run.py",
+            "PYTHONPATH=src:paper/reproduction python3 paper/reproduction/source_localization/run.py --permutation-b 200",
+            "python3 -m pytest paper/reproduction/source_localization/tests -q",
         ],
         "provenance": capture_run(
             track="source_localization",

@@ -1,0 +1,76 @@
+{
+  "d9_note": "MEG GEP rank is ~67 < 204, so paper A=W^{-1} is undefined. Haufe/SPoC patterns are used.",
+  "eigenvalues_head": [
+    0.83599407422755,
+    0.752597935799578,
+    0.6836016635573615,
+    0.6554552546697031,
+    0.5933354011181567,
+    0.5510723485489283,
+    0.46576939925688854,
+    0.4409670577249549
+  ],
+  "estimator": "redisca.ReDisCA",
+  "haufe_patterns": true,
+  "inference": "paper_condition_label_permutation_max_abs_lambda",
+  "label": "paper_faithful",
+  "matrix_mode": "unscaled_gram",
+  "n_channels": 204,
+  "n_patterns": 68,
+  "n_times": 1501,
+  "p_values_head": [
+    0.325,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pair_mode": "unique_unordered",
+  "patterns_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      -1.4697410126208102e-11,
+      -1.4677448571772014e-11,
+      -2.2483555643229306e-12,
+      -5.24230907693149e-12,
+      3.7979660583350867e-13,
+      -2.644861425342217e-11,
+      -4.936918615913317e-12,
+      -1.3031789842251277e-11
+    ],
+    "max": 6.47340592658382e-11,
+    "mean": -1.4067609268508509e-14,
+    "min": -6.598483547268326e-11,
+    "n_finite": 13872,
+    "n_nonfinite": 0,
+    "shape": [
+      68,
+      204
+    ],
+    "std": 4.670104165133307e-12
+  },
+  "permutation_B": 200,
+  "preprocessing": {
+    "bandpass": null,
+    "demean_time": false,
+    "window": "full_epoch_1501"
+  },
+  "rdm_name": "facevstool",
+  "selected_component_indices_0based": [
+    0,
+    1,
+    2
+  ],
+  "selected_p_values": [
+    0.325,
+    1.0,
+    1.0
+  ],
+  "time_window_s": [
+    -0.5,
+    1.0
+  ]
+}

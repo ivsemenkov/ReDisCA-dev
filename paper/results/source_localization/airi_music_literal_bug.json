@@ -1,0 +1,13 @@
+{
+  "algorithm": "AIRI method=music with P=eye(size(Nsns,1))=eye(1)",
+  "blocked_reason": "MATLAB P = eye(size(Nsns,1)) is eye(1); P*G is a dimension error. The committed music branch is non-executable as written. Not Fig. 18.",
+  "error": "AIRI sets P = eye(size(Nsns,1)), which is eye(1) because Nsns is a scalar. P has shape (1, 1); G has 204 rows. P*G is non-executable in MATLAB and NumPy. This is not Fig. 18. The obvious fix is P = eye(Nsns).",
+  "executable": false,
+  "figure": null,
+  "id": "airi-music-literal-P-eye1",
+  "is_fig18": false,
+  "nRAP": 1,
+  "path_label": "airi_executable_literal_bug",
+  "status": "blocked",
+  "topography": "A1(:,4)"
+}
