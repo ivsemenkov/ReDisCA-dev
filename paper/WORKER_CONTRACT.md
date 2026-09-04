@@ -13,11 +13,16 @@ Permanent git branch: `paper` (starts at library `main` commit
 | Owner | Paths |
 | --- | --- |
 | Source audit | `paper/reference/`, `paper/reproduction_manifest.md`, `paper/reproduction_manifest.json` |
-| N170 | `paper/reproduction/n170/`, `paper/results/n170/` |
-| MEG | `paper/reproduction/meg/`, `paper/results/meg/` |
+| N170 (original track; frozen) | `paper/reproduction/n170/` except the overnight subdirs below; `paper/results/n170/` except overnight subdirs |
+| MEG (original track; frozen) | `paper/reproduction/meg/` except overnight subdirs; `paper/results/meg/` except overnight subdirs |
 | Simulations | `paper/reproduction/simulations/`, `paper/results/simulations/` |
 | Source localization | `paper/reproduction/source_localization/`, `paper/results/source_localization/` |
-| Orchestrator / integration only | `paper/reproduction/common/`, `paper/README.md`, `paper/results_summary.*`, this file |
+| Overnight A+B historical N170 | `paper/reproduction/n170/historical/`, `paper/results/n170/historical/`, `paper/reproduction/n170/HISTORICAL_REPORT.md` |
+| Overnight C preprocessing | `paper/reproduction/n170/preprocessing_forensics/`, `paper/results/n170/preprocessing/`, `paper/reproduction/n170/PREPROCESSING_REPORT.md` |
+| Overnight D RDM correlation | `paper/reproduction/n170/rdm_correlation/`, `paper/results/n170/rdm_correlation/`, `paper/reproduction/n170/RDM_CORR_REPORT.md` |
+| Overnight E frozen-candidate apply | `paper/reproduction/n170/historical_apply/`, `paper/reproduction/meg/historical_candidate/`, `paper/results/n170/historical_apply/`, `paper/results/meg/historical_candidate/` |
+| Overnight F rank 67/68 | `paper/reproduction/meg/rank_audit/`, `paper/results/meg/rank_audit/`, `paper/reproduction/meg/RANK_AUDIT.md` |
+| Orchestrator / integration only | `paper/reproduction/common/`, `paper/README.md`, `paper/results_summary.*`, this file, `paper/HISTORICAL_INVESTIGATION.md` |
 
 Workers must not concurrently edit the same files. If a shared helper is
 needed, request it rather than racing to edit `paper/reproduction/common/`.
