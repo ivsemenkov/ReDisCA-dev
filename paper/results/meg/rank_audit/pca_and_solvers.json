@@ -1,0 +1,962 @@
+{
+  "airi_executable": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 2.448078264039595e-06,
+      "gap_ratio_68_minus_69": 2.4775645288044656e-06,
+      "margin_68_above_cutoff": 1.484829859651411e-06,
+      "margin_69_below_cutoff": 9.927346691530545e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 4.932908123691006e-06,
+      "ratio_68": 2.484829859651411e-06,
+      "ratio_69": 7.2653308469454474e-09,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.5975579591029678,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 2.1541934942941396e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 3.932908123691006e-06,
+          "ratio_to_max": 4.932908123691006e-06
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 1.0851214301724517e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.484829859651411e-06,
+          "ratio_to_max": 2.484829859651411e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 3.1727589592067532e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.927346691530545e-07,
+          "ratio_to_max": 7.2653308469454474e-09
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.99999932257837,
+      "cumulative_at_n": 0.99999932257837,
+      "cumulative_at_n_minus_1": 0.9999979816751061,
+      "feasible": true,
+      "interval_note": "pca in (0.9999979816751061, 0.99999932257837] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999979816751061
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 5.289724578700294e-38,
+      "max_abs_numpy_vs_scipy_eigh": 1.1754943508222875e-38,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 2.1541934942941396e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 3.932908123691006e-06,
+          "ratio_to_max": 4.932908123691006e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 1.0851214301724517e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.484829859651411e-06,
+          "ratio_to_max": 2.484829859651411e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 3.1727589592067532e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.927346691530545e-07,
+          "ratio_to_max": 7.2653308469454474e-09
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797081e-29,
+          "eigenvalue": 2.154193494289386e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 3.932908123680118e-06,
+          "ratio_to_max": 4.932908123680118e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797081e-29,
+          "eigenvalue": 1.0851214301719351e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.484829859650227e-06,
+          "ratio_to_max": 2.484829859650227e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.366984829797081e-29,
+          "eigenvalue": 3.172758959329761e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.927346691527729e-07,
+          "ratio_to_max": 7.265330847227121e-09
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 2.1541934942936186e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 3.9329081236898135e-06,
+          "ratio_to_max": 4.932908123689813e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 1.0851214301722755e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.4848298596510075e-06,
+          "ratio_to_max": 2.4848298596510074e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.366984829797079e-29,
+          "eigenvalue": 3.1727589600553205e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.927346691511114e-07,
+          "ratio_to_max": 7.26533084888859e-09
+        }
+      ]
+    }
+  },
+  "airi_window_filt15_matlab_cov": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 1.7085285149514367e-06,
+      "gap_ratio_68_minus_69": 1.684214550303834e-06,
+      "margin_68_above_cutoff": 6.891099633775543e-07,
+      "margin_69_below_cutoff": 9.951045869262798e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 3.397638478328991e-06,
+      "ratio_68": 1.6891099633775542e-06,
+      "ratio_69": 4.895413073720212e-09,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.4079722329028277,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 1.4546592337266363e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 2.3976384783289907e-06,
+          "ratio_to_max": 3.397638478328991e-06
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 7.231727038290572e-29,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 6.891099633775543e-07,
+          "ratio_to_max": 1.6891099633775542e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 2.0959139343440366e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.951045869262798e-07,
+          "ratio_to_max": 4.895413073720212e-09
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.9999995234870686,
+      "cumulative_at_n": 0.9999995234870686,
+      "cumulative_at_n_minus_1": 0.9999985677531575,
+      "feasible": true,
+      "interval_note": "pca in (0.9999985677531575, 0.9999995234870686] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999985677531575
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 5.877471754111438e-38,
+      "max_abs_numpy_vs_scipy_eigh": 8.816207631167156e-39,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 1.4546592337266363e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 2.3976384783289907e-06,
+          "ratio_to_max": 3.397638478328991e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 7.231727038290572e-29,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 6.891099633775543e-07,
+          "ratio_to_max": 1.6891099633775542e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 2.0959139343440366e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.951045869262798e-07,
+          "ratio_to_max": 4.895413073720212e-09
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735418e-29,
+          "eigenvalue": 1.4546592337265291e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 2.3976384783287375e-06,
+          "ratio_to_max": 3.3976384783287376e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735418e-29,
+          "eigenvalue": 7.231727038315645e-29,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 6.891099633834092e-07,
+          "ratio_to_max": 1.6891099633834091e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.281383210735418e-29,
+          "eigenvalue": 2.0959139311332243e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.951045869337792e-07,
+          "ratio_to_max": 4.895413066220733e-09
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 1.4546592337264107e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 2.397638478328464e-06,
+          "ratio_to_max": 3.397638478328464e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 7.231727038301065e-29,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 6.89109963380005e-07,
+          "ratio_to_max": 1.689109963380005e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.281383210735415e-29,
+          "eigenvalue": 2.095913934008489e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.951045869270635e-07,
+          "ratio_to_max": 4.8954130729364754e-09
+        }
+      ]
+    }
+  },
+  "airi_window_filtered_unscaled_gram": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 2.9010714434396058e-06,
+      "gap_ratio_68_minus_69": 2.4811673637977534e-06,
+      "margin_68_above_cutoff": 1.4881067318163e-06,
+      "margin_69_below_cutoff": 9.930606319814534e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 5.389178175255906e-06,
+      "ratio_68": 2.4881067318163e-06,
+      "ratio_69": 6.939368018546593e-09,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.5980879810288495,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 2.2586810436407144e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 4.389178175255906e-06,
+          "ratio_to_max": 5.389178175255906e-06
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 1.0428008365935068e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.4881067318163e-06,
+          "ratio_to_max": 2.4881067318163e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 2.908387603568802e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.930606319814534e-07,
+          "ratio_to_max": 6.939368018546593e-09
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.9999993265392316,
+      "cumulative_at_n": 0.9999993265392316,
+      "cumulative_at_n_minus_1": 0.9999978718968894,
+      "feasible": true,
+      "interval_note": "pca in (0.9999978718968894, 0.9999993265392316] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999978718968894
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 1.023150282955719e-34,
+      "max_abs_numpy_vs_scipy_eigh": 1.2037062152420224e-35,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 2.2586810436407144e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 4.389178175255906e-06,
+          "ratio_to_max": 5.389178175255906e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 1.0428008365935068e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.4881067318163e-06,
+          "ratio_to_max": 2.4881067318163e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.191141896201011e-26,
+          "eigenvalue": 2.908387603568802e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.930606319814534e-07,
+          "ratio_to_max": 6.939368018546593e-09
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.1911418962010214e-26,
+          "eigenvalue": 2.258681043639559e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 4.389178175253136e-06,
+          "ratio_to_max": 5.389178175253136e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.1911418962010214e-26,
+          "eigenvalue": 1.0428008365928442e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.4881067318147127e-06,
+          "ratio_to_max": 2.4881067318147126e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.1911418962010214e-26,
+          "eigenvalue": 2.9083876046350683e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.930606319789093e-07,
+          "ratio_to_max": 6.93936802109067e-09
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.19114189620101e-26,
+          "eigenvalue": 2.258681043640341e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 4.389178175255017e-06,
+          "ratio_to_max": 5.389178175255016e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.19114189620101e-26,
+          "eigenvalue": 1.0428008365934637e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 1.4881067318161975e-06,
+          "ratio_to_max": 2.4881067318161975e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.19114189620101e-26,
+          "eigenvalue": 2.908387603600632e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.930606319813773e-07,
+          "ratio_to_max": 6.9393680186225404e-09
+        }
+      ]
+    }
+  },
+  "airi_window_unfiltered_matlab_cov": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 2.4725811536779266e-06,
+      "gap_ratio_68_minus_69": 3.577944755553024e-06,
+      "margin_68_above_cutoff": 2.589258747364793e-06,
+      "margin_69_below_cutoff": 9.88686008188231e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 6.061839901042719e-06,
+      "ratio_68": 3.5892587473647926e-06,
+      "ratio_69": 1.131399181176882e-08,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.7213909415880947,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 2.9355425745107356e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 5.0618399010427194e-06,
+          "ratio_to_max": 6.061839901042719e-06
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 1.7381557474013808e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 2.589258747364793e-06,
+          "ratio_to_max": 3.5892587473647926e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 5.478980836395924e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.88686008188231e-07,
+          "ratio_to_max": 1.131399181176882e-08
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.9999989763928013,
+      "cumulative_at_n": 0.9999989763928013,
+      "cumulative_at_n_minus_1": 0.9999972530717076,
+      "feasible": true,
+      "interval_note": "pca in (0.9999972530717076, 0.9999989763928013] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999972530717076
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 1.410593220986745e-37,
+      "max_abs_numpy_vs_scipy_eigh": 1.1754943508222875e-38,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 2.9355425745107356e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 5.0618399010427194e-06,
+          "ratio_to_max": 6.061839901042719e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 1.7381557474013808e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 2.589258747364793e-06,
+          "ratio_to_max": 3.5892587473647926e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 5.478980836395924e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.88686008188231e-07,
+          "ratio_to_max": 1.131399181176882e-08
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567414e-29,
+          "eigenvalue": 2.9355425745081773e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 5.0618399010374255e-06,
+          "ratio_to_max": 6.061839901037425e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567414e-29,
+          "eigenvalue": 1.7381557473974628e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 2.589258747356695e-06,
+          "ratio_to_max": 3.589258747356695e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.842659361567414e-29,
+          "eigenvalue": 5.478980837744329e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.886860081854467e-07,
+          "ratio_to_max": 1.131399181455323e-08
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 2.935542574510868e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 5.061839901042993e-06,
+          "ratio_to_max": 6.061839901042993e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 1.7381557474014597e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 2.5892587473649555e-06,
+          "ratio_to_max": 3.589258747364955e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.842659361567404e-29,
+          "eigenvalue": 5.478980836133607e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.886860081887727e-07,
+          "ratio_to_max": 1.131399181122714e-08
+        }
+      ]
+    }
+  },
+  "paper_faithful": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 3.5027428047911425e-06,
+      "gap_ratio_68_minus_69": 4.34965362900362e-06,
+      "margin_68_above_cutoff": 3.3604739368331744e-06,
+      "margin_69_below_cutoff": 9.89179692170445e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 7.863216741624317e-06,
+      "ratio_68": 4.360473936833174e-06,
+      "ratio_69": 1.0820307829554845e-08,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.7706671305719908,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 7.11383617569939e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 6.863216741624317e-06,
+          "ratio_to_max": 7.863216741624317e-06
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 3.944911892207411e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 3.3604739368331744e-06,
+          "ratio_to_max": 4.360473936833174e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 9.789110461959618e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.89179692170445e-07,
+          "ratio_to_max": 1.0820307829554845e-08
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.9999986927796343,
+      "cumulative_at_n": 0.9999986927796343,
+      "cumulative_at_n_minus_1": 0.9999963413119723,
+      "feasible": true,
+      "interval_note": "pca in (0.9999963413119723, 0.9999986927796343] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999963413119723
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 7.824090399073146e-35,
+      "max_abs_numpy_vs_scipy_eigh": 6.018531076210112e-36,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 7.11383617569939e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 6.863216741624317e-06,
+          "ratio_to_max": 7.863216741624317e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 3.944911892207411e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 3.3604739368331744e-06,
+          "ratio_to_max": 4.360473936833174e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 9.789110461959618e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.89179692170445e-07,
+          "ratio_to_max": 1.0820307829554845e-08
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806025e-26,
+          "eigenvalue": 7.113836175703643e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 6.863216741629023e-06,
+          "ratio_to_max": 7.863216741629023e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806025e-26,
+          "eigenvalue": 3.944911892206728e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 3.360473936832423e-06,
+          "ratio_to_max": 4.360473936832423e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 9.046979638806025e-26,
+          "eigenvalue": 9.78911046118345e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.891796921713031e-07,
+          "ratio_to_max": 1.0820307828696923e-08
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 7.113836175700861e-25,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 6.8632167416259415e-06,
+          "ratio_to_max": 7.863216741625941e-06
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 3.9449118922067647e-25,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 3.3604739368324603e-06,
+          "ratio_to_max": 4.36047393683246e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 9.046979638806032e-26,
+          "eigenvalue": 9.789110462109299e-28,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.891796921702797e-07,
+          "ratio_to_max": 1.0820307829720294e-08
+        }
+      ]
+    }
+  },
+  "paper_window_matlab_cov": {
+    "matlab_eig_flip": {
+      "conservative_solver_delta_ratio": 1e-12,
+      "cutoff": 1e-06,
+      "gap_ratio_67_minus_68": 5.319127155236225e-06,
+      "gap_ratio_68_minus_69": 6.393849176486429e-06,
+      "margin_68_above_cutoff": 5.410067981349779e-06,
+      "margin_69_below_cutoff": 9.837811951366504e-07,
+      "note": "MATLAB eig is unavailable. This is a gap argument, not a parity claim. A solver-only flip 68\u219267 needs |\u03b4(\u03bb_68/\u03bb_max)| \u2265 margin_68_above_cutoff.",
+      "plausible_that_matlab_eig_alone_flips_68_to_67": false,
+      "rank_at_1e-6": 68,
+      "ratio_67": 1.1729195136586003e-05,
+      "ratio_68": 6.4100679813497785e-06,
+      "ratio_69": 1.6218804863349467e-08,
+      "relative_drop_of_eig68_to_cross_cutoff": 0.8439954142593308,
+      "rows": {
+        "67": {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 4.699402827287182e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 1.0729195136586003e-05,
+          "ratio_to_max": 1.1729195136586003e-05
+        },
+        "68": {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 2.5682488221801537e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 5.410067981349779e-06,
+          "ratio_to_max": 6.4100679813497785e-06
+        },
+        "69": {
+          "above_cutoff": false,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 6.498203546149581e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.837811951366504e-07,
+          "ratio_to_max": 1.6218804863349467e-08
+        }
+      },
+      "typical_lapack_n_eps": 4.529709940470639e-14,
+      "verdict": "not_borderline"
+    },
+    "numerical_rank_1e-6": 68,
+    "pca_interval_for_exactly_67": {
+      "airi_default_pca": 1.0,
+      "airi_default_would_select": 68,
+      "closed_upper": 0.9999983256101116,
+      "cumulative_at_n": 0.9999983256101116,
+      "cumulative_at_n_minus_1": 0.9999952695302368,
+      "feasible": true,
+      "interval_note": "pca in (0.9999952695302368, 0.9999983256101116] yields find()=67 before min(., r=68)",
+      "n_components": 67,
+      "numerical_rank": 68,
+      "open_lower": 0.9999952695302368
+    },
+    "pca_n_at_default_1": 68,
+    "solver_comparison": {
+      "all_solvers_agree_on_rank": true,
+      "asymmetry_fro_over_fro": 0.0,
+      "max_abs_numpy_eigh_vs_scipy_eig_real": 5.877471754111438e-38,
+      "max_abs_numpy_vs_scipy_eigh": 8.816207631167156e-39,
+      "ranks": {
+        "numpy_eigh": 68,
+        "scipy_eig_real": 68,
+        "scipy_eigh": 68
+      },
+      "ratio_window_numpy": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 4.699402827287182e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 1.0729195136586003e-05,
+          "ratio_to_max": 1.1729195136586003e-05
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 2.5682488221801537e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 5.410067981349779e-06,
+          "ratio_to_max": 6.4100679813497785e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 6.498203546149581e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.837811951366504e-07,
+          "ratio_to_max": 1.6218804863349467e-08
+        }
+      ],
+      "ratio_window_scipy_eig_real": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831771e-29,
+          "eigenvalue": 4.699402827291288e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 1.0729195136596231e-05,
+          "ratio_to_max": 1.1729195136596232e-05
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831771e-29,
+          "eigenvalue": 2.5682488221796707e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 5.410067981348564e-06,
+          "ratio_to_max": 6.410067981348564e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.006585935831771e-29,
+          "eigenvalue": 6.4982035443460085e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.83781195141152e-07,
+          "ratio_to_max": 1.6218804858847924e-08
+        }
+      ],
+      "ratio_window_scipy_eigh": [
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 4.699402827286814e-28,
+          "index_0based": 66,
+          "index_1based": 67,
+          "margin_ratio": 1.0729195136585084e-05,
+          "ratio_to_max": 1.1729195136585085e-05
+        },
+        {
+          "above_cutoff": true,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 2.568248822180463e-28,
+          "index_0based": 67,
+          "index_1based": 68,
+          "margin_ratio": 5.41006798135055e-06,
+          "ratio_to_max": 6.41006798135055e-06
+        },
+        {
+          "above_cutoff": false,
+          "cutoff": 4.006585935831765e-29,
+          "eigenvalue": 6.498203545624738e-31,
+          "index_0based": 68,
+          "index_1based": 69,
+          "margin_ratio": -9.837811951379604e-07,
+          "ratio_to_max": 1.6218804862039517e-08
+        }
+      ]
+    }
+  }
+}

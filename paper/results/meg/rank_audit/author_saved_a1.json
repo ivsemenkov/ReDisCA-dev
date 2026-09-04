@@ -1,0 +1,114 @@
+{
+  "column_norm_max": 3.469180504466154e-12,
+  "column_norm_mean": 1.3905388531400663e-12,
+  "column_norm_median": 1.227430357789981e-12,
+  "column_norm_min": 6.54446956027847e-13,
+  "comps_order": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "do_not_force_local_rank_to_n_columns": true,
+  "local_airi_n_patterns": 68,
+  "local_paper_n_patterns": 68,
+  "n_columns": 67,
+  "note": "A1 column count is the whitening size of the MATLAB SPoC run that saved this file (D17: committed script returns before save). It is not by itself a reason to truncate a local Cxx rank to 67.",
+  "path": ".reproduction_data/meg/topo_face_vs_tool_correct_filt15.mat",
+  "sha256": "b18be3e159164846c0e9d82e3d7dd62e1f01e53d00b511b10f11bd1f8b3b7328",
+  "shape": [
+    204,
+    67
+  ],
+  "svd_head": [
+    6.549876114121809e-12,
+    4.950291664591116e-12,
+    4.32629324990141e-12,
+    3.4275613917095043e-12,
+    3.3517280036712965e-12,
+    2.4231260211472978e-12,
+    2.289741100989537e-12,
+    1.9799666544506523e-12
+  ],
+  "svd_numerical_rank_1e-6_of_singular_values": 67,
+  "svd_tail": [
+    8.181995586888625e-14,
+    6.553152545953848e-14,
+    2.6347700241282025e-14,
+    1.201249054327267e-14
+  ],
+  "vs_airi_executable_haufe": {
+    "compared_dim": 67,
+    "leading_column_abs_pearson": [
+      {
+        "a1_col_norm": 3.4691805044661548e-12,
+        "abs_pearson": 0.9849502766876297,
+        "component_1based": 1,
+        "local_col_norm": 3.515509225036523e-12
+      },
+      {
+        "a1_col_norm": 2.805886170220956e-12,
+        "abs_pearson": 0.9541285625986238,
+        "component_1based": 2,
+        "local_col_norm": 2.9251606313627936e-12
+      },
+      {
+        "a1_col_norm": 2.6063624320416294e-12,
+        "abs_pearson": 0.9755720177552746,
+        "component_1based": 3,
+        "local_col_norm": 3.0283525916477635e-12
+      },
+      {
+        "a1_col_norm": 1.227430357789981e-12,
+        "abs_pearson": 0.931105944106804,
+        "component_1based": 4,
+        "local_col_norm": 1.131720539148008e-12
+      }
+    ],
+    "local_n_patterns": 68,
+    "subspace_first_n_take": {
+      "max_angle_rad": 0.5206276740578636,
+      "mean_angle_rad": 0.007798212991892943,
+      "mean_cosine": 0.9980224720194936,
+      "min_cosine": 0.8675071299763316,
+      "n_dim": 67
+    }
+  },
+  "vs_paper_faithful_haufe": {
+    "compared_dim": 67,
+    "leading_column_abs_pearson": [
+      {
+        "a1_col_norm": 3.4691805044661548e-12,
+        "abs_pearson": 0.30648013590907364,
+        "component_1based": 1,
+        "local_col_norm": 2.1437273791426854e-10
+      },
+      {
+        "a1_col_norm": 2.805886170220956e-12,
+        "abs_pearson": 0.33138325637610583,
+        "component_1based": 2,
+        "local_col_norm": 9.241965608694432e-11
+      },
+      {
+        "a1_col_norm": 2.6063624320416294e-12,
+        "abs_pearson": 0.8950511702664632,
+        "component_1based": 3,
+        "local_col_norm": 1.0567716709093476e-10
+      },
+      {
+        "a1_col_norm": 1.227430357789981e-12,
+        "abs_pearson": 0.35560169989096024,
+        "component_1based": 4,
+        "local_col_norm": 8.879924966605124e-11
+      }
+    ],
+    "local_n_patterns": 68,
+    "subspace_first_n_take": {
+      "max_angle_rad": 0.967301139675468,
+      "mean_angle_rad": 0.0145703398637731,
+      "mean_cosine": 0.993544549985398,
+      "min_cosine": 0.5675237210053334,
+      "n_dim": 67
+    }
+  }
+}
