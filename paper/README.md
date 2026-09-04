@@ -8,10 +8,11 @@ https://doi.org/10.1016/j.neuroimage.2024.120868
 This directory is the scientific reproduction program. It lives on the
 permanent `paper` branch. The lightweight public library remains on `main`.
 
-**Status of this README:** the source-audit worker writes
-`reproduction_manifest.md`; track workers fill `results/`; the integration
-worker replaces the status table below with evidence-backed classifications.
-Until then, treat statuses as `not yet reproduced`.
+**Status of this README:** the source-audit inventory is in
+`reproduction_manifest.md`. Track workers fill `results/`. The
+integration worker replaces the status table with evidence-backed
+classifications after those tracks finish. Until then, treat figure
+statuses as `not yet reproduced`.
 
 ## Scope
 
@@ -67,12 +68,15 @@ Official sources:
 ## Commands (one per track)
 
 ```bash
-python -m pytest paper/reproduction/common/tests -q
+python -m pytest paper/reproduction/common/tests tests -q
 python paper/reproduction/n170/run.py
 python paper/reproduction/meg/run.py
 python paper/reproduction/simulations/run.py
 python paper/reproduction/source_localization/run.py
 ```
+
+MEG must be run as separate `paper_faithful` and `airi_executable` paths
+(see `reproduction_manifest.md`). Never mix those settings in one figure.
 
 Expected runtime is filled after the first complete run of each track.
 
