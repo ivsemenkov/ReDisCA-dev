@@ -1,0 +1,230 @@
+{
+  "imports_redisca": false,
+  "matlab": null,
+  "n170_directed_cov_freeze_reproduces_published_meg_counts_without_airi_extras": null,
+  "note": "A = frozen estimator PLUS AIRI extras (reused). B = frozen estimator on the paper epoch, no AIRI window/filter. paper_faithful = unique+Gram + condition-label permutation. Do not mix paths in one untagged file. MATLAB not used.",
+  "published": {
+    "face_peak_ms": 160.0,
+    "figures": "Figs 13\u201315, 17",
+    "n_significant_components": 3,
+    "note": "Published component *count* is three significant components per figure. Numeric p-values are figure-panel fingerprints, not a printed table. Face peak ~160 ms (Fig. 13 / Fig. 17c)."
+  },
+  "rdms": {
+    "face": {
+      "airi_executable_reuse": {
+        "contrast_peak_ms_comp1": 319.0,
+        "eigenvalues_head": [
+          0.8800088554166329,
+          0.8586296576606791,
+          0.8332840177082375,
+          0.8062630690754736
+        ],
+        "n_components_p_lt_0.05_in_head": 4,
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.006,
+          0.008,
+          0.014,
+          0.032
+        ],
+        "rank": 68,
+        "recomputed": false,
+        "window": "99\u2013999 ms + butter 0.25\u201320 Hz"
+      },
+      "frozen_on_paper_epoch": null,
+      "item_id": "fig13-meg-face",
+      "matches_published_three_components": {
+        "airi_executable_reuse": true,
+        "frozen_on_paper_epoch": false,
+        "paper_faithful": false
+      },
+      "paper_faithful_unique_gram_labelperm": {
+        "contrast_peak_ms_comp1": 308.0,
+        "eigenvalues_head": [
+          0.8773291120521899,
+          0.7859658514095855,
+          0.690929955642079
+        ],
+        "empirical_rdm_pearson_comp1": 0.9994606192824319,
+        "estimator": "redisca.ReDisCA unique_unordered + unscaled_gram",
+        "inference": "condition_label_permutation max|lambda| (not historical primary)",
+        "n_first3_p_lt_0.05": 1,
+        "p_head": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "path_label": "paper_faithful",
+        "rank": 68
+      },
+      "published": {
+        "face_peak_ms": 160.0,
+        "figures": "Figs 13\u201315, 17",
+        "n_significant_components": 3,
+        "note": "Published component *count* is three significant components per figure. Numeric p-values are figure-panel fingerprints, not a printed table. Face peak ~160 ms (Fig. 13 / Fig. 17c)."
+      }
+    },
+    "facevstool": {
+      "airi_executable_reuse": {
+        "contrast_peak_ms_comp1": 321.0,
+        "eigenvalues_head": [
+          0.8476544145094776,
+          0.8311743538745514,
+          0.8099339276131384,
+          0.7819994246805684
+        ],
+        "n_components_p_lt_0.05_in_head": 3,
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.016,
+          0.019,
+          0.028,
+          0.054
+        ],
+        "rank": 68,
+        "recomputed": false,
+        "window": "99\u2013999 ms + butter 0.25\u201320 Hz"
+      },
+      "frozen_on_paper_epoch": null,
+      "item_id": "fig17-meg-nonbinary-components",
+      "matches_published_three_components": {
+        "airi_executable_reuse": true,
+        "frozen_on_paper_epoch": false,
+        "paper_faithful": false
+      },
+      "paper_faithful_unique_gram_labelperm": {
+        "contrast_peak_ms_comp1": 564.0,
+        "eigenvalues_head": [
+          0.83599407422755,
+          0.752597935799578,
+          0.6836016635573615
+        ],
+        "empirical_rdm_pearson_comp1": 0.9659650062147465,
+        "estimator": "redisca.ReDisCA unique_unordered + unscaled_gram",
+        "inference": "condition_label_permutation max|lambda| (not historical primary)",
+        "n_first3_p_lt_0.05": 0,
+        "p_head": [
+          0.302,
+          1.0,
+          1.0
+        ],
+        "path_label": "paper_faithful",
+        "rank": 68
+      },
+      "published": {
+        "face_peak_ms": 160.0,
+        "figures": "Figs 13\u201315, 17",
+        "n_significant_components": 3,
+        "note": "Published component *count* is three significant components per figure. Numeric p-values are figure-panel fingerprints, not a printed table. Face peak ~160 ms (Fig. 13 / Fig. 17c)."
+      }
+    },
+    "meaning": {
+      "airi_executable_reuse": {
+        "contrast_peak_ms_comp1": 499.0,
+        "eigenvalues_head": [
+          0.8739096362037326,
+          0.8549973521984421,
+          0.8315849817495685,
+          0.8119333660748219
+        ],
+        "n_components_p_lt_0.05_in_head": 4,
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.005,
+          0.012,
+          0.018,
+          0.026
+        ],
+        "rank": 68,
+        "recomputed": false,
+        "window": "99\u2013999 ms + butter 0.25\u201320 Hz"
+      },
+      "frozen_on_paper_epoch": null,
+      "item_id": "fig15-meg-meaning",
+      "matches_published_three_components": {
+        "airi_executable_reuse": true,
+        "frozen_on_paper_epoch": false,
+        "paper_faithful": false
+      },
+      "paper_faithful_unique_gram_labelperm": {
+        "contrast_peak_ms_comp1": 315.0,
+        "eigenvalues_head": [
+          0.870068550975931,
+          0.7747401147009165,
+          0.7168806331445672
+        ],
+        "empirical_rdm_pearson_comp1": 0.9995852902580858,
+        "estimator": "redisca.ReDisCA unique_unordered + unscaled_gram",
+        "inference": "condition_label_permutation max|lambda| (not historical primary)",
+        "n_first3_p_lt_0.05": 0,
+        "p_head": [
+          0.204,
+          1.0,
+          1.0
+        ],
+        "path_label": "paper_faithful",
+        "rank": 68
+      },
+      "published": {
+        "face_peak_ms": 160.0,
+        "figures": "Figs 13\u201315, 17",
+        "n_significant_components": 3,
+        "note": "Published component *count* is three significant components per figure. Numeric p-values are figure-panel fingerprints, not a printed table. Face peak ~160 ms (Fig. 13 / Fig. 17c)."
+      }
+    },
+    "tool": {
+      "airi_executable_reuse": {
+        "contrast_peak_ms_comp1": 424.0,
+        "eigenvalues_head": [
+          0.8732351254322898,
+          0.8605053471467181,
+          0.8337377920963361,
+          0.8225085197674992
+        ],
+        "n_components_p_lt_0.05_in_head": 5,
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.001,
+          0.003,
+          0.008,
+          0.01
+        ],
+        "rank": 68,
+        "recomputed": false,
+        "window": "99\u2013999 ms + butter 0.25\u201320 Hz"
+      },
+      "frozen_on_paper_epoch": null,
+      "item_id": "fig14-meg-tool",
+      "matches_published_three_components": {
+        "airi_executable_reuse": true,
+        "frozen_on_paper_epoch": false,
+        "paper_faithful": false
+      },
+      "paper_faithful_unique_gram_labelperm": {
+        "contrast_peak_ms_comp1": 384.0,
+        "eigenvalues_head": [
+          0.8572775946508424,
+          0.789106662143932,
+          0.7232611327600093
+        ],
+        "empirical_rdm_pearson_comp1": 0.9998890168922655,
+        "estimator": "redisca.ReDisCA unique_unordered + unscaled_gram",
+        "inference": "condition_label_permutation max|lambda| (not historical primary)",
+        "n_first3_p_lt_0.05": 0,
+        "p_head": [
+          0.478,
+          1.0,
+          1.0
+        ],
+        "path_label": "paper_faithful",
+        "rank": 68
+      },
+      "published": {
+        "face_peak_ms": 160.0,
+        "figures": "Figs 13\u201315, 17",
+        "n_significant_components": 3,
+        "note": "Published component *count* is three significant components per figure. Numeric p-values are figure-panel fingerprints, not a printed table. Face peak ~160 ms (Fig. 13 / Fig. 17c)."
+      }
+    }
+  }
+}

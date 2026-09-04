@@ -1,0 +1,80 @@
+{
+  "fig07": {
+    "any_p1_lt_0.05_in_350_450ms": true,
+    "continuous_segment_covers_400ms": true,
+    "nearest_400ms_center_ms": 400.0,
+    "nearest_400ms_primary_p1": 0.018,
+    "paper_claim": "Fig. 7: first-component uncorrected p<0.05 around t=400 ms; T=150 ms.",
+    "random_phase_p1_lt_0.05_near_400ms": true,
+    "segments_p1_lt_0.05": [
+      {
+        "center_ms_end": 400.0,
+        "center_ms_start": 400.0,
+        "i_end": 20,
+        "i_start": 20,
+        "n_windows": 1,
+        "p_min": 0.018
+      }
+    ]
+  },
+  "fig08": {
+    "centers_ms": [
+      375.0,
+      400.0,
+      425.0
+    ],
+    "corr_wTRw": [
+      0.9839737984953704,
+      0.9910479600447496,
+      0.9967962932308196
+    ],
+    "lambda1": [
+      0.6161661516147023,
+      0.6358730548202157,
+      0.6201556315136004
+    ],
+    "pattern_max_abs_channel": [
+      "Oz",
+      "Pz",
+      "Pz"
+    ],
+    "primary_p1": [
+      0.076,
+      0.018,
+      0.05
+    ],
+    "secondary_exact24_p1_signed_ge": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ]
+  },
+  "freeze": {
+    "car_variant_id": "car_c170_d100_airi_directed_matlab_cov",
+    "data_file": "1_N170_erp_ar.erp",
+    "executable": "common.source_faithful.fit_condition_averages",
+    "face_variant_id": "face_c200_d100_airi_directed_matlab_cov",
+    "freeze_B": 1000,
+    "freeze_path": "/tmp/redisca-worktrees/historical-apply/paper/results/n170/historical/leading_candidate.json",
+    "imports_redisca": false,
+    "inference": "spoc_random_phase",
+    "joint_candidate_id": "airi_directed__matlab_cov__car170",
+    "matlab": null,
+    "matrix_mode": "matlab_cov",
+    "p_formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+    "pair_mode": "airi_directed",
+    "rdm_fill": "binary 0/1 (within=0, between=1, diagonal=0)",
+    "reduced_B": false,
+    "seed_policy_from_freeze": {
+      "bit_generator": "PCG64",
+      "master_seed": 20240904,
+      "track_a": "PCG64(master_seed + variant_offset); offsets in variants.py",
+      "track_b": "PCG64(MASTER_SEED+10000+i + variant_offset) for i in 0..19"
+    },
+    "used_B": 1000
+  },
+  "imports_redisca": false,
+  "matlab": null,
+  "path_label": "historical_apply",
+  "quick": false
+}

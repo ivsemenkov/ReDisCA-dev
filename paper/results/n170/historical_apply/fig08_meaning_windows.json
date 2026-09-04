@@ -1,0 +1,193 @@
+{
+  "adjacent_step_ms": 25.0,
+  "centers_ms": [
+    375.0,
+    400.0,
+    425.0
+  ],
+  "duration_ms": 150.0,
+  "estimator": {
+    "car_variant_id": "car_c170_d100_airi_directed_matlab_cov",
+    "data_file": "1_N170_erp_ar.erp",
+    "executable": "common.source_faithful.fit_condition_averages",
+    "face_variant_id": "face_c200_d100_airi_directed_matlab_cov",
+    "freeze_B": 1000,
+    "freeze_path": "/tmp/redisca-worktrees/historical-apply/paper/results/n170/historical/leading_candidate.json",
+    "imports_redisca": false,
+    "inference": "spoc_random_phase",
+    "joint_candidate_id": "airi_directed__matlab_cov__car170",
+    "matlab": null,
+    "matrix_mode": "matlab_cov",
+    "p_formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+    "pair_mode": "airi_directed",
+    "rdm_fill": "binary 0/1 (within=0, between=1, diagonal=0)",
+    "reduced_B": false,
+    "seed_policy_from_freeze": {
+      "bit_generator": "PCG64",
+      "master_seed": 20240904,
+      "track_a": "PCG64(master_seed + variant_offset); offsets in variants.py",
+      "track_b": "PCG64(MASTER_SEED+10000+i + variant_offset) for i in 0..19"
+    },
+    "used_B": 1000
+  },
+  "imports_redisca": false,
+  "item_id": "fig08-n170-meaning-patterns",
+  "matlab": null,
+  "path_label": "historical_apply",
+  "seed_policy": {
+    "bit_generator": "PCG64",
+    "fig8_window": "Same PCG64(MASTER_SEED + 2000 + i) as the Fig. 7 sliding center with the same timestamp, so 375/400/425 ms p-values match the sliding map."
+  },
+  "windows": [
+    {
+      "center_ms": 375.0,
+      "corr_trace_sq": 0.5863991792239149,
+      "corr_wTRw": 0.9839737984953704,
+      "duration_ms": 150.0,
+      "eigenvalues_head": [
+        0.6161661516147023,
+        0.5816528275651841,
+        0.34612493003245887,
+        0.33096528565526745,
+        0.2937861117475069,
+        0.21899174240531855,
+        0.198546275251347,
+        0.15510655000862905
+      ],
+      "lambda1": 0.6161661516147023,
+      "n_samples": 39,
+      "pattern": {
+        "O1": -0.6478425922708907,
+        "O2": -0.3677856699256132,
+        "Oz": -1.1139386856091875,
+        "P7": -0.003519172205740092,
+        "P8": -0.16605527345735713,
+        "PO7": 0.026466217099785017,
+        "PO8": -0.38223648948310945,
+        "max_abs_channel": "Oz",
+        "max_abs_value": -1.1139386856091875,
+        "occipital_energy_fraction": 0.4566855192619958
+      },
+      "pattern_max_abs_channel": "Oz",
+      "pattern_max_abs_value": -1.1139386856091875,
+      "primary_p1": 0.076,
+      "primary_p_head": [
+        0.076,
+        0.145,
+        0.88,
+        0.901,
+        0.945,
+        0.998,
+        1.0,
+        1.0
+      ],
+      "rank": 25,
+      "rng_seed": 20242923,
+      "secondary_exact24_p1_maxabs": 0.3333333333333333,
+      "secondary_exact24_p1_signed_ge": 0.3333333333333333,
+      "sliding_grid_index": 19,
+      "t_end_ms": 450.0,
+      "t_start_ms": 300.0
+    },
+    {
+      "center_ms": 400.0,
+      "corr_trace_sq": 0.8543509599070771,
+      "corr_wTRw": 0.9910479600447496,
+      "duration_ms": 150.0,
+      "eigenvalues_head": [
+        0.6358730548202157,
+        0.5180039624437782,
+        0.4135494571366685,
+        0.3728160341469741,
+        0.341857418730002,
+        0.20909055195013854,
+        0.17632553683788793,
+        0.1312311258493896
+      ],
+      "lambda1": 0.6358730548202157,
+      "n_samples": 38,
+      "pattern": {
+        "O1": -0.22417864631644943,
+        "O2": -0.07997758052415523,
+        "Oz": -0.734814418497848,
+        "P7": 0.05613016771332694,
+        "P8": -0.18134038455161675,
+        "PO7": 0.3463399653351874,
+        "PO8": -0.29023576956382025,
+        "max_abs_channel": "Pz",
+        "max_abs_value": 1.2152775038504655,
+        "occipital_energy_fraction": 0.218396129862992
+      },
+      "pattern_max_abs_channel": "Pz",
+      "pattern_max_abs_value": 1.2152775038504655,
+      "primary_p1": 0.018,
+      "primary_p_head": [
+        0.018,
+        0.266,
+        0.666,
+        0.788,
+        0.852,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rank": 25,
+      "rng_seed": 20242924,
+      "secondary_exact24_p1_maxabs": 0.3333333333333333,
+      "secondary_exact24_p1_signed_ge": 0.3333333333333333,
+      "sliding_grid_index": 20,
+      "t_end_ms": 475.0,
+      "t_start_ms": 325.0
+    },
+    {
+      "center_ms": 425.0,
+      "corr_trace_sq": 0.8874620165122127,
+      "corr_wTRw": 0.9967962932308196,
+      "duration_ms": 150.0,
+      "eigenvalues_head": [
+        0.6201556315136004,
+        0.49718869686947,
+        0.4520305912321051,
+        0.3801304798068528,
+        0.29691030658166145,
+        0.20220944790618997,
+        0.1574532882574862,
+        0.1438037439210701
+      ],
+      "lambda1": 0.6201556315136004,
+      "n_samples": 39,
+      "pattern": {
+        "O1": -0.42327817496378994,
+        "O2": -0.5051529487057823,
+        "Oz": -0.023886203071193327,
+        "P7": -0.43666052196666294,
+        "P8": -0.14764328785168856,
+        "PO7": -0.4113894808242206,
+        "PO8": -0.14773903728958487,
+        "max_abs_channel": "Pz",
+        "max_abs_value": -1.31794604342978,
+        "occipital_energy_fraction": 0.2620540817299322
+      },
+      "pattern_max_abs_channel": "Pz",
+      "pattern_max_abs_value": -1.31794604342978,
+      "primary_p1": 0.05,
+      "primary_p_head": [
+        0.05,
+        0.338,
+        0.519,
+        0.758,
+        0.918,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rank": 25,
+      "rng_seed": 20242925,
+      "secondary_exact24_p1_maxabs": 0.3333333333333333,
+      "secondary_exact24_p1_signed_ge": 0.3333333333333333,
+      "sliding_grid_index": 21,
+      "t_end_ms": 500.0,
+      "t_start_ms": 350.0
+    }
+  ]
+}

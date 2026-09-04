@@ -1,0 +1,347 @@
+{
+  "imports_redisca": false,
+  "matlab": null,
+  "note": "Existing paper/results/meg/airi_executable/ is the frozen estimator PLUS AIRI MEG extras (99\u2013999 ms crop, butter 0.25\u201320 Hz filtfilt). PRIMARY p-values and \u03bb are copied, not recomputed.",
+  "path_label": "airi_executable_reuse",
+  "rdms": {
+    "face": {
+      "bandpass": {
+        "butter_order": 3,
+        "filtfilt": "scipy.signal.filtfilt",
+        "high_hz": 20.0,
+        "low_hz": 0.25,
+        "matlab_parity": false
+      },
+      "class1_peak_ms_comp1": 518.0,
+      "contrast_peak_ms_comp1": 319.0,
+      "eigenvalues_head": [
+        0.8800088554166329,
+        0.8586296576606791,
+        0.8332840177082375,
+        0.8062630690754736,
+        0.7870465458072567,
+        0.7257470169896701,
+        0.6174515814277575,
+        0.6015285444707449
+      ],
+      "empirical_rdm_pearson_comp1": 0.998008082313824,
+      "item_id": "fig13-meg-face",
+      "n_components_p_lt_0.05_in_head": 4,
+      "n_first3_p_lt_0.05": 3,
+      "n_samples": 901,
+      "p_spoc_head": [
+        0.006,
+        0.008,
+        0.014,
+        0.032,
+        0.052,
+        0.13,
+        0.403,
+        0.451
+      ],
+      "pair_matrix": "matlab_cov",
+      "pairs": "airi_directed_i_neq_j",
+      "rank": 68,
+      "recomputed_B1000": false,
+      "source_file": "fig13_face.json",
+      "verification": {
+        "checks": {
+          "B_1000": true,
+          "bandpass_0p25_20": true,
+          "inference_spoc_random_phase": true,
+          "n_planars_204": true,
+          "n_samples_901_airi_crop": true,
+          "pair_matrix_matlab_cov": true,
+          "pairs_airi_directed": true,
+          "path_label_airi_executable": true,
+          "reduced_B_false": true
+        },
+        "n_pairs": 30,
+        "ok": true,
+        "rank": 68,
+        "window_ms": [
+          99.0,
+          999.0
+        ]
+      },
+      "window_ms": [
+        99.0,
+        999.0
+      ]
+    },
+    "facevstool": {
+      "bandpass": {
+        "butter_order": 3,
+        "filtfilt": "scipy.signal.filtfilt",
+        "high_hz": 20.0,
+        "low_hz": 0.25,
+        "matlab_parity": false
+      },
+      "class1_peak_ms_comp1": 319.0,
+      "contrast_peak_ms_comp1": 321.0,
+      "eigenvalues_head": [
+        0.8476544145094776,
+        0.8311743538745514,
+        0.8099339276131384,
+        0.7819994246805684,
+        0.7454987134691295,
+        0.6925238548789632,
+        0.6108574596011233,
+        0.5841117423579592
+      ],
+      "empirical_rdm_pearson_comp1": 0.9646308681575568,
+      "item_id": "airi-executable-meg-facevstool",
+      "n_components_p_lt_0.05_in_head": 3,
+      "n_first3_p_lt_0.05": 3,
+      "n_samples": 901,
+      "p_spoc_head": [
+        0.016,
+        0.019,
+        0.028,
+        0.054,
+        0.091,
+        0.202,
+        0.452,
+        0.559
+      ],
+      "pair_matrix": "matlab_cov",
+      "pairs": "airi_directed_i_neq_j",
+      "rank": 68,
+      "recomputed_B1000": false,
+      "source_file": "airi_executable_meg_facevstool.json",
+      "verification": {
+        "checks": {
+          "B_1000": true,
+          "bandpass_0p25_20": true,
+          "inference_spoc_random_phase": true,
+          "n_planars_204": true,
+          "n_samples_901_airi_crop": true,
+          "pair_matrix_matlab_cov": true,
+          "pairs_airi_directed": true,
+          "path_label_airi_executable": true,
+          "reduced_B_false": true
+        },
+        "n_pairs": 30,
+        "ok": true,
+        "rank": 68,
+        "window_ms": [
+          99.0,
+          999.0
+        ]
+      },
+      "window_ms": [
+        99.0,
+        999.0
+      ]
+    },
+    "meaning": {
+      "bandpass": {
+        "butter_order": 3,
+        "filtfilt": "scipy.signal.filtfilt",
+        "high_hz": 20.0,
+        "low_hz": 0.25,
+        "matlab_parity": false
+      },
+      "class1_peak_ms_comp1": 500.0,
+      "contrast_peak_ms_comp1": 499.0,
+      "eigenvalues_head": [
+        0.8739096362037326,
+        0.8549973521984421,
+        0.8315849817495685,
+        0.8119333660748219,
+        0.7717831207355212,
+        0.6831652623076687,
+        0.6503974862443629,
+        0.6110734684603986
+      ],
+      "empirical_rdm_pearson_comp1": 0.998373416439531,
+      "item_id": "fig15-meg-meaning",
+      "n_components_p_lt_0.05_in_head": 4,
+      "n_first3_p_lt_0.05": 3,
+      "n_samples": 901,
+      "p_spoc_head": [
+        0.005,
+        0.012,
+        0.018,
+        0.026,
+        0.064,
+        0.21,
+        0.289,
+        0.415
+      ],
+      "pair_matrix": "matlab_cov",
+      "pairs": "airi_directed_i_neq_j",
+      "rank": 68,
+      "recomputed_B1000": false,
+      "source_file": "fig15_meaning.json",
+      "verification": {
+        "checks": {
+          "B_1000": true,
+          "bandpass_0p25_20": true,
+          "inference_spoc_random_phase": true,
+          "n_planars_204": true,
+          "n_samples_901_airi_crop": true,
+          "pair_matrix_matlab_cov": true,
+          "pairs_airi_directed": true,
+          "path_label_airi_executable": true,
+          "reduced_B_false": true
+        },
+        "n_pairs": 30,
+        "ok": true,
+        "rank": 68,
+        "window_ms": [
+          99.0,
+          999.0
+        ]
+      },
+      "window_ms": [
+        99.0,
+        999.0
+      ]
+    },
+    "tool": {
+      "bandpass": {
+        "butter_order": 3,
+        "filtfilt": "scipy.signal.filtfilt",
+        "high_hz": 20.0,
+        "low_hz": 0.25,
+        "matlab_parity": false
+      },
+      "class1_peak_ms_comp1": 450.0,
+      "contrast_peak_ms_comp1": 424.0,
+      "eigenvalues_head": [
+        0.8732351254322898,
+        0.8605053471467181,
+        0.8337377920963361,
+        0.8225085197674992,
+        0.7665968847984901,
+        0.7554199498756716,
+        0.6944078303676159,
+        0.6344961763404305
+      ],
+      "empirical_rdm_pearson_comp1": 0.9988662761277629,
+      "item_id": "fig14-meg-tool",
+      "n_components_p_lt_0.05_in_head": 5,
+      "n_first3_p_lt_0.05": 3,
+      "n_samples": 901,
+      "p_spoc_head": [
+        0.001,
+        0.003,
+        0.008,
+        0.01,
+        0.043,
+        0.065,
+        0.194,
+        0.434
+      ],
+      "pair_matrix": "matlab_cov",
+      "pairs": "airi_directed_i_neq_j",
+      "rank": 68,
+      "recomputed_B1000": false,
+      "source_file": "fig14_tool.json",
+      "verification": {
+        "checks": {
+          "B_1000": true,
+          "bandpass_0p25_20": true,
+          "inference_spoc_random_phase": true,
+          "n_planars_204": true,
+          "n_samples_901_airi_crop": true,
+          "pair_matrix_matlab_cov": true,
+          "pairs_airi_directed": true,
+          "path_label_airi_executable": true,
+          "reduced_B_false": true
+        },
+        "n_pairs": 30,
+        "ok": true,
+        "rank": 68,
+        "window_ms": [
+          99.0,
+          999.0
+        ]
+      },
+      "window_ms": [
+        99.0,
+        999.0
+      ]
+    }
+  },
+  "recomputed": false,
+  "stored_summary": {
+    "path_label": "airi_executable",
+    "rdms": {
+      "face": {
+        "contrast_peak_ms_comp1": 319.0,
+        "eigenvalues_head": [
+          0.8800088554166329,
+          0.8586296576606791,
+          0.8332840177082375,
+          0.8062630690754736
+        ],
+        "empirical_rdm_pearson_comp1": 0.998008082313824,
+        "item_id": "fig13-meg-face",
+        "p_spoc_head": [
+          0.006,
+          0.008,
+          0.014,
+          0.032
+        ],
+        "rank": 68
+      },
+      "facevstool": {
+        "contrast_peak_ms_comp1": 321.0,
+        "eigenvalues_head": [
+          0.8476544145094776,
+          0.8311743538745514,
+          0.8099339276131384,
+          0.7819994246805684
+        ],
+        "empirical_rdm_pearson_comp1": 0.9646308681575568,
+        "item_id": "airi-executable-meg-facevstool",
+        "p_spoc_head": [
+          0.016,
+          0.019,
+          0.028,
+          0.054
+        ],
+        "rank": 68
+      },
+      "meaning": {
+        "contrast_peak_ms_comp1": 499.0,
+        "eigenvalues_head": [
+          0.8739096362037326,
+          0.8549973521984421,
+          0.8315849817495685,
+          0.8119333660748219
+        ],
+        "empirical_rdm_pearson_comp1": 0.998373416439531,
+        "item_id": "fig15-meg-meaning",
+        "p_spoc_head": [
+          0.005,
+          0.012,
+          0.018,
+          0.026
+        ],
+        "rank": 68
+      },
+      "tool": {
+        "contrast_peak_ms_comp1": 424.0,
+        "eigenvalues_head": [
+          0.8732351254322898,
+          0.8605053471467181,
+          0.8337377920963361,
+          0.8225085197674992
+        ],
+        "empirical_rdm_pearson_comp1": 0.9988662761277629,
+        "item_id": "fig14-meg-tool",
+        "p_spoc_head": [
+          0.001,
+          0.003,
+          0.008,
+          0.01
+        ],
+        "rank": 68
+      }
+    }
+  },
+  "verified_directed_cov_random_phase_B1000": true
+}

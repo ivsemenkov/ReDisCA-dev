@@ -1,0 +1,16 @@
+{
+  "executable": "common.source_faithful.fit_condition_averages",
+  "freeze_B": 1000,
+  "freeze_path": "/tmp/redisca-worktrees/historical-apply/paper/results/n170/historical/leading_candidate.json",
+  "imports_redisca": false,
+  "inference": "spoc_random_phase",
+  "joint_candidate_id": "airi_directed__matlab_cov__car170",
+  "matlab": null,
+  "matrix_mode": "matlab_cov",
+  "note": "This is the N170 freeze applied to MEG. It is not a retune. AIRI 99\u2013999 ms crop and 0.25\u201320 Hz filtfilt are NOT applied on the paper-epoch path.",
+  "p_formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+  "pair_mode": "airi_directed",
+  "reduced_B": false,
+  "source": "N170 Tracks A+B leading freeze, unmodified",
+  "used_B": 1000
+}

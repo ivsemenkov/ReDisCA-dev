@@ -1,0 +1,109 @@
+{
+  "airi_executable_reuse": {
+    "rdms": {
+      "face": {
+        "eigenvalues_head": [
+          0.8800088554166329,
+          0.8586296576606791,
+          0.8332840177082375,
+          0.8062630690754736
+        ],
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.006,
+          0.008,
+          0.014,
+          0.032
+        ],
+        "rank": 68
+      },
+      "facevstool": {
+        "eigenvalues_head": [
+          0.8476544145094776,
+          0.8311743538745514,
+          0.8099339276131384,
+          0.7819994246805684
+        ],
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.016,
+          0.019,
+          0.028,
+          0.054
+        ],
+        "rank": 68
+      },
+      "meaning": {
+        "eigenvalues_head": [
+          0.8739096362037326,
+          0.8549973521984421,
+          0.8315849817495685,
+          0.8119333660748219
+        ],
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.005,
+          0.012,
+          0.018,
+          0.026
+        ],
+        "rank": 68
+      },
+      "tool": {
+        "eigenvalues_head": [
+          0.8732351254322898,
+          0.8605053471467181,
+          0.8337377920963361,
+          0.8225085197674992
+        ],
+        "n_first3_p_lt_0.05": 3,
+        "p_spoc_head": [
+          0.001,
+          0.003,
+          0.008,
+          0.01
+        ],
+        "rank": 68
+      }
+    },
+    "recomputed": false,
+    "verified": true
+  },
+  "command": "reuse",
+  "estimator": {
+    "executable": "common.source_faithful.fit_condition_averages",
+    "freeze_B": 1000,
+    "freeze_path": "/tmp/redisca-worktrees/historical-apply/paper/results/n170/historical/leading_candidate.json",
+    "imports_redisca": false,
+    "inference": "spoc_random_phase",
+    "joint_candidate_id": "airi_directed__matlab_cov__car170",
+    "matlab": null,
+    "matrix_mode": "matlab_cov",
+    "note": "This is the N170 freeze applied to MEG. It is not a retune. AIRI 99\u2013999 ms crop and 0.25\u201320 Hz filtfilt are NOT applied on the paper-epoch path.",
+    "p_formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+    "pair_mode": "airi_directed",
+    "reduced_B": false,
+    "source": "N170 Tracks A+B leading freeze, unmodified",
+    "used_B": 1000
+  },
+  "imports_redisca": false,
+  "matlab": null,
+  "n170_directed_cov_freeze_reproduces_published_meg_counts_without_airi_extras": null,
+  "paper_epoch": null,
+  "path_label": "historical_candidate",
+  "quick": false,
+  "reduced_B": false,
+  "seed_policy": {
+    "api": "numpy.random.default_rng / PCG64, same CLI seed as meg/run.py",
+    "bit_generator": "PCG64",
+    "master_seed": 20240904,
+    "stream_splits": {
+      "airi_executable_random_phase": "seed+3 (existing; JSON reused, not re-drawn)",
+      "airi_pair_order": "seed+10 (existing; not used here)",
+      "historical_candidate_paper_epoch_random_phase": "seed+20 = 20240924; one Generator consumed in RDM order face, tool, meaning, facevstool",
+      "historical_candidate_secondary_label_perm": "seed+21 = 20240925 reserved; secondary test enumerates all 6! = 720 permutations (no RNG)",
+      "paper_faithful_fwer": "seed+2 (existing; not used here)",
+      "paper_faithful_perm": "seed+1 (existing meg/run.py; not used here)"
+    }
+  }
+}
