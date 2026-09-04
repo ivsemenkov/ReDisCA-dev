@@ -1,0 +1,257 @@
+{
+  "note": "Paths differ by D1 (pairs), D2 (Gram vs cov demean), D4 (lambda scale), D5 (inference), D5b (time test), D6 (window), D7 (default RDM), D8 (bandpass). Eigenvector signs are aligned before correlation. Do not compare asterisks.",
+  "rdms": {
+    "face": {
+      "d1_std_ratio_directed_vs_unique": 0.982607368881035,
+      "d2_note": "Paper path is uncentered Gram; AIRI path demeans (MATLAB cov). 1/(T-1) cancels in the GEP.",
+      "d4_note": "Both executable estimators use mean aggregation; paper Eq.7 sum would scale lambda only.",
+      "eigenvalues_airi_mean_aggregation": [
+        0.8800088554166329,
+        0.8586296576606791,
+        0.8332840177082375
+      ],
+      "eigenvalues_paper_mean_aggregation": [
+        0.8773291120521899,
+        0.7859658514095855,
+        0.690929955642079
+      ],
+      "n_components_compared": 3,
+      "overlap_window_ms": [
+        99.0,
+        999.0
+      ],
+      "peak_latency_on_overlap": [
+        {
+          "airi_mean_trace_peak_ms": 160.0,
+          "paper_mean_trace_peak_ms": 245.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 197.0,
+          "paper_mean_trace_peak_ms": 284.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 144.0,
+          "paper_mean_trace_peak_ms": 138.0
+        }
+      ],
+      "sign_aligned_filter_pearson": [
+        0.4202520023059674,
+        0.2438571267800279,
+        0.17751238081817816
+      ],
+      "sign_aligned_pattern_pearson": [
+        0.49759966587272614,
+        0.229397356828661,
+        0.6880490490187825
+      ],
+      "subspace_filters": {
+        "max_angle_rad": 1.1417073570630112,
+        "mean_angle_rad": 0.5799990072688667,
+        "mean_cosine": 0.7744472221471924,
+        "min_cosine": 0.4160425342367276,
+        "n_dim": 3
+      },
+      "subspace_patterns": {
+        "max_angle_rad": 1.463408712552156,
+        "mean_angle_rad": 0.7133835685805611,
+        "mean_cosine": 0.6519834688818531,
+        "min_cosine": 0.10718133244291726,
+        "n_dim": 3
+      },
+      "timecourse_mean_pearson_on_airi_window": [
+        0.4766513964998073,
+        0.522210864941711,
+        0.5494420977713469
+      ]
+    },
+    "facevstool": {
+      "d1_std_ratio_directed_vs_unique": 0.982607368881035,
+      "d2_note": "Paper path is uncentered Gram; AIRI path demeans (MATLAB cov). 1/(T-1) cancels in the GEP.",
+      "d4_note": "Both executable estimators use mean aggregation; paper Eq.7 sum would scale lambda only.",
+      "eigenvalues_airi_mean_aggregation": [
+        0.8476544145094776,
+        0.8311743538745514,
+        0.8099339276131384
+      ],
+      "eigenvalues_paper_mean_aggregation": [
+        0.83599407422755,
+        0.752597935799578,
+        0.6836016635573615
+      ],
+      "n_components_compared": 3,
+      "overlap_window_ms": [
+        99.0,
+        999.0
+      ],
+      "peak_latency_on_overlap": [
+        {
+          "airi_mean_trace_peak_ms": 160.0,
+          "paper_mean_trace_peak_ms": 244.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 195.0,
+          "paper_mean_trace_peak_ms": 282.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 133.0,
+          "paper_mean_trace_peak_ms": 139.0
+        }
+      ],
+      "sign_aligned_filter_pearson": [
+        0.6061247449132378,
+        0.3719302458453016,
+        0.385367749174554
+      ],
+      "sign_aligned_pattern_pearson": [
+        0.3840052102919674,
+        0.2922422792438396,
+        0.9584095013297669
+      ],
+      "subspace_filters": {
+        "max_angle_rad": 1.0189214601049636,
+        "mean_angle_rad": 0.6740876634517305,
+        "mean_cosine": 0.7592707754955034,
+        "min_cosine": 0.524284679167777,
+        "n_dim": 3
+      },
+      "subspace_patterns": {
+        "max_angle_rad": 1.1314371550227411,
+        "mean_angle_rad": 0.5482245612585391,
+        "mean_cosine": 0.778994598535518,
+        "min_cosine": 0.4253595872423803,
+        "n_dim": 3
+      },
+      "timecourse_mean_pearson_on_airi_window": [
+        0.4402055674694112,
+        0.4796605164370533,
+        0.8547126175670074
+      ]
+    },
+    "meaning": {
+      "d1_std_ratio_directed_vs_unique": 0.982607368881035,
+      "d2_note": "Paper path is uncentered Gram; AIRI path demeans (MATLAB cov). 1/(T-1) cancels in the GEP.",
+      "d4_note": "Both executable estimators use mean aggregation; paper Eq.7 sum would scale lambda only.",
+      "eigenvalues_airi_mean_aggregation": [
+        0.8739096362037326,
+        0.8549973521984421,
+        0.8315849817495685
+      ],
+      "eigenvalues_paper_mean_aggregation": [
+        0.870068550975931,
+        0.7747401147009165,
+        0.7168806331445672
+      ],
+      "n_components_compared": 3,
+      "overlap_window_ms": [
+        99.0,
+        999.0
+      ],
+      "peak_latency_on_overlap": [
+        {
+          "airi_mean_trace_peak_ms": 558.0,
+          "paper_mean_trace_peak_ms": 118.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 128.0,
+          "paper_mean_trace_peak_ms": 999.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 392.0,
+          "paper_mean_trace_peak_ms": 551.0
+        }
+      ],
+      "sign_aligned_filter_pearson": [
+        0.7892212834594194,
+        0.7913470976417845,
+        0.444819353459319
+      ],
+      "sign_aligned_pattern_pearson": [
+        0.3406961317185541,
+        0.7238224678436609,
+        0.44182333071071794
+      ],
+      "subspace_filters": {
+        "max_angle_rad": 1.0625011838430005,
+        "mean_angle_rad": 0.717209626723503,
+        "mean_cosine": 0.7030292099860581,
+        "min_cosine": 0.48668863352604985,
+        "n_dim": 3
+      },
+      "subspace_patterns": {
+        "max_angle_rad": 1.1080130016901335,
+        "mean_angle_rad": 0.582142762828634,
+        "mean_cosine": 0.7728272159470019,
+        "min_cosine": 0.4464403895475523,
+        "n_dim": 3
+      },
+      "timecourse_mean_pearson_on_airi_window": [
+        0.3743866777829221,
+        0.4803941950787587,
+        0.12062446562680368
+      ]
+    },
+    "tool": {
+      "d1_std_ratio_directed_vs_unique": 0.982607368881035,
+      "d2_note": "Paper path is uncentered Gram; AIRI path demeans (MATLAB cov). 1/(T-1) cancels in the GEP.",
+      "d4_note": "Both executable estimators use mean aggregation; paper Eq.7 sum would scale lambda only.",
+      "eigenvalues_airi_mean_aggregation": [
+        0.8732351254322898,
+        0.8605053471467181,
+        0.8337377920963361
+      ],
+      "eigenvalues_paper_mean_aggregation": [
+        0.8572775946508424,
+        0.789106662143932,
+        0.7232611327600093
+      ],
+      "n_components_compared": 3,
+      "overlap_window_ms": [
+        99.0,
+        999.0
+      ],
+      "peak_latency_on_overlap": [
+        {
+          "airi_mean_trace_peak_ms": 506.0,
+          "paper_mean_trace_peak_ms": 128.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 389.0,
+          "paper_mean_trace_peak_ms": 281.0
+        },
+        {
+          "airi_mean_trace_peak_ms": 194.0,
+          "paper_mean_trace_peak_ms": 146.0
+        }
+      ],
+      "sign_aligned_filter_pearson": [
+        0.6761883089568714,
+        0.7534364805765781,
+        0.6948746366660614
+      ],
+      "sign_aligned_pattern_pearson": [
+        0.43258597763254253,
+        0.0739608587171697,
+        0.5283976938097195
+      ],
+      "subspace_filters": {
+        "max_angle_rad": 1.5613436180336715,
+        "mean_angle_rad": 1.012050997328178,
+        "mean_cosine": 0.49220262815956833,
+        "min_cosine": 0.009452567989432354,
+        "n_dim": 3
+      },
+      "subspace_patterns": {
+        "max_angle_rad": 1.5297097303284168,
+        "mean_angle_rad": 0.9139941133701776,
+        "mean_cosine": 0.5510831776884266,
+        "min_cosine": 0.04107503767064794,
+        "n_dim": 3
+      },
+      "timecourse_mean_pearson_on_airi_window": [
+        0.5944238487754043,
+        0.5518772605859313,
+        0.2503934710702222
+      ]
+    }
+  }
+}

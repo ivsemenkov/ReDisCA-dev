@@ -1,0 +1,45 @@
+{
+  "B": 200,
+  "default_pair_order_p": [
+    0.01,
+    0.015,
+    0.02,
+    0.045
+  ],
+  "inference": "diagnostic_pair_order_sensitivity_of_random_phase_p",
+  "n_shuffles": 5,
+  "note": "Diagnostic only. Pair-order shuffle changes the accidental FFT spectrum of the length-30 z vector that stock SPoC random-phase preserves. Filters stay on the same rays for a symmetric RDM.",
+  "replacement_test": false,
+  "shuffled_pair_order_p": [
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.005,
+      0.01,
+      0.01,
+      0.015
+    ],
+    [
+      0.005,
+      0.005,
+      0.015,
+      0.02
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.005
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.01
+    ]
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "airi_matlab_plots_full_mx_with_wrong_linspace": "AIRI plots W'*mx on all 1501 samples against linspace(-536,964). This path plots the fit window with the true 99\u2013999 ms axis.",
+  "bandpass": {
+    "butter_order": 3,
+    "filtfilt": "scipy.signal.filtfilt",
+    "high_hz": 20.0,
+    "low_hz": 0.25,
+    "matlab_parity": false
+  },
+  "d1_d4_note": "Directed pairs (D1) scale z via sample SD N-1; aggregation is SPoC mean (D4). Do not compare raw lambda to paper_faithful without those labels.",
+  "eigenvalues": [
+    0.8800088554166329,
+    0.8586296576606791,
+    0.8332840177082375,
+    0.8062630690754736,
+    0.7870465458072567,
+    0.7257470169896701,
+    0.6174515814277575,
+    0.6015285444707449
+  ],
+  "empirical_rdm_pearson": [
+    {
+      "component": 1,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          82.81377943914484,
+          1570.421270495171,
+          1609.345937829132,
+          1574.004934637514,
+          1604.2822628731262,
+          82.81377943914484,
+          0.0
+        ],
+        "max": 1746.59375557375,
+        "mean": 749.999999999996,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 821.0618919511547
+      },
+      "pearson_unique_triangle": 0.998008082313824
+    },
+    {
+      "component": 2,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          76.60911934165374,
+          1593.487844348723,
+          1645.2777300519497,
+          1652.3918035952408,
+          1542.6659676289614,
+          76.60911934165374,
+          0.0
+        ],
+        "max": 1706.1136928403591,
+        "mean": 749.9999999999959,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 804.0262555537364
+      },
+      "pearson_unique_triangle": 0.9988358204205008
+    },
+    {
+      "component": 3,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          140.5469501342443,
+          1535.3922816759693,
+          1570.462390477477,
+          1519.1915061141087,
+          1526.2196650965664,
+          140.5469501342443,
+          0.0
+        ],
+        "max": 1719.8477194784184,
+        "mean": 749.9999999999989,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 785.8599066754539
+      },
+      "pearson_unique_triangle": 0.9968546795948486
+    },
+    {
+      "component": 4,
+      "empirical_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.0,
+          188.21208958214456,
+          1504.1403204679925,
+          1667.229250219993,
+          1526.3430360120842,
+          1529.2261852216013,
+          188.21208958214456,
+          0.0
+        ],
+        "max": 1773.2930309287867,
+        "mean": 750.0000000000005,
+        "min": 0.0,
+        "n_finite": 36,
+        "n_nonfinite": 0,
+        "shape": [
+          6,
+          6
+        ],
+        "std": 765.7326836586942
+      },
+      "pearson_unique_triangle": 0.9960168032235268
+    }
+  ],
+  "estimator": "common.source_faithful.fit_condition_averages (does not import redisca)",
+  "filter_fingerprints": [
+    {
+      "dtype": "float64",
+      "head": [
+        523205094318.9298,
+        405300909860.61395,
+        795915710956.4497,
+        -449544252638.3661,
+        -210728030965.40384,
+        122950929477.6409,
+        642080441981.9492,
+        -1412651884075.6216
+      ],
+      "max": 1410949523027.6174,
+      "mean": -5907896059.820437,
+      "min": -2348387928987.806,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 476936313525.86975
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -2396822342904.4375,
+        127775079704.38635,
+        295863474225.2236,
+        -562967167432.6598,
+        -22714800990.90255,
+        -237293332457.3078,
+        -844518937653.6282,
+        2180183694608.0115
+      ],
+      "max": 2180183694608.0115,
+      "mean": 11365718976.30726,
+      "min": -2732165399032.9155,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 539727639318.45447
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        1338576456283.3516,
+        -484869689243.99896,
+        -607320741321.7448,
+        680136339679.3242,
+        112934664771.80016,
+        267254759905.00452,
+        427243079307.61835,
+        -401727546310.7348
+      ],
+      "max": 1870457475143.8599,
+      "mean": -6174563029.476562,
+      "min": -1133441457665.3281,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 385355800201.3936
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -271326590946.42337,
+        -52601271201.7837,
+        1069041903397.264,
+        -182491086439.7735,
+        -29576784449.703205,
+        74574960977.51888,
+        148966414188.1043,
+        -1075082089497.7389
+      ],
+      "max": 1888353541937.1023,
+      "mean": -10687125763.110758,
+      "min": -1478886707863.5728,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 456922764249.60144
+    }
+  ],
+  "inference_component": {
+    "B": 1000,
+    "name": "spoc_random_phase",
+    "p_formula": "count(max|lambda_s| >= |lambda|)/B ; p=0 possible",
+    "reduced_B": false,
+    "requested_B": 1000,
+    "used_B": 1000
+  },
+  "inference_time": {
+    "Nmc": 100,
+    "class1": [
+      0,
+      1
+    ],
+    "class2": [
+      4,
+      5
+    ],
+    "class_convention": "airi",
+    "matlab_indexing_hazard": "Committed MATLAB uses idx1=rpm(1:half) as linear indices into d (values 1:length(idxAll)), not idxAll(rpm). This reconstruction splits the pooled class trials as D5b describes.",
+    "name": "airi_halfsplit_channel_std_nmc100",
+    "not_the_paper_test": true,
+    "requested_Nmc": 100
+  },
+  "item_id": "fig13-meg-face",
+  "n_airi_asterisk_samples_fit_window": [
+    296,
+    66,
+    47,
+    119
+  ],
+  "n_pairs": 30,
+  "n_planars": 204,
+  "n_plot": 4,
+  "n_samples": 901,
+  "onsets_airi_asterisks": [
+    {
+      "first_cluster10_ms": 253.0,
+      "first_significant_ms": 253.0
+    },
+    {
+      "first_cluster10_ms": 152.0,
+      "first_significant_ms": 152.0
+    },
+    {
+      "first_cluster10_ms": 346.0,
+      "first_significant_ms": 112.0
+    },
+    {
+      "first_cluster10_ms": 298.0,
+      "first_significant_ms": 298.0
+    }
+  ],
+  "p_component_spoc_random_phase": [
+    0.006,
+    0.008,
+    0.014,
+    0.032,
+    0.052,
+    0.13,
+    0.403,
+    0.451
+  ],
+  "pair_matrix": "matlab_cov",
+  "pairs": "airi_directed_i_neq_j",
+  "paper_qualitative_onsets": {
+    "comp1": "differential from 65 ms; peak 160 ms; rises again from 311 ms; central/right occipital",
+    "comp2": "parietal; first significance 218 ms",
+    "comp3": "late sustained from 273 ms; bilateral occipital / some frontal"
+  },
+  "path_label": "airi_executable",
+  "pattern_fingerprints": [
+    {
+      "dtype": "float64",
+      "head": [
+        -2.500476077324133e-13,
+        -1.4169199181682447e-13,
+        -1.3379671368770036e-13,
+        -1.6360483163646742e-13,
+        5.601458504573134e-14,
+        -5.57742499096198e-13,
+        -2.5669735923508932e-14,
+        -3.4073880720947775e-13
+      ],
+      "max": 4.370726110361101e-13,
+      "mean": 8.1907398724881425e-16,
+      "min": -8.049422050462397e-13,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 2.6506311970007466e-13
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -1.5833275837047308e-13,
+        8.033631338590183e-14,
+        -2.1950329188360077e-13,
+        1.8884760225518006e-13,
+        -1.7123058641060728e-13,
+        4.478375706062619e-14,
+        -1.7699213878825886e-13,
+        -1.8777500504391158e-14
+      ],
+      "max": 4.522431306083809e-13,
+      "mean": -4.516783554992607e-14,
+      "min": -7.313400647148392e-13,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 2.2931044652770477e-13
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        2.0270879450584304e-13,
+        -1.9024941977934362e-14,
+        2.277203517801519e-13,
+        -2.4709678898627917e-13,
+        4.2872917155213906e-13,
+        -1.3257740940785687e-13,
+        1.9309467953949113e-13,
+        -6.370078239531667e-14
+      ],
+      "max": 5.068310363918569e-13,
+      "mean": 1.4839962750987088e-14,
+      "min": -4.1127430651423805e-13,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 1.8027291140371905e-13
+    },
+    {
+      "dtype": "float64",
+      "head": [
+        -1.8443199933481494e-14,
+        2.8767346415220914e-15,
+        1.9844898813859174e-14,
+        -5.650776261784417e-14,
+        1.0433602052248754e-13,
+        -1.2603981754163582e-13,
+        3.3648342393446556e-14,
+        -5.703129154861316e-14
+      ],
+      "max": 2.370467632623486e-13,
+      "mean": -7.543066592970264e-16,
+      "min": -3.555598409290897e-13,
+      "n_finite": 204,
+      "n_nonfinite": 0,
+      "shape": [
+        204
+      ],
+      "std": 9.770049200349899e-14
+    }
+  ],
+  "patterns": "Haufe / SPoC",
+  "peaks": [
+    {
+      "class1_peak_amp": 1.7779897928864075,
+      "class1_peak_ms": 518.0,
+      "class2_peak_amp": -1.8791398316597996,
+      "class2_peak_ms": 319.0,
+      "component": 1,
+      "contrast_peak_amp": -2.6021738336894398,
+      "contrast_peak_ms": 319.0
+    },
+    {
+      "class1_peak_amp": 5.511751101396738,
+      "class1_peak_ms": 191.0,
+      "class2_peak_amp": -2.3372890261461867,
+      "class2_peak_ms": 131.0,
+      "component": 2,
+      "contrast_peak_amp": -4.106025401790323,
+      "contrast_peak_ms": 184.0
+    },
+    {
+      "class1_peak_amp": 3.6324189349523266,
+      "class1_peak_ms": 291.0,
+      "class2_peak_amp": 2.417087192388499,
+      "class2_peak_ms": 147.0,
+      "component": 3,
+      "contrast_peak_amp": -4.062796193786367,
+      "contrast_peak_ms": 289.0
+    },
+    {
+      "class1_peak_amp": 2.329838916070984,
+      "class1_peak_ms": 372.0,
+      "class2_peak_amp": 2.5997620514396793,
+      "class2_peak_ms": 120.0,
+      "component": 4,
+      "contrast_peak_amp": 2.9956216910624907,
+      "contrast_peak_ms": 527.0
+    }
+  ],
+  "peaks_full_epoch_projection": [
+    {
+      "class1_peak_amp": 1.7779897928864075,
+      "class1_peak_ms": 518.0,
+      "class2_peak_amp": -1.8791398316597996,
+      "class2_peak_ms": 319.0,
+      "component": 1,
+      "contrast_peak_amp": -2.6021738336894398,
+      "contrast_peak_ms": 319.0
+    },
+    {
+      "class1_peak_amp": 5.511751101396738,
+      "class1_peak_ms": 191.0,
+      "class2_peak_amp": -2.3372890261461867,
+      "class2_peak_ms": 131.0,
+      "component": 2,
+      "contrast_peak_amp": -4.106025401790323,
+      "contrast_peak_ms": 184.0
+    },
+    {
+      "class1_peak_amp": 3.6324189349523266,
+      "class1_peak_ms": 291.0,
+      "class2_peak_amp": 2.417087192388499,
+      "class2_peak_ms": 147.0,
+      "component": 3,
+      "contrast_peak_amp": -4.062796193786367,
+      "contrast_peak_ms": 289.0
+    },
+    {
+      "class1_peak_amp": 2.329838916070984,
+      "class1_peak_ms": 372.0,
+      "class2_peak_amp": 2.5997620514396793,
+      "class2_peak_ms": 120.0,
+      "component": 4,
+      "contrast_peak_amp": 2.9956216910624907,
+      "contrast_peak_ms": 527.0
+    }
+  ],
+  "rank": 68,
+  "rdm_fill": "airi_numeric",
+  "rdm_name": "face",
+  "window_ms": [
+    99.0,
+    999.0
+  ]
+}
