@@ -1,0 +1,14 @@
+{
+  "current_track_preference": "1_N170_erp_ar.erp is primary; lpfilt is a labeled ERP CORE extra",
+  "paper_mentions_lowpass_on_erps": false,
+  "paper_n170_preprocessing_sentence": "were preprocessed and three ICA components corresponding to ocular and cardiac artifacts were removed from the data. Then, the ERP were computed by averaging responses within each of the stimulus types.",
+  "paper_only_lowpass_in_n170_neighborhood": "The published N170 section does not mention a 20 Hz (or any) low-pass on the ERPs. The word 'low-pass' in the paper extract near this section is the simulation source-generation Butterworth at 2 Hz, not EEG preprocessing.",
+  "scientifically_plausible_as_erpcore_extra": true,
+  "scientifically_required_by_paper": false,
+  "script12_measures": "mean amplitude / 50% area latency on unfiltered diff-waves; peaks/onset on lpfilt diff-waves",
+  "script7_call": "ERP = pop_filterp( ERP,  1:35 , 'Cutoff',  20, 'Design', 'butter', 'Filter', 'lowpass', 'Order',  8 );",
+  "script7_comment": "Apply a low-pass filter (non-causal Butterworth impulse response function, 20 Hz half-amplitude cut-off, 48 dB/oct roll-off) to the ERP waveforms",
+  "script7_optional_after_averaging": true,
+  "script8_plots_use": "1_N170_erp_ar_diff_waves_lpfilt.erp (parents + difference bins)",
+  "silent_default": false
+}

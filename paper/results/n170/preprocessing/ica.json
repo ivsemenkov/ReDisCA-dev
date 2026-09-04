@@ -1,0 +1,690 @@
+{
+  "corrected_set": {
+    "channel_labels": [
+      "FP1",
+      "F3",
+      "F7",
+      "FC3",
+      "C3",
+      "C5",
+      "P3",
+      "P7",
+      "PO7",
+      "PO3",
+      "O1",
+      "Oz",
+      "Pz",
+      "CPz",
+      "FP2",
+      "Fz",
+      "F4",
+      "F8",
+      "FC4",
+      "FCz",
+      "Cz",
+      "C4",
+      "C6",
+      "P4",
+      "P8",
+      "PO8",
+      "PO4",
+      "O2",
+      "HEOG_left",
+      "HEOG_right",
+      "VEOG_lower",
+      "(uncorr) HEOG",
+      "(uncorr) VEOG"
+    ],
+    "datfile": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.fdt",
+    "gcompreject": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "has_p10": false,
+    "has_p9": false,
+    "icachansind_1based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "icasphere": {
+      "dtype": "float64",
+      "n_finite": 961,
+      "present": true,
+      "shape": [
+        31,
+        31
+      ]
+    },
+    "icaweights": {
+      "dtype": "float64",
+      "n_finite": 899,
+      "present": true,
+      "shape": [
+        29,
+        31
+      ]
+    },
+    "icawinv": {
+      "dtype": "float64",
+      "n_finite": 899,
+      "present": true,
+      "shape": [
+        31,
+        29
+      ]
+    },
+    "n_ica_channels": 31,
+    "n_ica_components": 29,
+    "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.set",
+    "nbchan": 33,
+    "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.set",
+    "pnts": 174848,
+    "setname": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr",
+    "srate_hz": 256.0,
+    "trials": 1
+  },
+  "eog_abs_loading_by_ic": [
+    {
+      "component_1based": 1,
+      "eog_abs_sum": 0.31976007149672236,
+      "max_abs_channel": "F8",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 2,
+      "eog_abs_sum": 4.241877755310826,
+      "max_abs_channel": "VEOG_lower",
+      "removed_in_official_subcomp": true
+    },
+    {
+      "component_1based": 3,
+      "eog_abs_sum": 0.8599817467008042,
+      "max_abs_channel": "F8",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 4,
+      "eog_abs_sum": 2.203988100821787,
+      "max_abs_channel": "PO4",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 5,
+      "eog_abs_sum": 0.4178868016823415,
+      "max_abs_channel": "FP1",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 6,
+      "eog_abs_sum": 0.37372626767338873,
+      "max_abs_channel": "F8",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 7,
+      "eog_abs_sum": 5.955803826277044,
+      "max_abs_channel": "HEOG_left",
+      "removed_in_official_subcomp": true
+    },
+    {
+      "component_1based": 8,
+      "eog_abs_sum": 0.1905915328029699,
+      "max_abs_channel": "PO8",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 9,
+      "eog_abs_sum": 0.3873155737404674,
+      "max_abs_channel": "FP2",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 10,
+      "eog_abs_sum": 0.5478330646105964,
+      "max_abs_channel": "C5",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 11,
+      "eog_abs_sum": 3.409178963214673,
+      "max_abs_channel": "Pz",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 12,
+      "eog_abs_sum": 2.5770889613017367,
+      "max_abs_channel": "FP1",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 13,
+      "eog_abs_sum": 1.5084018292525423,
+      "max_abs_channel": "Oz",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 14,
+      "eog_abs_sum": 0.5572202646692606,
+      "max_abs_channel": "F7",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 15,
+      "eog_abs_sum": 2.9787955923210374,
+      "max_abs_channel": "Cz",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 16,
+      "eog_abs_sum": 0.48333040640979036,
+      "max_abs_channel": "PO4",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 17,
+      "eog_abs_sum": 0.1321945768407224,
+      "max_abs_channel": "PO7",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 18,
+      "eog_abs_sum": 7.591458037636007,
+      "max_abs_channel": "VEOG_lower",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 19,
+      "eog_abs_sum": 2.362731283030597,
+      "max_abs_channel": "FC4",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 20,
+      "eog_abs_sum": 0.6532671290241514,
+      "max_abs_channel": "Oz",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 21,
+      "eog_abs_sum": 3.4776267774310314,
+      "max_abs_channel": "FP1",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 22,
+      "eog_abs_sum": 0.9747101802411433,
+      "max_abs_channel": "P7",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 23,
+      "eog_abs_sum": 0.26875611593499277,
+      "max_abs_channel": "O1",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 24,
+      "eog_abs_sum": 0.3065745145619219,
+      "max_abs_channel": "O2",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 25,
+      "eog_abs_sum": 0.47744868028214604,
+      "max_abs_channel": "F7",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 26,
+      "eog_abs_sum": 0.36578150092397316,
+      "max_abs_channel": "P8",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 27,
+      "eog_abs_sum": 2.257817275060884,
+      "max_abs_channel": "FP2",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 28,
+      "eog_abs_sum": 1.5994506754881055,
+      "max_abs_channel": "PO4",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 29,
+      "eog_abs_sum": 2.565694006411113,
+      "max_abs_channel": "C4",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 30,
+      "eog_abs_sum": 2.2970286827101294,
+      "max_abs_channel": "C3",
+      "removed_in_official_subcomp": false
+    },
+    {
+      "component_1based": 31,
+      "eog_abs_sum": 1.9188284817248893,
+      "max_abs_channel": "FP1",
+      "removed_in_official_subcomp": false
+    }
+  ],
+  "gcompreject_not_used": "gcompreject is all zeros in the weighted file; Script 4 reads the xlsx rather than EEG.reject.gcompreject.",
+  "highest_remaining_eog_ic_observation": {
+    "highest_remaining_after_official_removal": {
+      "component_1based": 18,
+      "eog_abs_sum": 7.591458037636007,
+      "max_abs_channel": "VEOG_lower",
+      "removed_in_official_subcomp": false
+    },
+    "note": "Some remaining ICs have non-zero EOG-channel mixing energy (IC 18 is the largest remaining EOG-sum in subject 1). That is not a source-supported 'third component'. Official xlsx + pop_subcomp remove 2 and 7 only. Do not select IC 18 or any other leftover IC to chase the paper's 'three'."
+  },
+  "matches_xlsx_subject_1": true,
+  "n_components_after_subcomp": 29,
+  "n_components_before": 31,
+  "no_ecg_channel": true,
+  "paper_quote": "were preprocessed and three ICA components corresponding to ocular and cardiac artifacts were removed from the data. Then, the ERP were computed by averaging responses within each of the stimulus types.",
+  "paper_quote_source": ".reproduction_data/paper_text/published_neuroimage.txt (N170 paragraph)",
+  "removed_components_1based_from_weights": [
+    2,
+    7
+  ],
+  "script3_note": "Script 3 is commented out so original ICA weights are kept. This forensics track does not re-run ICA.",
+  "script4_quotes": {
+    "cardiac_mentioned": false,
+    "subcomp": "Perform ocular correction by removing the ICA component(s) specified above",
+    "xlsx_load": "Load list of ICA component(s) corresponding to ocular artifacts from Excel file ICA_Components_N170.xlsx"
+  },
+  "stop_reason": "No official list, reject mask, or script history marks a third subject-1 ICA component. The paper sentence is a coarse ERP CORE gloss (10/40 subjects have exactly 3 listed components; modal count is 1; mean \u2248 2.03). D11 remains a documented discrepancy.",
+  "third_component_source_supported": false,
+  "weighted_set": {
+    "channel_labels": [
+      "FP1",
+      "F3",
+      "F7",
+      "FC3",
+      "C3",
+      "C5",
+      "P3",
+      "P7",
+      "PO7",
+      "PO3",
+      "O1",
+      "Oz",
+      "Pz",
+      "CPz",
+      "FP2",
+      "Fz",
+      "F4",
+      "F8",
+      "FC4",
+      "FCz",
+      "Cz",
+      "C4",
+      "C6",
+      "P4",
+      "P8",
+      "PO8",
+      "PO4",
+      "O2",
+      "HEOG_left",
+      "HEOG_right",
+      "VEOG_lower",
+      "(uncorr) HEOG",
+      "(uncorr) VEOG"
+    ],
+    "datfile": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted.fdt",
+    "gcompreject": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "has_p10": false,
+    "has_p9": false,
+    "icachansind_1based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "icasphere": {
+      "dtype": "float64",
+      "n_finite": 961,
+      "present": true,
+      "shape": [
+        31,
+        31
+      ]
+    },
+    "icaweights": {
+      "dtype": "float64",
+      "n_finite": 961,
+      "present": true,
+      "shape": [
+        31,
+        31
+      ]
+    },
+    "icawinv": {
+      "dtype": "float64",
+      "n_finite": 961,
+      "present": true,
+      "shape": [
+        31,
+        31
+      ]
+    },
+    "n_ica_channels": 31,
+    "n_ica_components": 31,
+    "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted.set",
+    "nbchan": 33,
+    "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted.set",
+    "pnts": 174848,
+    "setname": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted",
+    "srate_hz": 256.0,
+    "trials": 1
+  },
+  "xlsx": {
+    "all_subjects": {
+      "1": [
+        2,
+        7
+      ],
+      "10": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "11": [
+        1,
+        2,
+        6
+      ],
+      "12": [
+        2
+      ],
+      "13": [
+        1
+      ],
+      "14": [
+        1,
+        7,
+        23
+      ],
+      "15": [
+        1,
+        4,
+        10
+      ],
+      "16": [
+        3
+      ],
+      "17": [
+        1
+      ],
+      "18": [
+        1,
+        2,
+        6
+      ],
+      "19": [
+        1,
+        3
+      ],
+      "2": [
+        3,
+        4
+      ],
+      "20": [
+        1,
+        2,
+        5
+      ],
+      "21": [
+        1,
+        2,
+        11,
+        16
+      ],
+      "22": [
+        1
+      ],
+      "23": [
+        1,
+        7
+      ],
+      "24": [
+        1
+      ],
+      "25": [
+        1,
+        4,
+        13
+      ],
+      "26": [
+        1,
+        2
+      ],
+      "27": [
+        1,
+        6
+      ],
+      "28": [
+        1,
+        2,
+        5
+      ],
+      "29": [
+        1,
+        9
+      ],
+      "3": [
+        1,
+        4
+      ],
+      "30": [
+        1,
+        5
+      ],
+      "31": [
+        1
+      ],
+      "32": [
+        1
+      ],
+      "33": [
+        1
+      ],
+      "34": [
+        2
+      ],
+      "35": [
+        1
+      ],
+      "36": [
+        1,
+        6
+      ],
+      "37": [
+        1
+      ],
+      "38": [
+        1,
+        4,
+        6
+      ],
+      "39": [
+        1
+      ],
+      "4": [
+        1
+      ],
+      "40": [
+        1,
+        3,
+        7
+      ],
+      "5": [
+        1
+      ],
+      "6": [
+        1,
+        2
+      ],
+      "7": [
+        1,
+        2,
+        3
+      ],
+      "8": [
+        1,
+        6
+      ],
+      "9": [
+        1,
+        2,
+        6,
+        8
+      ]
+    },
+    "count_histogram_n_components": {
+      "1": 15,
+      "2": 12,
+      "3": 10,
+      "4": 3
+    },
+    "mean_n_components": 2.025,
+    "modal_n_components": 1,
+    "n_subjects": 40,
+    "n_subjects_with_exactly_3": 10,
+    "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/ICA_Components_N170.xlsx",
+    "script4_label": "ocular artifacts (not cardiac)",
+    "sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+    "size_bytes": 9904,
+    "source": {
+      "datasets_md": "paper/reference/provenance/datasets.md",
+      "pinned_sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+      "url": "https://osf.io/download/f9r7c/"
+    },
+    "subject_1_components_1based": [
+      2,
+      7
+    ]
+  },
+  "xlsx_sha256_pinned": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+  "xlsx_url": "https://osf.io/download/f9r7c/"
+}

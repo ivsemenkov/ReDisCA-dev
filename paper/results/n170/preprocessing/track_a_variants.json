@@ -1,0 +1,42 @@
+{
+  "ran": false,
+  "reason_not_run": "No alternative PUBLIC preprocessing state is clearly source-supported as a better match to the paper than 1_N170_erp_ar.erp. Track C does not run a combinatorial preprocessing search.",
+  "would_have_been": {
+    "B": 1000,
+    "car": {
+      "center_motivation": "170 ms treats the paper's 'applied at t=170 ms' as a window center; 200 ms uses the same centering as the face analysis (still containing 170 ms). Documented, not executed.",
+      "centers_ms": [
+        170.0,
+        200.0
+      ],
+      "duration_ms": 100.0,
+      "matrix_modes": [
+        "unscaled_gram",
+        "matlab_cov"
+      ],
+      "n": 8,
+      "pair_modes": [
+        "unique_unordered",
+        "airi_directed"
+      ]
+    },
+    "estimator": "common.source_faithful.fit_condition_averages",
+    "face": {
+      "centers_ms": [
+        200.0
+      ],
+      "duration_ms": 100.0,
+      "matrix_modes": [
+        "unscaled_gram",
+        "matlab_cov"
+      ],
+      "n": 4,
+      "pair_modes": [
+        "unique_unordered",
+        "airi_directed"
+      ]
+    },
+    "inference": "spoc_random_phase",
+    "n_total": 12
+  }
+}
