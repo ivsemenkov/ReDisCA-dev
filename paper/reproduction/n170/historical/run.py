@@ -339,11 +339,12 @@ def freeze_leading_candidate(
         "second_plausible_candidate_id": track_b["candidates"][1]["candidate"]["id"],
         "why_chosen": (
             "Lexicographic qualitative rule on source-supported variants only: "
-            "prefer PRIMARY face and car p1==0, then car λ1 nearer 0.91639, "
-            "then car λ2 nearer 0.77036, then car p2 nearer 0.009, then face "
-            "λ1 nearer 0.87209. Face corr vs 0.82 was not used as a discard "
-            "rule. This is the least-bad jointly close setting under that "
-            "rule, not a claim of printed-figure parity."
+            "prefer PRIMARY face and car p1==0, then the printed Fig. 11 car "
+            "application time 170 ms, then car λ1 nearer 0.91639, then car p2 "
+            "nearer 0.009, then car λ2 nearer 0.77036, then face λ1 nearer "
+            "0.87209. Face corr vs 0.82 was not used as a discard rule. This "
+            "is the least-bad jointly close setting under that rule, not a "
+            "claim of printed-figure parity."
         ),
         "track_a_point_estimates": {
             "face_lambda_head": face_row["eigenvalues_head"],

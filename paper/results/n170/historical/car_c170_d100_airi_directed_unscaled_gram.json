@@ -1,0 +1,1403 @@
+{
+  "channel_labels": [
+    "FP1",
+    "F3",
+    "F7",
+    "FC3",
+    "C3",
+    "C5",
+    "P3",
+    "P7",
+    "PO7",
+    "PO3",
+    "O1",
+    "Oz",
+    "Pz",
+    "CPz",
+    "FP2",
+    "Fz",
+    "F4",
+    "F8",
+    "FC4",
+    "FCz",
+    "Cz",
+    "C4",
+    "C6",
+    "P4",
+    "P8",
+    "PO8",
+    "PO4",
+    "O2"
+  ],
+  "comparison_to_printed": {
+    "corr_trace_sq_exceeds_0.99": true,
+    "corr_wTRw_exceeds_0.99": true,
+    "delta_corr_wTRw_vs_0.99_threshold": 0.009919018956510706,
+    "delta_lambda1": 0.013808078142331981,
+    "delta_lambda2": 0.05998567360042151,
+    "delta_p1": 0.0,
+    "delta_p2": 0.0,
+    "printed": {
+      "corr_gt": 0.99,
+      "lambda1": 0.91639,
+      "lambda2": 0.77036,
+      "p1": 0.0,
+      "p2": 0.009
+    }
+  },
+  "components": [
+    {
+      "eigenvalue": 0.930198078142332,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.9506374815309404,
+          0.028845243254158496,
+          0.028953828540615033
+        ],
+        [
+          1.9506374815309404,
+          0.0,
+          1.9934119426451589,
+          1.9706311941391217
+        ],
+        [
+          0.028845243254158496,
+          1.9934119426451589,
+          0.0,
+          0.027520309890004934
+        ],
+        [
+          0.028953828540615033,
+          1.9706311941391217,
+          0.027520309890004934,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          0.9574810225771412,
+          0.02882813338945726,
+          0.028505560768862803
+        ],
+        [
+          0.9574810225771412,
+          0.0,
+          0.991993915654078,
+          0.9348269397926806
+        ],
+        [
+          0.02882813338945726,
+          0.991993915654078,
+          0.0,
+          0.027230087052796066
+        ],
+        [
+          0.028505560768862803,
+          0.9348269397926806,
+          0.027230087052796066,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.9506374815309386,
+          0.02884524325415858,
+          0.028953828540615092
+        ],
+        [
+          1.9506374815309386,
+          0.0,
+          1.9934119426451589,
+          1.9706311941391217
+        ],
+        [
+          0.02884524325415858,
+          1.9934119426451589,
+          0.0,
+          0.02752030989000469
+        ],
+        [
+          0.028953828540615092,
+          1.9706311941391217,
+          0.02752030989000469,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "CPz",
+      "index": 0,
+      "pattern": {
+        "O1": 9.729713860995824,
+        "O2": 9.020369235940302,
+        "Oz": 6.679882320163344,
+        "P7": 0.08559490740643912,
+        "P8": 4.009414830384872,
+        "PO7": 4.441257329917514,
+        "PO8": 5.011385971941175,
+        "max_abs_channel": "O1",
+        "max_abs_value": 9.729713860995824,
+        "occipital_energy_fraction": 0.42917183843137297
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": 0.5838272510019262,
+          "peak_index_in_search": 14,
+          "peak_time_ms": 136.71875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": 0.4363190907740092,
+          "peak_index_in_search": 34,
+          "peak_time_ms": 214.84375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": 0.4238920993745737,
+          "peak_index_in_search": 34,
+          "peak_time_ms": 214.84375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": 0.45652395433705034,
+          "peak_index_in_search": 35,
+          "peak_time_ms": 218.75,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.0,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9993657027141619,
+      "rdm_corr_trace_sq_unique_triangle": 0.9999190189565107,
+      "rdm_corr_wTRw_unique_triangle": 0.9999190189565107
+    },
+    {
+      "eigenvalue": 0.8303456736004216,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.8983679901289456,
+          0.14444816177610026,
+          0.10202806581330483
+        ],
+        [
+          1.8983679901289456,
+          0.0,
+          1.8489605493633774,
+          1.854474773387368
+        ],
+        [
+          0.14444816177610026,
+          1.8489605493633774,
+          0.0,
+          0.1517204595308966
+        ],
+        [
+          0.10202806581330483,
+          1.854474773387368,
+          0.1517204595308966,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.5000336434721777,
+          0.14394056085129892,
+          0.10091109188012506
+        ],
+        [
+          1.5000336434721777,
+          0.0,
+          1.4216795523783474,
+          1.4128367685519951
+        ],
+        [
+          0.14394056085129892,
+          1.4216795523783474,
+          0.0,
+          0.15160184217757633
+        ],
+        [
+          0.10091109188012506,
+          1.4128367685519951,
+          0.15160184217757633,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.898367990128946,
+          0.1444481617760991,
+          0.10202806581330474
+        ],
+        [
+          1.898367990128946,
+          0.0,
+          1.8489605493633787,
+          1.8544747733873677
+        ],
+        [
+          0.1444481617760991,
+          1.8489605493633787,
+          0.0,
+          0.1517204595308966
+        ],
+        [
+          0.10202806581330474,
+          1.8544747733873677,
+          0.1517204595308966,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "FCz",
+      "index": 1,
+      "pattern": {
+        "O1": 2.2899296621446363,
+        "O2": 4.357222438579653,
+        "Oz": 1.650576545574615,
+        "P7": -4.0259394328104845,
+        "P8": -4.1325988613173115,
+        "PO7": -2.308766458357057,
+        "PO8": -0.5697865967961051,
+        "max_abs_channel": "Pz",
+        "max_abs_value": 7.474248870193852,
+        "occipital_energy_fraction": 0.3626484547024865
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": 0.5245146725227557,
+          "peak_index_in_search": 29,
+          "peak_time_ms": 195.3125,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.45107140179678984,
+          "peak_index_in_search": 10,
+          "peak_time_ms": 121.09375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.43252799689589994,
+          "peak_index_in_search": 9,
+          "peak_time_ms": 117.1875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": -0.32417336043204653,
+          "peak_index_in_search": 12,
+          "peak_time_ms": 128.90625,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.009,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.998822053433241,
+      "rdm_corr_trace_sq_unique_triangle": 0.9996781244822815,
+      "rdm_corr_wTRw_unique_triangle": 0.9996781244822815
+    },
+    {
+      "eigenvalue": 0.7419372649349898,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.6393927792621312,
+          0.2940901554109917,
+          0.14070474013462544
+        ],
+        [
+          1.6393927792621312,
+          0.0,
+          1.8208063486142023,
+          1.864585471152817
+        ],
+        [
+          0.2940901554109917,
+          1.8208063486142023,
+          0.0,
+          0.24042050542520893
+        ],
+        [
+          0.14070474013462544,
+          1.864585471152817,
+          0.24042050542520893,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.4359771769476517,
+          0.292238178013597,
+          0.13751772940986887
+        ],
+        [
+          1.4359771769476517,
+          0.0,
+          1.5767201600780112,
+          1.6070598689570488
+        ],
+        [
+          0.292238178013597,
+          1.5767201600780112,
+          0.0,
+          0.24024043563021796
+        ],
+        [
+          0.13751772940986887,
+          1.6070598689570488,
+          0.24024043563021796,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.639392779262137,
+          0.29409015541099526,
+          0.1407047401346249
+        ],
+        [
+          1.639392779262137,
+          0.0,
+          1.820806348614207,
+          1.8645854711528087
+        ],
+        [
+          0.29409015541099526,
+          1.820806348614207,
+          0.0,
+          0.24042050542520688
+        ],
+        [
+          0.1407047401346249,
+          1.8645854711528087,
+          0.24042050542520688,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "FCz",
+      "index": 2,
+      "pattern": {
+        "O1": 1.9806855211141137,
+        "O2": 6.3801417043709545,
+        "Oz": 4.333653900058935,
+        "P7": 2.041061870874434,
+        "P8": 11.164329682475467,
+        "PO7": 0.7828514018138705,
+        "PO8": 13.674701552590422,
+        "max_abs_channel": "PO8",
+        "max_abs_value": 13.674701552590422,
+        "occipital_energy_fraction": 0.6893376334027864
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": -0.5507799678202779,
+          "peak_index_in_search": 34,
+          "peak_time_ms": 214.84375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.42676025722572797,
+          "peak_index_in_search": 6,
+          "peak_time_ms": 105.46875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.3787881601892358,
+          "peak_index_in_search": 7,
+          "peak_time_ms": 109.375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": -0.39902935587664556,
+          "peak_index_in_search": 10,
+          "peak_time_ms": 121.09375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.072,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9944573793140351,
+      "rdm_corr_trace_sq_unique_triangle": 0.9944090128275699,
+      "rdm_corr_wTRw_unique_triangle": 0.9944090128275701
+    },
+    {
+      "eigenvalue": 0.6130062047444474,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.63897911826544,
+          0.3886388595111727,
+          0.2872338802184901
+        ],
+        [
+          1.63897911826544,
+          0.0,
+          1.4323258431048598,
+          1.849487336377527
+        ],
+        [
+          0.3886388595111727,
+          1.4323258431048598,
+          0.0,
+          0.40333496252251333
+        ],
+        [
+          0.2872338802184901,
+          1.849487336377527,
+          0.40333496252251333,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.6281008131478096,
+          0.3880936223355793,
+          0.2869108368623281
+        ],
+        [
+          1.6281008131478096,
+          0.0,
+          1.425773134973288,
+          1.8345367670809216
+        ],
+        [
+          0.3880936223355793,
+          1.425773134973288,
+          0.0,
+          0.40162731259148726
+        ],
+        [
+          0.2869108368623281,
+          1.8345367670809216,
+          0.40162731259148726,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.6389791182654365,
+          0.3886388595111725,
+          0.287233880218489
+        ],
+        [
+          1.6389791182654365,
+          0.0,
+          1.4323258431048627,
+          1.8494873363775293
+        ],
+        [
+          0.3886388595111725,
+          1.4323258431048627,
+          0.0,
+          0.4033349625225141
+        ],
+        [
+          0.287233880218489,
+          1.8494873363775293,
+          0.4033349625225141,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "PO3",
+      "index": 3,
+      "pattern": {
+        "O1": 0.7610750436940887,
+        "O2": 2.730684046519523,
+        "Oz": 1.0726963335647484,
+        "P7": -0.9592268150574654,
+        "P8": 1.8986269759289667,
+        "PO7": 2.3430286682013604,
+        "PO8": 5.701067859691409,
+        "max_abs_channel": "PO8",
+        "max_abs_value": 5.701067859691409,
+        "occipital_energy_fraction": 0.5323311049761937
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": -0.824332213763902,
+          "peak_index_in_search": 36,
+          "peak_time_ms": 222.65625,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.6130526447755947,
+          "peak_index_in_search": 43,
+          "peak_time_ms": 250.0,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.44080699307342985,
+          "peak_index_in_search": 42,
+          "peak_time_ms": 246.09375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": -0.5717114446373313,
+          "peak_index_in_search": 42,
+          "peak_time_ms": 246.09375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.37,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9816448378918046,
+      "rdm_corr_trace_sq_unique_triangle": 0.9812287759543449,
+      "rdm_corr_wTRw_unique_triangle": 0.9812287759543451
+    },
+    {
+      "eigenvalue": 0.5265659929847886,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.2338384110018485,
+          0.6727787257150443,
+          0.426476648516026
+        ],
+        [
+          1.2338384110018485,
+          0.0,
+          1.846646576871113,
+          1.5694557398930207
+        ],
+        [
+          0.6727787257150443,
+          1.846646576871113,
+          0.0,
+          0.2508038980029332
+        ],
+        [
+          0.426476648516026,
+          1.5694557398930207,
+          0.2508038980029332,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.1928068555241749,
+          0.6722793342627686,
+          0.4258046732427331
+        ],
+        [
+          1.1928068555241749,
+          0.0,
+          1.814168984695974,
+          1.5172503634555579
+        ],
+        [
+          0.6722793342627686,
+          1.814168984695974,
+          0.0,
+          0.24847394816403573
+        ],
+        [
+          0.4258046732427331,
+          1.5172503634555579,
+          0.24847394816403573,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.2338384110018543,
+          0.6727787257150454,
+          0.42647664851602796
+        ],
+        [
+          1.2338384110018543,
+          0.0,
+          1.8466465768711158,
+          1.5694557398930105
+        ],
+        [
+          0.6727787257150454,
+          1.8466465768711158,
+          0.0,
+          0.2508038980029328
+        ],
+        [
+          0.42647664851602796,
+          1.5694557398930105,
+          0.2508038980029328,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "CPz",
+      "index": 4,
+      "pattern": {
+        "O1": 0.34632996756338935,
+        "O2": -1.65513445768971,
+        "Oz": -0.7735066328192512,
+        "P7": 3.302379274008635,
+        "P8": -0.728114324364912,
+        "PO7": 1.5692421955987177,
+        "PO8": -0.769594686274583,
+        "max_abs_channel": "P7",
+        "max_abs_value": 3.302379274008635,
+        "occipital_energy_fraction": 0.47598118824033425
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": 0.6620433655388867,
+          "peak_index_in_search": 6,
+          "peak_time_ms": 105.46875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": 0.643604311793854,
+          "peak_index_in_search": 10,
+          "peak_time_ms": 121.09375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": 0.7228104595204193,
+          "peak_index_in_search": 33,
+          "peak_time_ms": 210.9375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": 0.7586130113636828,
+          "peak_index_in_search": 33,
+          "peak_time_ms": 210.9375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.618,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9250463797138975,
+      "rdm_corr_trace_sq_unique_triangle": 0.931174376854194,
+      "rdm_corr_wTRw_unique_triangle": 0.931174376854194
+    },
+    {
+      "eigenvalue": 0.5033615926639147,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.5089491359679827,
+          0.4861490490262195,
+          0.2978958448288766
+        ],
+        [
+          1.5089491359679827,
+          0.0,
+          1.5082007855839945,
+          1.5600821891310295
+        ],
+        [
+          0.4861490490262195,
+          1.5082007855839945,
+          0.0,
+          0.638722995461774
+        ],
+        [
+          0.2978958448288766,
+          1.5600821891310295,
+          0.638722995461774,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.5078020760835105,
+          0.4857847474370778,
+          0.29492064691729913
+        ],
+        [
+          1.5078020760835105,
+          0.0,
+          1.5053965579320707,
+          1.5522652160968387
+        ],
+        [
+          0.4857847474370778,
+          1.5053965579320707,
+          0.0,
+          0.637465676863089
+        ],
+        [
+          0.29492064691729913,
+          1.5522652160968387,
+          0.637465676863089,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.5089491359680085,
+          0.48614904902621037,
+          0.29789584482887754
+        ],
+        [
+          1.5089491359680085,
+          0.0,
+          1.5082007855839927,
+          1.560082189131028
+        ],
+        [
+          0.48614904902621037,
+          1.5082007855839927,
+          0.0,
+          0.6387229954617638
+        ],
+        [
+          0.29789584482887754,
+          1.560082189131028,
+          0.6387229954617638,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "FCz",
+      "index": 5,
+      "pattern": {
+        "O1": -1.230862456802944,
+        "O2": 3.9692215855061304,
+        "Oz": 1.3210496334109258,
+        "P7": 1.3537289946629432,
+        "P8": 2.286274576194141,
+        "PO7": -1.349131038728434,
+        "PO8": 4.449180842550282,
+        "max_abs_channel": "FC4",
+        "max_abs_value": -5.850084184198632,
+        "occipital_energy_fraction": 0.30496757644195016
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": -0.5072705936463617,
+          "peak_index_in_search": 30,
+          "peak_time_ms": 199.21875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.3556826504871692,
+          "peak_index_in_search": 36,
+          "peak_time_ms": 222.65625,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.7166133227799242,
+          "peak_index_in_search": 5,
+          "peak_time_ms": 101.5625,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": -0.5547717432918311,
+          "peak_index_in_search": 3,
+          "peak_time_ms": 93.75,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.677,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9822178161252306,
+      "rdm_corr_trace_sq_unique_triangle": 0.982369291178486,
+      "rdm_corr_wTRw_unique_triangle": 0.9823692911784877
+    },
+    {
+      "eigenvalue": 0.38596949565930505,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.5335192444601085,
+          0.5646479853342575,
+          0.5369734813194929
+        ],
+        [
+          1.5335192444601085,
+          0.0,
+          1.2485834302751206,
+          1.4272932966106897
+        ],
+        [
+          0.5646479853342575,
+          1.2485834302751206,
+          0.0,
+          0.688982562000254
+        ],
+        [
+          0.5369734813194929,
+          1.4272932966106897,
+          0.688982562000254,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.5335192118549754,
+          0.5546593708532754,
+          0.536262806970495
+        ],
+        [
+          1.5335192118549754,
+          0.0,
+          1.2385586899704628,
+          1.4265729622723144
+        ],
+        [
+          0.5546593708532754,
+          1.2385586899704628,
+          0.0,
+          0.6836119323238179
+        ],
+        [
+          0.536262806970495,
+          1.4265729622723144,
+          0.6836119323238179,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.533519244460153,
+          0.5646479853342509,
+          0.5369734813195105
+        ],
+        [
+          1.533519244460153,
+          0.0,
+          1.24858343027512,
+          1.4272932966106875
+        ],
+        [
+          0.5646479853342509,
+          1.24858343027512,
+          0.0,
+          0.6889825620002329
+        ],
+        [
+          0.5369734813195105,
+          1.4272932966106875,
+          0.6889825620002329,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "FCz",
+      "index": 6,
+      "pattern": {
+        "O1": -1.7876915648467528,
+        "O2": 0.8156831951538475,
+        "Oz": 0.4410402449223427,
+        "P7": 2.8496375414009063,
+        "P8": 2.5655036260641535,
+        "PO7": 1.861196653102644,
+        "PO8": 1.8138603107841542,
+        "max_abs_channel": "FC4",
+        "max_abs_value": -5.396542718901506,
+        "occipital_energy_fraction": 0.17750142391364251
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": -0.9394897913214506,
+          "peak_index_in_search": 3,
+          "peak_time_ms": 93.75,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.7122198038576856,
+          "peak_index_in_search": 6,
+          "peak_time_ms": 105.46875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.5084745428519293,
+          "peak_index_in_search": 17,
+          "peak_time_ms": 148.4375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": 0.7896434215657668,
+          "peak_index_in_search": 39,
+          "peak_time_ms": 234.375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.906,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.971882495014462,
+      "rdm_corr_trace_sq_unique_triangle": 0.9731353696227595,
+      "rdm_corr_wTRw_unique_triangle": 0.9731353696227578
+    },
+    {
+      "eigenvalue": 0.33139917978235917,
+      "empirical_rdm_trace_sq": [
+        [
+          0.0,
+          1.4404190872036713,
+          0.7309569575843706,
+          0.5910418753578188
+        ],
+        [
+          1.4404190872036713,
+          0.0,
+          1.3695632930283237,
+          1.228423083006795
+        ],
+        [
+          0.7309569575843706,
+          1.3695632930283237,
+          0.0,
+          0.6395957038190497
+        ],
+        [
+          0.5910418753578188,
+          1.228423083006795,
+          0.6395957038190497,
+          0.0
+        ]
+      ],
+      "empirical_rdm_trace_sq_temporally_demeaned": [
+        [
+          0.0,
+          1.4378967391462607,
+          0.730952927308862,
+          0.5910079615770395
+        ],
+        [
+          1.4378967391462607,
+          0.0,
+          1.3672385654588495,
+          1.225281868660897
+        ],
+        [
+          0.730952927308862,
+          1.3672385654588495,
+          0.0,
+          0.639534377557556
+        ],
+        [
+          0.5910079615770395,
+          1.225281868660897,
+          0.639534377557556,
+          0.0
+        ]
+      ],
+      "empirical_rdm_wTRw": [
+        [
+          0.0,
+          1.4404190872036668,
+          0.7309569575843711,
+          0.591041875357822
+        ],
+        [
+          1.4404190872036668,
+          0.0,
+          1.369563293028323,
+          1.2284230830067995
+        ],
+        [
+          0.7309569575843711,
+          1.369563293028323,
+          0.0,
+          0.6395957038190433
+        ],
+        [
+          0.591041875357822,
+          1.2284230830067995,
+          0.6395957038190433,
+          0.0
+        ]
+      ],
+      "filter_max_abs_channel": "Fz",
+      "index": 7,
+      "pattern": {
+        "O1": 1.1335229788071688,
+        "O2": 2.997611714097976,
+        "Oz": 2.0650075317199335,
+        "P7": -0.3634005820320815,
+        "P8": -0.26640175364523616,
+        "PO7": -0.5400478870013832,
+        "PO8": 0.9678382621445876,
+        "max_abs_channel": "FP1",
+        "max_abs_value": -5.018713245456286,
+        "occipital_energy_fraction": 0.39071381782342257
+      },
+      "peaks_80_250ms_full_epoch": {
+        "Cars": {
+          "peak_amplitude": -0.670594330231653,
+          "peak_index_in_search": 3,
+          "peak_time_ms": 93.75,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Faces": {
+          "peak_amplitude": -0.8673504497959472,
+          "peak_index_in_search": 7,
+          "peak_time_ms": 109.375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Cars": {
+          "peak_amplitude": -0.6635863281250459,
+          "peak_index_in_search": 2,
+          "peak_time_ms": 89.84375,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        },
+        "Scrambled Faces": {
+          "peak_amplitude": -0.7421709965978402,
+          "peak_index_in_search": 14,
+          "peak_time_ms": 136.71875,
+          "search_hi_ms": 250.0,
+          "search_lo_ms": 80.0
+        }
+      },
+      "primary_random_phase_p": 0.965,
+      "rdm_corr_trace_sq_demeaned_unique_triangle": 0.9772850354363642,
+      "rdm_corr_trace_sq_unique_triangle": 0.977555903158248,
+      "rdm_corr_wTRw_unique_triangle": 0.9775559031582495
+    }
+  ],
+  "condition_labels": [
+    "Faces",
+    "Cars",
+    "Scrambled Faces",
+    "Scrambled Cars"
+  ],
+  "condition_order": [
+    "faces",
+    "cars",
+    "scrambled_faces",
+    "scrambled_cars"
+  ],
+  "contrast": "car",
+  "eigenvalues_head": [
+    0.930198078142332,
+    0.8303456736004216,
+    0.7419372649349898,
+    0.6130062047444474,
+    0.5265659929847886,
+    0.5033615926639147,
+    0.38596949565930505,
+    0.33139917978235917
+  ],
+  "erp": {
+    "file_name": "1_N170_erp_ar.erp",
+    "lpfilt": false,
+    "n_accepted": [
+      52,
+      38,
+      49,
+      52
+    ],
+    "path": "/tmp/redisca-worktrees/n170-historical/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar.erp",
+    "sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+    "srate_hz": 256.0
+  },
+  "extras": {
+    "condition_label_permutation": {
+      "kind": "exact_enumeration",
+      "label": "secondary_condition_label_permutation_not_historical_oracle",
+      "n_permutations": 24,
+      "n_unique_rdms": 4,
+      "p_matched_abs": [
+        0.25,
+        0.25,
+        0.5,
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "p_maxabs_familywise": [
+        0.25,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "p_signed_greater_equal": [
+        0.25,
+        0.25,
+        0.5,
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "permutation_floor_note": "Face/car one-vs-three RDMs have 3! = 6 equivalent relabelings of the three non-target conditions, so signed P(\u03bb* >= \u03bb_obs) cannot fall below 6/24 = 0.25 when the observed structure is uniquely best. That floor is a property of this secondary test, not of stock SPoC random-phase.",
+      "samples_lambda0": [
+        0.930198078142332,
+        0.930198078142332,
+        0.9250135837531844,
+        0.9170211964741602,
+        0.9250135837531844,
+        0.9170211964741602,
+        0.8926960549328484,
+        0.8926960549328484,
+        0.8926960549328484,
+        0.8926960549328484,
+        0.8926960549328484,
+        0.8926960549328484,
+        0.9250135837531844,
+        0.9170211964741602,
+        0.930198078142332,
+        0.930198078142332,
+        0.9170211964741602,
+        0.9250135837531844,
+        0.9250135837531844,
+        0.9170211964741602,
+        0.930198078142332,
+        0.930198078142332,
+        0.9170211964741602,
+        0.9250135837531844
+      ],
+      "unique": [
+        {
+          "example_order": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "lambda0": 0.930198078142332,
+          "multiplicity": 6
+        },
+        {
+          "example_order": [
+            0,
+            2,
+            1,
+            3
+          ],
+          "lambda0": 0.9250135837531844,
+          "multiplicity": 6
+        },
+        {
+          "example_order": [
+            0,
+            2,
+            3,
+            1
+          ],
+          "lambda0": 0.9170211964741602,
+          "multiplicity": 6
+        },
+        {
+          "example_order": [
+            1,
+            0,
+            2,
+            3
+          ],
+          "lambda0": 0.8926960549328484,
+          "multiplicity": 6
+        }
+      ]
+    },
+    "matched_component_random_phase": {
+      "label": "matched_component_random_phase_diagnostic_not_primary",
+      "n_iterations": 1000,
+      "note": "Each surrogate GEP is sorted signed-descending like the observed spectrum. p_abs_matched uses |\u03bb_surr_k| >= |\u03bb_obs_k|. This is not stock SPoC (stock uses max|\u03bb| over components).",
+      "p_abs_matched": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.003,
+        0.001
+      ],
+      "p_signed_ge_matched": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.003,
+        0.001
+      ]
+    }
+  },
+  "filters_fingerprint": {
+    "sha256_sign_canonical_columns": "5506c5ba706b99a80432c9af25b0accb2f02025fc0279e63bdcc992bd06a0d75",
+    "shape": [
+      28,
+      8
+    ]
+  },
+  "inference_primary": {
+    "B": 1000,
+    "executable": "common.source_faithful.fit_condition_averages",
+    "formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+    "name": "spoc_random_phase",
+    "note": "Stock SPoC random-phase of z. This is PRIMARY historical inference. It is not paper \u00a72.3 condition-label permutation.",
+    "p_equals_zero_allowed": true
+  },
+  "matlab": null,
+  "matrix_mode": "unscaled_gram",
+  "n_channels": 28,
+  "n_components": 25,
+  "n_reported": 8,
+  "n_samples": 26,
+  "numerical_rank_whitening_rows": 25,
+  "pair_mode": "airi_directed",
+  "pair_sequence": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      3,
+      2
+    ]
+  ],
+  "patterns_fingerprint": {
+    "sha256_sign_canonical_columns": "b47656550833bc3b4dd2cd6eede295d4e398b8fa6976cd40c95bddb527753abb",
+    "shape": [
+      28,
+      8
+    ]
+  },
+  "primary_random_phase_p_head": [
+    0.0,
+    0.009,
+    0.072,
+    0.37,
+    0.618,
+    0.677,
+    0.906,
+    0.965
+  ],
+  "rdm_fill": {
+    "between": 1.0,
+    "diagonal": 0.0,
+    "kind": "binary_0_1",
+    "within": 0.0
+  },
+  "reconstruction_note": "Source-faithful Python reconstruction of AIRI/SPoC semantics. MATLAB is unavailable; this is not MATLAB parity.",
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20241014,
+    "seed_used": 20241014
+  },
+  "seed_policy": {
+    "bit_generator": "PCG64",
+    "master_seed": 20240904,
+    "matched_component_extra_offset": 500,
+    "rng_seed": 20241014,
+    "variant_offset": 110
+  },
+  "variant_id": "car_c170_d100_airi_directed_unscaled_gram",
+  "window": {
+    "center_ms": 170.0,
+    "duration_ms": 100.0,
+    "index_end_inclusive": 107,
+    "index_start": 82,
+    "n_samples": 26,
+    "t_end_ms": 220.0,
+    "t_start_ms": 120.0
+  },
+  "window_center_ms": 170.0,
+  "window_duration_ms": 100.0,
+  "z_after_matlab_zscore": [
+    0.9574271077563381,
+    -0.9574271077563381,
+    -0.9574271077563381,
+    0.9574271077563381,
+    0.9574271077563381,
+    0.9574271077563381,
+    -0.9574271077563381,
+    0.9574271077563381,
+    -0.9574271077563381,
+    -0.9574271077563381,
+    0.9574271077563381,
+    -0.9574271077563381
+  ],
+  "z_raw": [
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+  ]
+}

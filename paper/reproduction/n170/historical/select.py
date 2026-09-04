@@ -79,16 +79,27 @@ def joint_settings_from_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]
     return settings
 
 
+SELECTION_RULE = (
+    "lexicographic (not a scalar loss): both PRIMARY p1==0; "
+    "then printed Fig. 11 car application time 170 ms; "
+    "then |car λ1-0.91639|; then |car p2-0.009|; "
+    "then |car λ2-0.77036|; then |face λ1-0.87209|. "
+    "Face corr vs 0.82 is not used as a discard rule."
+)
+
+
 def pick_two_joint_candidates(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Return two joint settings by a lexicographic qualitative rule.
 
     Order of preference (no weights, no combined score):
 
     1. Prefer PRIMARY face p1 == 0 and PRIMARY car p1 == 0.
-    2. Then smaller |car λ1 − 0.91639|.
-    3. Then smaller |car λ2 − 0.77036|.
+    2. Prefer car window center 170 ms (printed Fig. 11 application time).
+       The 200 ms car window remains in the Track A table.
+    3. Then smaller |car λ1 − 0.91639|.
     4. Then smaller |car p2 − 0.009|.
-    5. Then smaller |face λ1 − 0.87209|.
+    5. Then smaller |car λ2 − 0.77036|.
+    6. Then smaller |face λ1 − 0.87209|.
 
     Face window corr vs 0.82 is recorded and discussed; it is not used to
     discard a candidate because every source-supported window fit on this
@@ -98,13 +109,15 @@ def pick_two_joint_candidates(rows: list[dict[str, Any]]) -> list[dict[str, Any]
 
     def sort_key(item: dict[str, Any]) -> tuple:
         both_p1_zero = item["face_p1_is_zero"] and item["car_p1_is_zero"]
+        car_is_printed_170 = float(item["car_window"]["center_ms"]) == 170.0
         return (
             0 if both_p1_zero else 1,
             0 if item["car_p1_is_zero"] else 1,
             0 if item["face_p1_is_zero"] else 1,
+            0 if car_is_printed_170 else 1,
             item["abs_delta_car_lambda1"],
-            item["abs_delta_car_lambda2"],
             item["abs_delta_car_p2"],
+            item["abs_delta_car_lambda2"],
             item["abs_delta_face_lambda1"],
             item["id"],
         )
@@ -126,9 +139,5 @@ def pick_two_joint_candidates(rows: list[dict[str, Any]]) -> list[dict[str, Any]
             break
     for rank, item in enumerate(picked, start=1):
         item["selection_rank"] = rank
-        item["selection_rule"] = (
-            "lexicographic: both p1==0, then |car λ1-0.91639|, "
-            "|car λ2-0.77036|, |car p2-0.009|, |face λ1-0.87209|; "
-            "not a scalar loss; face corr vs 0.82 not used as a discard rule"
-        )
+        item["selection_rule"] = SELECTION_RULE
     return picked
