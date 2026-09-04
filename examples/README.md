@@ -1,5 +1,10 @@
 # ReDisCA Examples
 
+> Stale relative to the current public API. These scripts still call the
+> previous student helpers (`fit_redisca`, sliding windows, MNE adapters,
+> permutation tests) and have not been migrated to `from redisca import ReDisCA`.
+> They are kept as reference material for a later phase.
+
 This folder contains runnable workflows that show the library on synthetic
 benchmark data, ready MNE evoked data, and ERP CORE N170 data.
 
