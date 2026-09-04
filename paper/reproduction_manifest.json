@@ -1,0 +1,996 @@
+{
+  "paper": {
+    "citation": "Ossadtchi, A., Semenkov, I., Zhuravleva, A., Kozunov, V., Serikov, O., & Voloshina, E. (2024). Representational dissimilarity component analysis (ReDisCA). NeuroImage, 301, 120868.",
+    "doi": "10.1016/j.neuroimage.2024.120868",
+    "dataset_links": {
+      "printed_in_paper": "https://osf.io/pfde9/",
+      "printed_node_is": "ERP CORE N170 (parent https://osf.io/thsqg/)",
+      "airi_meg_and_source_models": "https://osf.io/8rk67/",
+      "erp_core_ethics_doi": "10.18115/D5JW4R",
+      "kozunov_2018": "https://doi.org/10.3389/fnhum.2017.00650",
+      "airi_github": "https://github.com/AIRI-Institute/ReDisCA",
+      "stock_spoc_github": "https://github.com/svendaehne/matlab_SPoC"
+    }
+  },
+  "sources": {
+    "airi_commit": "15bc19cdc76989da202714b257f6de4d26a42c51",
+    "spoc_commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+    "library_commit": "5a5c8658452172e4011445c9a394c1cbbd3c5f7e",
+    "erp_core_scripts_commit": "c18b43d70d791ca914d90410afe4ff06d6f7f429"
+  },
+  "items": [
+    {
+      "id": "table1-spoc-correspondence",
+      "figure": "Table 1",
+      "panel": null,
+      "section": "2.3",
+      "title": "SPoC variable correspondence used to define ReDisCA",
+      "dataset": null,
+      "rdm": null,
+      "time_window": null,
+      "preprocessing": null,
+      "algorithm_variant": "paper-printed mapping: e\u2194(i,j) unique triangle, C(e)\u2194R_ij unscaled Gram, z(e)\u2194d_ij",
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "Executable ReDisCA is SPoC covariance maximization on condition-pair difference matrices.",
+      "sources_needed": [
+        "paper Table 1",
+        "D\u00e4hne 2014 SPoC",
+        "stock SPoC spoc.m"
+      ],
+      "classes": [
+        "deterministic",
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Table 1, Section 2.3",
+        "airi": null,
+        "spoc": "SPoC/spoc.m"
+      },
+      "status_guess": "methods inventory; mapping is conceptual not bit-exact",
+      "paper_vs_airi_notes": "AIRI violates unique-triangle and unscaled-Gram rows of this table.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig01-source-space-rsa-diagrams",
+      "figure": "Figure 1",
+      "panel": "a,b",
+      "section": "2.2",
+      "title": "Source-space RSA diagrams (AV vs single-trial; MNE vs LCMV)",
+      "dataset": "simulated (later Figs 4\u20136)",
+      "rdm": "theoretical D vs regional D_m",
+      "time_window": "T samples of the RSA window",
+      "preprocessing": "inverse operator W_M applied either to averages (AV) or every trial (S.T.)",
+      "algorithm_variant": "four spotlight RSA versions: MNE AV, MNE S.T., BF AV, BF S.T.; d=squared Euclidean",
+      "metric": "Pearson corr of standardized upper-triangle RDM entries (Eq. 2)",
+      "statistical_test": "cluster permutation of condition labels (Maris 2007) for maps \u2014 described, not plotted here",
+      "n_monte_carlo": null,
+      "expected": "Schematic only. These four methods are the ROC/error baselines in Figs 4\u20136.",
+      "sources_needed": [
+        "paper Fig 1",
+        "Kozunov 2018 as methodological ancestor"
+      ],
+      "classes": [
+        "visual/qualitative",
+        "source-model-dependent"
+      ],
+      "evidence": {
+        "paper": "Fig. 1 caption and Section 2.2"
+      },
+      "status_guess": "visual/qualitative; methods inventory",
+      "paper_vs_airi_notes": "No AIRI implementation of source-space RSA.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig02-redisca-diagram",
+      "figure": "Figure 2",
+      "panel": null,
+      "section": "2.3",
+      "title": "ReDisCA reduced to SPoC covariance optimization",
+      "dataset": null,
+      "rdm": "user theoretical RDM D",
+      "time_window": "selected evoked-response window of length T",
+      "preprocessing": null,
+      "algorithm_variant": "paper GEP on unique-pair unscaled Grams; constraint w^T R_bar w=1",
+      "metric": "generalized eigenvalue \u03bb as RDM covariance fit",
+      "statistical_test": "paper: condition-label permutation (B unspecified)",
+      "n_monte_carlo": null,
+      "expected": "Diagram of the method. Patterns A from invert-W if full rank.",
+      "sources_needed": [
+        "paper Fig 2",
+        "Eqs 3\u201312"
+      ],
+      "classes": [
+        "visual/qualitative",
+        "deterministic"
+      ],
+      "evidence": {
+        "paper": "Fig. 2, Eqs 3\u201312, Table 1"
+      },
+      "status_guess": "visual/qualitative; methods inventory",
+      "paper_vs_airi_notes": "Executable path is SPoC Haufe patterns + MATLAB cov + directed pairs.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig03-sim-four-source-rdms",
+      "figure": "Figure 3",
+      "panel": "four matrices",
+      "section": "2.4.3 / 4.1",
+      "title": "Exemplar theoretical RDMs of four simulated sources (C=6)",
+      "dataset": "simulated sources; new Z each MC, four fixed mixings M_p",
+      "rdm": "D0_p from Eq. 1 on generated S, then D_p=D0_p+Upsilon_d",
+      "time_window": "T=200 ms",
+      "preprocessing": "source time series: 6th-order Butterworth 2 Hz low-pass on Gaussian rows of Z",
+      "algorithm_variant": "generative only (no ReDisCA fit in this figure)",
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": 100,
+      "expected": "Four distinct C\u00d7C RDMs (exemplar draw). Not a fixed numeric target to copy.",
+      "sources_needed": [
+        "paper Fig 3",
+        "Section 2.4.1\u20132.4.3",
+        "forward model (unspecified)"
+      ],
+      "classes": [
+        "stochastic",
+        "source-model-dependent",
+        "visual/qualitative",
+        "currently blocked"
+      ],
+      "evidence": {
+        "paper": "Fig. 3 caption; Section 2.4.3 says C=6 for these RDMs"
+      },
+      "status_guess": "blocked by missing source asset (forward model, Upsilon_d law, I_c, fs)",
+      "paper_vs_airi_notes": "No AIRI simulation code.",
+      "blocked_reason": "Paper does not name the cortical mesh/Gain, sampling rate, trial count I_c, or RDM-noise law. No public simulation script."
+    },
+    {
+      "id": "fig04-single-source-roc",
+      "figure": "Figure 4",
+      "panel": "a,c",
+      "section": "4.1",
+      "title": "Single-source detection ROC: ReDisCA vs four source-space RSA",
+      "dataset": "simulated single source, C=5, 100 MC locations, 1000 1/f noise sources",
+      "rdm": "noisy version of the single source's D0",
+      "time_window": "T=200 ms",
+      "preprocessing": "forward-model error sigma_delta=0.15||g||; SNR = RMS(signal matrix)/RMS(noise matrix)",
+      "algorithm_variant": "ReDisCA (paper GEP) with cosine/MUSIC localization vs MNE/BF \u00d7 AV/S.T. spotlight RSA",
+      "metric": "ROC from TP/FP/TN/FN inside/outside r_max=0.01 m sphere (Eq. 17\u201318); ROC AUC",
+      "statistical_test": null,
+      "n_monte_carlo": 100,
+      "expected": "ReDisCA dominates all four RSA versions. At SNR=0.1, ~85% hit rate at near-zero false alarms. Source-space RSA paradoxically better at lower SNR in this single-source setting. High-SNR panel: preprint overlay SNR=0.2; low-SNR panel: SNR=0.1 (published body).",
+      "sources_needed": [
+        "paper Fig 4",
+        "Section 2.4.2",
+        "forward operator G",
+        "1/f noise generator"
+      ],
+      "classes": [
+        "stochastic",
+        "source-model-dependent",
+        "numeric",
+        "visual/qualitative",
+        "currently blocked"
+      ],
+      "evidence": {
+        "paper": "Fig. 4a,c and body SNR=0.1 for c,d",
+        "biorxiv_overlay": "SNR 0.2 (a,b) and 0.1 (c,d)"
+      },
+      "status_guess": "blocked by missing source asset",
+      "paper_vs_airi_notes": "No AIRI simulation code.",
+      "blocked_reason": "Unspecified forward model, I_c, fs, Upsilon_d; no author simulation script."
+    },
+    {
+      "id": "fig04-single-source-traces",
+      "figure": "Figure 4",
+      "panel": "b,d",
+      "section": "4.1",
+      "title": "Noisy vs noise-free averaged ERP traces and theoretical RDM used in single-source sims",
+      "dataset": "same as fig04-single-source-roc",
+      "rdm": "exemplar theoretical D for the single source",
+      "time_window": "T=200 ms",
+      "preprocessing": "same",
+      "algorithm_variant": "display of simulated sensor time series (not a fit)",
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": 100,
+      "expected": "Blue noisy / red noise-free ERPs; RDM inset. SNR 0.2 then 0.1 if using preprint overlays.",
+      "sources_needed": [
+        "paper Fig 4b,d"
+      ],
+      "classes": [
+        "stochastic",
+        "visual/qualitative",
+        "source-model-dependent",
+        "currently blocked"
+      ],
+      "evidence": {
+        "paper": "Fig. 4b,d"
+      },
+      "status_guess": "blocked by missing source asset",
+      "paper_vs_airi_notes": "No AIRI simulation code.",
+      "blocked_reason": "Same missing generative assets as Fig. 4a,c."
+    },
+    {
+      "id": "fig05-four-source-mc",
+      "figure": "Figure 5",
+      "panel": "a\u2013d (caption also lists e)",
+      "section": "4.1 / 3.2",
+      "title": "Four-source Monte Carlo: localization errors and ReDisCA-specific correlations",
+      "dataset": "simulated P=4 sources, min separation 2 cm, 100 MC",
+      "rdm": "four noisy D_p; exemplar shown in Fig 3",
+      "time_window": "T=200 ms",
+      "preprocessing": "Eq. 16 superposition + 1/f noise; SNR 0.4 and 0.2 (preprint overlays); body says c,d are SNR=0.2",
+      "algorithm_variant": "ReDisCA first component vs BF S.T. and MNE S.T. (best two RSA from Fig 4)",
+      "metric": "histograms of ||rhat-rtrue||; corr(a1,gtrue); corr(w1,gtrue); corr(upper D_p, w^T R_ij w)",
+      "statistical_test": null,
+      "n_monte_carlo": 100,
+      "expected": "ReDisCA has the largest mass of errors <1 cm. Patterns align better than weights. Empirical RDMs well correlated with targets. ReDisCA still operable at SNR=0.2 with four sources.",
+      "sources_needed": [
+        "paper Fig 5",
+        "Section 3.2",
+        "forward operator"
+      ],
+      "classes": [
+        "stochastic",
+        "source-model-dependent",
+        "numeric",
+        "visual/qualitative",
+        "currently blocked"
+      ],
+      "evidence": {
+        "paper": "Fig. 5 caption vs body conflict on C and panel identity",
+        "biorxiv_overlay": "SNR 0.4 top, 0.2 bottom; caption C=6, body C=5"
+      },
+      "status_guess": "blocked by missing source asset; paper-internal caption/body conflict",
+      "paper_vs_airi_notes": "No AIRI simulation code. Caption uses M=4 for source count (collides with voxel index M).",
+      "blocked_reason": "Missing forward model and generative details; C=5 vs C=6 unresolved in the paper."
+    },
+    {
+      "id": "fig06-error-vs-C",
+      "figure": "Figure 6",
+      "panel": null,
+      "section": "4.1",
+      "title": "Average median localization error of 4 sources vs number of conditions C",
+      "dataset": "same four-source simulations, C in {3,4,5,6}",
+      "rdm": "subset of the C=6 RDM / regenerated with C conditions",
+      "time_window": "T=200 ms",
+      "preprocessing": "unspecified SNR for this figure",
+      "algorithm_variant": "ReDisCA dipole fit to a_p1 vs BF S.T. vs MNE S.T.",
+      "metric": "average median ||rhat-rtrue|| vs C",
+      "statistical_test": null,
+      "n_monte_carlo": 100,
+      "expected": "Error decreases with C. ReDisCA best at all C. Mean median error < 2 cm at C=6.",
+      "sources_needed": [
+        "paper Fig 6"
+      ],
+      "classes": [
+        "stochastic",
+        "source-model-dependent",
+        "numeric",
+        "currently blocked"
+      ],
+      "evidence": {
+        "paper": "Fig. 6 caption and last paragraph of 4.1"
+      },
+      "status_guess": "blocked by missing source asset",
+      "paper_vs_airi_notes": "No AIRI simulation code.",
+      "blocked_reason": "Same as Figs 3\u20135; SNR for Fig 6 not stated."
+    },
+    {
+      "id": "fig07-n170-meaning-pmap",
+      "figure": "Figure 7",
+      "panel": "a\u2013d",
+      "section": "4.2.1",
+      "title": "N170 meaningful vs meaningless: theoretical RDM, p-map, occipital pattern, p(t)",
+      "dataset": "ERP CORE N170, subject index '1', 4 conditions face/car/scrambled face/scrambled car",
+      "rdm": "Fig. 7a meaningful vs meaningless (numeric entries not printed)",
+      "time_window": "sliding T=150 ms; step unspecified; significant segment around t=400 ms",
+      "preprocessing": "ERP CORE official pipeline for subject '1' (ICA comps 2 and 7, not paper's 'three ocular+cardiac'); epoch [-200,800] ms at 256 Hz; average good trials",
+      "algorithm_variant": "paper ReDisCA in sliding windows; library demean_time variants; no AIRI script",
+      "metric": "component p-values (map); uncorrected p<0.05 on component 1",
+      "statistical_test": "per-window component p (B and whether max|lambda| unspecified); Fig 7d uncorrected",
+      "n_monte_carlo": null,
+      "expected": "Only first component significant around 400 ms; highly occipital topography; agrees with Mensen 2017 300\u2013500 ms (misses their ~100 ms peak).",
+      "sources_needed": [
+        "osf.io/pfde9 N170 All Data subject 1 ERP",
+        "ICA_Components_N170.xlsx",
+        "paper Fig 7",
+        "Kappenman 2021 pipeline"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative",
+        "numeric"
+      ],
+      "evidence": {
+        "paper": "Section 4.2.1, Fig. 7",
+        "erp_core": "subject 1 bins Faces/Cars/Scrambled Faces/Scrambled Cars"
+      },
+      "status_guess": "not yet reproduced; sliding step and N170 p-procedure unspecified",
+      "paper_vs_airi_notes": "No AIRI N170 code. Paper ICA gloss is false for subject 1 (2 components: 2 and 7).",
+      "blocked_reason": "Sliding-window step and N170 permutation/bootstrap count not stated. Channel set (30 scalp vs all EEG-typed) not stated. Not blocked if those are documented as chosen variants."
+    },
+    {
+      "id": "fig08-n170-meaning-patterns",
+      "figure": "Figure 8",
+      "panel": "three time slices",
+      "section": "4.2.1",
+      "title": "N170 meaning: topography, four condition traces, empirical RDM at three windows near 400 ms",
+      "dataset": "same as fig07",
+      "rdm": "target Fig 7a; empirical RDMs in bottom row",
+      "time_window": "three consecutive T=150 ms windows around t=400 ms",
+      "preprocessing": "same as fig07",
+      "algorithm_variant": "first significant ReDisCA component p<0.05",
+      "metric": "visual pattern similarity across windows; empirical RDM resemblance to Fig 7a",
+      "statistical_test": "p<0.05 on the first component",
+      "n_monte_carlo": null,
+      "expected": "Meaningless (yellow/violet) traces disentangled from meaningful (red/blue). Face (blue) longer-lasting than car (red). Topography stays occipital, drifts sagittally.",
+      "sources_needed": [
+        "same as fig07"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 8"
+      },
+      "status_guess": "not yet reproduced",
+      "paper_vs_airi_notes": "No AIRI N170 code.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig09-n170-face-car-rdms",
+      "figure": "Figure 9",
+      "panel": "a,b",
+      "section": "4.2.1",
+      "title": "Theoretical RDMs for N170 face-specific (a) and car-specific (b)",
+      "dataset": "N170 4 conditions",
+      "rdm": "(a) face distinct, other three similar; (b) car distinct, other three similar. Numerics not printed.",
+      "time_window": null,
+      "preprocessing": null,
+      "algorithm_variant": null,
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "Two 4\u00d74 theoretical RDMs used in Figs 10\u201311.",
+      "sources_needed": [
+        "paper Fig 9"
+      ],
+      "classes": [
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 9"
+      },
+      "status_guess": "visual/qualitative; encode 0/1 structure plus optional 0.1-within AIRI-style fill as a labeled variant",
+      "paper_vs_airi_notes": "AIRI 6\u00d76 MEG RDMs are not these 4\u00d74 N170 RDMs.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig10-n170-face",
+      "figure": "Figure 10",
+      "panel": "topo + traces + empirical RDM",
+      "section": "4.2.1",
+      "title": "N170 face-specific ReDisCA component",
+      "dataset": "ERP CORE N170 subject '1'",
+      "rdm": "Fig. 9a face detector",
+      "time_window": "T=100 ms centered at 200 ms (150\u2013250 ms if symmetric)",
+      "preprocessing": "same as fig07",
+      "algorithm_variant": "paper ReDisCA; first and only significant component",
+      "metric": "empirical\u2013theoretical RDM correlation = 0.82; right-fusiform-like topography; face burst ~170 ms",
+      "statistical_test": "component significance (B unspecified)",
+      "n_monte_carlo": null,
+      "expected": "Numeric target: RDM correlation 0.82. One significant component. Face trace bursts near 170 ms; other three traces aligned.",
+      "sources_needed": [
+        "paper Fig 10",
+        "ERP CORE subject 1"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "numeric",
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 10 and surrounding prose"
+      },
+      "status_guess": "not yet reproduced",
+      "paper_vs_airi_notes": "No AIRI N170 code.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig11-n170-car",
+      "figure": "Figure 11",
+      "panel": "two components",
+      "section": "4.2.1",
+      "title": "N170 car-specific ReDisCA components",
+      "dataset": "ERP CORE N170 subject '1'",
+      "rdm": "Fig. 9b car detector",
+      "time_window": "applied at t=170 ms (duration not restated; 100 ms is the only other real-data T besides 150 ms)",
+      "preprocessing": "same as fig07",
+      "algorithm_variant": "paper ReDisCA; two significant components p<0.01",
+      "metric": "empirical\u2013theoretical RDM correlation > 0.99; ventral then dorsal-like topographies; car deflection ~150 ms on component 1",
+      "statistical_test": "p<0.01",
+      "n_monte_carlo": null,
+      "expected": "Two components with p<0.01. RDM correlation >0.99. Comp1 lower occipital, car-specific ~150 ms; comp2 dorsal/graspable-tool interpretation in the prose.",
+      "sources_needed": [
+        "paper Fig 11",
+        "ERP CORE subject 1"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "numeric",
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 11"
+      },
+      "status_guess": "not yet reproduced; window duration at t=170 ms not explicit",
+      "paper_vs_airi_notes": "No AIRI N170 code.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig12-meg-theoretical-rdms",
+      "figure": "Figure 12",
+      "panel": "a,b,c",
+      "section": "4.2.2",
+      "title": "Three theoretical MEG RDMs: face, tool, meaningful vs meaningless",
+      "dataset": "Kozunov 2018 subject AD, 6 subcategories",
+      "rdm": "12a face, 12b tool, 12c meaning (numeric entries not printed; AIRI analogs use 0.1/1)",
+      "time_window": null,
+      "preprocessing": null,
+      "algorithm_variant": null,
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "Three 6\u00d76 RDMs driving Figs 13\u201315.",
+      "sources_needed": [
+        "paper Fig 12",
+        "AIRI D-builder for numeric 0.1/1 analogs"
+      ],
+      "classes": [
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 12",
+        "airi": "Redisca_tools_faces_3_random_norm_correct.m face/tool/meaning branches"
+      },
+      "status_guess": "visual/qualitative; emit both binary 0/1 and AIRI 0.1/1 fills",
+      "paper_vs_airi_notes": "AIRI default is facevstool (Fig 16), not these three. AIRI implements face/tool/meaning as selectable names.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig13-meg-face",
+      "figure": "Figure 13",
+      "panel": "a\u2013c (three components \u00d7 traces+topo)",
+      "section": "4.2.2",
+      "title": "MEG face-specific ReDisCA (entire epoch)",
+      "dataset": "Kozunov 2018 AD run 1; 6 ERFs, 80 epochs each, 204 planar gradiometers",
+      "rdm": "Fig. 12a face (AIRI name 'face' if using numeric analog)",
+      "time_window": "paper: entire 1500 ms (\u2212500\u2026+1000). AIRI executable: 99\u2013999 ms (trange 600:1500 on 1501 samples).",
+      "preprocessing": "paper: averages only. AIRI: butter(3) 0.25\u201320 Hz filtfilt per trial.",
+      "algorithm_variant": "paper-faithful unique Gram vs AIRI directed MATLAB-cov SPoC",
+      "metric": "first three significant components; onsets 65/160/311, 218, 273 ms; occipital then parietal then late occipital/frontal",
+      "statistical_test": "component p from permutation/SPoC bootstrap; time-series FWER max-stat over time (paper) vs AIRI half-split Nmc=100",
+      "n_monte_carlo": {
+        "paper_component_B": "unspecified",
+        "airi_spoc_B": 1000,
+        "airi_timecourse_Nmc": 100
+      },
+      "expected": "Comp1: faces vs others from 65 ms, peak 160 ms, again from 311 ms, central/right occipital. Comp2: parietal from 218 ms. Comp3: late from 273 ms. Aligns with Kozunov 2018 Fig 3 face trace.",
+      "sources_needed": [
+        "MEG_AD_run1.mat",
+        "ibfctfprespm8_*.mat",
+        "paper Fig 13",
+        "stock SPoC",
+        "source_faithful.py"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative",
+        "numeric"
+      ],
+      "evidence": {
+        "paper": "Fig. 13 and Section 4.2.2",
+        "airi": "main script with RDM='face' (not the default)"
+      },
+      "status_guess": "not yet reproduced; run paper-faithful and AIRI-executable as separate labeled paths",
+      "paper_vs_airi_notes": "Default AIRI RDM is not this figure. Window, filter, pairs, inference all differ (D5\u2013D8).",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig14-meg-tool",
+      "figure": "Figure 14",
+      "panel": "a\u2013c",
+      "section": "4.2.2",
+      "title": "MEG tool-specific ReDisCA (entire epoch)",
+      "dataset": "same as fig13",
+      "rdm": "Fig. 12b tool (AIRI name 'tool')",
+      "time_window": "same paper vs AIRI split as fig13",
+      "preprocessing": "same paper vs AIRI split as fig13",
+      "algorithm_variant": "same dual path as fig13",
+      "metric": "comp1 210 ms occipito-parietal / left central sulcus; comp2 later mid-occipital left parietal; comp3 ~240 ms bilateral sensory-motor, right-prevalent",
+      "statistical_test": "same as fig13",
+      "n_monte_carlo": {
+        "airi_spoc_B": 1000,
+        "airi_timecourse_Nmc": 100
+      },
+      "expected": "Tool responses at 210 ms then later dorsal/motor, matching Kozunov IPS/VPM/MTp timing qualitatively.",
+      "sources_needed": [
+        "same as fig13"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative",
+        "numeric"
+      ],
+      "evidence": {
+        "paper": "Fig. 14",
+        "airi": "RDM='tool'"
+      },
+      "status_guess": "not yet reproduced; dual path required",
+      "paper_vs_airi_notes": "AIRI default is not this RDM.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig15-meg-meaning",
+      "figure": "Figure 15",
+      "panel": "a\u2013c",
+      "section": "4.2.2",
+      "title": "MEG meaningful vs meaningless ReDisCA (entire epoch)",
+      "dataset": "same as fig13",
+      "rdm": "Fig. 12c meaning (AIRI name 'meaning')",
+      "time_window": "same paper vs AIRI split as fig13",
+      "preprocessing": "same paper vs AIRI split as fig13",
+      "algorithm_variant": "same dual path as fig13",
+      "metric": "comp1 from 160 ms occipito-parietal (ventral); comp2 dorsal; comp3 182 ms and 675 ms focal mid-parietal",
+      "statistical_test": "same as fig13",
+      "n_monte_carlo": {
+        "airi_spoc_B": 1000,
+        "airi_timecourse_Nmc": 100
+      },
+      "expected": "Meaningful vs nonsense differentiation from 160 ms, earlier than N170 EEG 400 ms result.",
+      "sources_needed": [
+        "same as fig13"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative",
+        "numeric"
+      ],
+      "evidence": {
+        "paper": "Fig. 15",
+        "airi": "RDM='meaning'"
+      },
+      "status_guess": "not yet reproduced; dual path required",
+      "paper_vs_airi_notes": "AIRI default is not this RDM.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig16-meg-nonbinary-rdm",
+      "figure": "Figure 16",
+      "panel": "a,b",
+      "section": "4.2.2",
+      "title": "Non-binary MEG RDM imposing face/tool opposite sides of nonsense",
+      "dataset": "same 6 MEG subcategories",
+      "rdm": "within-category similar; d(face,tool) > d(face,nons)=d(tool,nons). AIRI facevstool uses 0.1 / 1 / 0.5.",
+      "time_window": null,
+      "preprocessing": null,
+      "algorithm_variant": null,
+      "metric": null,
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "Geometry cartoon (b) matches matrix (a). This is AIRI's default RDM.",
+      "sources_needed": [
+        "paper Fig 16",
+        "AIRI D facevstool"
+      ],
+      "classes": [
+        "visual/qualitative"
+      ],
+      "evidence": {
+        "paper": "Fig. 16",
+        "airi": "ThRDMArr(2)='facevstool'"
+      },
+      "status_guess": "visual/qualitative; AIRI numeric matrix is the executable target",
+      "paper_vs_airi_notes": "AIRI default. Paper figure values not printed; AIRI 0.1/0.5/1 is the only numeric source.",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig17-meg-nonbinary-components",
+      "figure": "Figure 17",
+      "panel": "three components",
+      "section": "4.2.2",
+      "title": "MEG non-binary RDM components (lowest p), order returned by ReDisCA",
+      "dataset": "same as fig13",
+      "rdm": "Fig. 16 / AIRI facevstool",
+      "time_window": "paper entire epoch vs AIRI 99\u2013999 ms",
+      "preprocessing": "paper none vs AIRI 0.25\u201320 Hz",
+      "algorithm_variant": "paper-faithful vs AIRI default executable path",
+      "metric": "comp1 tools vs faces from 202 ms left parietal/SM; comp2 visual/FG-like late tools; comp3 face peak ~160 ms",
+      "statistical_test": "three lowest component p-values; paper FWER time asterisks",
+      "n_monte_carlo": {
+        "airi_spoc_B": 1000,
+        "airi_timecourse_Nmc": 100
+      },
+      "expected": "Matches Kozunov Fig 3 tool timing at 202 ms. Face and tool traces on opposite sides of nonsense.",
+      "sources_needed": [
+        "same as fig13",
+        "AIRI default RDM"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "visual/qualitative",
+        "numeric"
+      ],
+      "evidence": {
+        "paper": "Fig. 17",
+        "airi": "default RDM facevstool"
+      },
+      "status_guess": "not yet reproduced; this is the closest paper figure to an unmodified AIRI run, but window/filter/pairs/inference still differ",
+      "paper_vs_airi_notes": "Closest AIRI default correspondence, still not identical (D1,D2,D5,D6,D8).",
+      "blocked_reason": null
+    },
+    {
+      "id": "fig18-meg-music",
+      "figure": "Figure 18",
+      "panel": "cortical views A/P/S/L/R",
+      "section": "4.2.2 / Eq. 14",
+      "title": "MUSIC scan of Fig. 17 representational dissimilarity subspace",
+      "dataset": "subject AD individual MRI forward model (Kozunov 2018 / Brainstorm overlapping spheres)",
+      "rdm": "Fig. 16 subspace spanned by Fig. 17 topographies",
+      "time_window": "n/a (scan on patterns)",
+      "preprocessing": "forward model from individual MRI; public Gain+tess on OSF 8rk67",
+      "algorithm_variant": "paper Eq. 14 subspace correlation, free-orientation dipole vs A_K. AIRI default is constrained sLORETA of A1(:,4), not this.",
+      "metric": "first principal angle / subcorr(g_m, A_K); claimed right FG, right insula, left IPS, anterior central gyrus",
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "Qualitative involvement of those regions. Visual cortical maps.",
+      "sources_needed": [
+        "headmodel_surf_os_meg.mat",
+        "tess_cortex_pial_low.mat",
+        "Fig 17 patterns from a local fit",
+        "paper Eq. 14"
+      ],
+      "classes": [
+        "source-model-dependent",
+        "visual/qualitative",
+        "preprocessing-dependent"
+      ],
+      "evidence": {
+        "paper": "Fig. 18, Eq. 14",
+        "airi": "music branch exists but default is precomp sLORETA of component 4"
+      },
+      "status_guess": "not yet reproduced; do not treat AIRI precomp maps as Fig 18",
+      "paper_vs_airi_notes": "AIRI default method/topography/index vector all differ (D15). Public tess+Gain are AD 5002 overlapping spheres \u2014 likely the Kozunov model, individual T1 not released.",
+      "blocked_reason": "Individual MRI volume not on OSF; tess+Gain are sufficient for a MUSIC scan on this mesh if patterns are computed locally. Blocked only if a track requires rebuilding Gain from MRI."
+    },
+    {
+      "id": "airi-executable-meg-facevstool",
+      "figure": "AIRI-executable (not a paper figure id)",
+      "panel": null,
+      "section": "AIRI main script",
+      "title": "Unmodified AIRI MEG sensor-space run (default facevstool)",
+      "dataset": "OSF 8rk67 MEG_AD_run1 + SPM labels",
+      "rdm": "AIRI facevstool 6\u00d76 (0.1/0.5/1)",
+      "time_window": "MATLAB 600:1500 \u2192 99\u2013999 ms (901 samples)",
+      "preprocessing": "butter(3) 0.25\u201320 Hz filtfilt; 204 planars; directed pairs; MATLAB cov",
+      "algorithm_variant": "stock SPoC n_bootstrapping_iterations=1000 random-phase",
+      "metric": "W,A,lambda,p_values; first four components plotted",
+      "statistical_test": "SPoC p=count(max|lambda_s|>=|lambda|)/1000; timecourse Nmc=100 half-split",
+      "n_monte_carlo": 1000,
+      "expected": "An AIRI-executable reconstruction, separately labeled from paper Figs 13\u201317. OSF topo A1 is 204\u00d767 (rank-truncated).",
+      "sources_needed": [
+        "AIRI main script",
+        "stock SPoC",
+        "MEG files",
+        "source_faithful.py"
+      ],
+      "classes": [
+        "stochastic",
+        "preprocessing-dependent",
+        "numeric"
+      ],
+      "evidence": {
+        "airi": "Redisca_tools_faces_3_random_norm_correct.m defaults"
+      },
+      "status_guess": "not yet reproduced (no MATLAB in this environment; Python source-faithful is the intended substitute)",
+      "paper_vs_airi_notes": "This path is AIRI, not paper. Do not drop it in paper/results/meg without an airi_executable label.",
+      "blocked_reason": null
+    },
+    {
+      "id": "airi-source-loc-precomp",
+      "figure": "AIRI-executable source loc",
+      "panel": null,
+      "section": "AIRI source-loc script",
+      "title": "AIRI default sLORETA map of saved A1(:,4)",
+      "dataset": "OSF topo_face_vs_tool_correct_filt15 + sLORETA kernel + tess",
+      "rdm": "whatever produced the saved A1 (filename says face vs tool / filt15)",
+      "time_window": "n/a",
+      "preprocessing": "constrained sLORETA MEG ALL kernel; megplanarbst = MAG+firstGRAD index set on 306-ch kernel",
+      "algorithm_variant": "method='precomp'",
+      "metric": "abs(W*topo) on 5002 vertices",
+      "statistical_test": null,
+      "n_monte_carlo": null,
+      "expected": "A cortical map that is not Fig 18. Author-saved A1 is not produced by the committed script (return before save).",
+      "sources_needed": [
+        "AIRI source-loc script",
+        "three OSF source-model files",
+        "topo mat"
+      ],
+      "classes": [
+        "source-model-dependent",
+        "visual/qualitative",
+        "currently blocked"
+      ],
+      "evidence": {
+        "airi": "Redisca_source_loc_for_tools_faces_3_random_.m"
+      },
+      "status_guess": "blocked / not Fig 18: missing show_on_cortex; MAG/GRAD index hazard; saved topo not generated by committed script",
+      "paper_vs_airi_notes": "D15, D17.",
+      "blocked_reason": "show_on_cortex not in repo; topo file is a pre-saved author artifact (filt15 unexplained); default is not paper MUSIC."
+    }
+  ],
+  "discrepancies": [
+    {
+      "id": "D1",
+      "topic": "pair set",
+      "paper": "unique upper triangle i<j (Table 1, Eq. 6\u20137); Eq. 5 sloppy",
+      "airi": "directed i!=j (30 pairs for C=6)",
+      "stock_spoc": "sees n_epochs as given",
+      "python_library": "unique i<j",
+      "notes": "Symmetric D: Cxx unchanged; z and lambda scale via sample SD N-1. Filters stay on the same rays."
+    },
+    {
+      "id": "D2",
+      "topic": "pair matrix",
+      "paper": "unscaled Gram, no demean, no 1/(T-1)",
+      "airi": "MATLAB cov of (Xi-Xj)' : demean + /(T-1)",
+      "stock_spoc": "cov(X_e) per epoch",
+      "python_library": "demean_time default True, omits 1/(T-1)",
+      "notes": "1/(T-1) cancels in GEP. Demeaning does not."
+    },
+    {
+      "id": "D3",
+      "topic": "target std",
+      "paper": "standardized d-tilde, sample vs population unspecified",
+      "airi": "SPoC z-score",
+      "stock_spoc": "MATLAB std, divisor N-1",
+      "python_library": "ddof=1",
+      "notes": "Same sample-SD convention. Not a bug. Duplication still changes N."
+    },
+    {
+      "id": "D4",
+      "topic": "aggregation of R_bar_d",
+      "paper": "Eq. 7 SUM (prose says average)",
+      "airi": "SPoC create_Cxxz / Ne",
+      "stock_spoc": "weighted mean",
+      "python_library": "np.mean",
+      "notes": "Scale-only for filter directions; lambda and p(lambda) change."
+    },
+    {
+      "id": "D5",
+      "topic": "component inference",
+      "paper": "permute condition labels; p=fraction surrogate lambda exceeds original; B unspecified",
+      "airi": "spoc n_bootstrapping_iterations=1000",
+      "stock_spoc": "random-phase z, null max|lambda|, p=count/B (0 possible); randperm commented out",
+      "python_library": "no inference",
+      "notes": "AIRI uses stock SPoC bootstrap, not paper permutation."
+    },
+    {
+      "id": "D5b",
+      "topic": "MEG time-series inference",
+      "paper": "permute subcategory labels of epochs; surrogate averages; FWER max-stat over time",
+      "airi": "Nmc=100 half-split of pooled class trials on channel-std data; pointwise pplus/pminus",
+      "stock_spoc": "not involved",
+      "python_library": "not involved",
+      "notes": "Second, independent discrepancy from D5."
+    },
+    {
+      "id": "D6",
+      "topic": "MEG window",
+      "paper": "entire 1500 ms, 204\u00d71500, \u2212500\u2026+1000 ms",
+      "airi": "trange=600:1500 on 1501 samples \u2192 99\u2013999 ms (901 samples)",
+      "stock_spoc": "uses whatever T AIRI passes",
+      "python_library": "uses whatever T the caller passes",
+      "notes": "Data file is 1501 samples not 1500. AIRI linspace(-536,964) plot axis is wrong."
+    },
+    {
+      "id": "D7",
+      "topic": "AIRI default RDM",
+      "paper": "Fig 12 face/tool/meaning then Fig 16 non-binary",
+      "airi": "ThRDMArr(2)='facevstool' 0.1/0.5/1",
+      "stock_spoc": "n/a",
+      "python_library": "n/a",
+      "notes": "Default is Fig-16-like, not Fig 12a. Within-category 0.1 not 0."
+    },
+    {
+      "id": "D8",
+      "topic": "MEG bandpass",
+      "paper": "none stated beyond Kozunov/tSSS averaging",
+      "airi": "butter(3,[0.25,20]/500) filtfilt per trial",
+      "stock_spoc": "assumes X already filtered",
+      "python_library": "none",
+      "notes": "Must label paper-faithful vs AIRI-executable MEG."
+    },
+    {
+      "id": "D9",
+      "topic": "patterns",
+      "paper": "A=W^{-1} if full rank",
+      "airi": "SPoC Haufe A=Cxx*W/(W'*Cxx*W); MEG rank 67",
+      "stock_spoc": "Haufe",
+      "python_library": "Haufe",
+      "notes": "Use Haufe for all executable paths."
+    },
+    {
+      "id": "D11",
+      "topic": "N170 ICA count",
+      "paper": "three ICA components ocular+cardiac",
+      "airi": "no N170 code",
+      "stock_spoc": "n/a",
+      "python_library": "n/a",
+      "notes": "ERP CORE subject 1 removes components 2 and 7 only. Scripts say ocular."
+    },
+    {
+      "id": "D15",
+      "topic": "source localization",
+      "paper": "Fig 18 MUSIC of Fig 17 subspace, free orientation, individual MRI",
+      "airi": "default precomp sLORETA of A1(:,4); megplanarbst MAG+firstGRAD indices",
+      "stock_spoc": "n/a",
+      "python_library": "no MUSIC",
+      "notes": "Do not equate AIRI default maps with Fig 18."
+    },
+    {
+      "id": "D17",
+      "topic": "saved topo artifact",
+      "paper": "n/a",
+      "airi": "return before save topo_*; OSF file named filt15",
+      "stock_spoc": "n/a",
+      "python_library": "n/a",
+      "notes": "Author-saved A1 is not an output of running the committed script as-is."
+    }
+  ],
+  "n170_notes": {
+    "dataset": "ERP CORE N170, OSF pfde9, Kappenman et al. 2021",
+    "subject": "folder/index '1' (not BIDS sub-001)",
+    "n_subjects_in_dataset": 40,
+    "conditions": [
+      "faces",
+      "cars",
+      "scrambled faces",
+      "scrambled cars"
+    ],
+    "bins_correct_only": true,
+    "paper_ica_claim": "three components ocular+cardiac",
+    "erpcore_subject_1_ica": [
+      2,
+      7
+    ],
+    "ica_xlsx_sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+    "subject_1_accepted_trials": {
+      "total": 191,
+      "faces": 52,
+      "cars": 38,
+      "scrambled_faces": 49,
+      "scrambled_cars": 52
+    },
+    "epoch_ms": [
+      -200,
+      800
+    ],
+    "fs_hz_after_resample": 256,
+    "sliding_T_ms_meaning": 150,
+    "sliding_step_ms": null,
+    "face_window": "T=100 ms centered at 200 ms",
+    "car_window": "applied at t=170 ms; duration not restated",
+    "reported_rdm_corr": {
+      "face": 0.82,
+      "car": ">0.99"
+    },
+    "airi_code": false,
+    "preferred_erp_file": "N170 All Data and Scripts/1/1_N170_erp_ar.erp"
+  },
+  "meg_notes": {
+    "dataset": "Kozunov 2018 first run subject AD",
+    "osf": "https://osf.io/8rk67/",
+    "file_shape_matlab": [
+      207,
+      1501,
+      880
+    ],
+    "planars": 204,
+    "fs_hz": 1000,
+    "true_time_ms": [
+      -500,
+      1000
+    ],
+    "paper_matrix": "204 x 1500",
+    "subcategories": [
+      "face1",
+      "face2",
+      "tool1",
+      "tool2",
+      "nons1",
+      "nons2"
+    ],
+    "epochs_per_subcategory": 80,
+    "paper_window": "entire 1500 ms",
+    "airi_trange_1based": [
+      600,
+      1500
+    ],
+    "airi_window_ms": [
+      99,
+      999
+    ],
+    "airi_n_samples": 901,
+    "airi_filter": {
+      "butter_order": 3,
+      "low_hz": 0.25,
+      "high_hz": 20.0,
+      "filtfilt": true
+    },
+    "airi_default_rdm": "facevstool",
+    "airi_n_directed_pairs": 30,
+    "airi_spoc_B": 1000,
+    "airi_timecourse_Nmc": 100,
+    "paper_timeseries_test": "permute subcategory labels; FWER max over time"
+  },
+  "simulation_notes": {
+    "T_ms": 200,
+    "source_lpf": "6th-order Butterworth 2 Hz",
+    "single_source_C": 5,
+    "multi_source_P": 4,
+    "multi_source_C_methods": 6,
+    "fig5_C_conflict": "caption C=6, body C=5",
+    "fig6_C": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "n_monte_carlo": 100,
+    "r_max_m": 0.01,
+    "sigma_delta": "0.15 ||g||",
+    "n_one_over_f_sources": 1000,
+    "min_source_separation_m": 0.02,
+    "snr_fig4": {
+      "high_preprint_overlay": 0.2,
+      "low_published": 0.1
+    },
+    "snr_fig5": {
+      "high_preprint_overlay": 0.4,
+      "low_body": 0.2
+    },
+    "I_c": null,
+    "fs": null,
+    "forward_model": "unspecified; only public candidate is AD tess_cortex_pial_low + overlapping-spheres Gain",
+    "airi_code": false,
+    "blocked": true
+  },
+  "localization_notes": {
+    "paper_fig18": "MUSIC Eq. 14 of Fig 17 subspace, free orientation, individual MRI (Kozunov 2018)",
+    "public_mesh": "tess_cortex_pial_low 5002 vertices subject AD",
+    "public_gain": "headmodel_surf_os_meg Gain (322, 15006) overlapping spheres",
+    "public_kernel": "constrained sLORETA ImagingKernel (5002, 306), nComponents=1, MEG ALL",
+    "airi_default": "precomp abs(W*A1(:,4)) with megplanarbst=sort([1:3:304 2:3:305])",
+    "airi_music_branch": "exists, not default, still uses single topography A1(:,4)",
+    "missing": [
+      "show_on_cortex.m",
+      "individual T1",
+      "Brainstorm channel.mat",
+      "committed script does not save A1"
+    ],
+    "index_hazard": "megplanarbst is MAG+first GRAD of Neuromag triplets if applied to 306-ch kernel; sensor data 1:204 are already both planars"
+  }
+}
