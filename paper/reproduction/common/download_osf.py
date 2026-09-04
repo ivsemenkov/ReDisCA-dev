@@ -46,7 +46,7 @@ OSF_8RK67_FILES: dict[str, dict[str, Any]] = {
         "note": "Author-saved A1; not a substitute for a local SPoC run",
     },
     "headmodel_surf_os_meg.mat": {
-        "download": "https://osf.io/download/8rk67/",
+        "download": "https://osf.io/download/2afzg/",
         "sha256": "a365912cae29c3ddda7be90b4bb3830f4ce081e7d4de1206d0c1406985ec439c",
         "size_bytes": 35957600,
         "dest_dir": "source_models",
@@ -54,21 +54,21 @@ OSF_8RK67_FILES: dict[str, dict[str, Any]] = {
         "lookup_name": "headmodel_surf_os_meg.mat",
     },
     "results_sLORETA_MEG_GRAD_MEG_MAG_KERNEL_150924_1824.mat": {
-        "download": None,
+        "download": "https://osf.io/download/673e19715cbaa22c0a75e832/",
         "sha256": "794043eb34f588a14186b297721d78e71ac9a08187938f611bdf0a0e0a92a1d3",
         "size_bytes": 13203960,
         "dest_dir": "source_models",
         "required_for": ["source_localization"],
     },
     "tess_cortex_pial_low.mat": {
-        "download": None,
+        "download": "https://osf.io/download/673e1974b0f7255a4475e61b/",
         "sha256": "40502997c4c21d89a4c7ea207ab77c1c458a005d74e7cb78e6e0e2beb578cad1",
         "size_bytes": 481530,
         "dest_dir": "source_models",
         "required_for": ["source_localization"],
     },
     "ibfctfprespm8_AD_run1_raw_tsss_mc.dat": {
-        "download": None,
+        "download": "https://osf.io/download/352dp/",
         "sha256": "d609567ff25eb88055fa26713d7debc4a6c359770835c148fe358bcb97c408e8",
         "size_bytes": 1093688640,
         "dest_dir": "meg",
@@ -91,7 +91,11 @@ def _dest_dir(name: str) -> Path:
 
 
 def _osf_catalog() -> dict[str, dict[str, Any]]:
-    with urllib.request.urlopen(OSF_8RK67_API, timeout=60) as response:
+    request = urllib.request.Request(
+        OSF_8RK67_API,
+        headers={"User-Agent": "ReDisCA-paper-reproduction/1.0"},
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
         payload = json.loads(response.read().decode("utf-8"))
     catalog = {}
     for item in payload.get("data", []):
@@ -108,7 +112,10 @@ def _osf_catalog() -> dict[str, dict[str, Any]]:
 def download_file(url: str, dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-    with urllib.request.urlopen(url, timeout=600) as response, tmp.open("wb") as handle:
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "ReDisCA-paper-reproduction/1.0"}
+    )
+    with urllib.request.urlopen(request, timeout=600) as response, tmp.open("wb") as handle:
         while True:
             chunk = response.read(1024 * 1024)
             if not chunk:
