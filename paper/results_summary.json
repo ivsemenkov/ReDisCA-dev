@@ -1,0 +1,669 @@
+{
+  "paper": {
+    "citation": "Ossadtchi, A., Semenkov, I., Zhuravleva, A., Kozunov, V., Serikov, O., & Voloshina, E. (2024). Representational dissimilarity component analysis (ReDisCA). NeuroImage, 301, 120868.",
+    "doi": "10.1016/j.neuroimage.2024.120868",
+    "evidence_commit": "0a2d9ed",
+    "library_commit": "5a5c8658452172e4011445c9a394c1cbbd3c5f7e",
+    "airi_commit": "15bc19cdc76989da202714b257f6de4d26a42c51",
+    "spoc_commit": "18e4754aec1411160fd5b7ef0db852f1e0a87d90"
+  },
+  "review": {
+    "reviewer": "integration",
+    "date_utc": "2026-09-04",
+    "matlab_parity_claimed": false,
+    "source_faithful_imports_redisca": false,
+    "student_code_used_as_oracle": false,
+    "hidden_parameter_tuning": false,
+    "paper_airi_path_mixing_in_figures": false,
+    "canonical_library_bug": false,
+    "canonical_library_note": "D1-D9 are documented design differences (unique pairs, optional demean, mean aggregation, no inference, Haufe). Default demean_time=True is not the printed Gram; paper-faithful fits set False. Target SD ddof=1 matches MATLAB (D3), not a bug.",
+    "any_paper_figure_reproduced_numerically": false,
+    "status_vocabulary": [
+      "reproduced numerically",
+      "reproduced qualitatively",
+      "approximate",
+      "blocked by missing source asset",
+      "paper/code discrepancy",
+      "stochastic mismatch",
+      "not yet reproduced"
+    ]
+  },
+  "qc": {
+    "n170_condition_order": ["faces", "cars", "scrambled_faces", "scrambled_cars"],
+    "meg_condition_order": ["face1", "face2", "tool1", "tool2", "nons1", "nons2"],
+    "n170_windows": {
+      "meaning_duration_ms": 150,
+      "sliding_step_ms": 25,
+      "sliding_step_in_paper": false,
+      "face": "T=100 ms centered at 200 ms",
+      "car": "T=100 ms centered at 170 ms (duration not restated in paper)"
+    },
+    "meg_windows": {
+      "paper_faithful_ms": [-500, 1000],
+      "paper_faithful_n_times": 1501,
+      "airi_executable_ms": [99, 999],
+      "airi_executable_n_times": 901
+    },
+    "n170_permutation_floors": {
+      "meaning_2_2": 0.3333333333333333,
+      "face_or_car_one_vs_three": 0.25,
+      "note": "Paper Fig.7 p<0.05 and Fig.11 p<0.01 are incompatible with exact condition-label permutation of C=4 averages."
+    },
+    "meg_sign_subspace": {
+      "comparison_file": "paper/results/meg/comparison/paper_vs_airi.json",
+      "signs_aligned_before_pearson": true,
+      "face_filter_pearson_c1c3": [0.4202520023059674, 0.2438571267800279, 0.17751238081817816],
+      "tool_filter_subspace_min_cosine": 0.009452567989432354,
+      "note": "Low cosine is a real path disagreement (D2+D6+D8), not a sign-alignment bug."
+    },
+    "seeds": {
+      "n170": 20240904,
+      "simulations_master": 20240904,
+      "simulations_secondary": 20240915,
+      "meg_cli": 20240904,
+      "meg_streams": "permutation seed+1, FWER seed+2, AIRI seed+3, pair-order seed+10",
+      "source_loc_permutation": 20240915
+    }
+  },
+  "items": [
+    {
+      "id": "table1-spoc-correspondence",
+      "figure": "Table 1",
+      "status": "reproduced qualitatively",
+      "path": "library",
+      "quantitative_metrics_vs_paper": null,
+      "blocked_reasons": [],
+      "inference": "library has no p-values",
+      "canonical_library_issues": "Haufe not invert-W (D9); unique pairs not directed (D1)",
+      "evidence": "paper/reproduction_manifest.md"
+    },
+    {
+      "id": "fig01-source-space-rsa-diagrams",
+      "figure": "Fig. 1",
+      "status": "reproduced qualitatively",
+      "path": "methods_diagram",
+      "quantitative_metrics_vs_paper": null,
+      "blocked_reasons": [],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/reproduction/simulations/rsa_baselines.py"
+    },
+    {
+      "id": "fig02-redisca-diagram",
+      "figure": "Fig. 2",
+      "status": "reproduced qualitatively",
+      "path": "methods_diagram",
+      "quantitative_metrics_vs_paper": null,
+      "blocked_reasons": [],
+      "inference": null,
+      "canonical_library_issues": "invert-W undefined at MEG rank 68",
+      "evidence": "paper/reproduction_manifest.md"
+    },
+    {
+      "id": "fig03-sim-four-source-rdms",
+      "figure": "Fig. 3",
+      "status": "approximate",
+      "path": "library",
+      "quantitative_metrics_vs_paper": {
+        "paper": "visual exemplar C=6 P=4 RDMs; not a fixed matrix",
+        "this_run": "exemplar written; stochastic"
+      },
+      "blocked_reasons": [
+        "unnamed forward model (D13)",
+        "Upsilon_d unspecified"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/simulations/fig03_rdms.json",
+      "runtime": "~108 min for the full simulations track (4 cores)"
+    },
+    {
+      "id": "fig04-single-source-roc",
+      "figure": "Fig. 4a,c",
+      "status": "approximate",
+      "path": "library",
+      "quantitative_metrics_vs_paper": {
+        "paper_hit_rate_snr_0.1": "~85% hit at ~0 FA",
+        "redisca_demean_false_snr_0.1": {
+          "auc": 0.8740012341317527,
+          "tpr_at_fpr_0": 0.0,
+          "tpr_at_fpr_0.01": 0.3811092806150467,
+          "median_error_cm": 0.86
+        },
+        "redisca_demean_true_snr_0.1_extra": {
+          "auc": 0.49949084520152726,
+          "tpr_at_fpr_0": 0.0
+        },
+        "mne_st_snr_0.1_auc": 0.6933451864343433,
+        "redisca_demean_false_snr_0.2_preprint": {
+          "auc": 0.880212518742328,
+          "tpr_at_fpr_0": 0.002324230098779779,
+          "tpr_at_fpr_0.01": 0.39744334689134225
+        },
+        "secondary_seed_20mc_auc": 0.845,
+        "hit_rate_recovered": false,
+        "ranking_redisca_above_rsa": true
+      },
+      "blocked_reasons": [
+        "blocked by missing source asset: unnamed mesh / Gain",
+        "I_c=40 assumed",
+        "fs_hz=1000 assumed",
+        "Upsilon_d assumed",
+        "1/f recipe assumed"
+      ],
+      "inference": null,
+      "canonical_library_issues": "demean_time=True extra is near chance on 2 Hz ERPs; not a bug, not the paper Gram",
+      "evidence": "paper/results/simulations/fig04_roc.json",
+      "tuned": false
+    },
+    {
+      "id": "fig04-single-source-traces",
+      "figure": "Fig. 4b,d",
+      "status": "approximate",
+      "path": "library",
+      "quantitative_metrics_vs_paper": {
+        "paper": "visual noisy/clean ERPs + RDM inset"
+      },
+      "blocked_reasons": [
+        "blocked by missing source asset: unnamed mesh / Gain"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/simulations/fig04_traces.json"
+    },
+    {
+      "id": "fig05-four-source-mc",
+      "figure": "Fig. 5",
+      "status": "approximate",
+      "path": "library",
+      "quantitative_metrics_vs_paper": {
+        "paper": "ReDisCA most mass <1 cm",
+        "redisca_mean_median_cm": {
+          "snr_0.4_C5": 4.1404365694735725,
+          "snr_0.4_C6": 3.7714314806263443,
+          "snr_0.2_C5": 3.847108919376472,
+          "snr_0.2_C6": 3.5551878286808765
+        },
+        "redisca_frac_lt_1cm": {
+          "snr_0.4_C5": 0.2325,
+          "snr_0.4_C6": 0.2425,
+          "snr_0.2_C5": 0.25,
+          "snr_0.2_C6": 0.2625
+        },
+        "largest_mass_lt_1cm_recovered": false,
+        "C_choice": "both C=5 and C=6 from the same C=6 draws (D14)"
+      },
+      "blocked_reasons": [
+        "blocked by missing source asset: unnamed mesh / Gain",
+        "Fig. 5 caption C=6 vs body C=5 (D14)"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/simulations/fig05_four_source.json"
+    },
+    {
+      "id": "fig06-error-vs-C",
+      "figure": "Fig. 6",
+      "status": "approximate",
+      "path": "library",
+      "quantitative_metrics_vs_paper": {
+        "paper": "ReDisCA best; mean median <2 cm at C=6",
+        "snr_assumed": 0.2,
+        "redisca_mean_median_cm": {
+          "3": 5.422313588673066,
+          "4": 4.318046788430127,
+          "5": 4.130739311672399,
+          "6": 3.3598883157717014
+        },
+        "frac_lt_2cm_C6": 0.4825,
+        "less_than_2cm_at_C6_recovered": false,
+        "redisca_best_at_every_C": true
+      },
+      "blocked_reasons": [
+        "blocked by missing source asset: unnamed mesh / Gain",
+        "Fig. 6 SNR unspecified (assumed 0.2)"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/simulations/fig06_error_vs_C.json"
+    },
+    {
+      "id": "fig07-n170-meaning-pmap",
+      "figure": "Fig. 7",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "uncorrected p<0.05 around t=400 ms, occipital",
+        "p_exact24_at_400ms": 0.3333333333333333,
+        "p_strict_greater_at_400ms": 0.0,
+        "rdm_corr_window_at_400ms": 0.9998054976368955,
+        "max_abs_channel_at_400ms": "PO8",
+        "occipital_energy_fraction_at_400ms": 0.6098100580699337,
+        "n_windows_p_lt_0.05": 0,
+        "sliding_step_ms": 25.0
+      },
+      "blocked_reasons": [
+        "sliding step not printed (25 ms documented)",
+        "unpublished permutation B / p formula"
+      ],
+      "inference": "paper condition-label permutation, exact 24, P(lambda* >= lambda). Meaning 2-2 partition floor 8/24. SPoC random-phase exploratory p=0.547 at 400 ms (also not p<0.05).",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/n170/fig07_meaning_pmap.json"
+    },
+    {
+      "id": "fig08-n170-meaning-patterns",
+      "figure": "Fig. 8",
+      "status": "reproduced qualitatively",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "three adjacent windows ~400 ms",
+        "centers_ms": [375.0, 400.0, 425.0],
+        "rdm_corr_window": [0.9998129121047074, 0.9998054976368955, 0.999905197614563],
+        "max_abs_channel": ["PO4", "PO8", "Oz"],
+        "p_exact24": 0.3333333333333333
+      },
+      "blocked_reasons": [
+        "sliding step not printed"
+      ],
+      "inference": "same C=4 floor as Fig. 7; this figure is patterns/traces, not the p-map",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/n170/fig08_meaning_windows.json"
+    },
+    {
+      "id": "fig09-n170-face-car-rdms",
+      "figure": "Fig. 9",
+      "status": "reproduced qualitatively",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "4x4 theoretical RDMs as images; 0/1 structure from prose",
+        "binary_encoded": true,
+        "within_0.1_zscore_equivalent": true
+      },
+      "blocked_reasons": [
+        "numeric fill not printed"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/n170/fig09_rdms.json"
+    },
+    {
+      "id": "fig10-n170-face",
+      "figure": "Fig. 10",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper_rdm_corr": 0.82,
+        "observed_rdm_corr_window": 0.9998814542043535,
+        "observed_rdm_corr_full_epoch": 0.9446641853385273,
+        "paper_n_significant": 1,
+        "observed_n_p_lt_0.05_exact24": 0,
+        "p_exact24_comp0": 0.75,
+        "p_mc_B1000_comp0": 0.741,
+        "paper_face_burst_ms": 170,
+        "observed_faces_peak_ms": 171.875,
+        "max_abs_channel": "P7",
+        "occipital_energy_fraction": 0.5315590816601398,
+        "tuned_toward_0.82": false
+      },
+      "blocked_reasons": [
+        "unpublished permutation B",
+        "channel list unnamed; P9/P10 absent from official ERP"
+      ],
+      "inference": "exact-24 condition-label P(lambda* >= lambda)=0.75. Random-phase exploratory p=0.000 is D5, not the paper N170 test.",
+      "canonical_library_issues": "GEP on 28 ch x ~26 samples can match a 6-entry two-level RDM almost perfectly; not treated as a library bug",
+      "evidence": "paper/results/n170/fig10_face.json"
+    },
+    {
+      "id": "fig11-n170-car",
+      "figure": "Fig. 11",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper_rdm_corr": ">0.99",
+        "observed_rdm_corr_window_comp0": 0.9999190189565106,
+        "observed_rdm_corr_window_comp1": 0.9996781244822817,
+        "corr_meets_gt_0.99": true,
+        "paper_n_comps_p_lt_0.01": 2,
+        "observed_n_p_lt_0.01_exact24": 0,
+        "p_exact24_comp0_comp1": [0.25, 0.25],
+        "p_strict_greater_comp0_comp1": [0.0, 0.0],
+        "observed_cars_peak_ms_comp0": 136.71875,
+        "max_abs_channel_comp0_comp1": ["O1", "Pz"]
+      },
+      "blocked_reasons": [
+        "car-window duration not restated (100 ms used)"
+      ],
+      "inference": "exact-24 floor 6/24=0.25; paper p<0.01 unreachable. Strict-'exceeds' p=0 for comps 1-2 (uniquely best detector) is stored as an extra reading, not used to claim significance.",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/n170/fig11_car.json"
+    },
+    {
+      "id": "fig12-meg-theoretical-rdms",
+      "figure": "Fig. 12",
+      "status": "reproduced qualitatively",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "face / tool / meaning theoretical RDMs as images",
+        "emitted": ["binary 0/1", "AIRI 0.1/1"]
+      },
+      "blocked_reasons": [
+        "exact 0 vs 0.1 fill unreadable from figures"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/paper_faithful/fig12_theoretical_rdms.json",
+      "note": "AIRI default is facevstool (Fig. 16), not Fig. 12a (D7). Two-level 0 vs 0.1 identical after z-score."
+    },
+    {
+      "id": "fig13-meg-face",
+      "figure": "Fig. 13",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "three significant components; from 65 ms; peak 160 ms; again from 311 ms",
+        "paper_faithful": {
+          "eigenvalues_head": [0.8773291120521899, 0.7859658514095855, 0.690929955642079],
+          "p_maxabs": [0.0, 1.0, 1.0],
+          "empirical_rdm_pearson_comp1": 0.9994606192824319,
+          "fwer_onset_ms_comp1": 107.0,
+          "contrast_peak_ms_comp1": 308.0,
+          "n_p_lt_0.05_maxabs": 1
+        },
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [0.006, 0.008, 0.014, 0.032],
+          "contrast_peak_ms_comp1": 319.0,
+          "overlap_mean_trace_peak_ms_comp1": 160.0
+        },
+        "three_significant_components_under_paper_test": false
+      },
+      "blocked_reasons": [
+        "FieldTrip / prepare4topoNMG helmet topographies missing",
+        "paper permutation B unspecified (used 500)"
+      ],
+      "inference": "paper_faithful: condition-label permutation, primary max|lambda| B=500, FWER time Nmc=200. AIRI: random-phase B=1000 (D5) and half-split Nmc=100 (D5b). Do not compare asterisks.",
+      "canonical_library_issues": null,
+      "evidence": {
+        "paper_faithful": "paper/results/meg/paper_faithful/fig13_face.json",
+        "airi_executable": "paper/results/meg/airi_executable/fig13_face.json",
+        "comparison": "paper/results/meg/comparison/paper_vs_airi.json"
+      }
+    },
+    {
+      "id": "fig14-meg-tool",
+      "figure": "Fig. 14",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "210 ms; three components implied",
+        "paper_faithful": {
+          "eigenvalues_head": [0.8572775946508424, 0.789106662143932, 0.7232611327600093],
+          "p_maxabs": [0.478, 1.0, 1.0],
+          "empirical_rdm_pearson_comp1": 0.9998890168922655,
+          "fwer_onset_ms_comp1": 165.0,
+          "contrast_peak_ms_comp1": 384.0
+        },
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [0.001, 0.003, 0.008, 0.01],
+          "contrast_peak_ms_comp1": 424.0
+        }
+      },
+      "blocked_reasons": [
+        "FieldTrip helmet topographies missing"
+      ],
+      "inference": "paper_faithful max|lambda| does not yield p<0.05 for any of the first three components",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/paper_faithful/fig14_tool.json"
+    },
+    {
+      "id": "fig15-meg-meaning",
+      "figure": "Fig. 15",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "from 160 ms",
+        "paper_faithful": {
+          "eigenvalues_head": [0.870068550975931, 0.7747401147009165, 0.7168806331445672],
+          "p_maxabs": [0.204, 1.0, 1.0],
+          "empirical_rdm_pearson_comp1": 0.9995852902580858,
+          "fwer_onset_ms_comp1": 128.0,
+          "contrast_peak_ms_comp1": 315.0
+        },
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [0.005, 0.012, 0.018, 0.026],
+          "contrast_peak_ms_comp1": 499.0
+        }
+      },
+      "blocked_reasons": [
+        "FieldTrip helmet topographies missing"
+      ],
+      "inference": "paper_faithful max|lambda| does not yield three p<0.05 components",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/paper_faithful/fig15_meaning.json"
+    },
+    {
+      "id": "fig16-meg-nonbinary-rdm",
+      "figure": "Fig. 16",
+      "status": "reproduced qualitatively",
+      "path": "airi_executable",
+      "quantitative_metrics_vs_paper": {
+        "paper": "non-binary geometry as images",
+        "airi_facevstool_fill": [0.1, 0.5, 1.0]
+      },
+      "blocked_reasons": [],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/paper_faithful/fig16_nonbinary_rdm.json",
+      "note": "AIRI default ThRDMArr(2); not Fig. 12a (D7)"
+    },
+    {
+      "id": "fig17-meg-nonbinary-components",
+      "figure": "Fig. 17",
+      "status": "paper/code discrepancy",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "tools vs faces from 202 ms; face-specific peak ~160 ms",
+        "paper_faithful": {
+          "eigenvalues_head": [0.83599407422755, 0.752597935799578, 0.6836016635573615],
+          "p_maxabs": [0.302, 1.0, 1.0],
+          "empirical_rdm_pearson_comp1": 0.9659650062147465,
+          "fwer_onset_ms_comp1": 113.0,
+          "contrast_peak_ms_comp1": 564.0
+        },
+        "airi_executable_not_paper_methods": {
+          "p_spoc": [0.016, 0.019, 0.028, 0.054],
+          "contrast_peak_ms_comp1": 321.0,
+          "class2_tools_peak_ms": 161.0
+        }
+      },
+      "blocked_reasons": [
+        "FieldTrip helmet topographies missing"
+      ],
+      "inference": "paper_faithful max|lambda| p=(0.302,1,1). AIRI random-phase first three p<0.05 is D5, not section 2.3.",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/paper_faithful/fig17_nonbinary_components.json"
+    },
+    {
+      "id": "airi-executable-meg-facevstool",
+      "figure": "not a paper figure",
+      "status": "approximate",
+      "path": "airi_executable",
+      "quantitative_metrics_vs_paper": {
+        "lambda_head": [0.8476544145094776, 0.8311743538745514, 0.8099339276131384, 0.7819994246805684],
+        "p_spoc": [0.016, 0.019, 0.028, 0.054],
+        "empirical_rdm_pearson_comp1": 0.9646308681575568
+      },
+      "blocked_reasons": [
+        "SciPy filtfilt / eigh / Generator are not MATLAB parity"
+      ],
+      "inference": "SPoC random-phase B=1000; pair-order diagnostic shows p moves with the accidental FFT of the length-30 z sequence",
+      "canonical_library_issues": null,
+      "evidence": "paper/results/meg/airi_executable/airi_executable_meg_facevstool.json",
+      "estimator": "common.source_faithful.fit_condition_averages (does not import redisca)"
+    },
+    {
+      "id": "fig18-meg-music",
+      "figure": "Fig. 18",
+      "status": "approximate",
+      "path": "paper_faithful",
+      "quantitative_metrics_vs_paper": {
+        "paper": "MUSIC of Fig. 17 subspace; qualitative right FG / right insula / left IPS / anterior central gyrus",
+        "peak_vertex_0based": 117,
+        "peak_vertex_1based_matlab": 118,
+        "subcorr": 0.82120811334584,
+        "Mindboggle": "cuneus L",
+        "Brodmann": "V2 L",
+        "scout_max_subcorr": {
+          "fusiform_R": 0.7535551059358746,
+          "insula_R": 0.7217829059658336,
+          "left_IPS": 0.5920393480874346
+        },
+        "paper_regions_are_argmax": false
+      },
+      "blocked_reasons": [
+        "blocked by missing source asset: individual T1 / rebuild of Gain",
+        "show_on_cortex / prepare4topoNMG / FieldTrip A/P/S/L/R views missing",
+        "paper permutation B unspecified (used 200)"
+      ],
+      "inference": "local facevstool ReDisCA(demean_time=False) full epoch; condition-label max|lambda| B=200 p=(0.325,1,1); three leading components used as the Fig. 17 analog, not claimed significant",
+      "canonical_library_issues": "Haufe (D9); invert-W undefined",
+      "evidence": "paper/results/source_localization/fig18_meg_music.json",
+      "fsaverage_used": false
+    },
+    {
+      "id": "airi-source-loc-precomp",
+      "figure": "not Fig. 18",
+      "status": "reproduced numerically",
+      "path": "airi_executable",
+      "quantitative_metrics_vs_paper": {
+        "formula": "abs(ImagingKernel[:, megplanarbst] @ A1[:, 3])",
+        "peak_vertex_0based": 394,
+        "Mindboggle": "lingual L",
+        "max_abs_Wa": 8.496596003180272e-11
+      },
+      "blocked_reasons": [
+        "visual screenshot blocked: show_on_cortex missing",
+        "topography is author-saved filt15 (D17), not a vanilla script save"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/source_localization/airi_source_loc_precomp.json",
+      "note": "Numeric map of the committed AIRI default. Not Fig. 18 MUSIC."
+    },
+    {
+      "id": "airi-music-literal-bug",
+      "figure": "not Fig. 18",
+      "status": "paper/code discrepancy",
+      "path": "airi_executable",
+      "quantitative_metrics_vs_paper": null,
+      "blocked_reasons": [
+        "committed MATLAB P=eye(size(Nsns,1)) is eye(1); dimension error"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/source_localization/airi_music_literal_bug.json"
+    },
+    {
+      "id": "airi-music-eye-Nsns-fix",
+      "figure": "not Fig. 18",
+      "status": "approximate",
+      "path": "airi_executable",
+      "quantitative_metrics_vs_paper": {
+        "peak_vertex_0based": 294,
+        "subcorr": 0.5761843662839256,
+        "Mindboggle": "lingual L"
+      },
+      "blocked_reasons": [
+        "nRAP=1 never deflates; still A1(:,4) only"
+      ],
+      "inference": null,
+      "canonical_library_issues": null,
+      "evidence": "paper/results/source_localization/airi_music_eye_nsns_fix.json"
+    }
+  ],
+  "track_self_report_deltas": [
+    {
+      "id": "fig08-n170-meaning-patterns",
+      "track": "ran",
+      "integration": "reproduced qualitatively",
+      "change": "upgrade of ran to qualitative (windows/patterns only)"
+    },
+    {
+      "id": "fig09-n170-face-car-rdms",
+      "track": "encoded",
+      "integration": "reproduced qualitatively",
+      "change": "upgrade of encoded to qualitative; not numeric fill"
+    },
+    {
+      "id": "fig11-n170-car",
+      "track": "ran; corr agrees >0.99",
+      "integration": "paper/code discrepancy",
+      "change": "downgrade vs reading the corr match as figure reproduction; two comps p<0.01 not recovered"
+    },
+    {
+      "id": "fig10-n170-face",
+      "track": "ran; report 0.99988 vs 0.82",
+      "integration": "paper/code discrepancy",
+      "change": "classified; not upgraded to qualitative despite 171.9 ms peak"
+    },
+    {
+      "id": "fig07-n170-meaning-pmap",
+      "track": "ran; p<0.05 not obtained",
+      "integration": "paper/code discrepancy",
+      "change": "classified, not upgraded"
+    },
+    {
+      "id": "fig12-meg-theoretical-rdms",
+      "track": "emitted",
+      "integration": "reproduced qualitatively",
+      "change": "upgrade of emitted"
+    },
+    {
+      "id": "fig16-meg-nonbinary-rdm",
+      "track": "emitted",
+      "integration": "reproduced qualitatively",
+      "change": "upgrade of emitted"
+    },
+    {
+      "id": "fig13-meg-face",
+      "track": "partial / AIRI numeric run complete",
+      "integration": "paper/code discrepancy",
+      "change": "downgrade of partial; AIRI path is approximate not paper reproduction"
+    },
+    {
+      "id": "fig14-meg-tool",
+      "track": "partial",
+      "integration": "paper/code discrepancy",
+      "change": "downgrade of partial"
+    },
+    {
+      "id": "fig15-meg-meaning",
+      "track": "partial",
+      "integration": "paper/code discrepancy",
+      "change": "downgrade of partial"
+    },
+    {
+      "id": "fig17-meg-nonbinary-components",
+      "track": "partial / closest AIRI run",
+      "integration": "paper/code discrepancy",
+      "change": "downgrade of partial; AIRI significance count is D5"
+    },
+    {
+      "id": "fig03-fig06-simulations",
+      "track": "approximate / blocked",
+      "integration": "approximate",
+      "change": "kept; 85% / <1 cm / <2 cm claims not upgraded to qualitative reproduction"
+    },
+    {
+      "id": "fig18-meg-music",
+      "track": "approximate",
+      "integration": "approximate",
+      "change": "kept"
+    },
+    {
+      "id": "airi-source-loc-precomp",
+      "track": "approximate; numeric map reproduced",
+      "integration": "reproduced numerically",
+      "change": "upgrade of the AIRI map formula only; still not Fig. 18"
+    }
+  ]
+}

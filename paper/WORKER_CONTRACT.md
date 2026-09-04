@@ -57,3 +57,8 @@ internally.
 
 Workers must follow `paper/reproduction_manifest.md` (and the JSON
 companion) once the source-audit worker has written it.
+
+Integration writes the evidence-backed status table in `paper/README.md`
+and the reproduction matrix in `paper/results_summary.md` /
+`paper/results_summary.json`. TRACK_REPORT self-labels are inputs, not
+final statuses.
