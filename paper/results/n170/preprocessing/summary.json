@@ -1,0 +1,73 @@
+{
+  "alternative_estimators_run": false,
+  "answers": {
+    "d11_status": {
+      "action": "Keep official precomputed averages with components 2 and 7 already removed. Do not invent a third component. MATLAB was not used; no MATLAB parity claimed.",
+      "erpcore_subject_1": [
+        2,
+        7
+      ],
+      "id": "D11",
+      "paper": "three ICA components ocular+cardiac",
+      "status": "documented_unresolved"
+    },
+    "q1_better_matching_erp": {
+      "answer": "No. The 4-condition official average closest to the paper ('averaging responses within each of the stimulus types') is 1_N170_erp_ar.erp. lpfilt is the same averages after Script 7's optional 20 Hz filter. Diff-waves_lpfilt bins 1-4 are bit-identical to lpfilt; bins 5-9 are derived contrasts, not the 4-condition ReDisCA input.",
+      "lpfilt_identical_to_diff_waves_parents": true,
+      "missing_unfiltered_diff_waves": true,
+      "preferred": "1_N170_erp_ar.erp",
+      "preferred_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72"
+    },
+    "q2_lpfilt_paper_plausible": {
+      "answer": "Plausible as a documented ERP CORE extra (Script 7), not as the paper-stated analysis. The paper does not mention low-pass filtering ERPs. Do not use lpfilt as a silent default.",
+      "estimator_run_on_lpfilt": false,
+      "paper_mentions_lowpass_on_erps": false,
+      "script7_applies_20hz_after_averaging": true
+    },
+    "q3_channels_at_analysis_stage": {
+      "answer": "The averaged ERP has 35 labels: 28 scalp EEG (FP1\u2026O2) plus 7 EOG/bipolar channels. P9/P10 are in the raw 33-channel 1_N170.set and are dropped by Script 1; they are absent from every later .set and from the .erp. Do not interpolate them. Do not add EOG merely to change results. Documented analysis subset remains the 28 scalp channels.",
+      "erp_nchan": 35,
+      "p9_p10_in_erp": false,
+      "p9_p10_in_raw_set": true,
+      "scalp_n": 28
+    },
+    "q4_third_ica_component": {
+      "answer": "No source-supported third subject-1 component. xlsx subject 1 = [2, 7]; icaweights 31\u00d731 -> 29\u00d731 after pop_subcomp, and the dropped rows match components 2 and 7. Script 4 calls them ocular, not cardiac. Across 40 subjects the modal count is 1 (15 subjects); exactly 3 components occur in 10/40 subjects, not including '1'. STOP: do not invent a third IC.",
+      "invented_component": null,
+      "removed_from_weights": [
+        2,
+        7
+      ],
+      "subject_1_components_1based": [
+        2,
+        7
+      ],
+      "third_component_source_supported": false
+    },
+    "q5_alternative_state_ran": {
+      "answer": "No alternative estimator battery was run.",
+      "ran_all_trials_estimators": false,
+      "ran_diff_waves_estimators": false,
+      "ran_lpfilt_estimators": false,
+      "ran_pre_ar_estimators": false,
+      "ran_track_a_12_variants": false
+    }
+  },
+  "d11": {
+    "action": "Keep official precomputed averages with components 2 and 7 already removed. Do not invent a third component. MATLAB was not used; no MATLAB parity claimed.",
+    "erpcore_subject_1": [
+      2,
+      7
+    ],
+    "id": "D11",
+    "paper": "three ICA components ocular+cardiac",
+    "status": "documented_unresolved"
+  },
+  "erp_core_scripts_commit": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+  "invented_third_ica_component": false,
+  "lpfilt_used_as_silent_default": false,
+  "matlab": null,
+  "preferred_erp": "1_N170_erp_ar.erp",
+  "preferred_erp_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+  "track": "C"
+}

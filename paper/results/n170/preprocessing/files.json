@@ -1,0 +1,364 @@
+{
+  "scripts": {
+    "commit": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+    "files": {
+      "bdf": {
+        "exists": true,
+        "name": "BDF_N170.txt",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/BDF_N170.txt",
+        "relative": "N170/EEG_ERP_Processing/BDF_N170.txt",
+        "sha256": "c66a75a5d1cd076c990b05d2f8f111bd3a45bdb0a5c4185797d954b78966c847",
+        "size_bytes": 207
+      },
+      "corr_bipolars": {
+        "exists": true,
+        "name": "Add_Corrected_Bipolars_N170.txt",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/Add_Corrected_Bipolars_N170.txt",
+        "relative": "N170/EEG_ERP_Processing/Add_Corrected_Bipolars_N170.txt",
+        "sha256": "f6979ba3be61e945570f7f476cc3a492a24f12666b2e62cf8fbd8d6e36ad469a",
+        "size_bytes": 903
+      },
+      "diff_wave": {
+        "exists": true,
+        "name": "N170_Diff_Wave.txt",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/N170_Diff_Wave.txt",
+        "relative": "N170/EEG_ERP_Processing/N170_Diff_Wave.txt",
+        "sha256": "2cdd1abc57f8c776858e39dc29aa7bf3d6d08609ca20bbeb19056f3064bde675",
+        "size_bytes": 276
+      },
+      "reref": {
+        "exists": true,
+        "name": "Rereference_Add_Uncorrected_Bipolars_N170.txt",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/Rereference_Add_Uncorrected_Bipolars_N170.txt",
+        "relative": "N170/EEG_ERP_Processing/Rereference_Add_Uncorrected_Bipolars_N170.txt",
+        "sha256": "6b03d660ba824d9f992dd176258ff1ec89faebdfab13e4e20e2576eecab6e051",
+        "size_bytes": 1462
+      },
+      "script1": {
+        "exists": true,
+        "name": "1_Import_Raw_EEG_Shift_DS_Reref_Hpfilt.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/1_Import_Raw_EEG_Shift_DS_Reref_Hpfilt.m",
+        "relative": "N170/EEG_ERP_Processing/1_Import_Raw_EEG_Shift_DS_Reref_Hpfilt.m",
+        "sha256": "797079c85e1ce590c84a8168b90466956c715a2e53357710faed945c07d024b4",
+        "size_bytes": 4517
+      },
+      "script12": {
+        "exists": true,
+        "name": "12_Measure_ERPs.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/ERP_Measurements/12_Measure_ERPs.m",
+        "relative": "N170/EEG_ERP_Processing/ERP_Measurements/12_Measure_ERPs.m",
+        "sha256": "b1514c759e60bf239f8d98fac47b17c4d5cee5267d650356e9beda510aa7cafd",
+        "size_bytes": 7308
+      },
+      "script3": {
+        "exists": true,
+        "name": "3_Run_ICA.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/3_Run_ICA.m",
+        "relative": "N170/EEG_ERP_Processing/3_Run_ICA.m",
+        "sha256": "db2f2cabb6996445067a112a62d78df27ed4019b860255dde1708c1bdbdb6503",
+        "size_bytes": 5965
+      },
+      "script4": {
+        "exists": true,
+        "name": "4_Remove_ICA_Components.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/4_Remove_ICA_Components.m",
+        "relative": "N170/EEG_ERP_Processing/4_Remove_ICA_Components.m",
+        "sha256": "b2f5f6d3746641f7328619a19b44dfe8dc3dc74f55d684c542f58926d5c69cb4",
+        "size_bytes": 4470
+      },
+      "script5": {
+        "exists": true,
+        "name": "5_Elist_Bin_Epoch.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/5_Elist_Bin_Epoch.m",
+        "relative": "N170/EEG_ERP_Processing/5_Elist_Bin_Epoch.m",
+        "sha256": "ee458b0422f5dc12bd79dd63a7816ae21bc6a9b9f2cb11c2638797eac057cbdb",
+        "size_bytes": 4191
+      },
+      "script6": {
+        "exists": true,
+        "name": "6_Artifact_Rejection.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/6_Artifact_Rejection.m",
+        "relative": "N170/EEG_ERP_Processing/6_Artifact_Rejection.m",
+        "sha256": "f2b53b8b0ed48b757396df2684f3d9d4d1b291ba07a2918786d03a0bcaf99541",
+        "size_bytes": 10695
+      },
+      "script7": {
+        "exists": true,
+        "name": "7_Average_ERPs.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/7_Average_ERPs.m",
+        "relative": "N170/EEG_ERP_Processing/7_Average_ERPs.m",
+        "sha256": "1fc8f307ee297f864a96a458ecbac0ced63fe2d2eda6f57aa0801e44c4ae9b00",
+        "size_bytes": 5921
+      },
+      "script8": {
+        "exists": true,
+        "name": "8_Plot_Individual_Subject_ERPs.m",
+        "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE/N170/EEG_ERP_Processing/8_Plot_Individual_Subject_ERPs.m",
+        "relative": "N170/EEG_ERP_Processing/8_Plot_Individual_Subject_ERPs.m",
+        "sha256": "1b770925c98f3413a5db9ee9b0967cbd064fd9edad05a1e841837d22b90eb9a7",
+        "size_bytes": 4819
+      }
+    },
+    "root": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/upstream/ERP_CORE"
+  },
+  "subject_1": [
+    {
+      "exists": true,
+      "name": "1_AR_Percentages_N170.csv",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_AR_Percentages_N170.csv",
+      "sha256": "6cd40ab3228310935c0ae63a422ccf85ba911d7f191c68b01d04abf1a5cff483",
+      "size_bytes": 206
+    },
+    {
+      "exists": true,
+      "name": "1_N170.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170.fdt",
+      "sha256": "08406f3c6b4a869dc8f67c9acc233a91993bae1b04b7dee5bc0521677ed8949b",
+      "size_bytes": 92319744
+    },
+    {
+      "exists": true,
+      "name": "1_N170.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170.set",
+      "sha256": "2abe204dd380a7fa2358f5b01edaf6fb53ea1da5075a89e859572c45725ca483",
+      "size_bytes": 5794216
+    },
+    {
+      "exists": true,
+      "name": "1_N170_Eventlist.txt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Eventlist.txt",
+      "sha256": "3c962c8c67e74afc0546d338a046e0e5694b366968590deb70f652ab3cc4a187",
+      "size_bytes": 72820
+    },
+    {
+      "exists": true,
+      "name": "1_N170_Eventlist_Bins.txt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Eventlist_Bins.txt",
+      "sha256": "69c6360f51ffdcc49fbc20906d2e8eaee9402a1b5018ecb7bd55866cce8a929e",
+      "size_bytes": 73377
+    },
+    {
+      "exists": true,
+      "name": "1_N170_Eventlist_For_RTs.txt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Eventlist_For_RTs.txt",
+      "sha256": "b3820453fc338047c9432b781d26f437c95ea6056a4d1ce2e0a18a1663f0c280",
+      "size_bytes": 73107
+    },
+    {
+      "exists": true,
+      "name": "1_N170_Eventlist_RTs.txt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Eventlist_RTs.txt",
+      "sha256": "22ed405643e5c24907e8ce517e95666a7b42514382bc9b389c3243306f022b6c",
+      "size_bytes": 74739
+    },
+    {
+      "exists": true,
+      "name": "1_N170_Histo_RTs.txt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Histo_RTs.txt",
+      "sha256": "f43a3abfdafa93e3b77f6c0b9e607ae9c9c0ad21ff8749f16b334f03fe926113",
+      "size_bytes": 13696
+    },
+    {
+      "exists": true,
+      "name": "1_N170_erp_ar.erp",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar.erp",
+      "sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+      "size_bytes": 541758
+    },
+    {
+      "exists": true,
+      "name": "1_N170_erp_ar_diff_waves_lpfilt.erp",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar_diff_waves_lpfilt.erp",
+      "sha256": "3e63fbc34c66527ed3d88fb46040fd0df5075a08b81bef8c654a470d3faf0846",
+      "size_bytes": 664060
+    },
+    {
+      "exists": true,
+      "name": "1_N170_erp_ar_lpfilt.erp",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_erp_ar_lpfilt.erp",
+      "sha256": "228b52ad69b9dc9b88f6b4c0b1d32dc778450e0d9aa32850b9ad9a8a61a8b9fe",
+      "size_bytes": 315199
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted.fdt",
+      "sha256": "08406f3c6b4a869dc8f67c9acc233a91993bae1b04b7dee5bc0521677ed8949b",
+      "size_bytes": 92319744
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted.set",
+      "sha256": "e7aa5accb0f5e3e322b3bd4aa700f8eabf5c44cb5568ba73f3ffa11c0de00461",
+      "size_bytes": 5866656
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip.set",
+      "sha256": "f033fba3dc2c39fa274097f53762e0b084dd2b0bedab9bcdc2bac737f4cd8a36",
+      "size_bytes": 1692616
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt.fdt",
+      "sha256": "d258021148c618d700b141f921d64453b1f02228d7c00105fe7c69c357dedab0",
+      "size_bytes": 23079936
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt.set",
+      "sha256": "51c4008a64bc85f7224af973423970d13a70d3e236407c931f6e143de788d630",
+      "size_bytes": 1693160
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.fdt",
+      "sha256": "2b82b9075f5f03033f4e20b5a328d804b9b37188aee2257f8ecd1e354a2fb05a",
+      "size_bytes": 23079936
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr.set",
+      "sha256": "3344a27e8c65123a94ffb1fd7b252ae01b5b341d15c490718d6b4cb1f24e4f6a",
+      "size_bytes": 1731560
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip.fdt",
+      "sha256": "0d18096448fd0e4daa551199a1d019a1bf1f13bf081fbcb811b12006d2fde07f",
+      "size_bytes": 24478720
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip.set",
+      "sha256": "700058c92309f2b696bc36bfdf92e253da5020ff9e2e684437385153006a5626",
+      "size_bytes": 1732752
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist.fdt",
+      "sha256": "0d18096448fd0e4daa551199a1d019a1bf1f13bf081fbcb811b12006d2fde07f",
+      "size_bytes": 24478720
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist.set",
+      "sha256": "fc3fb07909710e22049c5be3c1a43401543301c638561ef415e15091de32bbca",
+      "size_bytes": 2456904
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins.fdt",
+      "sha256": "0d18096448fd0e4daa551199a1d019a1bf1f13bf081fbcb811b12006d2fde07f",
+      "size_bytes": 24478720
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins.set",
+      "sha256": "56739861ea04084c1754005a37bcb9cb70d080c27aa361cbe629153e426275c0",
+      "size_bytes": 2475224
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch.fdt",
+      "sha256": "a208b290931085f6bd36219d90737623af25d61e255ef7dc9f728a30c79f885c",
+      "size_bytes": 8601600
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch.set",
+      "sha256": "2792a23f62721f957b912acfa96eaa97433bd174aa3923219baf9984ef17b4c4",
+      "size_bytes": 1488360
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp.set",
+      "sha256": "83798537e79568838f193705b1e08dbc3c8a88e8105b8cf004dcf931e6fd1750",
+      "size_bytes": 1480528
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp_ar.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp_ar.fdt",
+      "sha256": "1b3030f257cddf27158623332c21f6669aefae8b6fbe3988f153bc37e814bec6",
+      "size_bytes": 8601600
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp_ar.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_corr_cbip_elist_bins_epoch_interp_ar.set",
+      "sha256": "3f219184e578406dcaadcd3c27f2c5bb7d903af2045a27dd383526a5f1717c38",
+      "size_bytes": 1492104
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep1.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep1.fdt",
+      "sha256": "1c52fe425bd37ae634ed5335fee245ac1a0430d17aa60202593e946c13bc7d64",
+      "size_bytes": 16983252
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep1.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep1.set",
+      "sha256": "8ae544d40a31dbb76d5af6f7e3a2bbb049e1d46b599665adeb071ee659b121ca",
+      "size_bytes": 1364608
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2.fdt",
+      "sha256": "46f48c1ff62b1e9d104902b81b6cc2cc20586a7777d9221e8903a56d46393088",
+      "size_bytes": 16453800
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2.set",
+      "sha256": "cb4c77b76732fe6e318a6b29ecc6cd24297a17c561a1713a8a1f232fb808819b",
+      "size_bytes": 1327616
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2_weighted.fdt",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2_weighted.fdt",
+      "sha256": "0e312b607544f42a04b38e8a9f2096a297f34530289c470c472e848d0d34e0da",
+      "size_bytes": 16453800
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2_weighted.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_prep2_weighted.set",
+      "sha256": "73c9a40d41b376da279bed3d9800f1f4217286a685be9ba576fc04311b6f583b",
+      "size_bytes": 1352608
+    },
+    {
+      "exists": true,
+      "name": "1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted.set",
+      "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_shifted_ds_reref_ucbip_hpfilt_ica_weighted.set",
+      "sha256": "1c297bf0cefac7df9ca0f3964f60130b78abd96dd760dc7d147d75d6d7ec400f",
+      "size_bytes": 1716736
+    }
+  ],
+  "xlsx": {
+    "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/ICA_Components_N170.xlsx",
+    "pinned_sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+    "sha256": "23373a2b7aae80e7b01abfdc523fb1d04fbc6f41fc48c090f7e840534224cf85",
+    "url": "https://osf.io/download/f9r7c/"
+  }
+}

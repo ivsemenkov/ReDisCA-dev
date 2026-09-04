@@ -1,0 +1,38 @@
+{
+  "artifact_rejection": {
+    "ar_csv": "SubID,Bin,Accepted,Rejected,Total Percent Rejected\n1,Total,191,49,20.42\n,Faces - Correct,52,9,14.75\n,Cars - Correct ,38,15,28.30\n,Scrambled Faces - Correct,49,16,24.62\n,Scrambled Cars - Correct ,52,9,14.75\n",
+    "ar_csv_sha256": "6cd40ab3228310935c0ae63a422ccf85ba911d7f191c68b01d04abf1a5cff483",
+    "averager_criterion": "good (Script 7 pop_averager Criterion='good')",
+    "epoched_trials": 240,
+    "eventlist_unique_epochs": 240,
+    "flag_histogram": {
+      "0": 191,
+      "5": 42,
+      "7": 5,
+      "9": 2
+    },
+    "n_flagged": 49,
+    "n_good_flag0": 191,
+    "note": "Pre-AR epoched data exist as a .set (240 correct-response epochs). The only public 4-condition averaged ERPs are post-AR. Re-averaging pre-AR trials would reconstruct a new file, not use a precomputed official ERP; that is not a clearly source-supported alternative analysis state for the paper.",
+    "pre_ar_public_erp": false
+  },
+  "correct_response_only": true,
+  "diff_waves_are_not_4condition_redisca_input": true,
+  "eventlist": {
+    "bdf": "BDF_N170.txt bins 1-4 are correct-response only (stimulus then 201 in 200-1000 ms)",
+    "header_correct_bins": {
+      "Cars, Correct": 53,
+      "Faces, Correct": 61,
+      "Scrambled Cars, Correct": 61,
+      "Scrambled Faces, Correct": 65
+    },
+    "n_correct_binned_header": 240,
+    "n_correct_response_201": 244,
+    "n_incorrect_response_202": 76,
+    "n_stimulus_events": 320,
+    "n_unbinned_stimuli": 80,
+    "paper_vs_bdf": "Paper: averaging responses within each stimulus type. ERP CORE BDF and the precomputed .erp are correct-response only. No public all-trials 4-condition .erp exists in the subject-1 dump.",
+    "path": "/tmp/redisca-worktrees/n170-preproc/.reproduction_data/erpcore/all_data_and_scripts/1/1_N170_Eventlist_Bins.txt",
+    "sha256": "69c6360f51ffdcc49fbc20906d2e8eaee9402a1b5018ecb7bd55866cce8a929e"
+  }
+}
