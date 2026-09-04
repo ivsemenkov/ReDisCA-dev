@@ -1,0 +1,308 @@
+{
+  "bandpass": null,
+  "class_labels_airi": {
+    "class1": [
+      2,
+      3
+    ],
+    "class2": [
+      4,
+      5
+    ]
+  },
+  "class_labels_paper": {
+    "class1": [
+      2,
+      3
+    ],
+    "class2": [
+      0,
+      1,
+      4,
+      5
+    ]
+  },
+  "eigenvalues_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      0.8183471094394918,
+      0.8049816476576809,
+      0.7377569827401571,
+      0.6973406043663704,
+      0.6756415067678866,
+      0.644263556338736,
+      0.5249581457931519,
+      0.46983277387736877
+    ],
+    "max": 0.8183471094394918,
+    "mean": 0.01990090895006721,
+    "min": -0.3852287118003975,
+    "n_finite": 68,
+    "n_nonfinite": 0,
+    "shape": [
+      68
+    ],
+    "std": 0.3318316241341766
+  },
+  "eigenvalues_head": [
+    0.8183471094394918,
+    0.8049816476576809,
+    0.7377569827401571,
+    0.6973406043663704,
+    0.6756415067678866,
+    0.644263556338736,
+    0.5249581457931519,
+    0.46983277387736877
+  ],
+  "empirical_rdm": [
+    {
+      "component": 1,
+      "pattern_max_abs_planar_index": 154,
+      "pattern_max_abs_value": -5.994776554221963e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9988911005783926,
+      "pearson_wTRw_unique_triangle": 0.9988911005783926
+    },
+    {
+      "component": 2,
+      "pattern_max_abs_planar_index": 121,
+      "pattern_max_abs_value": -4.927803933509127e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9988777465186113,
+      "pearson_wTRw_unique_triangle": 0.9988777465186113
+    },
+    {
+      "component": 3,
+      "pattern_max_abs_planar_index": 150,
+      "pattern_max_abs_value": 4.568872540480323e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9666063318067833,
+      "pearson_wTRw_unique_triangle": 0.9666063318067835
+    },
+    {
+      "component": 4,
+      "pattern_max_abs_planar_index": 155,
+      "pattern_max_abs_value": -4.369341796553244e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9889809731467438,
+      "pearson_wTRw_unique_triangle": 0.9889809731467439
+    },
+    {
+      "component": 5,
+      "pattern_max_abs_planar_index": 157,
+      "pattern_max_abs_value": 6.756397594216584e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9917731322833574,
+      "pearson_wTRw_unique_triangle": 0.9917731322833575
+    },
+    {
+      "component": 6,
+      "pattern_max_abs_planar_index": 186,
+      "pattern_max_abs_value": 4.1124162533114533e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9707340689078501,
+      "pearson_wTRw_unique_triangle": 0.9707340689078483
+    },
+    {
+      "component": 7,
+      "pattern_max_abs_planar_index": 141,
+      "pattern_max_abs_value": 3.849934594235964e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9869979329723189,
+      "pearson_wTRw_unique_triangle": 0.9869979329723185
+    },
+    {
+      "component": 8,
+      "pattern_max_abs_planar_index": 164,
+      "pattern_max_abs_value": -1.505313998274197e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.6819481597392738,
+      "pearson_wTRw_unique_triangle": 0.6819481597392729
+    }
+  ],
+  "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+  "extras": {
+    "condition_label_permutation": {
+      "kind": "exact_enumeration",
+      "label": "secondary_condition_label_permutation_not_historical_oracle",
+      "n_permutations": 720,
+      "n_unique_rdms": 15,
+      "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+      "p_maxabs_familywise": [
+        0.5333333333333333,
+        0.8,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "p_signed_greater_equal": [
+        0.5333333333333333,
+        0.0,
+        0.0,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.0,
+        0.13333333333333333,
+        0.06666666666666667
+      ]
+    }
+  },
+  "filters_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      415057556300.4505,
+      -342901990497.90454,
+      1004960062310.4962,
+      -273192472261.66098,
+      372954789901.72375,
+      -75979465576.1143,
+      -1864761355375.1516,
+      1438250168775.5537
+    ],
+    "max": 4268067647066.2603,
+    "mean": 202912128.05192387,
+    "min": -4266570404309.797,
+    "n_finite": 1632,
+    "n_nonfinite": 0,
+    "shape": [
+      204,
+      8
+    ],
+    "std": 592134246869.4086
+  },
+  "imports_redisca": false,
+  "item_id": "fig14-meg-tool",
+  "matlab": null,
+  "n_components_p_lt_0.05_all_rank": 2,
+  "n_first3_p_lt_0.05": 2,
+  "n_pairs": 30,
+  "n_planars": 204,
+  "n_reported": 8,
+  "n_samples": 1501,
+  "pair_matrix": "matlab_cov",
+  "pair_sequence_head": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "pairs": "airi_directed_i_neq_j",
+  "paper_qualitative": {
+    "face_peak_ms": null,
+    "n_significant_components_published": 3
+  },
+  "path_label": "historical_candidate_paper_epoch",
+  "patterns_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      -3.012500152601385e-13,
+      5.912767157007144e-14,
+      1.480197620019451e-13,
+      5.3698444774151265e-14,
+      5.1084510594448146e-14,
+      9.612225875132198e-14,
+      7.988272493615892e-14,
+      1.036804436224647e-14
+    ],
+    "max": 6.756397594216584e-13,
+    "mean": 8.696492680862902e-15,
+    "min": -5.994776554221963e-13,
+    "n_finite": 1632,
+    "n_nonfinite": 0,
+    "shape": [
+      204,
+      8
+    ],
+    "std": 1.359350729150719e-13
+  },
+  "peaks": [
+    {
+      "class1_peak_ms_paper_convention": 393.0,
+      "class2_peak_ms_paper_convention": 972.0,
+      "component": 1,
+      "contrast_peak_ms_paper_convention": 392.0,
+      "mean_of_six_conditions_peak_ms": 126.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 284.0,
+      "class2_peak_ms_paper_convention": 386.0,
+      "component": 2,
+      "contrast_peak_ms_paper_convention": 810.0,
+      "mean_of_six_conditions_peak_ms": 283.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 314.0,
+      "class2_peak_ms_paper_convention": 393.0,
+      "component": 3,
+      "contrast_peak_ms_paper_convention": 259.0,
+      "mean_of_six_conditions_peak_ms": 333.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 453.0,
+      "class2_peak_ms_paper_convention": 310.0,
+      "component": 4,
+      "contrast_peak_ms_paper_convention": 650.0,
+      "mean_of_six_conditions_peak_ms": 309.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 950.0,
+      "class2_peak_ms_paper_convention": 119.0,
+      "component": 5,
+      "contrast_peak_ms_paper_convention": 116.0,
+      "mean_of_six_conditions_peak_ms": 800.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 295.0,
+      "class2_peak_ms_paper_convention": 253.0,
+      "component": 6,
+      "contrast_peak_ms_paper_convention": 557.0,
+      "mean_of_six_conditions_peak_ms": 299.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 160.0,
+      "class2_peak_ms_paper_convention": 140.0,
+      "component": 7,
+      "contrast_peak_ms_paper_convention": 134.0,
+      "mean_of_six_conditions_peak_ms": 142.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 195.0,
+      "class2_peak_ms_paper_convention": 154.0,
+      "component": 8,
+      "contrast_peak_ms_paper_convention": 918.0,
+      "mean_of_six_conditions_peak_ms": 186.0
+    }
+  ],
+  "primary_random_phase_p_head": [
+    0.006,
+    0.01,
+    0.057,
+    0.107,
+    0.155,
+    0.244,
+    0.82,
+    0.965
+  ],
+  "rank": 68,
+  "rdm_fill": "airi_numeric",
+  "rdm_name": "tool",
+  "window_ms": [
+    -500.0,
+    1000.0
+  ]
+}

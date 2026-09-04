@@ -1,0 +1,85 @@
+{
+  "environment": {
+    "captured_at_utc": "2026-09-04T22:38:06.449517+00:00",
+    "machine": "x86_64",
+    "matlab": null,
+    "note": "This is a source-faithful Python reconstruction environment. MATLAB is not assumed to be available; results are not MATLAB parity.",
+    "packages": {
+      "numpy": "2.4.4",
+      "redisca": "0.1.0",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.1"
+    },
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+  },
+  "extra": {
+    "bandpass": null,
+    "does_not_call_redisca_fit": true,
+    "freeze_B": 1000,
+    "prepare": {
+      "airi_filter": {
+        "fs": 1000.0,
+        "high_hz": 20.0,
+        "low_hz": 0.25,
+        "order": 3
+      },
+      "airi_n_samples": 901,
+      "airi_slice_0based": [
+        599,
+        1500
+      ],
+      "airi_trange_1based": [
+        600,
+        1500
+      ],
+      "airi_window_ms": [
+        99.0,
+        999.0
+      ],
+      "condition_order": [
+        "face1",
+        "face2",
+        "tool1",
+        "tool2",
+        "nons1",
+        "nons2"
+      ],
+      "dat_file_loaded": false,
+      "epochs_per_condition": 80,
+      "fs_hz": 1000.0,
+      "labels_mat": "/tmp/redisca-worktrees/historical-apply/.reproduction_data/meg/ibfctfprespm8_AD_run1_raw_tsss_mc.mat",
+      "n_file_trials": 880,
+      "n_planars": 204,
+      "n_times_file": 1501,
+      "n_used_trials": 480,
+      "paper_n_samples": 1501,
+      "paper_printed_matrix": "204 x 1500 (D16: file is 1501 samples; paper_faithful uses 1501)",
+      "paper_window_ms": [
+        -500.0,
+        1000.0
+      ],
+      "scipy_filtfilt_vs_matlab": "AIRI MATLAB uses Signal Processing Toolbox filtfilt (Gustafsson method / MATLAB padding). This reconstruction uses scipy.signal.filtfilt with default padtype='odd' and padlen=3*(max(len(a),len(b))-1). Not bit-exact (D8 numeric).",
+      "source_mat": "/tmp/redisca-worktrees/historical-apply/.reproduction_data/meg/MEG_AD_run1.mat",
+      "unused_trial_count": 400
+    },
+    "rdms": [
+      "face",
+      "tool",
+      "meaning",
+      "facevstool"
+    ],
+    "used_B": 1000,
+    "window": "full -500..+1000 ms, 1501 samples"
+  },
+  "path_label": "historical_candidate_paper_epoch",
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20240924
+  },
+  "track": "meg_historical_candidate"
+}

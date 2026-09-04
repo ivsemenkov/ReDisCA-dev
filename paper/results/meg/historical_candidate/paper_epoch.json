@@ -1,0 +1,1333 @@
+{
+  "B": 1000,
+  "bandpass": null,
+  "estimator": {
+    "executable": "common.source_faithful.fit_condition_averages",
+    "freeze_B": 1000,
+    "freeze_path": "/tmp/redisca-worktrees/historical-apply/paper/results/n170/historical/leading_candidate.json",
+    "imports_redisca": false,
+    "inference": "spoc_random_phase",
+    "joint_candidate_id": "airi_directed__matlab_cov__car170",
+    "matlab": null,
+    "matrix_mode": "matlab_cov",
+    "note": "This is the N170 freeze applied to MEG. It is not a retune. AIRI 99\u2013999 ms crop and 0.25\u201320 Hz filtfilt are NOT applied on the paper-epoch path.",
+    "p_formula": "p = count(max|lambda_surr| >= |lambda_obs|) / B",
+    "pair_mode": "airi_directed",
+    "reduced_B": false,
+    "source": "N170 Tracks A+B leading freeze, unmodified",
+    "used_B": 1000
+  },
+  "imports_redisca": false,
+  "inference": "spoc_random_phase",
+  "matlab": null,
+  "matrix_mode": "matlab_cov",
+  "n_planars": 204,
+  "n_samples": 1501,
+  "pair_mode": "airi_directed",
+  "path_label": "historical_candidate_paper_epoch",
+  "prepare": {
+    "airi_filter": {
+      "fs": 1000.0,
+      "high_hz": 20.0,
+      "low_hz": 0.25,
+      "order": 3
+    },
+    "airi_n_samples": 901,
+    "airi_slice_0based": [
+      599,
+      1500
+    ],
+    "airi_trange_1based": [
+      600,
+      1500
+    ],
+    "airi_window_ms": [
+      99.0,
+      999.0
+    ],
+    "condition_order": [
+      "face1",
+      "face2",
+      "tool1",
+      "tool2",
+      "nons1",
+      "nons2"
+    ],
+    "dat_file_loaded": false,
+    "epochs_per_condition": 80,
+    "fs_hz": 1000.0,
+    "labels_mat": "/tmp/redisca-worktrees/historical-apply/.reproduction_data/meg/ibfctfprespm8_AD_run1_raw_tsss_mc.mat",
+    "n_file_trials": 880,
+    "n_planars": 204,
+    "n_times_file": 1501,
+    "n_used_trials": 480,
+    "paper_n_samples": 1501,
+    "paper_printed_matrix": "204 x 1500 (D16: file is 1501 samples; paper_faithful uses 1501)",
+    "paper_window_ms": [
+      -500.0,
+      1000.0
+    ],
+    "scipy_filtfilt_vs_matlab": "AIRI MATLAB uses Signal Processing Toolbox filtfilt (Gustafsson method / MATLAB padding). This reconstruction uses scipy.signal.filtfilt with default padtype='odd' and padlen=3*(max(len(a),len(b))-1). Not bit-exact (D8 numeric).",
+    "source_mat": "/tmp/redisca-worktrees/historical-apply/.reproduction_data/meg/MEG_AD_run1.mat",
+    "unused_trial_count": 400
+  },
+  "rdms": {
+    "face": {
+      "bandpass": null,
+      "class_labels_airi": {
+        "class1": [
+          0,
+          1
+        ],
+        "class2": [
+          4,
+          5
+        ]
+      },
+      "class_labels_paper": {
+        "class1": [
+          0,
+          1
+        ],
+        "class2": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "eigenvalues_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.8618763046920177,
+          0.7958508612051723,
+          0.6939134091625939,
+          0.6833159325031387,
+          0.5686084875289563,
+          0.5299240019652044,
+          0.4713418608499796,
+          0.4598006568041117
+        ],
+        "max": 0.8618763046920177,
+        "mean": 0.00349522166699105,
+        "min": -0.38259208984840487,
+        "n_finite": 68,
+        "n_nonfinite": 0,
+        "shape": [
+          68
+        ],
+        "std": 0.3227495301764865
+      },
+      "eigenvalues_head": [
+        0.8618763046920177,
+        0.7958508612051723,
+        0.6939134091625939,
+        0.6833159325031387,
+        0.5686084875289563,
+        0.5299240019652044,
+        0.4713418608499796,
+        0.4598006568041117
+      ],
+      "empirical_rdm": [
+        {
+          "component": 1,
+          "pattern_max_abs_planar_index": 155,
+          "pattern_max_abs_value": 1.335053275017102e-12,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9955917392028119,
+          "pearson_wTRw_unique_triangle": 0.9955917392028117
+        },
+        {
+          "component": 2,
+          "pattern_max_abs_planar_index": 151,
+          "pattern_max_abs_value": 5.616248210834621e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9930856479275735,
+          "pearson_wTRw_unique_triangle": 0.9930856479275735
+        },
+        {
+          "component": 3,
+          "pattern_max_abs_planar_index": 175,
+          "pattern_max_abs_value": 6.883326662409632e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9852460608773905,
+          "pearson_wTRw_unique_triangle": 0.9852460608773905
+        },
+        {
+          "component": 4,
+          "pattern_max_abs_planar_index": 132,
+          "pattern_max_abs_value": 3.615238126952385e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.993479610418067,
+          "pearson_wTRw_unique_triangle": 0.9934796104180665
+        },
+        {
+          "component": 5,
+          "pattern_max_abs_planar_index": 154,
+          "pattern_max_abs_value": -4.651292625890027e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9823001293754303,
+          "pearson_wTRw_unique_triangle": 0.9823001293754313
+        },
+        {
+          "component": 6,
+          "pattern_max_abs_planar_index": 187,
+          "pattern_max_abs_value": 2.2762514178454266e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9605951774801662,
+          "pearson_wTRw_unique_triangle": 0.9605951774801665
+        },
+        {
+          "component": 7,
+          "pattern_max_abs_planar_index": 178,
+          "pattern_max_abs_value": -6.015838061970766e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.7941857106115183,
+          "pearson_wTRw_unique_triangle": 0.7941857106115174
+        },
+        {
+          "component": 8,
+          "pattern_max_abs_planar_index": 178,
+          "pattern_max_abs_value": 4.5114355967730803e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.7402452336202133,
+          "pearson_wTRw_unique_triangle": 0.7402452336202122
+        }
+      ],
+      "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+      "extras": {
+        "condition_label_permutation": {
+          "kind": "exact_enumeration",
+          "label": "secondary_condition_label_permutation_not_historical_oracle",
+          "n_permutations": 720,
+          "n_unique_rdms": 15,
+          "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+          "p_maxabs_familywise": [
+            0.0,
+            0.8666666666666667,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "p_signed_greater_equal": [
+            0.0,
+            0.13333333333333333,
+            0.4,
+            0.13333333333333333,
+            0.6,
+            0.3333333333333333,
+            0.4,
+            0.06666666666666667
+          ]
+        }
+      },
+      "filters_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          504565681759.02606,
+          227729006337.8305,
+          1186320832573.619,
+          151666922198.0708,
+          -90794794767.73853,
+          -311208583008.0014,
+          -815518074023.0795,
+          616008222594.8354
+        ],
+        "max": 3515216103580.5005,
+        "mean": -5463842039.416815,
+        "min": -4554849325309.069,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 574636953474.4147
+      },
+      "imports_redisca": false,
+      "item_id": "fig13-meg-face",
+      "matlab": null,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "n_pairs": 30,
+      "n_planars": 204,
+      "n_reported": 8,
+      "n_samples": 1501,
+      "pair_matrix": "matlab_cov",
+      "pair_sequence_head": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "pairs": "airi_directed_i_neq_j",
+      "paper_qualitative": {
+        "face_peak_ms": 160.0,
+        "n_significant_components_published": 3
+      },
+      "path_label": "historical_candidate_paper_epoch",
+      "patterns_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          -1.784479926779905e-13,
+          2.0010200465269722e-13,
+          2.1734519077824894e-13,
+          -5.4055964435040286e-14,
+          3.558566620988392e-14,
+          -5.568826576799249e-14,
+          9.241740381846328e-15,
+          -4.100620060969425e-14
+        ],
+        "max": 1.335053275017102e-12,
+        "mean": -1.1854790528638424e-15,
+        "min": -1.3203890577806023e-12,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 1.7185902765505136e-13
+      },
+      "peaks": [
+        {
+          "class1_peak_ms_paper_convention": 533.0,
+          "class2_peak_ms_paper_convention": 282.0,
+          "component": 1,
+          "contrast_peak_ms_paper_convention": 309.0,
+          "mean_of_six_conditions_peak_ms": 275.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 922.0,
+          "class2_peak_ms_paper_convention": 286.0,
+          "component": 2,
+          "contrast_peak_ms_paper_convention": 805.0,
+          "mean_of_six_conditions_peak_ms": 284.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 197.0,
+          "class2_peak_ms_paper_convention": 139.0,
+          "component": 3,
+          "contrast_peak_ms_paper_convention": 176.0,
+          "mean_of_six_conditions_peak_ms": 138.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 295.0,
+          "class2_peak_ms_paper_convention": 378.0,
+          "component": 4,
+          "contrast_peak_ms_paper_convention": 286.0,
+          "mean_of_six_conditions_peak_ms": 330.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 196.0,
+          "class2_peak_ms_paper_convention": 899.0,
+          "component": 5,
+          "contrast_peak_ms_paper_convention": 194.0,
+          "mean_of_six_conditions_peak_ms": 223.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 521.0,
+          "class2_peak_ms_paper_convention": 945.0,
+          "component": 6,
+          "contrast_peak_ms_paper_convention": 977.0,
+          "mean_of_six_conditions_peak_ms": 944.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 894.0,
+          "class2_peak_ms_paper_convention": 817.0,
+          "component": 7,
+          "contrast_peak_ms_paper_convention": 172.0,
+          "mean_of_six_conditions_peak_ms": 955.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 191.0,
+          "class2_peak_ms_paper_convention": 223.0,
+          "component": 8,
+          "contrast_peak_ms_paper_convention": 117.0,
+          "mean_of_six_conditions_peak_ms": 214.0
+        }
+      ],
+      "primary_random_phase_p_head": [
+        0.006,
+        0.019,
+        0.114,
+        0.142,
+        0.445,
+        0.566,
+        0.736,
+        0.767
+      ],
+      "rank": 68,
+      "rdm_fill": "airi_numeric",
+      "rdm_name": "face",
+      "window_ms": [
+        -500.0,
+        1000.0
+      ]
+    },
+    "facevstool": {
+      "bandpass": null,
+      "class_labels_airi": {
+        "class1": [
+          0,
+          1
+        ],
+        "class2": [
+          2,
+          3
+        ]
+      },
+      "class_labels_paper": {
+        "class1": [
+          0,
+          1
+        ],
+        "class2": [
+          2,
+          3
+        ]
+      },
+      "eigenvalues_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.8076453502568317,
+          0.7658216648708985,
+          0.6967841822308736,
+          0.6538662270597131,
+          0.6043668473915219,
+          0.5554803556892068,
+          0.4773852147008129,
+          0.4514462550649521
+        ],
+        "max": 0.8076453502568317,
+        "mean": 0.017011269312483146,
+        "min": -0.5147340224986594,
+        "n_finite": 68,
+        "n_nonfinite": 0,
+        "shape": [
+          68
+        ],
+        "std": 0.2974244315370662
+      },
+      "eigenvalues_head": [
+        0.8076453502568317,
+        0.7658216648708985,
+        0.6967841822308736,
+        0.6538662270597131,
+        0.6043668473915219,
+        0.5554803556892068,
+        0.4773852147008129,
+        0.4514462550649521
+      ],
+      "empirical_rdm": [
+        {
+          "component": 1,
+          "pattern_max_abs_planar_index": 154,
+          "pattern_max_abs_value": 1.1303876014385758e-12,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9627128378433953,
+          "pearson_wTRw_unique_triangle": 0.9627128378433956
+        },
+        {
+          "component": 2,
+          "pattern_max_abs_planar_index": 151,
+          "pattern_max_abs_value": -5.914066879674402e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.961792789428613,
+          "pearson_wTRw_unique_triangle": 0.9617927894286129
+        },
+        {
+          "component": 3,
+          "pattern_max_abs_planar_index": 180,
+          "pattern_max_abs_value": -5.028440352846274e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9516101886347667,
+          "pearson_wTRw_unique_triangle": 0.9516101886347668
+        },
+        {
+          "component": 4,
+          "pattern_max_abs_planar_index": 157,
+          "pattern_max_abs_value": 8.033511234666672e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9587627480590488,
+          "pearson_wTRw_unique_triangle": 0.9587627480590488
+        },
+        {
+          "component": 5,
+          "pattern_max_abs_planar_index": 132,
+          "pattern_max_abs_value": 3.5722120011591954e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9525712923572617,
+          "pearson_wTRw_unique_triangle": 0.9525712923572622
+        },
+        {
+          "component": 6,
+          "pattern_max_abs_planar_index": 175,
+          "pattern_max_abs_value": -3.8335585149760724e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9546817002627284,
+          "pearson_wTRw_unique_triangle": 0.9546817002627284
+        },
+        {
+          "component": 7,
+          "pattern_max_abs_planar_index": 143,
+          "pattern_max_abs_value": -2.2251682920411197e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9183403707954316,
+          "pearson_wTRw_unique_triangle": 0.9183403707954335
+        },
+        {
+          "component": 8,
+          "pattern_max_abs_planar_index": 156,
+          "pattern_max_abs_value": -3.4095181597847054e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9234436248488498,
+          "pearson_wTRw_unique_triangle": 0.9234436248488611
+        }
+      ],
+      "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+      "extras": {
+        "condition_label_permutation": {
+          "kind": "exact_enumeration",
+          "label": "secondary_condition_label_permutation_not_historical_oracle",
+          "n_permutations": 720,
+          "n_unique_rdms": 45,
+          "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+          "p_maxabs_familywise": [
+            0.26666666666666666,
+            0.9333333333333333,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "p_signed_greater_equal": [
+            0.26666666666666666,
+            0.06666666666666667,
+            0.044444444444444446,
+            0.08888888888888889,
+            0.0,
+            0.06666666666666667,
+            0.17777777777777778,
+            0.06666666666666667
+          ]
+        }
+      },
+      "filters_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          -593260382326.1948,
+          -283258904487.1057,
+          -1581920349705.458,
+          -387973539756.46075,
+          -487205792146.9006,
+          356961251635.8774,
+          1026610671248.5435,
+          -2699014501540.6104
+        ],
+        "max": 4376021286408.6616,
+        "mean": 137225680.36913285,
+        "min": -7407863970644.328,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 659876000757.7031
+      },
+      "imports_redisca": false,
+      "item_id": "fig17-meg-nonbinary-components",
+      "matlab": null,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "n_pairs": 30,
+      "n_planars": 204,
+      "n_reported": 8,
+      "n_samples": 1501,
+      "pair_matrix": "matlab_cov",
+      "pair_sequence_head": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "pairs": "airi_directed_i_neq_j",
+      "paper_qualitative": {
+        "face_peak_ms": 160.0,
+        "n_significant_components_published": 3
+      },
+      "path_label": "historical_candidate_paper_epoch",
+      "patterns_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          2.6177389467173207e-13,
+          -1.881904692849705e-13,
+          -1.9221766865277937e-13,
+          -9.822761523902509e-14,
+          3.002367197722305e-14,
+          2.240594182304131e-14,
+          -1.4561211311967902e-15,
+          4.176497467655225e-14
+        ],
+        "max": 1.1303876014385758e-12,
+        "mean": -7.841159162962028e-15,
+        "min": -9.70013696768487e-13,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 1.5254676369862415e-13
+      },
+      "peaks": [
+        {
+          "class1_peak_ms_paper_convention": 969.0,
+          "class2_peak_ms_paper_convention": 248.0,
+          "component": 1,
+          "contrast_peak_ms_paper_convention": 566.0,
+          "mean_of_six_conditions_peak_ms": 250.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 281.0,
+          "class2_peak_ms_paper_convention": 286.0,
+          "component": 2,
+          "contrast_peak_ms_paper_convention": 807.0,
+          "mean_of_six_conditions_peak_ms": 284.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 138.0,
+          "class2_peak_ms_paper_convention": 139.0,
+          "component": 3,
+          "contrast_peak_ms_paper_convention": 289.0,
+          "mean_of_six_conditions_peak_ms": 139.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 113.0,
+          "class2_peak_ms_paper_convention": 164.0,
+          "component": 4,
+          "contrast_peak_ms_paper_convention": 117.0,
+          "mean_of_six_conditions_peak_ms": 802.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 304.0,
+          "class2_peak_ms_paper_convention": 406.0,
+          "component": 5,
+          "contrast_peak_ms_paper_convention": 657.0,
+          "mean_of_six_conditions_peak_ms": 392.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 192.0,
+          "class2_peak_ms_paper_convention": 410.0,
+          "component": 6,
+          "contrast_peak_ms_paper_convention": 18.0,
+          "mean_of_six_conditions_peak_ms": 192.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 172.0,
+          "class2_peak_ms_paper_convention": 955.0,
+          "component": 7,
+          "contrast_peak_ms_paper_convention": 171.0,
+          "mean_of_six_conditions_peak_ms": 956.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 202.0,
+          "class2_peak_ms_paper_convention": 217.0,
+          "component": 8,
+          "contrast_peak_ms_paper_convention": 180.0,
+          "mean_of_six_conditions_peak_ms": 220.0
+        }
+      ],
+      "primary_random_phase_p_head": [
+        0.01,
+        0.024,
+        0.104,
+        0.191,
+        0.36,
+        0.545,
+        0.838,
+        0.913
+      ],
+      "rank": 68,
+      "rdm_fill": "airi_numeric",
+      "rdm_name": "facevstool",
+      "window_ms": [
+        -500.0,
+        1000.0
+      ]
+    },
+    "meaning": {
+      "bandpass": null,
+      "class_labels_airi": {
+        "class1": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "class2": [
+          4,
+          5
+        ]
+      },
+      "class_labels_paper": {
+        "class1": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "class2": [
+          4,
+          5
+        ]
+      },
+      "eigenvalues_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.8449866831248929,
+          0.787213331768332,
+          0.7305427251575697,
+          0.6682757274558776,
+          0.5994037328136647,
+          0.565977214791378,
+          0.5262106664753553,
+          0.44155282399350965
+        ],
+        "max": 0.8449866831248929,
+        "mean": -0.0005391249184695033,
+        "min": -0.38369540092521753,
+        "n_finite": 68,
+        "n_nonfinite": 0,
+        "shape": [
+          68
+        ],
+        "std": 0.3256059482596952
+      },
+      "eigenvalues_head": [
+        0.8449866831248929,
+        0.787213331768332,
+        0.7305427251575697,
+        0.6682757274558776,
+        0.5994037328136647,
+        0.565977214791378,
+        0.5262106664753553,
+        0.44155282399350965
+      ],
+      "empirical_rdm": [
+        {
+          "component": 1,
+          "pattern_max_abs_planar_index": 155,
+          "pattern_max_abs_value": -1.0098491701304351e-12,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9977986553970848,
+          "pearson_wTRw_unique_triangle": 0.9977986553970845
+        },
+        {
+          "component": 2,
+          "pattern_max_abs_planar_index": 156,
+          "pattern_max_abs_value": -5.194170933592229e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9956733275219195,
+          "pearson_wTRw_unique_triangle": 0.9956733275219197
+        },
+        {
+          "component": 3,
+          "pattern_max_abs_planar_index": 172,
+          "pattern_max_abs_value": -4.413239505647458e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9911149656559661,
+          "pearson_wTRw_unique_triangle": 0.9911149656559662
+        },
+        {
+          "component": 4,
+          "pattern_max_abs_planar_index": 164,
+          "pattern_max_abs_value": 3.3400945781653533e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9751703962794732,
+          "pearson_wTRw_unique_triangle": 0.9751703962794733
+        },
+        {
+          "component": 5,
+          "pattern_max_abs_planar_index": 175,
+          "pattern_max_abs_value": -4.86904875385861e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9545887889156969,
+          "pearson_wTRw_unique_triangle": 0.9545887889156973
+        },
+        {
+          "component": 6,
+          "pattern_max_abs_planar_index": 186,
+          "pattern_max_abs_value": -2.81235261553387e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.8933409352385989,
+          "pearson_wTRw_unique_triangle": 0.8933409352386007
+        },
+        {
+          "component": 7,
+          "pattern_max_abs_planar_index": 142,
+          "pattern_max_abs_value": -3.8805579609717286e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9837499122565736,
+          "pearson_wTRw_unique_triangle": 0.9837499122565729
+        },
+        {
+          "component": 8,
+          "pattern_max_abs_planar_index": 141,
+          "pattern_max_abs_value": 4.118363223487093e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.8410094852981613,
+          "pearson_wTRw_unique_triangle": 0.8410094852981604
+        }
+      ],
+      "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+      "extras": {
+        "condition_label_permutation": {
+          "kind": "exact_enumeration",
+          "label": "secondary_condition_label_permutation_not_historical_oracle",
+          "n_permutations": 720,
+          "n_unique_rdms": 15,
+          "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+          "p_maxabs_familywise": [
+            0.13333333333333333,
+            0.8666666666666667,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "p_signed_greater_equal": [
+            0.13333333333333333,
+            0.13333333333333333,
+            0.13333333333333333,
+            0.2,
+            0.2,
+            0.06666666666666667,
+            0.0,
+            0.26666666666666666
+          ]
+        }
+      },
+      "filters_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          361834791118.47943,
+          268937147257.5057,
+          -242614546245.47934,
+          -162728461367.5147,
+          -899795344086.5367,
+          1125739486004.0637,
+          105069533458.16785,
+          -702736564517.7532
+        ],
+        "max": 2625703523234.8394,
+        "mean": -3450623523.7875786,
+        "min": -3053386585201.3843,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 434625380280.99414
+      },
+      "imports_redisca": false,
+      "item_id": "fig15-meg-meaning",
+      "matlab": null,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "n_pairs": 30,
+      "n_planars": 204,
+      "n_reported": 8,
+      "n_samples": 1501,
+      "pair_matrix": "matlab_cov",
+      "pair_sequence_head": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "pairs": "airi_directed_i_neq_j",
+      "paper_qualitative": {
+        "face_peak_ms": null,
+        "n_significant_components_published": 3
+      },
+      "path_label": "historical_candidate_paper_epoch",
+      "patterns_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          -1.1928794665135093e-13,
+          1.5426715548167841e-13,
+          5.800391379923855e-14,
+          7.774200687824223e-15,
+          -1.0776301835968884e-13,
+          6.2845283728381905e-15,
+          -5.4432501823079065e-14,
+          7.195956957031498e-14
+        ],
+        "max": 8.936156729994508e-13,
+        "mean": -3.259160028181275e-15,
+        "min": -1.0098491701304351e-12,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 1.4163864976128611e-13
+      },
+      "peaks": [
+        {
+          "class1_peak_ms_paper_convention": 120.0,
+          "class2_peak_ms_paper_convention": 312.0,
+          "component": 1,
+          "contrast_peak_ms_paper_convention": 315.0,
+          "mean_of_six_conditions_peak_ms": 118.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 1000.0,
+          "class2_peak_ms_paper_convention": 200.0,
+          "component": 2,
+          "contrast_peak_ms_paper_convention": 857.0,
+          "mean_of_six_conditions_peak_ms": 1000.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 497.0,
+          "class2_peak_ms_paper_convention": 753.0,
+          "component": 3,
+          "contrast_peak_ms_paper_convention": 498.0,
+          "mean_of_six_conditions_peak_ms": 551.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 365.0,
+          "class2_peak_ms_paper_convention": 244.0,
+          "component": 4,
+          "contrast_peak_ms_paper_convention": 368.0,
+          "mean_of_six_conditions_peak_ms": 250.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 186.0,
+          "class2_peak_ms_paper_convention": 139.0,
+          "component": 5,
+          "contrast_peak_ms_paper_convention": 126.0,
+          "mean_of_six_conditions_peak_ms": 147.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 1000.0,
+          "class2_peak_ms_paper_convention": 120.0,
+          "component": 6,
+          "contrast_peak_ms_paper_convention": 47.0,
+          "mean_of_six_conditions_peak_ms": 1000.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 314.0,
+          "class2_peak_ms_paper_convention": 412.0,
+          "component": 7,
+          "contrast_peak_ms_paper_convention": 111.0,
+          "mean_of_six_conditions_peak_ms": 341.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 1000.0,
+          "class2_peak_ms_paper_convention": 643.0,
+          "component": 8,
+          "contrast_peak_ms_paper_convention": 239.0,
+          "mean_of_six_conditions_peak_ms": 1000.0
+        }
+      ],
+      "primary_random_phase_p_head": [
+        0.001,
+        0.018,
+        0.061,
+        0.171,
+        0.344,
+        0.444,
+        0.561,
+        0.805
+      ],
+      "rank": 68,
+      "rdm_fill": "airi_numeric",
+      "rdm_name": "meaning",
+      "window_ms": [
+        -500.0,
+        1000.0
+      ]
+    },
+    "tool": {
+      "bandpass": null,
+      "class_labels_airi": {
+        "class1": [
+          2,
+          3
+        ],
+        "class2": [
+          4,
+          5
+        ]
+      },
+      "class_labels_paper": {
+        "class1": [
+          2,
+          3
+        ],
+        "class2": [
+          0,
+          1,
+          4,
+          5
+        ]
+      },
+      "eigenvalues_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          0.8183471094394918,
+          0.8049816476576809,
+          0.7377569827401571,
+          0.6973406043663704,
+          0.6756415067678866,
+          0.644263556338736,
+          0.5249581457931519,
+          0.46983277387736877
+        ],
+        "max": 0.8183471094394918,
+        "mean": 0.01990090895006721,
+        "min": -0.3852287118003975,
+        "n_finite": 68,
+        "n_nonfinite": 0,
+        "shape": [
+          68
+        ],
+        "std": 0.3318316241341766
+      },
+      "eigenvalues_head": [
+        0.8183471094394918,
+        0.8049816476576809,
+        0.7377569827401571,
+        0.6973406043663704,
+        0.6756415067678866,
+        0.644263556338736,
+        0.5249581457931519,
+        0.46983277387736877
+      ],
+      "empirical_rdm": [
+        {
+          "component": 1,
+          "pattern_max_abs_planar_index": 154,
+          "pattern_max_abs_value": -5.994776554221963e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9988911005783926,
+          "pearson_wTRw_unique_triangle": 0.9988911005783926
+        },
+        {
+          "component": 2,
+          "pattern_max_abs_planar_index": 121,
+          "pattern_max_abs_value": -4.927803933509127e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9988777465186113,
+          "pearson_wTRw_unique_triangle": 0.9988777465186113
+        },
+        {
+          "component": 3,
+          "pattern_max_abs_planar_index": 150,
+          "pattern_max_abs_value": 4.568872540480323e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9666063318067833,
+          "pearson_wTRw_unique_triangle": 0.9666063318067835
+        },
+        {
+          "component": 4,
+          "pattern_max_abs_planar_index": 155,
+          "pattern_max_abs_value": -4.369341796553244e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9889809731467438,
+          "pearson_wTRw_unique_triangle": 0.9889809731467439
+        },
+        {
+          "component": 5,
+          "pattern_max_abs_planar_index": 157,
+          "pattern_max_abs_value": 6.756397594216584e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9917731322833574,
+          "pearson_wTRw_unique_triangle": 0.9917731322833575
+        },
+        {
+          "component": 6,
+          "pattern_max_abs_planar_index": 186,
+          "pattern_max_abs_value": 4.1124162533114533e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9707340689078501,
+          "pearson_wTRw_unique_triangle": 0.9707340689078483
+        },
+        {
+          "component": 7,
+          "pattern_max_abs_planar_index": 141,
+          "pattern_max_abs_value": 3.849934594235964e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.9869979329723189,
+          "pearson_wTRw_unique_triangle": 0.9869979329723185
+        },
+        {
+          "component": 8,
+          "pattern_max_abs_planar_index": 164,
+          "pattern_max_abs_value": -1.505313998274197e-13,
+          "pearson_trace_sq_demeaned_unique_triangle": 0.6819481597392738,
+          "pearson_wTRw_unique_triangle": 0.6819481597392729
+        }
+      ],
+      "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+      "extras": {
+        "condition_label_permutation": {
+          "kind": "exact_enumeration",
+          "label": "secondary_condition_label_permutation_not_historical_oracle",
+          "n_permutations": 720,
+          "n_unique_rdms": 15,
+          "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+          "p_maxabs_familywise": [
+            0.5333333333333333,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "p_signed_greater_equal": [
+            0.5333333333333333,
+            0.0,
+            0.0,
+            0.06666666666666667,
+            0.06666666666666667,
+            0.0,
+            0.13333333333333333,
+            0.06666666666666667
+          ]
+        }
+      },
+      "filters_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          415057556300.4505,
+          -342901990497.90454,
+          1004960062310.4962,
+          -273192472261.66098,
+          372954789901.72375,
+          -75979465576.1143,
+          -1864761355375.1516,
+          1438250168775.5537
+        ],
+        "max": 4268067647066.2603,
+        "mean": 202912128.05192387,
+        "min": -4266570404309.797,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 592134246869.4086
+      },
+      "imports_redisca": false,
+      "item_id": "fig14-meg-tool",
+      "matlab": null,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "n_pairs": 30,
+      "n_planars": 204,
+      "n_reported": 8,
+      "n_samples": 1501,
+      "pair_matrix": "matlab_cov",
+      "pair_sequence_head": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "pairs": "airi_directed_i_neq_j",
+      "paper_qualitative": {
+        "face_peak_ms": null,
+        "n_significant_components_published": 3
+      },
+      "path_label": "historical_candidate_paper_epoch",
+      "patterns_fingerprint": {
+        "dtype": "float64",
+        "head": [
+          -3.012500152601385e-13,
+          5.912767157007144e-14,
+          1.480197620019451e-13,
+          5.3698444774151265e-14,
+          5.1084510594448146e-14,
+          9.612225875132198e-14,
+          7.988272493615892e-14,
+          1.036804436224647e-14
+        ],
+        "max": 6.756397594216584e-13,
+        "mean": 8.696492680862902e-15,
+        "min": -5.994776554221963e-13,
+        "n_finite": 1632,
+        "n_nonfinite": 0,
+        "shape": [
+          204,
+          8
+        ],
+        "std": 1.359350729150719e-13
+      },
+      "peaks": [
+        {
+          "class1_peak_ms_paper_convention": 393.0,
+          "class2_peak_ms_paper_convention": 972.0,
+          "component": 1,
+          "contrast_peak_ms_paper_convention": 392.0,
+          "mean_of_six_conditions_peak_ms": 126.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 284.0,
+          "class2_peak_ms_paper_convention": 386.0,
+          "component": 2,
+          "contrast_peak_ms_paper_convention": 810.0,
+          "mean_of_six_conditions_peak_ms": 283.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 314.0,
+          "class2_peak_ms_paper_convention": 393.0,
+          "component": 3,
+          "contrast_peak_ms_paper_convention": 259.0,
+          "mean_of_six_conditions_peak_ms": 333.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 453.0,
+          "class2_peak_ms_paper_convention": 310.0,
+          "component": 4,
+          "contrast_peak_ms_paper_convention": 650.0,
+          "mean_of_six_conditions_peak_ms": 309.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 950.0,
+          "class2_peak_ms_paper_convention": 119.0,
+          "component": 5,
+          "contrast_peak_ms_paper_convention": 116.0,
+          "mean_of_six_conditions_peak_ms": 800.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 295.0,
+          "class2_peak_ms_paper_convention": 253.0,
+          "component": 6,
+          "contrast_peak_ms_paper_convention": 557.0,
+          "mean_of_six_conditions_peak_ms": 299.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 160.0,
+          "class2_peak_ms_paper_convention": 140.0,
+          "component": 7,
+          "contrast_peak_ms_paper_convention": 134.0,
+          "mean_of_six_conditions_peak_ms": 142.0
+        },
+        {
+          "class1_peak_ms_paper_convention": 195.0,
+          "class2_peak_ms_paper_convention": 154.0,
+          "component": 8,
+          "contrast_peak_ms_paper_convention": 918.0,
+          "mean_of_six_conditions_peak_ms": 186.0
+        }
+      ],
+      "primary_random_phase_p_head": [
+        0.006,
+        0.01,
+        0.057,
+        0.107,
+        0.155,
+        0.244,
+        0.82,
+        0.965
+      ],
+      "rank": 68,
+      "rdm_fill": "airi_numeric",
+      "rdm_name": "tool",
+      "window_ms": [
+        -500.0,
+        1000.0
+      ]
+    }
+  },
+  "rng": {
+    "bit_generator": "PCG64",
+    "extra": {
+      "api": "numpy.random.default_rng"
+    },
+    "library": "numpy",
+    "seed": 20240924
+  },
+  "seed_policy": {
+    "api": "numpy.random.default_rng / PCG64, same CLI seed as meg/run.py",
+    "bit_generator": "PCG64",
+    "master_seed": 20240904,
+    "stream_splits": {
+      "airi_executable_random_phase": "seed+3 (existing; JSON reused, not re-drawn)",
+      "airi_pair_order": "seed+10 (existing; not used here)",
+      "historical_candidate_paper_epoch_random_phase": "seed+20 = 20240924; one Generator consumed in RDM order face, tool, meaning, facevstool",
+      "historical_candidate_secondary_label_perm": "seed+21 = 20240925 reserved; secondary test enumerates all 6! = 720 permutations (no RNG)",
+      "paper_faithful_fwer": "seed+2 (existing; not used here)",
+      "paper_faithful_perm": "seed+1 (existing meg/run.py; not used here)"
+    }
+  },
+  "window_ms": [
+    -500.0,
+    1000.0
+  ]
+}

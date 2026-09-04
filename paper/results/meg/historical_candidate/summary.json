@@ -69,7 +69,7 @@
     "recomputed": false,
     "verified": true
   },
-  "command": "reuse",
+  "command": "paper-epoch",
   "estimator": {
     "executable": "common.source_faithful.fit_condition_averages",
     "freeze_B": 1000,
@@ -88,8 +88,145 @@
   },
   "imports_redisca": false,
   "matlab": null,
-  "n170_directed_cov_freeze_reproduces_published_meg_counts_without_airi_extras": null,
-  "paper_epoch": null,
+  "n170_directed_cov_freeze_reproduces_published_meg_counts_without_airi_extras": false,
+  "paper_epoch": {
+    "face": {
+      "class1_peak_ms_comp1": 533.0,
+      "contrast_peak_ms_comp1": 309.0,
+      "eigenvalues_head": [
+        0.8618763046920177,
+        0.7958508612051723,
+        0.6939134091625939,
+        0.6833159325031387
+      ],
+      "empirical_rdm_pearson_comp1": 0.9955917392028117,
+      "item_id": "fig13-meg-face",
+      "mean_of_six_peak_ms_comp1": 275.0,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "primary_p_head": [
+        0.006,
+        0.019,
+        0.114,
+        0.142
+      ],
+      "rank": 68,
+      "secondary_labelperm_p_maxabs_head": [
+        0.0,
+        0.8666666666666667,
+        1.0,
+        1.0
+      ],
+      "secondary_labelperm_p_signed_ge_head": [
+        0.0,
+        0.13333333333333333,
+        0.4,
+        0.13333333333333333
+      ]
+    },
+    "facevstool": {
+      "class1_peak_ms_comp1": 969.0,
+      "contrast_peak_ms_comp1": 566.0,
+      "eigenvalues_head": [
+        0.8076453502568317,
+        0.7658216648708985,
+        0.6967841822308736,
+        0.6538662270597131
+      ],
+      "empirical_rdm_pearson_comp1": 0.9627128378433956,
+      "item_id": "fig17-meg-nonbinary-components",
+      "mean_of_six_peak_ms_comp1": 250.0,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "primary_p_head": [
+        0.01,
+        0.024,
+        0.104,
+        0.191
+      ],
+      "rank": 68,
+      "secondary_labelperm_p_maxabs_head": [
+        0.26666666666666666,
+        0.9333333333333333,
+        1.0,
+        1.0
+      ],
+      "secondary_labelperm_p_signed_ge_head": [
+        0.26666666666666666,
+        0.06666666666666667,
+        0.044444444444444446,
+        0.08888888888888889
+      ]
+    },
+    "meaning": {
+      "class1_peak_ms_comp1": 120.0,
+      "contrast_peak_ms_comp1": 315.0,
+      "eigenvalues_head": [
+        0.8449866831248929,
+        0.787213331768332,
+        0.7305427251575697,
+        0.6682757274558776
+      ],
+      "empirical_rdm_pearson_comp1": 0.9977986553970845,
+      "item_id": "fig15-meg-meaning",
+      "mean_of_six_peak_ms_comp1": 118.0,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "primary_p_head": [
+        0.001,
+        0.018,
+        0.061,
+        0.171
+      ],
+      "rank": 68,
+      "secondary_labelperm_p_maxabs_head": [
+        0.13333333333333333,
+        0.8666666666666667,
+        1.0,
+        1.0
+      ],
+      "secondary_labelperm_p_signed_ge_head": [
+        0.13333333333333333,
+        0.13333333333333333,
+        0.13333333333333333,
+        0.2
+      ]
+    },
+    "tool": {
+      "class1_peak_ms_comp1": 393.0,
+      "contrast_peak_ms_comp1": 392.0,
+      "eigenvalues_head": [
+        0.8183471094394918,
+        0.8049816476576809,
+        0.7377569827401571,
+        0.6973406043663704
+      ],
+      "empirical_rdm_pearson_comp1": 0.9988911005783926,
+      "item_id": "fig14-meg-tool",
+      "mean_of_six_peak_ms_comp1": 126.0,
+      "n_components_p_lt_0.05_all_rank": 2,
+      "n_first3_p_lt_0.05": 2,
+      "primary_p_head": [
+        0.006,
+        0.01,
+        0.057,
+        0.107
+      ],
+      "rank": 68,
+      "secondary_labelperm_p_maxabs_head": [
+        0.5333333333333333,
+        0.8,
+        1.0,
+        1.0
+      ],
+      "secondary_labelperm_p_signed_ge_head": [
+        0.5333333333333333,
+        0.0,
+        0.0,
+        0.06666666666666667
+      ]
+    }
+  },
   "path_label": "historical_candidate",
   "quick": false,
   "reduced_B": false,

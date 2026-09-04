@@ -1,0 +1,306 @@
+{
+  "bandpass": null,
+  "class_labels_airi": {
+    "class1": [
+      0,
+      1
+    ],
+    "class2": [
+      2,
+      3
+    ]
+  },
+  "class_labels_paper": {
+    "class1": [
+      0,
+      1
+    ],
+    "class2": [
+      2,
+      3
+    ]
+  },
+  "eigenvalues_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      0.8076453502568317,
+      0.7658216648708985,
+      0.6967841822308736,
+      0.6538662270597131,
+      0.6043668473915219,
+      0.5554803556892068,
+      0.4773852147008129,
+      0.4514462550649521
+    ],
+    "max": 0.8076453502568317,
+    "mean": 0.017011269312483146,
+    "min": -0.5147340224986594,
+    "n_finite": 68,
+    "n_nonfinite": 0,
+    "shape": [
+      68
+    ],
+    "std": 0.2974244315370662
+  },
+  "eigenvalues_head": [
+    0.8076453502568317,
+    0.7658216648708985,
+    0.6967841822308736,
+    0.6538662270597131,
+    0.6043668473915219,
+    0.5554803556892068,
+    0.4773852147008129,
+    0.4514462550649521
+  ],
+  "empirical_rdm": [
+    {
+      "component": 1,
+      "pattern_max_abs_planar_index": 154,
+      "pattern_max_abs_value": 1.1303876014385758e-12,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9627128378433953,
+      "pearson_wTRw_unique_triangle": 0.9627128378433956
+    },
+    {
+      "component": 2,
+      "pattern_max_abs_planar_index": 151,
+      "pattern_max_abs_value": -5.914066879674402e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.961792789428613,
+      "pearson_wTRw_unique_triangle": 0.9617927894286129
+    },
+    {
+      "component": 3,
+      "pattern_max_abs_planar_index": 180,
+      "pattern_max_abs_value": -5.028440352846274e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9516101886347667,
+      "pearson_wTRw_unique_triangle": 0.9516101886347668
+    },
+    {
+      "component": 4,
+      "pattern_max_abs_planar_index": 157,
+      "pattern_max_abs_value": 8.033511234666672e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9587627480590488,
+      "pearson_wTRw_unique_triangle": 0.9587627480590488
+    },
+    {
+      "component": 5,
+      "pattern_max_abs_planar_index": 132,
+      "pattern_max_abs_value": 3.5722120011591954e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9525712923572617,
+      "pearson_wTRw_unique_triangle": 0.9525712923572622
+    },
+    {
+      "component": 6,
+      "pattern_max_abs_planar_index": 175,
+      "pattern_max_abs_value": -3.8335585149760724e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9546817002627284,
+      "pearson_wTRw_unique_triangle": 0.9546817002627284
+    },
+    {
+      "component": 7,
+      "pattern_max_abs_planar_index": 143,
+      "pattern_max_abs_value": -2.2251682920411197e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9183403707954316,
+      "pearson_wTRw_unique_triangle": 0.9183403707954335
+    },
+    {
+      "component": 8,
+      "pattern_max_abs_planar_index": 156,
+      "pattern_max_abs_value": -3.4095181597847054e-13,
+      "pearson_trace_sq_demeaned_unique_triangle": 0.9234436248488498,
+      "pearson_wTRw_unique_triangle": 0.9234436248488611
+    }
+  ],
+  "estimator": "common.source_faithful.spoc_from_pair_stack (does not import redisca)",
+  "extras": {
+    "condition_label_permutation": {
+      "kind": "exact_enumeration",
+      "label": "secondary_condition_label_permutation_not_historical_oracle",
+      "n_permutations": 720,
+      "n_unique_rdms": 45,
+      "note": "Paper \u00a72.3-style condition-label permutation on the frozen directed+matlab_cov pair stack. PRIMARY remains SPoC random-phase.",
+      "p_maxabs_familywise": [
+        0.26666666666666666,
+        0.9333333333333333,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "p_signed_greater_equal": [
+        0.26666666666666666,
+        0.06666666666666667,
+        0.044444444444444446,
+        0.08888888888888889,
+        0.0,
+        0.06666666666666667,
+        0.17777777777777778,
+        0.06666666666666667
+      ]
+    }
+  },
+  "filters_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      -593260382326.1948,
+      -283258904487.1057,
+      -1581920349705.458,
+      -387973539756.46075,
+      -487205792146.9006,
+      356961251635.8774,
+      1026610671248.5435,
+      -2699014501540.6104
+    ],
+    "max": 4376021286408.6616,
+    "mean": 137225680.36913285,
+    "min": -7407863970644.328,
+    "n_finite": 1632,
+    "n_nonfinite": 0,
+    "shape": [
+      204,
+      8
+    ],
+    "std": 659876000757.7031
+  },
+  "imports_redisca": false,
+  "item_id": "fig17-meg-nonbinary-components",
+  "matlab": null,
+  "n_components_p_lt_0.05_all_rank": 2,
+  "n_first3_p_lt_0.05": 2,
+  "n_pairs": 30,
+  "n_planars": 204,
+  "n_reported": 8,
+  "n_samples": 1501,
+  "pair_matrix": "matlab_cov",
+  "pair_sequence_head": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "pairs": "airi_directed_i_neq_j",
+  "paper_qualitative": {
+    "face_peak_ms": 160.0,
+    "n_significant_components_published": 3
+  },
+  "path_label": "historical_candidate_paper_epoch",
+  "patterns_fingerprint": {
+    "dtype": "float64",
+    "head": [
+      2.6177389467173207e-13,
+      -1.881904692849705e-13,
+      -1.9221766865277937e-13,
+      -9.822761523902509e-14,
+      3.002367197722305e-14,
+      2.240594182304131e-14,
+      -1.4561211311967902e-15,
+      4.176497467655225e-14
+    ],
+    "max": 1.1303876014385758e-12,
+    "mean": -7.841159162962028e-15,
+    "min": -9.70013696768487e-13,
+    "n_finite": 1632,
+    "n_nonfinite": 0,
+    "shape": [
+      204,
+      8
+    ],
+    "std": 1.5254676369862415e-13
+  },
+  "peaks": [
+    {
+      "class1_peak_ms_paper_convention": 969.0,
+      "class2_peak_ms_paper_convention": 248.0,
+      "component": 1,
+      "contrast_peak_ms_paper_convention": 566.0,
+      "mean_of_six_conditions_peak_ms": 250.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 281.0,
+      "class2_peak_ms_paper_convention": 286.0,
+      "component": 2,
+      "contrast_peak_ms_paper_convention": 807.0,
+      "mean_of_six_conditions_peak_ms": 284.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 138.0,
+      "class2_peak_ms_paper_convention": 139.0,
+      "component": 3,
+      "contrast_peak_ms_paper_convention": 289.0,
+      "mean_of_six_conditions_peak_ms": 139.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 113.0,
+      "class2_peak_ms_paper_convention": 164.0,
+      "component": 4,
+      "contrast_peak_ms_paper_convention": 117.0,
+      "mean_of_six_conditions_peak_ms": 802.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 304.0,
+      "class2_peak_ms_paper_convention": 406.0,
+      "component": 5,
+      "contrast_peak_ms_paper_convention": 657.0,
+      "mean_of_six_conditions_peak_ms": 392.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 192.0,
+      "class2_peak_ms_paper_convention": 410.0,
+      "component": 6,
+      "contrast_peak_ms_paper_convention": 18.0,
+      "mean_of_six_conditions_peak_ms": 192.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 172.0,
+      "class2_peak_ms_paper_convention": 955.0,
+      "component": 7,
+      "contrast_peak_ms_paper_convention": 171.0,
+      "mean_of_six_conditions_peak_ms": 956.0
+    },
+    {
+      "class1_peak_ms_paper_convention": 202.0,
+      "class2_peak_ms_paper_convention": 217.0,
+      "component": 8,
+      "contrast_peak_ms_paper_convention": 180.0,
+      "mean_of_six_conditions_peak_ms": 220.0
+    }
+  ],
+  "primary_random_phase_p_head": [
+    0.01,
+    0.024,
+    0.104,
+    0.191,
+    0.36,
+    0.545,
+    0.838,
+    0.913
+  ],
+  "rank": 68,
+  "rdm_fill": "airi_numeric",
+  "rdm_name": "facevstool",
+  "window_ms": [
+    -500.0,
+    1000.0
+  ]
+}

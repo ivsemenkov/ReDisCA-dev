@@ -56,8 +56,22 @@ Same freeze. Condition averages via `meg.prepare` on the full file epoch:
   order face → tool → meaning → facevstool.
 - Secondary: exact 6! = 720 condition-label permutations (no RNG).
 
-**Status at first commit:** code and tests landed; B=1000 paper-epoch run
-follows this commit (see updated numbers below after the run).
+Ran B=1000 (not reduced). Wall time ~13 s. Rank **68** on all four RDMs.
+
+| RDM | rank | λ₁…λ₄ | p (B=1000) | first-3 p<0.05 | n p<0.05 (all rank) | contrast peak c1 | class1 peak c1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| face | 68 | 0.862, 0.796, 0.694, 0.683 | **0.006, 0.019, 0.114, 0.142** | **2** | 2 | 309 ms | 533 ms |
+| tool | 68 | 0.818, 0.805, 0.738, 0.697 | **0.006, 0.010, 0.057, 0.107** | **2** | 2 | 392 ms | 393 ms |
+| meaning | 68 | 0.845, 0.787, 0.731, 0.668 | **0.001, 0.018, 0.061, 0.171** | **2** | 2 | 315 ms | 120 ms |
+| facevstool | 68 | 0.808, 0.766, 0.697, 0.654 | **0.010, 0.024, 0.104, 0.191** | **2** | 2 | 566 ms | 969 ms |
+
+Component 3 sits just above 0.05 (tool 0.057, meaning 0.061, face 0.114,
+facevstool 0.104). Secondary exact-720 label-perm `max|λ|` does **not**
+give three p<0.05 components (face p₁=0 then p₂=0.867; tool p₁=0.533).
+
+Face ~160 ms is not on c1. Face c3 class1 peak 197 ms is the closest
+neighbour among the first three, and c3 is not significant (p=0.114).
+facevstool c4 class2 peak 164 ms (p=0.191). Not force-matched.
 
 ## Comparison vs paper_faithful (previous unique+Gram+label-permutation)
 
@@ -92,20 +106,29 @@ python3 paper/reproduction/meg/historical_candidate/run.py paper-epoch
 - MATLAB: **none**
 - SciPy `filtfilt` on path A only (already stored); path B has no filter
 
-## Path B results (filled after B=1000)
+## Path B results
 
-_Placeholder before the paper-epoch run. Replaced in the results commit._
+See the table under application B. Files: `paper_epoch.json` and
+`paper_epoch_{face,tool,meaning,facevstool}.json`.
 
 ## Does the N170 directed+cov freeze reproduce published MEG counts without AIRI extras?
 
-**Pending path B.** Path A (freeze **with** AIRI window/filter) already
-matches the published **three-component count**. Path B asks whether that
-count survives on the paper epoch without those extras.
+**No.** On the paper epoch (full −500…+1000 ms, no bandpass) the freeze
+yields **two** components with PRIMARY p<0.05 for every RDM, not three.
+Path A (same freeze **plus** AIRI 99–999 ms crop and 0.25–20 Hz filtfilt)
+does match the published three-component **count**. The extras, not the
+N170 pair/matrix freeze alone, are what recover that count.
+
+paper_faithful unique+Gram + label-permutation still yields 0–1 significant
+components under `max|λ|`. Random-phase on directed+cov is the lever that
+moves p₁ (and p₂) below 0.05; the AIRI window/filter is the remaining lever
+for p₃.
 
 ## Honest mismatches / not claimed
 
 - Paper face peak ~160 ms is a qualitative fingerprint, not a tuning target.
-  Path A contrast peaks are ~319/424/499/321 ms (see MEG TRACK_REPORT).
+  Path B face c1 contrast peak is 309 ms (paper_faithful 308 ms). Path A
+  contrast peaks are ~319/424/499/321 ms (MEG TRACK_REPORT).
 - Rank 68 vs author-saved 67 is recorded, not forced.
 - MATLAB `eig` / `rand` / `filtfilt` parity is not claimed.
 - Condition-label permutation remains secondary.
