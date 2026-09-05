@@ -61,8 +61,18 @@ def _empirical_rdm(traces: np.ndarray) -> np.ndarray:
     return rdm
 
 
+class UninformativeTargetRDM(ValueError):
+    """Generated target RDM is constant; stock SPoC standardization refuses it."""
+
+
 def _fit_first_component(averages: np.ndarray, target: np.ndarray) -> dict[str, Any]:
-    model = fit_redisca(averages, target)
+    try:
+        model = fit_redisca(averages, target)
+    except ValueError as exc:
+        message = str(exc)
+        if "uninformative" in message.lower() or "close to zero" in message.lower():
+            raise UninformativeTargetRDM(message) from exc
+        raise
     traces = model.transform(averages)[:, 0, :]
     return {
         "eigenvalues": model.eigenvalues_,
@@ -113,7 +123,22 @@ def run_fig4(
     for mc in range(config.n_mc):
         rng, child_seed, _ = spawned_generator(seed, "fig4", int(round(snr * 1000)), mc)
         draw = simulate_single_source(forward, rng, mixing, config=config, snr=snr)
-        fit = _fit_first_component(draw.averages, draw.d_target)
+        try:
+            fit = _fit_first_component(draw.averages, draw.d_target)
+        except UninformativeTargetRDM as exc:
+            realization_records.append(
+                {
+                    "mc": mc,
+                    "child_seed": child_seed,
+                    "vertex": draw.vertex,
+                    "snr": snr,
+                    "hashes": _record_draw_hashes(draw),
+                    "skipped_uninformative_target_rdm": True,
+                    "skip_reason": str(exc),
+                }
+            )
+            del draw
+            continue
         scan = cosine_abs_scan(fit["pattern0"], forward.gain)
         scores_redisca.append(scan)
         mask = forward.distances_from(draw.vertex) <= config.r_max_m
@@ -156,7 +181,10 @@ def run_fig4(
             )
         del draw
     thresholds = default_thresholds("cosine_abs")
-    roc = roc_from_mc(np.stack(scores_redisca), np.stack(inside), thresholds)
+    if scores_redisca:
+        roc = roc_from_mc(np.stack(scores_redisca), np.stack(inside), thresholds)
+    else:
+        roc = {"auc": None, "tpr_at_fpr_0.01": None, "note": "all MCs skipped"}
     summary = {
         "candidate_id": candidate_id,
         "experiment": "fig4_single_source",
@@ -173,17 +201,23 @@ def run_fig4(
         },
         "config": config.to_dict(),
         "redisca_kwargs": dict(AIRI_SPOC_KWARGS),
-        "redisca_roc": summarize_roc(roc),
-        "redisca_roc_curve": downsample_roc(roc),
-        "mean_loc_error_cm": float(np.mean([x["error_cm"] for x in loc_errors])),
-        "median_loc_error_cm": float(np.median([x["error_cm"] for x in loc_errors])),
+        "redisca_roc": summarize_roc(roc) if scores_redisca else None,
+        "redisca_roc_curve": downsample_roc(roc) if scores_redisca else None,
+        "n_mc_used": int(len(scores_redisca)),
+        "n_mc_skipped_uninformative_rdm": int(sum(
+            1 for rec in realization_records if rec.get("skipped_uninformative_target_rdm")
+        )),
+        "mean_loc_error_cm": float(np.mean([x["error_cm"] for x in loc_errors])) if loc_errors else None,
+        "median_loc_error_cm": float(np.median([x["error_cm"] for x in loc_errors])) if loc_errors else None,
         "example": example,
         "realizations": realization_records,
         "provenance": capture_run(track="simulations", candidate_id=candidate_id, seed=seed),
     }
-    if include_rsa:
+    if include_rsa and inside:
         rsa_summary = {}
         for name, scans in scores_rsa.items():
+            if not scans:
+                continue
             roc_m = roc_from_mc(np.stack(scans), np.stack(inside), default_thresholds("pearson"))
             rsa_summary[name] = summarize_roc(roc_m)
         summary["rsa_roc"] = rsa_summary
@@ -215,7 +249,17 @@ def run_fig5_fig6(
             sliced = subset_conditions_multi(draw, n_cond)
             source_metrics = []
             for p in range(4):
-                fit = _fit_first_component(sliced["averages"], sliced["d_target"][p])
+                try:
+                    fit = _fit_first_component(sliced["averages"], sliced["d_target"][p])
+                except UninformativeTargetRDM as exc:
+                    source_metrics.append(
+                        {
+                            "source": p,
+                            "skipped_uninformative_target_rdm": True,
+                            "skip_reason": str(exc),
+                        }
+                    )
+                    continue
                 pattern = sign_align_to_reference(fit["pattern0"], sliced["g_true"][p])
                 weight = sign_align_to_reference(fit["filter0"], sliced["g_true"][p])
                 scan = cosine_abs_scan(fit["pattern0"], forward.gain)
@@ -283,18 +327,40 @@ def run_fig5_fig6(
         "provenance": capture_run(track="simulations", candidate_id=candidate_id, seed=seed),
     }
     for n_cond, records in by_c.items():
-        errors = [src["loc_error_cm"] for rec in records for src in rec["sources"]]
-        rdm_corrs = [src["rdm_corr"] for rec in records for src in rec["sources"]]
-        pattern_corrs = [src["pattern_corr"] for rec in records for src in rec["sources"]]
-        weight_corrs = [src["weight_corr"] for rec in records for src in rec["sources"]]
+        used = [
+            src
+            for rec in records
+            for src in rec["sources"]
+            if not src.get("skipped_uninformative_target_rdm")
+        ]
+        errors = [src["loc_error_cm"] for src in used]
+        rdm_corrs = [src["rdm_corr"] for src in used]
+        pattern_corrs = [src["pattern_corr"] for src in used]
+        weight_corrs = [src["weight_corr"] for src in used]
+        medians = []
+        for rec in records:
+            vals = [
+                src["loc_error_cm"]
+                for src in rec["sources"]
+                if not src.get("skipped_uninformative_target_rdm")
+            ]
+            if vals:
+                medians.append(float(np.median(vals)))
         summary["by_C"][str(n_cond)] = {
-            "mean_median_error_cm": float(np.mean([
-                np.median([src["loc_error_cm"] for src in rec["sources"]]) for rec in records
-            ])),
-            "frac_error_lt_1cm": float(np.mean(np.asarray(errors) < 1.0)),
-            "mean_rdm_corr": float(np.mean(rdm_corrs)),
-            "mean_pattern_corr": float(np.mean(pattern_corrs)),
-            "mean_weight_corr": float(np.mean(weight_corrs)),
+            "mean_median_error_cm": float(np.mean(medians)) if medians else None,
+            "frac_error_lt_1cm": float(np.mean(np.asarray(errors) < 1.0)) if errors else None,
+            "mean_rdm_corr": float(np.mean(rdm_corrs)) if rdm_corrs else None,
+            "mean_pattern_corr": float(np.mean(pattern_corrs)) if pattern_corrs else None,
+            "mean_weight_corr": float(np.mean(weight_corrs)) if weight_corrs else None,
+            "n_source_fits_used": int(len(used)),
+            "n_source_fits_skipped_uninformative_rdm": int(
+                sum(
+                    1
+                    for rec in records
+                    for src in rec["sources"]
+                    if src.get("skipped_uninformative_target_rdm")
+                )
+            ),
             "realizations": records,
         }
     return summary

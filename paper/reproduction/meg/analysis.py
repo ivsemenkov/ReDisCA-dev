@@ -55,6 +55,7 @@ def analyze_rdm(
     nmc_paper: int = PAPER_TEMPORAL_NMC_ASSUMED,
     run_secondary_perm: bool = True,
     run_temporal: bool = True,
+    run_paper_fwer: bool = True,
 ) -> dict[str, Any]:
     rdm = theoretical_rdm(rdm_name, fill=fill) if fill == "binary" else theoretical_rdm(rdm_name, fill="airi")
     averages = prepared["averages"]
@@ -97,10 +98,6 @@ def analyze_rdm(
         )
     if run_temporal:
         rng_airi, _, _ = spawned_generator(seed, "meg", prepared["candidate_id"], rdm_name, "airi_time")
-        rng_paper, _, _ = spawned_generator(seed, "meg", prepared["candidate_id"], rdm_name, "paper_time")
-        used, labels = prepared["used_trials"], prepared["trial_labels"]
-        # filters_ is (rank, channels); transform used trials
-        filtered = np.einsum("rc,ctn->rtn", model.filters_[:4], used)
         class1, class2 = class_labels(rdm_name, convention="airi")
         idx1 = np.concatenate([prepared["indices"][name] for i, name in enumerate(
             ("face1", "face2", "tool1", "tool2", "nons1", "nons2")
@@ -142,15 +139,6 @@ def analyze_rdm(
             n_components=4,
             indexing="literal",
         )
-        paper_c1, paper_c2 = class_labels(rdm_name, convention="paper")
-        paper_time = paper_timeseries_fwer(
-            filtered,
-            labels,
-            class1=paper_c1,
-            class2=paper_c2,
-            nmc=nmc_paper,
-            rng=rng_paper,
-        )
         time_ms = prepared["time_ms"]
         time_axis = "full_epoch" if prepared["candidate_id"] == "MEG-AIRI" else "analysis_window"
         payload["temporal_airi_corrected"] = {
@@ -183,13 +171,26 @@ def analyze_rdm(
             **payload["temporal_airi_corrected"],
             "note": "Alias of temporal_airi_corrected; not literal MATLAB indexing.",
         }
-        payload["temporal_paper_fwer"] = {
-            "Nmc": nmc_paper,
-            "intervals": [
-                _intervals_ms(paper_time["significant"][k], time_ms)
-                for k in range(paper_time["significant"].shape[0])
-            ],
-        }
+        if run_paper_fwer:
+            rng_paper, _, _ = spawned_generator(seed, "meg", prepared["candidate_id"], rdm_name, "paper_time")
+            used, labels = prepared["used_trials"], prepared["trial_labels"]
+            filtered = np.einsum("rc,ctn->rtn", model.filters_[:4], used)
+            paper_c1, paper_c2 = class_labels(rdm_name, convention="paper")
+            paper_time = paper_timeseries_fwer(
+                filtered,
+                labels,
+                class1=paper_c1,
+                class2=paper_c2,
+                nmc=nmc_paper,
+                rng=rng_paper,
+            )
+            payload["temporal_paper_fwer"] = {
+                "Nmc": nmc_paper,
+                "intervals": [
+                    _intervals_ms(paper_time["significant"][k], time_ms)
+                    for k in range(paper_time["significant"].shape[0])
+                ],
+            }
     return payload
 
 
@@ -201,6 +202,7 @@ def analyze_candidate(
     quick: bool = False,
     run_secondary_perm: bool | None = None,
     run_temporal: bool = True,
+    run_paper_fwer: bool = True,
 ) -> dict[str, Any]:
     candidate_id = prepared["candidate_id"]
     if candidate_id == "MEG-AIRI":
@@ -234,6 +236,7 @@ def analyze_candidate(
             nmc_paper=8 if quick else PAPER_TEMPORAL_NMC_ASSUMED,
             run_secondary_perm=run_secondary_perm,
             run_temporal=run_temporal,
+            run_paper_fwer=run_paper_fwer,
         )
     return {
         "candidate_id": candidate_id,

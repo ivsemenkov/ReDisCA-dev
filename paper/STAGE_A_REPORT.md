@@ -83,7 +83,7 @@ gitignored `.reproduction_data/`.
 
 ```text
 python -m paper.reproduction test
-136 passed
+137 passed
 ```
 
 Historical
@@ -111,7 +111,7 @@ This inventory is the reason there is **no final verdict**.
 | MEG component inference: AIRI / PAPER-1501 / PAPER-1500 × 5 seeds, B=1000 | **Run** |
 | MEG temporal: AIRI-LITERAL-INDEXING and AIRI-CORRECTED-POOLED, Nmc=100, 5 seeds | **Required; companion files in progress** |
 | Fig. 18 MUSIC on *p*<0.05 components (2-D when n_sig=2) | Run for seed 20240904 only; **not** the paper Fig. 17 rule |
-| Fig. 18 MUSIC on the three lowest-*p* components (3-D) | **Required; in progress** (5 seeds × MEG-PAPER-1501 and MEG-AIRI) |
+| Fig. 18 MUSIC on the three lowest-*p* components (3-D) | **Run** (5 seeds × MEG-PAPER-1501 and MEG-AIRI). Selection and patterns are deterministic across seeds. |
 | SIM-P1 Fig. 4, SNR 0.2 and 0.1, seed 20240904, n_mc=100 | **Run** |
 | SIM-P1 Figs 5–6, SNR 0.4, seed 20240904, n_mc=100 | **Run** |
 | SIM-P1 Figs 5–6, SNR 0.2; seeds 20240905–20240908 | **Required; not finished** |
@@ -372,11 +372,20 @@ seeds (`patterns_hash` identical). MEG-AIRI facevstool likewise always
 selects **[0, 1, 2]**; four components are *p*<0.05, so the paper rule
 still takes the three lowest, not all significant ones.
 
-The required paper-described run is `FIG18-MUSIC-LOWESTP`: 3-D MUSIC /
-first-principal-angle scan of those three topographies. Results go to
-`fig18_lowestp_{MEG-*}_seed*.json`. If selection and patterns stay
-identical, MUSIC is computed once and copied with per-seed *p*-values
-rather than recomputed five times.
+**`FIG18-MUSIC-LOWESTP` is now complete** (5 seeds × MEG-PAPER-1501 and
+MEG-AIRI). Selection is `[0, 1, 2]` for every registered seed.
+`patterns_hash` is identical across seeds, so MUSIC was computed once
+per MEG candidate and reused.
+
+| MEG candidate | Selected (lowest *p*) | Selected *p* (seed 20240904) | n_sig *p*<0.05 | Peak | Paper regions? |
+| --- | --- | --- | --- | --- | --- |
+| MEG-PAPER-1501 | 0, 1, 2 | 0.007, 0.021, 0.093 | 2 | vertex 89, left V2 / G_occipital_sup / lateral occipital, subcorr 0.787 | **No** (not rFG / insula / IPS / anterior-central) |
+| MEG-AIRI | 0, 1, 2 | 0.006, 0.010, 0.017 | 4 (paper rule still takes 3, not 4) | vertex 2595, right occipital pole / lateral occipital, subcorr 0.838 | **No** |
+
+Adding the third (non-significant) PAPER-1501 component does **not**
+move the peak off the 2-D *p*<0.05 scan: same vertex 89. The
+paper-described 3-D input therefore still does not recover the published
+Fig. 18 anatomy on this OSF AD overlapping-spheres Gain.
 
 AIRI sLORETA of author-saved `A1(:,4)` and of the local MEG-AIRI
 facevstool pattern peak in lingual / occipital cortex.
@@ -397,8 +406,10 @@ What can be said without pretending the matrix is finished:
   significant.” PAPER-1501 face `n_sig=2` is not.
 - **MEG early timing (partial):** neither finished temporal analysis
   recovers 65 ms. Literal vs corrected AIRI indexing is still running.
-- **Fig. 18:** the *p*<0.05 2-D scan is the wrong input. The 3-D
-  lowest-*p* scan is the paper path and is not yet the basis of a
+- **Fig. 18 (now run on the paper 3-D input):** lowest-*p* three
+  components, deterministic across seeds. Peaks remain occipital (left
+  V2 for PAPER-1501; right occipital pole for AIRI), not the published
+  rFG / insula / IPS set. This is one finished track, not a global
   verdict.
 - **Simulations:** one seed of literal SIM-P1 is far from the published
   ROC / <2 cm picture. That is a reason to finish the review-required

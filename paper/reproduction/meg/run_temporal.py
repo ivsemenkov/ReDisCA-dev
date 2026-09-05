@@ -60,6 +60,7 @@ def main(argv: list[str] | None = None) -> int:
                 quick=args.quick,
                 run_secondary_perm=False,
                 run_temporal=True,
+                run_paper_fwer=False,
             )
             compact = {
                 "candidate_id": candidate_id,

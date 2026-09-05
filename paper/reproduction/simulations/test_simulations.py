@@ -161,6 +161,19 @@ def test_per_epoch_noise_loci_can_change_active_channels():
     assert not np.all(active == active[0])
 
 
+def test_uninformative_target_is_labeled_not_a_library_patch():
+    from paper.reproduction.simulations.run import UninformativeTargetRDM, _fit_first_component
+
+    X = np.random.default_rng(0).standard_normal((4, 6, 20))
+    y = np.ones((4, 4))
+    np.fill_diagonal(y, 0.0)
+    try:
+        _fit_first_component(X, y)
+    except UninformativeTargetRDM:
+        return
+    raise AssertionError("constant off-diagonal RDM must be labeled uninformative")
+
+
 def test_unknown_candidate_is_rejected():
     try:
         config_for_candidate("SIM-P9")
