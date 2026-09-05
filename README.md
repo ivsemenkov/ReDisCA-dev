@@ -75,7 +75,8 @@ ReDisCA(
 | `rank` | `None` | Principal-space rank of `R_bar`. `None` uses the effective numerical rank from `rank_tol`. |
 | `rank_tol` | `1e-6` | Keep directions of `R_bar` with `eigval > rank_tol * max_eigval`. |
 
-`ReDisCA()` with no arguments is the historical default: unique pairs,
+`ReDisCA()` with no arguments preserves the library defaults that were in
+place before the reproduction-oriented switches were added: unique pairs,
 `demean_time=True`, no `1/(T-1)` scale, mean aggregation, and the
 generalized solver.
 
