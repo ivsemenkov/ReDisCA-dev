@@ -108,6 +108,11 @@ class TestSklearnAPI:
         assert model.demean_time is True
         assert cloned.n_components == 2
         assert not hasattr(cloned, "filters_")
+        defaults = ReDisCA().get_params()
+        assert defaults["divide_by_t_minus_1"] is False
+        assert defaults["directed_pairs"] is False
+        assert defaults["aggregation"] == "mean"
+        assert defaults["solver"] == "generalized"
 
     def test_transform_before_fit_raises(self):
         X, y = _structured_data()

@@ -2,8 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
+
+Aggregation = Literal["mean", "sum"]
+SolverName = Literal["generalized", "whitening"]
 
 
 def _reject_bool(value: object, *, name: str) -> None:
@@ -11,6 +16,14 @@ def _reject_bool(value: object, *, name: str) -> None:
         raise TypeError(
             f"{name} must not be a bool; got {value!r}."
         )
+
+
+def _as_bool(value: object, *, name: str) -> bool:
+    if not isinstance(value, (bool, np.bool_)):
+        raise TypeError(
+            f"{name} must be a bool, got {type(value).__name__}."
+        )
+    return bool(value)
 
 
 def _as_finite_array(values: ArrayLike, *, name: str) -> NDArray[np.float64]:
@@ -39,16 +52,39 @@ def validate_estimator_params(
     *,
     n_components: int | None,
     demean_time: object,
+    divide_by_t_minus_1: object,
+    directed_pairs: object,
+    aggregation: object,
+    solver: object,
     rank: int | None,
     rank_tol: float,
-) -> tuple[int | None, bool, int | None, float]:
+) -> tuple[int | None, bool, bool, bool, Aggregation, SolverName, int | None, float]:
     """Validate constructor parameters. Does not depend on data shapes."""
-    if not isinstance(demean_time, (bool, np.bool_)):
+    demean_time = _as_bool(demean_time, name="demean_time")
+    divide_by_t_minus_1 = _as_bool(divide_by_t_minus_1, name="divide_by_t_minus_1")
+    directed_pairs = _as_bool(directed_pairs, name="directed_pairs")
+
+    if not isinstance(aggregation, str):
         raise TypeError(
-            "demean_time must be a bool, "
-            f"got {type(demean_time).__name__}."
+            "aggregation must be 'mean' or 'sum', "
+            f"got {type(aggregation).__name__}."
         )
-    demean_time = bool(demean_time)
+    if aggregation not in ("mean", "sum"):
+        raise ValueError(
+            "aggregation must be 'mean' or 'sum', "
+            f"got {aggregation!r}."
+        )
+
+    if not isinstance(solver, str):
+        raise TypeError(
+            "solver must be 'generalized' or 'whitening', "
+            f"got {type(solver).__name__}."
+        )
+    if solver not in ("generalized", "whitening"):
+        raise ValueError(
+            "solver must be 'generalized' or 'whitening', "
+            f"got {solver!r}."
+        )
 
     if n_components is not None:
         n_components = validate_positive_int(n_components, name="n_components")
@@ -69,7 +105,16 @@ def validate_estimator_params(
             "rank_tol must be a finite real scalar satisfying "
             f"0 < rank_tol < 1, got {rank_tol}."
         )
-    return n_components, demean_time, rank, rank_tol
+    return (
+        n_components,
+        demean_time,
+        divide_by_t_minus_1,
+        directed_pairs,
+        aggregation,
+        solver,
+        rank,
+        rank_tol,
+    )
 
 
 def validate_fit_xy(
@@ -77,6 +122,7 @@ def validate_fit_xy(
     y: ArrayLike | None,
     *,
     demean_time: bool,
+    divide_by_t_minus_1: bool = False,
 ) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
     """Validate condition-average data ``X`` and target RDM ``y``."""
     if y is None:
@@ -110,6 +156,10 @@ def validate_fit_xy(
         raise ValueError(
             "demean_time=True requires at least 2 time samples; "
             "temporal centering of a single sample zeros every pair matrix."
+        )
+    if divide_by_t_minus_1 and n_times < 2:
+        raise ValueError(
+            "divide_by_t_minus_1=True requires at least 2 time samples."
         )
 
     if y_arr.ndim != 2:

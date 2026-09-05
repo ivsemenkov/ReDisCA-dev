@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -12,7 +14,7 @@ from ._core import (
     mean_pair_matrix,
     pair_indices,
     pair_matrices,
-    solve_generalized_eigenproblem,
+    solve_eigenproblem,
     standardize_target,
     vectorize_rdm,
     weighted_centered_mean,
@@ -23,6 +25,9 @@ from ._validation import (
     validate_inverse_U,
     validate_transform_X,
 )
+
+Aggregation = Literal["mean", "sum"]
+SolverName = Literal["generalized", "whitening"]
 
 
 class ReDisCA(TransformerMixin, BaseEstimator):
@@ -42,12 +47,25 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         If True, temporally center each condition-pair difference per channel
         before forming the quadratic pair matrix (MATLAB ``cov`` centering).
         If False, use the uncentered Gram corresponding to the paper's printed
-        squared-Euclidean expression. This flag does not apply a ``1/(T-1)``
-        scale and is not used at transform time.
+        squared-Euclidean expression. This flag is not used at transform time.
+    divide_by_t_minus_1 : bool, default=False
+        If True, divide each pair matrix by ``T-1`` (MATLAB ``cov`` scale).
+        Independent of ``demean_time``. Default omits the scale.
+    directed_pairs : bool, default=False
+        If False, use unique unordered pairs ``i < j``. If True, use every
+        ``i != j`` in AIRI nested-loop order.
+    aggregation : {'mean', 'sum'}, default='mean'
+        How to form the weighted centered matrix ``R_bar_d``. ``mean`` is
+        stock SPoC / the previous library behavior. ``sum`` is the printed
+        paper Eq. 7 convention. ``R_bar`` is always a mean.
+    solver : {'generalized', 'whitening'}, default='generalized'
+        ``generalized`` solves the GEP in the principal subspace of ``R_bar``.
+        ``whitening`` is the stock-SPoC explicit-whitening path. Both share
+        the same rank rule and metric normalization.
     rank : int or None, default=None
-        Principal-space rank of ``R_bar`` used to solve the generalized
-        eigenproblem. ``None`` uses the effective numerical rank defined by
-        ``rank_tol``. This is not the number of ReDisCA output components.
+        Principal-space rank of ``R_bar`` used to solve the eigenproblem.
+        ``None`` uses the effective numerical rank defined by ``rank_tol``.
+        This is not the number of ReDisCA output components.
         If the requested rank exceeds the effective numerical rank, ``fit``
         raises ``ValueError``.
     rank_tol : float, default=1e-6
@@ -73,6 +91,15 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         Number of conditions seen during ``fit``.
     n_times_in_ : int
         Number of time samples seen during ``fit``.
+    r_bar_ : ndarray of shape (n_channels, n_channels)
+        Mean pair matrix (``Cxx``).
+    r_bar_d_ : ndarray of shape (n_channels, n_channels)
+        Weighted centered pair matrix (``Cxxz``).
+    z_ : ndarray of shape (n_pairs,)
+        Standardized target pair vector.
+    centered_pair_stack_ : ndarray of shape (n_pairs, n_channels, n_channels)
+        Pair matrices after subtracting ``r_bar_``. Stored so inference can
+        change the number of surrogates without refitting.
     """
 
     def __init__(
@@ -80,11 +107,19 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         n_components: int | None = None,
         *,
         demean_time: bool = True,
+        divide_by_t_minus_1: bool = False,
+        directed_pairs: bool = False,
+        aggregation: Aggregation = "mean",
+        solver: SolverName = "generalized",
         rank: int | None = None,
         rank_tol: float = 1e-6,
     ) -> None:
         self.n_components = n_components
         self.demean_time = demean_time
+        self.divide_by_t_minus_1 = divide_by_t_minus_1
+        self.directed_pairs = directed_pairs
+        self.aggregation = aggregation
+        self.solver = solver
         self.rank = rank
         self.rank_tol = rank_tol
 
@@ -104,25 +139,51 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         self : ReDisCA
             Fitted estimator.
         """
-        n_components, demean_time, rank, rank_tol = validate_estimator_params(
+        (
+            n_components,
+            demean_time,
+            divide_by_t_minus_1,
+            directed_pairs,
+            aggregation,
+            solver,
+            rank,
+            rank_tol,
+        ) = validate_estimator_params(
             n_components=self.n_components,
             demean_time=self.demean_time,
+            divide_by_t_minus_1=self.divide_by_t_minus_1,
+            directed_pairs=self.directed_pairs,
+            aggregation=self.aggregation,
+            solver=self.solver,
             rank=self.rank,
             rank_tol=self.rank_tol,
         )
-        X_arr, y_arr = validate_fit_xy(X, y, demean_time=demean_time)
+        X_arr, y_arr = validate_fit_xy(
+            X,
+            y,
+            demean_time=demean_time,
+            divide_by_t_minus_1=divide_by_t_minus_1,
+        )
         n_conditions, n_channels, n_times = X_arr.shape
 
-        pairs = pair_indices(n_conditions)
-        pair_stack = pair_matrices(X_arr, pairs, demean_time=demean_time)
+        pairs = pair_indices(n_conditions, directed=directed_pairs)
+        pair_stack = pair_matrices(
+            X_arr,
+            pairs,
+            demean_time=demean_time,
+            divide_by_t_minus_1=divide_by_t_minus_1,
+        )
         target_vec = vectorize_rdm(y_arr, pairs)
         z = standardize_target(target_vec)
         r_bar = mean_pair_matrix(pair_stack)
-        r_bar_d = weighted_centered_mean(pair_stack, r_bar, z)
+        r_bar_d = weighted_centered_mean(
+            pair_stack, r_bar, z, aggregation=aggregation
+        )
 
-        filters, eigenvalues = solve_generalized_eigenproblem(
+        filters, eigenvalues = solve_eigenproblem(
             r_bar_d,
             r_bar,
+            solver=solver,
             rank=rank,
             rank_tol=rank_tol,
         )
@@ -146,6 +207,10 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         self.n_features_in_ = int(n_channels)
         self.n_conditions_ = int(n_conditions)
         self.n_times_in_ = int(n_times)
+        self.r_bar_ = np.asarray(r_bar, dtype=np.float64)
+        self.r_bar_d_ = np.asarray(r_bar_d, dtype=np.float64)
+        self.z_ = np.asarray(z, dtype=np.float64)
+        self.centered_pair_stack_ = np.asarray(pair_stack - r_bar, dtype=np.float64)
         return self
 
     def transform(self, X: ArrayLike) -> NDArray[np.float64]:

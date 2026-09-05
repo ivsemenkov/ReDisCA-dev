@@ -51,6 +51,17 @@ class TestPairIndices:
         assert len(pairs) == len(set(pairs))
         assert all((j, i) not in pairs for i, j in pairs)
 
+    def test_directed_airi_nested_loop_order(self):
+        assert pair_indices(3, directed=True) == [
+            (0, 1),
+            (0, 2),
+            (1, 0),
+            (1, 2),
+            (2, 0),
+            (2, 1),
+        ]
+        assert len(pair_indices(6, directed=True)) == 30
+
 
 class TestPairMatrices:
     def test_demean_false_is_uncentered_gram(self):
@@ -119,6 +130,14 @@ class TestPairMatrices:
                 stacked[k],
                 pair_matrix(X[i], X[j], demean_time=True),
             )
+
+    def test_matlab_cov_scale_is_gram_over_t_minus_1(self):
+        rng = np.random.default_rng(16)
+        x_i = rng.standard_normal((4, 9))
+        x_j = rng.standard_normal((4, 9))
+        gram = pair_matrix(x_i, x_j, demean_time=True)
+        cov = pair_matrix(x_i, x_j, demean_time=True, divide_by_t_minus_1=True)
+        assert_allclose(cov, gram / 8.0)
 
 
 class TestRDMVectorAndStandardization:
@@ -206,6 +225,10 @@ class TestRBarAndRBarD:
         summed = np.sum(z[:, None, None] * (stacked - r_bar), axis=0)
         assert_allclose(r_bar_d, summed / 5.0)
         assert not np.allclose(r_bar_d, summed)
+        assert_allclose(
+            weighted_centered_mean(stacked, r_bar, z, aggregation="sum"),
+            summed,
+        )
 
 
 class TestFullRankGEP:
