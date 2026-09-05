@@ -1,0 +1,853 @@
+{
+  "candidate_id": "MEG-AIRI",
+  "filter": {
+    "fs": 1000.0,
+    "high_hz": 20.0,
+    "low_hz": 0.25,
+    "order": 3
+  },
+  "n_samples": 901,
+  "note": "Temporal-only companion. Component p-values here used a reduced B and must not replace seed*.json random-phase results.",
+  "provenance": {
+    "candidate_id": "MEG-AIRI",
+    "environment": {
+      "airi_sha": "15bc19cdc76989da202714b257f6de4d26a42c51",
+      "captured_at_utc": "2026-09-05T20:01:44.666508+00:00",
+      "erp_core_sha": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+      "library_main_sha_expected": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "library_main_sha_observed": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "machine": "x86_64",
+      "matlab": null,
+      "note": "Stage A uses current-main redisca.ReDisCA with the frozen AIRI-SPoC kwargs. MATLAB is not assumed; NumPy RNG is not MATLAB rand bitwise parity. library_main_sha_observed is the pinned main commit when present; working_branch_sha is HEAD.",
+      "packages": {
+        "numpy": "2.4.4",
+        "redisca": "0.1.0",
+        "scikit-learn": "1.9.0",
+        "scipy": "1.18.1"
+      },
+      "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "redisca_kwargs": {
+        "aggregation": "mean",
+        "demean_time": true,
+        "directed_pairs": true,
+        "divide_by_t_minus_1": true,
+        "n_components": null,
+        "rank": null,
+        "rank_tol": 1e-06,
+        "solver": "whitening"
+      },
+      "redisca_src_differs_from_pinned_main": false,
+      "spoc_sha": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+      "working_branch_sha": "f49410b7efb8fd09f6da7f2cfdb3d188c6a32c40"
+    },
+    "redisca_kwargs": {
+      "aggregation": "mean",
+      "demean_time": true,
+      "directed_pairs": true,
+      "divide_by_t_minus_1": true,
+      "n_components": null,
+      "rank": null,
+      "rank_tol": 1e-06,
+      "solver": "whitening"
+    },
+    "seed": 20240907,
+    "track": "meg_temporal"
+  },
+  "quick_non_reproduction": false,
+  "rdms": {
+    "face_airi": {
+      "eigenvalues": [
+        0.8800088554166366,
+        0.8586296576606919,
+        0.83328401770824,
+        0.8062630690754821,
+        0.7870465458072603,
+        0.7257470169897475
+      ],
+      "p_random_phase_reduced_B_DO_NOT_REPORT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "paper_qualitative": {
+        "comp1": "differential from 65 ms; peak 160 ms; rises again from 311 ms",
+        "comp2": "first significance 218 ms",
+        "comp3": "late sustained from 273 ms"
+      },
+      "temporal_airi_corrected": {
+        "Nmc": 100,
+        "indexing": "corrected_pooled",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 255.0,
+              "t_end_ms": 348.0,
+              "t_start_ms": 255.0
+            },
+            {
+              "peak_ms": 384.0,
+              "t_end_ms": 410.0,
+              "t_start_ms": 384.0
+            },
+            {
+              "peak_ms": 421.0,
+              "t_end_ms": 574.0,
+              "t_start_ms": 421.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 156.0,
+              "t_end_ms": 200.0,
+              "t_start_ms": 156.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 344.0,
+              "t_end_ms": 375.0,
+              "t_start_ms": 344.0
+            },
+            {
+              "peak_ms": 403.0,
+              "t_end_ms": 427.0,
+              "t_start_ms": 403.0
+            },
+            {
+              "peak_ms": 457.0,
+              "t_end_ms": 478.0,
+              "t_start_ms": 457.0
+            }
+          ],
+          [
+            {
+              "peak_ms": -171.0,
+              "t_end_ms": -137.0,
+              "t_start_ms": -171.0
+            },
+            {
+              "peak_ms": 288.0,
+              "t_end_ms": 383.0,
+              "t_start_ms": 288.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 953.0,
+              "t_end_ms": 969.0,
+              "t_start_ms": 953.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 904.0,
+              "t_end_ms": 917.0,
+              "t_start_ms": 904.0
+            }
+          ],
+          [],
+          [
+            {
+              "peak_ms": 765.0,
+              "t_end_ms": 803.0,
+              "t_start_ms": 765.0
+            },
+            {
+              "peak_ms": 852.0,
+              "t_end_ms": 876.0,
+              "t_start_ms": 852.0
+            }
+          ]
+        ],
+        "role": "airi_corrected_pooled_intent",
+        "time_axis": "full_epoch"
+      },
+      "temporal_airi_literal": {
+        "Nmc": 100,
+        "indexing": "literal",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 250.0,
+              "t_end_ms": 358.0,
+              "t_start_ms": 250.0
+            },
+            {
+              "peak_ms": 369.0,
+              "t_end_ms": 578.0,
+              "t_start_ms": 369.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 149.0,
+              "t_end_ms": 207.0,
+              "t_start_ms": 149.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 341.0,
+              "t_end_ms": 386.0,
+              "t_start_ms": 341.0
+            },
+            {
+              "peak_ms": 391.0,
+              "t_end_ms": 494.0,
+              "t_start_ms": 391.0
+            }
+          ],
+          [
+            {
+              "peak_ms": -168.0,
+              "t_end_ms": -138.0,
+              "t_start_ms": -168.0
+            },
+            {
+              "peak_ms": 290.0,
+              "t_end_ms": 382.0,
+              "t_start_ms": 290.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [],
+          [
+            {
+              "peak_ms": 898.0,
+              "t_end_ms": 922.0,
+              "t_start_ms": 898.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 109.0,
+              "t_end_ms": 117.0,
+              "t_start_ms": 109.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 764.0,
+              "t_end_ms": 804.0,
+              "t_start_ms": 764.0
+            },
+            {
+              "peak_ms": 848.0,
+              "t_end_ms": 879.0,
+              "t_start_ms": 848.0
+            }
+          ]
+        ],
+        "role": "literal_airi_executable_indexing",
+        "time_axis": "full_epoch"
+      },
+      "temporal_paper_fwer": null
+    },
+    "facevstool_airi": {
+      "eigenvalues": [
+        0.8476544145094812,
+        0.8311743538745548,
+        0.8099339276131413,
+        0.7819994246805821,
+        0.7454987134691369,
+        0.6925238548789867
+      ],
+      "p_random_phase_reduced_B_DO_NOT_REPORT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.125
+      ],
+      "paper_qualitative": {
+        "comp1": "tools vs faces from 202 ms"
+      },
+      "temporal_airi_corrected": {
+        "Nmc": 100,
+        "indexing": "corrected_pooled",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 269.0,
+              "t_end_ms": 329.0,
+              "t_start_ms": 269.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 745.0,
+              "t_end_ms": 766.0,
+              "t_start_ms": 745.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 345.0,
+              "t_end_ms": 419.0,
+              "t_start_ms": 345.0
+            },
+            {
+              "peak_ms": 440.0,
+              "t_end_ms": 584.0,
+              "t_start_ms": 440.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 294.0,
+              "t_end_ms": 329.0,
+              "t_start_ms": 294.0
+            },
+            {
+              "peak_ms": 979.0,
+              "t_end_ms": 988.0,
+              "t_start_ms": 979.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [],
+          [
+            {
+              "peak_ms": 123.0,
+              "t_end_ms": 204.0,
+              "t_start_ms": 123.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 263.0,
+              "t_end_ms": 305.0,
+              "t_start_ms": 263.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 110.0,
+              "t_end_ms": 131.0,
+              "t_start_ms": 110.0
+            },
+            {
+              "peak_ms": 194.0,
+              "t_end_ms": 255.0,
+              "t_start_ms": 194.0
+            }
+          ]
+        ],
+        "role": "airi_corrected_pooled_intent",
+        "time_axis": "full_epoch"
+      },
+      "temporal_airi_literal": {
+        "Nmc": 100,
+        "indexing": "literal",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 264.0,
+              "t_end_ms": 333.0,
+              "t_start_ms": 264.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 736.0,
+              "t_end_ms": 769.0,
+              "t_start_ms": 736.0
+            },
+            {
+              "peak_ms": 806.0,
+              "t_end_ms": 817.0,
+              "t_start_ms": 806.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 340.0,
+              "t_end_ms": 588.0,
+              "t_start_ms": 340.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 291.0,
+              "t_end_ms": 339.0,
+              "t_start_ms": 291.0
+            },
+            {
+              "peak_ms": 976.0,
+              "t_end_ms": 988.0,
+              "t_start_ms": 976.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 188.0,
+              "t_end_ms": 216.0,
+              "t_start_ms": 188.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 101.0,
+              "t_end_ms": 207.0,
+              "t_start_ms": 101.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 229.0,
+              "t_end_ms": 308.0,
+              "t_start_ms": 229.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 107.0,
+              "t_end_ms": 134.0,
+              "t_start_ms": 107.0
+            },
+            {
+              "peak_ms": 192.0,
+              "t_end_ms": 258.0,
+              "t_start_ms": 192.0
+            }
+          ]
+        ],
+        "role": "literal_airi_executable_indexing",
+        "time_axis": "full_epoch"
+      },
+      "temporal_paper_fwer": null
+    },
+    "meaning_airi": {
+      "eigenvalues": [
+        0.8739096362037366,
+        0.8549973521984761,
+        0.8315849817495699,
+        0.8119333660748328,
+        0.771783120735607,
+        0.6831652623077337
+      ],
+      "p_random_phase_reduced_B_DO_NOT_REPORT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.125
+      ],
+      "paper_qualitative": {
+        "comp1": "from 160 ms",
+        "comp3": "early 182 ms and late 675 ms"
+      },
+      "temporal_airi_corrected": {
+        "Nmc": 100,
+        "indexing": "corrected_pooled",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 295.0,
+              "t_end_ms": 561.0,
+              "t_start_ms": 295.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 230.0,
+              "t_end_ms": 373.0,
+              "t_start_ms": 230.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 213.0,
+              "t_end_ms": 325.0,
+              "t_start_ms": 213.0
+            },
+            {
+              "peak_ms": 660.0,
+              "t_end_ms": 680.0,
+              "t_start_ms": 660.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 69.0,
+              "t_end_ms": 109.0,
+              "t_start_ms": 69.0
+            },
+            {
+              "peak_ms": 154.0,
+              "t_end_ms": 286.0,
+              "t_start_ms": 154.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 690.0,
+              "t_end_ms": 899.0,
+              "t_start_ms": 690.0
+            },
+            {
+              "peak_ms": 917.0,
+              "t_end_ms": 950.0,
+              "t_start_ms": 917.0
+            }
+          ],
+          [],
+          [
+            {
+              "peak_ms": 366.0,
+              "t_end_ms": 431.0,
+              "t_start_ms": 366.0
+            },
+            {
+              "peak_ms": 896.0,
+              "t_end_ms": 956.0,
+              "t_start_ms": 896.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 502.0,
+              "t_end_ms": 530.0,
+              "t_start_ms": 502.0
+            },
+            {
+              "peak_ms": 536.0,
+              "t_end_ms": 661.0,
+              "t_start_ms": 536.0
+            },
+            {
+              "peak_ms": 697.0,
+              "t_end_ms": 717.0,
+              "t_start_ms": 697.0
+            }
+          ]
+        ],
+        "role": "airi_corrected_pooled_intent",
+        "time_axis": "full_epoch"
+      },
+      "temporal_airi_literal": {
+        "Nmc": 100,
+        "indexing": "literal",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 296.0,
+              "t_end_ms": 560.0,
+              "t_start_ms": 296.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 231.0,
+              "t_end_ms": 372.0,
+              "t_start_ms": 231.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 224.0,
+              "t_end_ms": 324.0,
+              "t_start_ms": 224.0
+            },
+            {
+              "peak_ms": 665.0,
+              "t_end_ms": 676.0,
+              "t_start_ms": 665.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 72.0,
+              "t_end_ms": 108.0,
+              "t_start_ms": 72.0
+            },
+            {
+              "peak_ms": 155.0,
+              "t_end_ms": 286.0,
+              "t_start_ms": 155.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 693.0,
+              "t_end_ms": 807.0,
+              "t_start_ms": 693.0
+            },
+            {
+              "peak_ms": 821.0,
+              "t_end_ms": 890.0,
+              "t_start_ms": 821.0
+            },
+            {
+              "peak_ms": 924.0,
+              "t_end_ms": 945.0,
+              "t_start_ms": 924.0
+            }
+          ],
+          [],
+          [
+            {
+              "peak_ms": 367.0,
+              "t_end_ms": 430.0,
+              "t_start_ms": 367.0
+            },
+            {
+              "peak_ms": 899.0,
+              "t_end_ms": 953.0,
+              "t_start_ms": 899.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 506.0,
+              "t_end_ms": 522.0,
+              "t_start_ms": 506.0
+            },
+            {
+              "peak_ms": 543.0,
+              "t_end_ms": 658.0,
+              "t_start_ms": 543.0
+            },
+            {
+              "peak_ms": 702.0,
+              "t_end_ms": 713.0,
+              "t_start_ms": 702.0
+            }
+          ]
+        ],
+        "role": "literal_airi_executable_indexing",
+        "time_axis": "full_epoch"
+      },
+      "temporal_paper_fwer": null
+    },
+    "tool_airi": {
+      "eigenvalues": [
+        0.8732351254323008,
+        0.8605053471467276,
+        0.8337377920963539,
+        0.8225085197675013,
+        0.7665968847985072,
+        0.7554199498756908
+      ],
+      "p_random_phase_reduced_B_DO_NOT_REPORT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.25,
+        0.25
+      ],
+      "paper_qualitative": {
+        "comp1": "210 ms",
+        "comp3": "from ~240 ms"
+      },
+      "temporal_airi_corrected": {
+        "Nmc": 100,
+        "indexing": "corrected_pooled",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 104.0,
+              "t_end_ms": 148.0,
+              "t_start_ms": 104.0
+            },
+            {
+              "peak_ms": 425.0,
+              "t_end_ms": 441.0,
+              "t_start_ms": 425.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 385.0,
+              "t_end_ms": 415.0,
+              "t_start_ms": 385.0
+            },
+            {
+              "peak_ms": 509.0,
+              "t_end_ms": 523.0,
+              "t_start_ms": 509.0
+            },
+            {
+              "peak_ms": 570.0,
+              "t_end_ms": 665.0,
+              "t_start_ms": 570.0
+            },
+            {
+              "peak_ms": 706.0,
+              "t_end_ms": 722.0,
+              "t_start_ms": 706.0
+            },
+            {
+              "peak_ms": 920.0,
+              "t_end_ms": 932.0,
+              "t_start_ms": 920.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 493.0,
+              "t_end_ms": 527.0,
+              "t_start_ms": 493.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 385.0,
+              "t_end_ms": 427.0,
+              "t_start_ms": 385.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 585.0,
+              "t_end_ms": 687.0,
+              "t_start_ms": 585.0
+            },
+            {
+              "peak_ms": 714.0,
+              "t_end_ms": 730.0,
+              "t_start_ms": 714.0
+            },
+            {
+              "peak_ms": 813.0,
+              "t_end_ms": 817.0,
+              "t_start_ms": 813.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 83.0,
+              "t_end_ms": 277.0,
+              "t_start_ms": 83.0
+            }
+          ],
+          [],
+          [
+            {
+              "peak_ms": 213.0,
+              "t_end_ms": 331.0,
+              "t_start_ms": 213.0
+            }
+          ]
+        ],
+        "role": "airi_corrected_pooled_intent",
+        "time_axis": "full_epoch"
+      },
+      "temporal_airi_literal": {
+        "Nmc": 100,
+        "indexing": "literal",
+        "intervals_pminus": [
+          [
+            {
+              "peak_ms": 106.0,
+              "t_end_ms": 147.0,
+              "t_start_ms": 106.0
+            },
+            {
+              "peak_ms": 425.0,
+              "t_end_ms": 440.0,
+              "t_start_ms": 425.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 384.0,
+              "t_end_ms": 416.0,
+              "t_start_ms": 384.0
+            },
+            {
+              "peak_ms": 508.0,
+              "t_end_ms": 524.0,
+              "t_start_ms": 508.0
+            },
+            {
+              "peak_ms": 569.0,
+              "t_end_ms": 666.0,
+              "t_start_ms": 569.0
+            },
+            {
+              "peak_ms": 705.0,
+              "t_end_ms": 723.0,
+              "t_start_ms": 705.0
+            },
+            {
+              "peak_ms": 919.0,
+              "t_end_ms": 933.0,
+              "t_start_ms": 919.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 490.0,
+              "t_end_ms": 532.0,
+              "t_start_ms": 490.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 384.0,
+              "t_end_ms": 427.0,
+              "t_start_ms": 384.0
+            }
+          ]
+        ],
+        "intervals_pplus": [
+          [
+            {
+              "peak_ms": 583.0,
+              "t_end_ms": 738.0,
+              "t_start_ms": 583.0
+            },
+            {
+              "peak_ms": 807.0,
+              "t_end_ms": 823.0,
+              "t_start_ms": 807.0
+            }
+          ],
+          [
+            {
+              "peak_ms": 81.0,
+              "t_end_ms": 279.0,
+              "t_start_ms": 81.0
+            }
+          ],
+          [],
+          [
+            {
+              "peak_ms": 211.0,
+              "t_end_ms": 332.0,
+              "t_start_ms": 211.0
+            }
+          ]
+        ],
+        "role": "literal_airi_executable_indexing",
+        "time_axis": "full_epoch"
+      },
+      "temporal_paper_fwer": null
+    }
+  },
+  "seed": 20240907,
+  "window_ms": [
+    99.0,
+    999.0
+  ]
+}
