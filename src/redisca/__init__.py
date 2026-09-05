@@ -6,10 +6,13 @@ target representational dissimilarity matrix (RDM).
 """
 
 from ._redisca import ReDisCA
+from .inference import RandomPhaseResult, random_phase_test
 
 __version__ = "0.1.0"
 
 __all__ = [
     "ReDisCA",
+    "RandomPhaseResult",
+    "random_phase_test",
     "__version__",
 ]

@@ -116,6 +116,21 @@ class TestIndependentSPoCEquivalence:
         reconstruction_ref = ref_patterns.T @ ref_filters
         assert_allclose(reconstruction_ours, reconstruction_ref, rtol=1e-6, atol=1e-8)
 
+    def test_scaled_whitening_solver_matches_independent_spoc(self):
+        X, y = _structured_problem()
+        ref_filters, ref_patterns, ref_lambdas = _independent_spoc(X, y)
+        model = ReDisCA(
+            demean_time=True,
+            divide_by_t_minus_1=True,
+            solver="whitening",
+        ).fit(X, y)
+        assert model.rank_ == ref_filters.shape[0]
+        assert_allclose(model.eigenvalues_, ref_lambdas, rtol=1e-8, atol=1e-10)
+        aligned_filters = _align_rows(ref_filters, model.filters_)
+        aligned_patterns = _align_rows(ref_patterns, model.patterns_)
+        assert_allclose(aligned_filters, ref_filters, rtol=1e-6, atol=1e-8)
+        assert_allclose(aligned_patterns, ref_patterns, rtol=1e-6, atol=1e-8)
+
 
 class TestDemeanFalseIsNotSPoC:
     def test_uncentered_grams_are_not_matlab_cov_equivalent(self):
