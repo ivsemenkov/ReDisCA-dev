@@ -82,6 +82,12 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         Generalized eigenvalues, sorted in signed descending order.
     rank_ : int
         Principal-space rank actually used to solve the eigenproblem.
+    aggregation_ : {'mean', 'sum'}
+        Aggregation used when forming ``r_bar_d_`` during ``fit``.
+    solver_ : {'generalized', 'whitening'}
+        Eigenproblem solver used during ``fit``.
+    rank_tol_ : float
+        Relative eigenvalue threshold used during ``fit``.
     n_components_ : int
         Number of leading components used by ``transform`` and
         ``inverse_transform``.
@@ -203,6 +209,9 @@ class ReDisCA(TransformerMixin, BaseEstimator):
         self.patterns_ = np.asarray(patterns.T, dtype=np.float64)
         self.eigenvalues_ = np.asarray(eigenvalues, dtype=np.float64)
         self.rank_ = used_rank
+        self.aggregation_ = aggregation
+        self.solver_ = solver
+        self.rank_tol_ = rank_tol
         self.n_components_ = n_components_
         self.n_features_in_ = int(n_channels)
         self.n_conditions_ = int(n_conditions)

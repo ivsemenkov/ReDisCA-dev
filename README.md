@@ -120,8 +120,9 @@ patterns_.shape == (rank_, n_channels)
 `n_components` only slices `transform` / `inverse_transform`; the full
 decomposition remains in `filters_`, `patterns_`, and `eigenvalues_`.
 
-`fit` also stores `r_bar_`, `r_bar_d_`, `z_`, and `centered_pair_stack_`
-so inference can reuse the fitted state.
+`fit` also stores `r_bar_`, `r_bar_d_`, `z_`, `centered_pair_stack_`,
+`aggregation_`, `solver_`, and `rank_tol_` so inference can reuse the
+fitted state rather than mutable constructor parameters.
 
 ## Inference
 
