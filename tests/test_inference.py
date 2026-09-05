@@ -80,7 +80,7 @@ class TestRandomPhaseTest:
 
         rng = np.random.default_rng(0)
         subspace = metric_subspace(
-            model.r_bar_, rank=model.rank, rank_tol=model.rank_tol
+            model.r_bar_, rank=model.rank_, rank_tol=model.rank_tol_
         )
         amplitudes = None
         expected_null = np.empty(5)
@@ -88,9 +88,9 @@ class TestRandomPhaseTest:
         for index in range(5):
             z_s, amplitudes = random_phase_surrogate(z, rng, amplitudes=amplitudes)
             cxxz_s = weighted_aggregate(
-                model.centered_pair_stack_, z_s, aggregation=model.aggregation
+                model.centered_pair_stack_, z_s, aggregation=model.aggregation_
             )
-            evals = subspace_eigenvalues(cxxz_s, subspace, solver=model.solver)
+            evals = subspace_eigenvalues(cxxz_s, subspace, solver=model.solver_)
             expected_null[index] = float(np.max(np.abs(evals)))
         assert_allclose(result.null_statistic, expected_null)
 
@@ -145,6 +145,42 @@ class TestRandomPhaseTest:
         assert np.all(
             np.isclose(result.p_values * 20.0, np.round(result.p_values * 20.0))
         )
+
+    def test_inference_ignores_constructor_params_changed_after_fit(self):
+        X, y = structured_problem(seed=8)
+        model = ReDisCA(
+            aggregation="sum",
+            solver="whitening",
+            rank=None,
+            rank_tol=1e-5,
+        ).fit(X, y)
+
+        assert model.aggregation_ == "sum"
+        assert model.solver_ == "whitening"
+        assert model.rank_tol_ == 1e-5
+        assert model.rank_ == model.filters_.shape[0]
+        assert model.rank_ > 1
+
+        first = random_phase_test(model, n_surrogates=12, random_state=7)
+
+        model.set_params(
+            aggregation="mean",
+            solver="generalized",
+            rank_tol=0.5,
+            rank=1,
+        )
+        assert model.aggregation_ == "sum"
+        assert model.solver_ == "whitening"
+        assert model.rank_tol_ == 1e-5
+        assert model.rank_ > 1
+        assert model.aggregation == "mean"
+        assert model.solver == "generalized"
+        assert model.rank_tol == 0.5
+        assert model.rank == 1
+
+        second = random_phase_test(model, n_surrogates=12, random_state=7)
+        assert_array_equal(first.p_values, second.p_values)
+        assert_array_equal(first.null_statistic, second.null_statistic)
 
     def test_deterministic_for_fixed_python_random_state(self):
         X, y = snapshot_problem()

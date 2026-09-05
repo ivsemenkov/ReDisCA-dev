@@ -1,8 +1,9 @@
 """Statistical inference helpers that operate on an already fitted ReDisCA.
 
 These routines must not refit the estimator. Changing the number of
-surrogates reuses the fitted ``Cxx``, pair stack, standardized target, and
-rank/whitening.
+surrogates reuses the fitted ``Cxx``, pair stack, standardized target,
+aggregation, solver, and rank/whitening. Constructor parameters are not
+used to define the surrogate distribution.
 """
 
 from __future__ import annotations
@@ -102,23 +103,34 @@ def random_phase_test(
     """Stock-SPoC random-phase significance test on a fitted ReDisCA.
 
     The observed model is not refitted. Each surrogate randomizes the phase
-    of the stored standardized target, rebuilds only the weighted matrix,
-    and recomputes the eigenspectrum in the fitted ``Cxx`` subspace.
+    of the stored standardized target, rebuilds only the weighted matrix
+    with the fitted ``aggregation_``, and recomputes the eigenspectrum in
+    the fitted ``Cxx`` subspace using ``rank_``, ``rank_tol_``, and
+    ``solver_``. Mutable constructor parameters are ignored.
 
     The null statistic is ``max(abs(lambda_surrogate))``. Component p-values
     are ``count(null >= abs(lambda_observed)) / B`` with no ``+1`` correction.
     """
     check_is_fitted(
         estimator,
-        ["eigenvalues_", "r_bar_", "z_", "centered_pair_stack_", "rank_"],
+        [
+            "eigenvalues_",
+            "r_bar_",
+            "z_",
+            "centered_pair_stack_",
+            "rank_",
+            "aggregation_",
+            "solver_",
+            "rank_tol_",
+        ],
     )
     n_surrogates = validate_positive_int(n_surrogates, name="n_surrogates")
     rng = _as_generator(random_state)
 
     subspace = metric_subspace(
         estimator.r_bar_,
-        rank=estimator.rank,
-        rank_tol=estimator.rank_tol,
+        rank=estimator.rank_,
+        rank_tol=estimator.rank_tol_,
     )
     if subspace.used_rank != int(estimator.rank_):
         raise RuntimeError(
@@ -136,10 +148,10 @@ def random_phase_test(
         cxxz_s = weighted_aggregate(
             estimator.centered_pair_stack_,
             z_surrogate,
-            aggregation=estimator.aggregation,
+            aggregation=estimator.aggregation_,
         )
         evals = subspace_eigenvalues(
-            cxxz_s, subspace, solver=estimator.solver
+            cxxz_s, subspace, solver=estimator.solver_
         )
         null_statistic[index] = float(np.max(np.abs(evals)))
 
