@@ -119,7 +119,7 @@ def analyze_rdm(
             airi_time_ms = prepared["time_ms"]
         std_map = np.std(std_source, axis=2, ddof=1)
         std_planars = std_source / np.maximum(std_map[..., None], 1e-12)
-        airi_time = airi_halfsplit_timecourse(
+        airi_corrected = airi_halfsplit_timecourse(
             std_planars,
             idx1,
             idx2,
@@ -127,6 +127,20 @@ def analyze_rdm(
             nmc=nmc_airi,
             rng=rng_airi,
             n_components=4,
+            indexing="corrected_pooled",
+        )
+        rng_airi_lit, _, _ = spawned_generator(
+            seed, "meg", prepared["candidate_id"], rdm_name, "airi_time_literal"
+        )
+        airi_literal = airi_halfsplit_timecourse(
+            std_planars,
+            idx1,
+            idx2,
+            model.filters_,
+            nmc=nmc_airi,
+            rng=rng_airi_lit,
+            n_components=4,
+            indexing="literal",
         )
         paper_c1, paper_c2 = class_labels(rdm_name, convention="paper")
         paper_time = paper_timeseries_fwer(
@@ -138,15 +152,36 @@ def analyze_rdm(
             rng=rng_paper,
         )
         time_ms = prepared["time_ms"]
-        payload["temporal_airi"] = {
+        time_axis = "full_epoch" if prepared["candidate_id"] == "MEG-AIRI" else "analysis_window"
+        payload["temporal_airi_corrected"] = {
             "Nmc": nmc_airi,
-            "time_axis": "full_epoch" if prepared["candidate_id"] == "MEG-AIRI" else "analysis_window",
+            "indexing": "corrected_pooled",
+            "role": "airi_corrected_pooled_intent",
+            "time_axis": time_axis,
             "intervals_pplus": [
-                _intervals_ms(airi_time["asterisk_positive"][k], airi_time_ms) for k in range(4)
+                _intervals_ms(airi_corrected["asterisk_positive"][k], airi_time_ms) for k in range(4)
             ],
             "intervals_pminus": [
-                _intervals_ms(airi_time["asterisk_negative"][k], airi_time_ms) for k in range(4)
+                _intervals_ms(airi_corrected["asterisk_negative"][k], airi_time_ms) for k in range(4)
             ],
+        }
+        payload["temporal_airi_literal"] = {
+            "Nmc": nmc_airi,
+            "indexing": "literal",
+            "role": "literal_airi_executable_indexing",
+            "time_axis": time_axis,
+            "intervals_pplus": [
+                _intervals_ms(airi_literal["asterisk_positive"][k], airi_time_ms) for k in range(4)
+            ],
+            "intervals_pminus": [
+                _intervals_ms(airi_literal["asterisk_negative"][k], airi_time_ms) for k in range(4)
+            ],
+        }
+        # Backward-compatible alias: previous files stored the corrected intent
+        # under this key and incorrectly labeled it "literal AIRI".
+        payload["temporal_airi"] = {
+            **payload["temporal_airi_corrected"],
+            "note": "Alias of temporal_airi_corrected; not literal MATLAB indexing.",
         }
         payload["temporal_paper_fwer"] = {
             "Nmc": nmc_paper,
@@ -164,6 +199,8 @@ def analyze_candidate(
     seed: int,
     n_surrogates: int = RANDOM_PHASE_B,
     quick: bool = False,
+    run_secondary_perm: bool | None = None,
+    run_temporal: bool = True,
 ) -> dict[str, Any]:
     candidate_id = prepared["candidate_id"]
     if candidate_id == "MEG-AIRI":
@@ -182,6 +219,8 @@ def analyze_candidate(
         jobs = [("face", "binary"), ("tool", "binary"), ("meaning", "binary"), ("facevstool", "airi")]
     if quick:
         jobs = jobs[:1]
+    if run_secondary_perm is None:
+        run_secondary_perm = not quick
     results = {}
     for name, fill in jobs:
         key = f"{name}_{fill}"
@@ -193,8 +232,8 @@ def analyze_candidate(
             n_surrogates=n_surrogates,
             nmc_airi=8 if quick else AIRI_NMC_TEMPORAL,
             nmc_paper=8 if quick else PAPER_TEMPORAL_NMC_ASSUMED,
-            run_secondary_perm=not quick,
-            run_temporal=True,
+            run_secondary_perm=run_secondary_perm,
+            run_temporal=run_temporal,
         )
     return {
         "candidate_id": candidate_id,

@@ -8,7 +8,11 @@ only in ``paper.reproduction.common.method``.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from typing import Any
+from typing import Any, Literal
+
+DeltaMode = Literal["literal_covariance", "norm_15pct"]
+SnrGammaMode = Literal["per_trial", "global"]
+NoiseLociMode = Literal["per_epoch", "fixed"]
 
 PAPER_T_MS = 200
 PAPER_BUTTER_ORDER = 6
@@ -67,6 +71,10 @@ class SimulationConfig:
     pink_psd_exponent: float = ASSUMED_PINK_PSD_EXPONENT
     mne_snr: float = ASSUMED_MNE_SNR
     lcmv_reg_frac: float = ASSUMED_LCMV_REG_FRAC
+    delta_mode: DeltaMode = "literal_covariance"
+    snr_gamma_mode: SnrGammaMode = "per_trial"
+    noise_loci_mode: NoiseLociMode = "per_epoch"
+    fig5_generate_c: int = 6
     extra_fields: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -99,3 +107,42 @@ class SimulationConfig:
 
 DEFAULT_CONFIG = SimulationConfig()
 QUICK_CONFIG = SimulationConfig(n_mc=2, i_c=8)
+
+
+def config_for_candidate(candidate_id: str, *, n_mc: int | None = None) -> SimulationConfig:
+    """Return the generation config for a labeled simulation candidate.
+
+    Defaults match the original frozen SIM-P1 reconstruction. Review-added
+    candidates change only documented external generation knobs.
+    """
+    mc = PAPER_N_MC if n_mc is None else int(n_mc)
+    specs: dict[str, dict[str, Any]] = {
+        "SIM-P1": {},
+        "SIM-P2": {"i_c": 80},
+        "SIM-P3": {"butter_zero_phase": False},
+        "SIM-P4": {"i_c": 100},
+        "SIM-P5": {"delta_mode": "norm_15pct"},
+        "SIM-P6": {"snr_gamma_mode": "global"},
+        "SIM-P7": {"noise_loci_mode": "fixed"},
+        "SIM-P8": {"fig5_generate_c": 5},
+        "SIM-R1": {
+            "i_c": 100,
+            "delta_mode": "norm_15pct",
+            "snr_gamma_mode": "global",
+            "noise_loci_mode": "fixed",
+        },
+    }
+    if candidate_id not in specs:
+        raise ValueError(f"Unknown simulation candidate {candidate_id!r}")
+    return SimulationConfig(n_mc=mc, **specs[candidate_id])
+
+
+REVIEW_ADDED_SIM_CANDIDATES: tuple[str, ...] = (
+    "SIM-P4",
+    "SIM-P5",
+    "SIM-P6",
+    "SIM-P7",
+    "SIM-P8",
+    "SIM-R1",
+)
+ORIGINAL_SIM_CANDIDATES: tuple[str, ...] = ("SIM-P1", "SIM-P2", "SIM-P3")

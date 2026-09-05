@@ -27,7 +27,10 @@ External analysis choices (preprocessing, windows, RDM fill, inference
 procedure) may branch. ReDisCA constructor arguments do not.
 
 The candidate matrix is frozen in `paper/reproduction_manifest.json`
-**before** full-result selection.
+**before** full-result selection. Review-added forensic branches live
+in `paper/reproduction_manifest_addendum.json` and are marked
+`added_after_stage_a_review: true`. They do not rewrite the original
+freeze.
 
 ## Commands
 

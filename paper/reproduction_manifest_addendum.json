@@ -1,0 +1,137 @@
+{
+  "kind": "stage_a_review_addendum",
+  "does_not_replace": "paper/reproduction_manifest.json",
+  "added_after_stage_a_review": true,
+  "added_at_utc_date": "2026-09-05",
+  "original_manifest_frozen_before_full_results": true,
+  "method_unchanged": {
+    "id": "AIRI_SPOC",
+    "kwargs": {
+      "n_components": null,
+      "demean_time": true,
+      "divide_by_t_minus_1": true,
+      "directed_pairs": true,
+      "aggregation": "mean",
+      "solver": "whitening",
+      "rank": null,
+      "rank_tol": 1e-6
+    }
+  },
+  "candidates_added": [
+    {
+      "id": "AIRI-LITERAL-INDEXING",
+      "track": "meg_temporal",
+      "added_after_stage_a_review": true,
+      "why": "Committed AIRI MATLAB uses rpm = randperm(length(idxAll)) then data(:,:,idx1) with idx1=rpm(1:half), not data(:,:,idxAll(rpm)). Previous Python silently implemented the intended pooled lookup.",
+      "source": "AIRI Redisca_tools_faces_3_random_norm_correct.m @ 15bc19cdc76989da202714b257f6de4d26a42c51",
+      "category": "B_literal_historical_executable"
+    },
+    {
+      "id": "AIRI-CORRECTED-POOLED",
+      "track": "meg_temporal",
+      "added_after_stage_a_review": true,
+      "why": "Preserve the intended pooled-class half-split (idxAll(rpm)) as a labeled external implementation branch. Not a ReDisCA method change. max/min-over-time logic stays literal.",
+      "source": "Same AIRI script; corrected index into idxAll",
+      "category": "C_source_supported_ambiguity"
+    },
+    {
+      "id": "FIG18-MUSIC-LOWESTP",
+      "track": "source_localization",
+      "added_after_stage_a_review": true,
+      "why": "Paper Fig. 17 shows the three lowest-p components; Fig. 18 uses that subspace. Previous scan used only p<0.05 components (2-D when only two cross 0.05).",
+      "source": "Paper: “The three components with the lowest p-values are shown in Fig. 17.”",
+      "category": "A_directly_specified_by_paper"
+    },
+    {
+      "id": "SIM-P4",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "inherits": "SIM-P1",
+      "values": {"I_c": 100},
+      "why": "Published Fig. 4 panel titles visibly include “100 trials” while the caption also says 100 MC trials. I_c=100 is a plausible reading that was not in the original freeze (SIM-P1=40, SIM-P2=80).",
+      "source": "Fig. 4 panel titles vs caption; paper does not print I_c",
+      "category": "C_source_supported_ambiguity",
+      "not_pre_registered": true
+    },
+    {
+      "id": "SIM-P5",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "inherits": "SIM-P1",
+      "values": {"delta_mode": "norm_15pct"},
+      "why": "Literal C_δ = (0.15||g||)^2 I makes typical ||δ|| ≈ 0.15√N ||g|| > 2||g|| in 204-D and destroys localization even noiseless. A 15%-of-vector-norm reading is an essential forensic alternative. Not called paper-faithful. The bioRxiv preprint instead says δ was set “to have variance equal to 15% of gm0’s norm”, which is itself ambiguous but closer to a norm-relative perturbation than to an isotropic N-dimensional blow-up.",
+      "source": "Published paper: Σ=σ²I, σ=0.15||g||. Preprint: variance equal to 15% of gm0’s norm. No recoverable Ossadtchi 2018 drop-in for this RDM recipe.",
+      "category": "D_post_review_forensic_because_literal_is_pathological",
+      "not_paper_faithful": true
+    },
+    {
+      "id": "SIM-P6",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "inherits": "SIM-P1",
+      "values": {"snr_gamma_mode": "global"},
+      "why": "Paper describes a singular γ and later “by combining noiseless sensor data with noise data matrices … we effectively control the SNR based on the ratio of root mean powers between these two matrices.” That wording is one global scale for the two matrices, not an explicit per-trial γ. Per-trial γ remains the original frozen SIM-P1 reconstruction.",
+      "source": "Published §4.1 / preprint SNR paragraph; Eq. (15)–(16) write a single γ",
+      "category": "C_source_supported_ambiguity"
+    },
+    {
+      "id": "SIM-P7",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "inherits": "SIM-P1",
+      "values": {"noise_loci_mode": "fixed"},
+      "why": "Paper: 1000 randomly seeded cortical 1/f sources; each trial a new realization of spatially correlated noise. “Seeded” may mean locations once. Cited Ossadtchi 2018 PSIICOS public sim does not recover this recipe. Both per-epoch redraw (SIM-P1) and fixed-loci + new time series remain plausible.",
+      "source": "Paper §2.4.2; Ossadtchi et al. 2018 citation not a drop-in script for this RDM study",
+      "category": "C_source_supported_ambiguity"
+    },
+    {
+      "id": "SIM-P8",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "values": {"fig5_generate_c": 5, "P": 4},
+      "why": "Fig. 5 body says C=5; caption says C=6. Original code generated C=6 and sliced the first five conditions. That is the Fig. 6 subset reading, not a C=5-from-scratch experiment.",
+      "source": "Paper Fig. 5 caption vs body",
+      "category": "C_source_supported_ambiguity"
+    },
+    {
+      "id": "SIM-R1",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "values": {
+        "I_c": 100,
+        "delta_mode": "norm_15pct",
+        "snr_gamma_mode": "global",
+        "noise_loci_mode": "fixed"
+      },
+      "why": "One coherent forensic reconstruction that jointly applies the four generation interpretations above. Labeled composite, not tuned after seeing which combo matches ~85%. Not a Cartesian product substitute for the one-factor candidates.",
+      "category": "D_post_review_forensic_because_literal_is_pathological",
+      "not_paper_faithful": true
+    }
+  ],
+  "meg_three_components_clarification": {
+    "paper_quote": "we considered only the first three statistically significant ReDisCA components",
+    "meaning": "The paper shows the first three significant components; it does not say that exactly three were significant.",
+    "consequence": "n_sig>=3 is compatible with Figs 13–15. Do not treat a fourth/fifth p<0.05 component as a mismatch to that sentence."
+  },
+  "coverage_expansions_of_original_candidates": [
+    {
+      "id": "SIM-P2",
+      "added_after_stage_a_review": true,
+      "what": "Fig. 5/6 coverage in addition to the original fig4-only plan",
+      "why": "I_c changes the ERP average and is scientifically relevant to Figs 5–6; the original freeze left this uncrossed only for compute, not because it was implausible."
+    }
+  ],
+  "source_reinspection_2026-09-05": {
+    "published_pdf": "https://megmoscow.ru/wp-content/uploads/pubs/10.1016_j.neuroimage.2024.120868.pdf",
+    "preprint": "https://www.biorxiv.org/content/10.1101/2024.02.01.578343v2",
+    "airi_commit": "15bc19cdc76989da202714b257f6de4d26a42c51",
+    "findings": [
+      "Fig. 5 caption: C=6; body: C=5. Both remain as labeled external generation branches (C=6-generated subsets vs C=5-from-scratch).",
+      "Captions say 100 MC trials. I_c is printed only as a symbol. Fig. 4 panel titles include “100 trials”; I_c=100 is a post-review candidate, not pre-registered.",
+      "Published δ: normally distributed with covariance σ²I, σ=0.15||g||. Preprint: variance equal to 15% of ||g||. Literal high-D blow-up is documented; norm-15% is forensic category D.",
+      "SNR: singular γ; “ratio of root mean powers between these two matrices” supports one global γ per realization. Per-trial γ is the original SIM-P1 reconstruction.",
+      "1000 randomly seeded cortical 1/f sources; each trial a new spatially correlated noise realization. Locations-once vs redraw-every-epoch both remain plausible. Ossadtchi 2018 public PSIICOS sim is not this RDM recipe.",
+      "Figs 13–15: first three statistically significant components (not “exactly three were significant”). Fig. 17: three lowest-p components, then Fig. 18 uses that subspace."
+    ]
+  }
+}

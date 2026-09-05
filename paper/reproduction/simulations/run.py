@@ -13,19 +13,20 @@ from typing import Any
 import numpy as np
 
 from paper.reproduction.common.constants import MASTER_SEEDS
-from paper.reproduction.common.hashing import sha256_array, write_json
+from paper.reproduction.common.hashing import read_json, sha256_array, write_json
 from paper.reproduction.common.method import AIRI_SPOC_KWARGS, fit_redisca
 from paper.reproduction.common.paths import RESULTS_ROOT, SOURCE_MODEL_DIR, ARRAY_CACHE_DIR
 from paper.reproduction.common.provenance import capture_run
 from paper.reproduction.common.rng import spawned_generator
 from paper.reproduction.simulations.config import (
-    DEFAULT_CONFIG,
     PAPER_SNR_FIG4_HIGH,
     PAPER_SNR_FIG4_LOW,
     PAPER_SNR_FIG5_HIGH,
     PAPER_SNR_FIG5_LOW,
     QUICK_CONFIG,
+    REVIEW_ADDED_SIM_CANDIDATES,
     SimulationConfig,
+    config_for_candidate,
 )
 from paper.reproduction.simulations.forward_model import load_ad_forward
 from paper.reproduction.simulations.generate import (
@@ -164,6 +165,12 @@ def run_fig4(
         "n_mc": config.n_mc,
         "n_conditions": n_conditions,
         "mixing_seed": mix_seed,
+        "generation_modes": {
+            "delta_mode": config.delta_mode,
+            "snr_gamma_mode": config.snr_gamma_mode,
+            "noise_loci_mode": config.noise_loci_mode,
+            "i_c": config.i_c,
+        },
         "config": config.to_dict(),
         "redisca_kwargs": dict(AIRI_SPOC_KWARGS),
         "redisca_roc": summarize_roc(roc),
@@ -189,11 +196,13 @@ def run_fig5_fig6(
     config: SimulationConfig,
     seed: int,
     snr: float,
-    eval_conditions: tuple[int, ...],
+    eval_conditions: tuple[int, ...] | None = None,
     include_rsa: bool = True,
 ) -> dict[str, Any]:
     forward = load_ad_forward(SOURCE_MODEL_DIR)
-    n_gen = 6
+    n_gen = int(config.fig5_generate_c)
+    if eval_conditions is None:
+        eval_conditions = tuple(range(3, n_gen + 1)) if n_gen >= 3 else (n_gen,)
     mix_rng, mix_seed, _ = spawned_generator(seed, "fig5", "mixing")
     mixings = mix_rng.standard_normal((4, n_gen, n_gen))
     by_c: dict[int, list[dict[str, Any]]] = {c: [] for c in eval_conditions}
@@ -259,6 +268,13 @@ def run_fig5_fig6(
         "snr": snr,
         "n_mc": config.n_mc,
         "generated_C": n_gen,
+        "generation_modes": {
+            "delta_mode": config.delta_mode,
+            "snr_gamma_mode": config.snr_gamma_mode,
+            "noise_loci_mode": config.noise_loci_mode,
+            "fig5_generate_c": config.fig5_generate_c,
+            "i_c": config.i_c,
+        },
         "eval_conditions": list(eval_conditions),
         "mixing_seed": mix_seed,
         "config": config.to_dict(),
@@ -291,56 +307,97 @@ def _out_path(candidate_id: str, name: str, seed: int, *, quick: bool = False) -
     return dest
 
 
+def _is_complete_reproduction(path: Path) -> bool:
+    if not path.exists():
+        return False
+    try:
+        payload = read_json(path)
+    except (OSError, ValueError):
+        return False
+    if payload.get("quick_non_reproduction"):
+        return False
+    return int(payload.get("n_mc") or 0) >= 100
+
+
 def run_candidate(
     candidate_id: str,
     *,
     seeds: tuple[int, ...],
     quick: bool = False,
     include_rsa: bool = True,
+    experiments: tuple[str, ...] = ("fig4", "fig5"),
+    skip_existing: bool = True,
 ) -> dict[str, Any]:
-    config = QUICK_CONFIG if quick else DEFAULT_CONFIG
-    if candidate_id == "SIM-P2":
-        config = SimulationConfig(n_mc=config.n_mc, i_c=80)
-    if candidate_id == "SIM-P3":
-        config = SimulationConfig(n_mc=config.n_mc, i_c=config.i_c, butter_zero_phase=False)
+    config = QUICK_CONFIG if quick else config_for_candidate(candidate_id)
     written = []
+    skipped = []
+    run_fig4_exps = "fig4" in experiments and candidate_id != "SIM-P8"
+    run_fig5_exps = "fig5" in experiments and candidate_id in {
+        "SIM-P1",
+        "SIM-P2",
+        "SIM-P4",
+        "SIM-P5",
+        "SIM-P6",
+        "SIM-P7",
+        "SIM-P8",
+        "SIM-R1",
+    }
+    fig4_snrs = (PAPER_SNR_FIG4_HIGH, PAPER_SNR_FIG4_LOW)
+    if candidate_id == "SIM-P3":
+        fig4_snrs = (PAPER_SNR_FIG4_LOW,)
+    fig5_snrs = (PAPER_SNR_FIG5_HIGH, PAPER_SNR_FIG5_LOW)
     for seed in seeds:
-        if candidate_id in {"SIM-P1", "SIM-P2", "SIM-P3"}:
-            for snr in (PAPER_SNR_FIG4_HIGH, PAPER_SNR_FIG4_LOW):
-                if candidate_id == "SIM-P3" and snr != PAPER_SNR_FIG4_LOW:
+        if run_fig4_exps:
+            for snr in fig4_snrs:
+                path = _out_path(candidate_id, f"fig4_snr{snr}", seed, quick=quick)
+                if skip_existing and not quick and _is_complete_reproduction(path):
+                    skipped.append(str(path))
                     continue
                 payload = run_fig4(
                     candidate_id=candidate_id,
                     config=config,
                     seed=seed,
                     snr=snr,
-                    include_rsa=include_rsa and candidate_id == "SIM-P1",
+                    include_rsa=include_rsa and candidate_id in {"SIM-P1", "SIM-R1"},
                 )
-                path = _out_path(candidate_id, f"fig4_snr{snr}", seed, quick=quick)
                 write_json(path, payload)
                 written.append(str(path))
-        if candidate_id == "SIM-P1":
-            for snr in (PAPER_SNR_FIG5_HIGH, PAPER_SNR_FIG5_LOW):
+        if run_fig5_exps:
+            for snr in fig5_snrs:
+                path = _out_path(candidate_id, f"fig5_fig6_snr{snr}", seed, quick=quick)
+                if skip_existing and not quick and _is_complete_reproduction(path):
+                    skipped.append(str(path))
+                    continue
                 payload = run_fig5_fig6(
                     candidate_id=candidate_id,
                     config=config,
                     seed=seed,
                     snr=snr,
-                    eval_conditions=(3, 4, 5, 6),
-                    include_rsa=include_rsa,
+                    include_rsa=include_rsa and candidate_id in {"SIM-P1", "SIM-R1"},
                 )
-                path = _out_path(candidate_id, f"fig5_fig6_snr{snr}", seed, quick=quick)
                 write_json(path, payload)
                 written.append(str(path))
-    return {"candidate_id": candidate_id, "quick": quick, "written": written}
+    return {
+        "candidate_id": candidate_id,
+        "quick": quick,
+        "written": written,
+        "skipped_existing": skipped,
+        "review_added": candidate_id in REVIEW_ADDED_SIM_CANDIDATES,
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Stage A simulations (Figs 3–6).")
-    parser.add_argument("--candidate", default="SIM-P1", choices=["SIM-P1", "SIM-P2", "SIM-P3"])
+    parser.add_argument(
+        "--candidate",
+        default="SIM-P1",
+        choices=["SIM-P1", "SIM-P2", "SIM-P3", "SIM-P4", "SIM-P5", "SIM-P6", "SIM-P7", "SIM-P8", "SIM-R1"],
+    )
     parser.add_argument("--seeds", nargs="*", type=int, default=list(MASTER_SEEDS))
     parser.add_argument("--quick", action="store_true", help="NON-REPRODUCTION: reduced MC/I_c")
     parser.add_argument("--no-rsa", action="store_true")
+    parser.add_argument("--experiments", nargs="*", default=["fig4", "fig5"], choices=["fig4", "fig5"])
+    parser.add_argument("--no-skip-existing", action="store_true")
     args = parser.parse_args(argv)
     if args.quick:
         print("WARNING: --quick is NON-REPRODUCTION and must not be reported as a paper result.")
@@ -349,6 +406,8 @@ def main(argv: list[str] | None = None) -> int:
         seeds=tuple(args.seeds),
         quick=args.quick,
         include_rsa=not args.no_rsa,
+        experiments=tuple(args.experiments),
+        skip_existing=not args.no_skip_existing,
     )
     print(result)
     return 0

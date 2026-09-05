@@ -234,11 +234,22 @@ def airi_halfsplit_timecourse(
     nmc: int,
     rng: np.random.Generator,
     n_components: int = 4,
+    indexing: Literal["literal", "corrected_pooled"] = "corrected_pooled",
 ) -> dict[str, Any]:
-    """Literal AIRI Nmc half-split on channel-std data.
+    """AIRI Nmc half-split on channel-std data.
 
-    ``filters`` is row-oriented ``(n_components, n_channels)`` as stored by
-    ``ReDisCA.filters_``.
+    Observed contrast always uses the real class trial indices.
+
+    Surrogate indexing
+    ------------------
+    ``literal``
+        Committed MATLAB: ``rpm = randperm(length(idxAll));`` then
+        ``data(:,:,rpm(1:half))`` — *not* ``data(:,:,idxAll(rpm))``.
+    ``corrected_pooled``
+        Intended pooled-class half-split: ``data(:,:,idxAll(rpm))``.
+
+    Both keep AIRI ``max(aa,[],2)`` / ``min(aa,[],2)`` over time.
+    ``filters`` is row-oriented ``(n_components, n_channels)``.
     """
     if nmc < 1:
         raise ValueError("nmc must be positive")
@@ -257,8 +268,14 @@ def airi_halfsplit_timecourse(
     aa = np.empty((nmc, w.shape[0], n_times), dtype=np.float64)
     for mc in range(nmc):
         order = rng.permutation(n_pooled)
-        a = pooled[order[:half]]
-        b = pooled[order[half:]]
+        if indexing == "literal":
+            a = order[:half]
+            b = order[half:]
+        elif indexing == "corrected_pooled":
+            a = pooled[order[:half]]
+            b = pooled[order[half:]]
+        else:
+            raise ValueError(f"Unknown AIRI indexing {indexing!r}")
         mxs1 = projected[:, :, a].mean(axis=2)
         mxs2 = projected[:, :, b].mean(axis=2)
         aa[mc] = mxs1 - mxs2
@@ -270,8 +287,13 @@ def airi_halfsplit_timecourse(
         pminus[i] = 1.0 - np.sum(dd[i][np.newaxis, :] > max_over_time[:, np.newaxis], axis=0) / nmc
         pplus[i] = 1.0 - np.sum(dd[i][np.newaxis, :] < min_over_time[:, np.newaxis], axis=0) / nmc
     return {
-        "inference": "airi_halfsplit_channel_std_nmc100",
-        "role": "primary_airi_executable",
+        "inference": f"airi_halfsplit_{indexing}",
+        "role": (
+            "literal_airi_executable_indexing"
+            if indexing == "literal"
+            else "airi_corrected_pooled_intent"
+        ),
+        "indexing": indexing,
         "Nmc": int(nmc),
         "n_components": int(w.shape[0]),
         "observed_contrast_std": dd,

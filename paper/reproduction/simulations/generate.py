@@ -130,11 +130,23 @@ def cortical_one_over_f_sensor_noise(
     n_sources: int,
     fs_hz: float,
     exponent: float,
+    loci_mode: str = "per_epoch",
 ) -> NDArray[np.float64]:
-    """1000 randomly seeded cortical 1/f sources, projected, shape (n_epochs, N, T)."""
+    """1000 randomly seeded cortical 1/f sources, projected, shape (n_epochs, N, T).
+
+    ``per_epoch`` (original SIM-P1): redraw locations every epoch.
+    ``fixed`` (review forensic): seed 1000 locations once; only 1/f series
+    change across epochs. Not claimed as paper-faithful.
+    """
     gain = np.asarray(gain, dtype=np.float64)
     n_channels, n_vertices = gain.shape
-    index = rng.integers(0, n_vertices, size=(n_epochs, n_sources))
+    if loci_mode == "per_epoch":
+        index = rng.integers(0, n_vertices, size=(n_epochs, n_sources))
+    elif loci_mode == "fixed":
+        fixed = rng.integers(0, n_vertices, size=n_sources)
+        index = np.broadcast_to(fixed, (n_epochs, n_sources)).copy()
+    else:
+        raise ValueError(f"Unknown noise loci mode {loci_mode!r}")
     pink = fft_pink_noise(
         rng, n_epochs * n_sources, n_times, fs_hz=fs_hz, exponent=exponent
     ).reshape(n_epochs, n_sources, n_times)
@@ -169,11 +181,24 @@ def topography_with_forward_error(
     rng: np.random.Generator,
     *,
     sigma_rel: float,
+    delta_mode: str = "literal_covariance",
 ) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
-    """g + δ with δ ~ N(0, (σ||g||)^2 I), σ=0.15 in the paper."""
+    """g + δ.
+
+    ``literal_covariance``: δ ~ N(0, (σ||g||)^2 I), the printed paper formula.
+    ``norm_15pct``: same isotropic direction, rescaled so ||δ|| = σ||g||.
+    Both consume one standard-normal draw of length N.
+    """
     g = np.asarray(g, dtype=np.float64).ravel()
-    sigma = float(sigma_rel) * float(np.linalg.norm(g))
-    delta = rng.standard_normal(g.shape) * sigma
+    direction = rng.standard_normal(g.shape)
+    scale = float(sigma_rel) * float(np.linalg.norm(g))
+    if delta_mode == "literal_covariance":
+        delta = direction * scale
+    elif delta_mode == "norm_15pct":
+        denom = float(np.linalg.norm(direction))
+        delta = np.zeros_like(direction) if denom == 0.0 else direction * (scale / denom)
+    else:
+        raise ValueError(f"Unknown delta mode {delta_mode!r}")
     return g + delta, delta
 
 
@@ -208,10 +233,14 @@ def mix_signal_and_noise(
     signal_ct: NDArray[np.floating],
     noise_ict: NDArray[np.floating],
     snr: float,
+    *,
+    gamma_mode: str = "per_trial",
 ) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
-    """Broadcast (C, N, T) signal over trials; scale each trial's noise to SNR.
+    """Broadcast (C, N, T) signal over trials; scale noise to SNR.
 
-    ``noise_ict`` is (I_c, C, N, T). Returns trials (I_c, C, N, T) and per-trial gamma.
+    ``per_trial`` (original SIM-P1): a separate γ per trial.
+    ``global``: one γ from RMS(signal) / (SNR · RMS(all noise)).
+    ``noise_ict`` is (I_c, C, N, T).
     """
     signal_ct = np.asarray(signal_ct, dtype=np.float64)
     noise_ict = np.asarray(noise_ict, dtype=np.float64)
@@ -219,12 +248,21 @@ def mix_signal_and_noise(
         raise ValueError("SNR must be positive")
     n_trials = noise_ict.shape[0]
     signal_rms = rms(signal_ct)
-    noise_rms = np.sqrt(np.mean(noise_ict.reshape(n_trials, -1) ** 2, axis=1))
-    if np.any(noise_rms == 0.0):
-        raise ValueError("noise matrix has zero RMS for at least one trial")
-    gammas = signal_rms / (float(snr) * noise_rms)
-    trials = signal_ct[None, ...] + gammas[:, None, None, None] * noise_ict
-    return trials, np.asarray(gammas, dtype=np.float64)
+    if gamma_mode == "per_trial":
+        noise_rms = np.sqrt(np.mean(noise_ict.reshape(n_trials, -1) ** 2, axis=1))
+        if np.any(noise_rms == 0.0):
+            raise ValueError("noise matrix has zero RMS for at least one trial")
+        gammas = signal_rms / (float(snr) * noise_rms)
+        trials = signal_ct[None, ...] + gammas[:, None, None, None] * noise_ict
+        return trials, np.asarray(gammas, dtype=np.float64)
+    if gamma_mode == "global":
+        noise_rms = rms(noise_ict)
+        if noise_rms == 0.0:
+            raise ValueError("noise matrix has zero RMS")
+        gamma = signal_rms / (float(snr) * noise_rms)
+        trials = signal_ct[None, ...] + gamma * noise_ict
+        return trials, np.full(n_trials, gamma, dtype=np.float64)
+    raise ValueError(f"Unknown SNR gamma mode {gamma_mode!r}")
 
 
 @dataclass
@@ -266,7 +304,10 @@ def simulate_single_source(
     vertex = int(rng.integers(0, forward.n_vertices))
     g_true = forward.gain[:, vertex]
     topo, _delta = topography_with_forward_error(
-        g_true, rng, sigma_rel=config.sigma_delta_rel
+        g_true,
+        rng,
+        sigma_rel=config.sigma_delta_rel,
+        delta_mode=config.delta_mode,
     )
     signal = topo[None, :, None] * source[:, None, :]  # (C, N, T)
     noise = cortical_one_over_f_sensor_noise(
@@ -277,8 +318,11 @@ def simulate_single_source(
         n_sources=config.n_noise_sources,
         fs_hz=config.fs_hz,
         exponent=config.pink_psd_exponent,
+        loci_mode=config.noise_loci_mode,
     ).reshape(config.i_c, n_cond, forward.n_channels, config.n_times)
-    trials, gammas = mix_signal_and_noise(signal, noise, snr)
+    trials, gammas = mix_signal_and_noise(
+        signal, noise, snr, gamma_mode=config.snr_gamma_mode
+    )
     averages = trials.mean(axis=0)
     return SingleSourceDraw(
         vertex=vertex,
@@ -349,7 +393,10 @@ def simulate_multi_source(
     topographies = np.empty_like(g_true)
     for p in range(n_sources):
         topographies[p], _ = topography_with_forward_error(
-            g_true[p], rng, sigma_rel=config.sigma_delta_rel
+            g_true[p],
+            rng,
+            sigma_rel=config.sigma_delta_rel,
+            delta_mode=config.delta_mode,
         )
     signal = np.einsum("pn,pct->cnt", topographies, sources)
     noise = cortical_one_over_f_sensor_noise(
@@ -360,8 +407,11 @@ def simulate_multi_source(
         n_sources=config.n_noise_sources,
         fs_hz=config.fs_hz,
         exponent=config.pink_psd_exponent,
+        loci_mode=config.noise_loci_mode,
     ).reshape(config.i_c, n_conditions, forward.n_channels, config.n_times)
-    trials, gammas = mix_signal_and_noise(signal, noise, snr)
+    trials, gammas = mix_signal_and_noise(
+        signal, noise, snr, gamma_mode=config.snr_gamma_mode
+    )
     return MultiSourceDraw(
         vertices=vertices,
         mixings=mixings,
