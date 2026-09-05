@@ -15502,6 +15502,56 @@
       "snr": 0.4
     },
     {
+      "added_after_stage_a_review": false,
+      "candidate": "SIM-P2",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "i_c": 80,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 7.186044070869762,
+      "median_loc_error_cm": 7.089064492585242,
+      "n_mc": 100,
+      "path": "simulations/SIM-P2/fig4_snr0.1_seed20240904.json",
+      "redisca_roc": {
+        "auc": 0.5235177186569847,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0,
+        "tpr_at_fpr_0.01": 0.01680672268907563,
+        "tpr_at_fpr_0.05": 0.08283313325330131
+      },
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "added_after_stage_a_review": false,
+      "candidate": "SIM-P2",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "i_c": 80,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 7.802922087558759,
+      "median_loc_error_cm": 8.2085735748384,
+      "n_mc": 100,
+      "path": "simulations/SIM-P2/fig4_snr0.2_seed20240904.json",
+      "redisca_roc": {
+        "auc": 0.518905706760316,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0,
+        "tpr_at_fpr_0.01": 0.008955223880597015,
+        "tpr_at_fpr_0.05": 0.04597014925373134
+      },
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
       "added_after_stage_a_review": true,
       "candidate": "SIM-P5",
       "experiment": "fig4_single_source",
@@ -15550,6 +15600,56 @@
       },
       "seed": 20240904,
       "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.370455735284168,
+          "mean_pattern_corr": 0.16758924845762047,
+          "mean_rdm_corr": 0.22645391870846343,
+          "mean_weight_corr": 0.0015051009310367263
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.570890446385539,
+          "mean_pattern_corr": 0.1774245838899851,
+          "mean_rdm_corr": 0.3002569371477669,
+          "mean_weight_corr": 0.0019138265993714821
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.5494895873046275,
+          "mean_pattern_corr": 0.17596625530372104,
+          "mean_rdm_corr": 0.32615850782755546,
+          "mean_weight_corr": 0.0026234091575107438
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.455449383152231,
+          "mean_pattern_corr": 0.17664918661577034,
+          "mean_rdm_corr": 0.30978026833320405,
+          "mean_weight_corr": 0.002419781697417
+        }
+      },
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P5/fig5_fig6_snr0.4_seed20240904.json",
+      "redisca_roc": null,
+      "seed": 20240904,
+      "snr": 0.4
     }
   ],
   "source_localization": [
@@ -17139,18 +17239,6 @@
         "snr": 0.2
       },
       {
-        "candidate": "SIM-P2",
-        "experiment": "fig4",
-        "seed": 20240904,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P2",
-        "experiment": "fig4",
-        "seed": 20240904,
-        "snr": 0.1
-      },
-      {
         "candidate": "SIM-P3",
         "experiment": "fig4",
         "seed": 20240904,
@@ -17179,12 +17267,6 @@
         "experiment": "fig5_fig6",
         "seed": 20240904,
         "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P5",
-        "experiment": "fig5_fig6",
-        "seed": 20240904,
-        "snr": 0.4
       },
       {
         "candidate": "SIM-P5",
@@ -17973,7 +18055,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 5,
+    "n_completed_sim_jobs": 8,
     "n_required_sim_jobs": 145,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,

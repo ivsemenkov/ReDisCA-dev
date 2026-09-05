@@ -348,13 +348,23 @@ weights. Under **this** SIM-P1 reconstruction, weights are ~0, patterns
 ~0.17, localization stays ~7.5 cm, and error does not fall as C
 increases. That is an interim observation, not a closed Stage A result.
 
-**SIM-P5 (D, norm-15% δ only), Fig. 4, seed 20240904, n_mc=100:**
-AUC 0.519 / 0.519, TPR@FPR0.01 ≈0.008 / 0.007, median loc. 7.08 cm /
-7.90 cm at SNR 0.2 / 0.1. Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not
-produce the published ROC. Other generation branches are still running.
+**SIM-P5 (D, norm-15% δ only), seed 20240904, n_mc=100:**
 
-Fig. 5 SNR=0.2, the other four master seeds, SIM-P2/P3, and
-SIM-P4…P8 / SIM-R1 are not finished.
+| Job | AUC / TPR@0.01 | Median loc. | Pattern corr | Notes |
+| --- | --- | --- | --- | --- |
+| Fig. 4 SNR 0.2 | 0.519 / 0.008 | 7.08 cm | — | no RSA |
+| Fig. 4 SNR 0.1 | 0.519 / 0.007 | 7.90 cm | — | no RSA |
+| Fig. 5/6 SNR 0.4, C=3…6 | — | 7.37–7.57 cm | ≈0.17 | frac&lt;1 cm ≈0; RDM corr 0.23–0.33 |
+
+Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not produce the published ROC
+or &lt;2 cm Fig. 6 picture.
+
+**SIM-P2 (C, I_c=80), Fig. 4, seed 20240904, n_mc=100:**
+AUC 0.519 / 0.524, TPR@0.01 0.009 / 0.017, median 8.21 cm / 7.09 cm
+at SNR 0.2 / 0.1. Doubling I_c does not recover the paper ROC.
+
+Fig. 5 SNR=0.2, remaining seeds, SIM-P3, SIM-P4, SIM-P6…P8, and
+SIM-R1 are still running.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
