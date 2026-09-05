@@ -1,0 +1,47 @@
+{
+  "stage": "A",
+  "working_branch": "cursor/stage-a-reproduction-093e",
+  "note": "Inventory of what was actually executed. QUICK_NONREPRO leftovers are not reproduction results.",
+  "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+  "redisca_src_unchanged_from_main": true,
+  "method": "AIRI_SPOC via paper.reproduction.common.method.make_redisca",
+  "master_seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
+  "tracks": {
+    "validation": {
+      "status": "complete",
+      "matlab": false,
+      "oracle": "paper/reproduction/validation/oracle.py independent AIRI/SPoC formula check",
+      "tests": "117 passed (python -m paper.reproduction test)"
+    },
+    "n170": {
+      "status": "complete_full_B1000",
+      "candidates": ["N170-UNFILT", "N170-LP20"],
+      "seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
+      "B": 1000
+    },
+    "meg": {
+      "status": "complete_full_B1000_Nmc100",
+      "candidates": ["MEG-AIRI", "MEG-PAPER-1501", "MEG-PAPER-1500"],
+      "seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
+      "B": 1000,
+      "Nmc": 100
+    },
+    "simulations": {
+      "status": "partial",
+      "completed": [
+        "SIM-P1 fig4 SNR=0.2 seed 20240904 n_mc=100",
+        "SIM-P1 fig4 SNR=0.1 seed 20240904 n_mc=100"
+      ],
+      "in_progress_at_report": "SIM-P1 fig5/fig6 seed 20240904 (process still running)",
+      "not_started": [
+        "SIM-P1 remaining seeds 20240905–20240908",
+        "SIM-P2",
+        "SIM-P3"
+      ]
+    },
+    "source_localization": {
+      "status": "complete_seed_20240904",
+      "candidates": ["FIG18-MUSIC", "AIRI-PRECOMP-SLORETA", "AIRI-MUSIC-EYE-NSNS"]
+    }
+  }
+}
