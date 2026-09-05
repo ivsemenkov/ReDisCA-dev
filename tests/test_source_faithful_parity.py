@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -41,6 +42,7 @@ def _load_source_faithful():
     if spec is None or spec.loader is None:
         pytest.skip("could not load source_faithful.py from origin/paper")
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
