@@ -1,0 +1,150 @@
+{
+  "candidate_id": "AIRI-MUSIC-EYE-NSNS",
+  "literal_bug": "AIRI sets P = eye(size(Nsns,1)), which is eye(1) because Nsns is a scalar. P has shape (1, 1); G has 204 rows. P*G is non-executable in MATLAB and NumPy. This is not Fig. 18. The obvious fix is P = eye(Nsns).",
+  "peak_atlas": {
+    "Brodmann": "unlabeled",
+    "Destrieux": "Pole_occipital R",
+    "Mindboggle": "lateraloccipital R",
+    "hemisphere": "Cortex R"
+  },
+  "peak_value": 0.8381612282523214,
+  "peak_vertex": 2595,
+  "provenance": {
+    "candidate_id": "AIRI-MUSIC-EYE-NSNS",
+    "environment": {
+      "airi_sha": "15bc19cdc76989da202714b257f6de4d26a42c51",
+      "captured_at_utc": "2026-09-05T15:23:25.615552+00:00",
+      "erp_core_sha": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+      "library_main_sha_expected": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "library_main_sha_observed": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "machine": "x86_64",
+      "matlab": null,
+      "note": "Stage A uses current-main redisca.ReDisCA with the frozen AIRI-SPoC kwargs. MATLAB is not assumed; NumPy RNG is not MATLAB rand bitwise parity. library_main_sha_observed is the pinned main commit when present; working_branch_sha is HEAD.",
+      "packages": {
+        "numpy": "2.4.4",
+        "redisca": "0.1.0",
+        "scikit-learn": "1.9.0",
+        "scipy": "1.18.1"
+      },
+      "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "redisca_kwargs": {
+        "aggregation": "mean",
+        "demean_time": true,
+        "directed_pairs": true,
+        "divide_by_t_minus_1": true,
+        "n_components": null,
+        "rank": null,
+        "rank_tol": 1e-06,
+        "solver": "whitening"
+      },
+      "redisca_src_differs_from_pinned_main": false,
+      "spoc_sha": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+      "working_branch_sha": "ce3069d681462c56318c0dc4ac117311be901900"
+    },
+    "redisca_kwargs": {
+      "aggregation": "mean",
+      "demean_time": true,
+      "directed_pairs": true,
+      "divide_by_t_minus_1": true,
+      "n_components": null,
+      "rank": null,
+      "rank_tol": 1e-06,
+      "solver": "whitening"
+    },
+    "seed": null,
+    "track": "source_localization"
+  },
+  "top10": [
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 1,
+      "value": 0.8381612282523214,
+      "vertex": 2595
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 2,
+      "value": 0.837323080031192,
+      "vertex": 2581
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 3,
+      "value": 0.8299893116328577,
+      "vertex": 2610
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "S_collat_transv_post R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 4,
+      "value": 0.8278153513715243,
+      "vertex": 2708
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "G_and_S_occipital_inf R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 5,
+      "value": 0.8264356560683015,
+      "vertex": 2710
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "G_oc-temp_med-Lingual R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 6,
+      "value": 0.8245335154654841,
+      "vertex": 2641
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lingual R",
+      "hemisphere": "Cortex R",
+      "rank": 7,
+      "value": 0.824396986926413,
+      "vertex": 2553
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 8,
+      "value": 0.824385583610831,
+      "vertex": 2516
+    },
+    {
+      "Brodmann": "V2 R",
+      "Destrieux": "Pole_occipital R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 9,
+      "value": 0.8242526423507256,
+      "vertex": 2587
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "G_and_S_occipital_inf R",
+      "Mindboggle": "lateraloccipital R",
+      "hemisphere": "Cortex R",
+      "rank": 10,
+      "value": 0.8226232579995488,
+      "vertex": 2605
+    }
+  ]
+}

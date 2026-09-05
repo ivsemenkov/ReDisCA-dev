@@ -1,0 +1,260 @@
+{
+  "candidate_id": "FIG18-MUSIC",
+  "choice_note": "significant p<0.05 components",
+  "chosen_components": [
+    0,
+    1
+  ],
+  "index_audit": {
+    "airi_megplanarbst_is_both_planars_on_this_file": true,
+    "airi_megplanarbst_n": 204,
+    "airi_megplanarbst_n_grad": 204,
+    "airi_megplanarbst_n_mag": 0,
+    "d15_same_integers_as_megplanarbst_if_one_assumes_MAG_first": true,
+    "d15_this_file_grad1_plus_mag_counts": {
+      "MEG GRAD": 102,
+      "MEG MAG": 102
+    },
+    "note": "D15 is an ordering hazard on the same MATLAB index vector. On this OSF kernel ChannelTypes are GRAD, GRAD, MAG, so AIRI megplanarbst selects 204 planars. A MAG+GRAD mix on this file uses a different index set (GRAD1+MAG) and is a labeled negative control, not Fig. 18.",
+    "triplet_order_verified": [
+      "MEG GRAD",
+      "MEG GRAD",
+      "MEG MAG"
+    ]
+  },
+  "meg_candidate": "MEG-PAPER-1501",
+  "p_values": [
+    0.007,
+    0.021,
+    0.093,
+    0.197,
+    0.352,
+    0.545,
+    0.846,
+    0.914,
+    0.974,
+    0.998,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.999,
+    0.972,
+    0.964,
+    0.901,
+    0.718
+  ],
+  "paper_claimed": [
+    "right fusiform",
+    "right insula",
+    "left intraparietal",
+    "anterior-central"
+  ],
+  "peak_atlas": {
+    "Brodmann": "V2 L",
+    "Destrieux": "G_occipital_sup L",
+    "Mindboggle": "lateraloccipital L",
+    "hemisphere": "Cortex L"
+  },
+  "peak_subcorr": 0.7871681077600088,
+  "peak_vertex": 89,
+  "provenance": {
+    "candidate_id": "FIG18-MUSIC",
+    "environment": {
+      "airi_sha": "15bc19cdc76989da202714b257f6de4d26a42c51",
+      "captured_at_utc": "2026-09-05T15:21:37.272852+00:00",
+      "erp_core_sha": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+      "library_main_sha_expected": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "library_main_sha_observed": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+      "machine": "x86_64",
+      "matlab": null,
+      "note": "Stage A uses current-main redisca.ReDisCA with the frozen AIRI-SPoC kwargs. MATLAB is not assumed; NumPy RNG is not MATLAB rand bitwise parity. library_main_sha_observed is the pinned main commit when present; working_branch_sha is HEAD.",
+      "packages": {
+        "numpy": "2.4.4",
+        "redisca": "0.1.0",
+        "scikit-learn": "1.9.0",
+        "scipy": "1.18.1"
+      },
+      "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "redisca_kwargs": {
+        "aggregation": "mean",
+        "demean_time": true,
+        "directed_pairs": true,
+        "divide_by_t_minus_1": true,
+        "n_components": null,
+        "rank": null,
+        "rank_tol": 1e-06,
+        "solver": "whitening"
+      },
+      "redisca_src_differs_from_pinned_main": false,
+      "spoc_sha": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+      "working_branch_sha": "ce3069d681462c56318c0dc4ac117311be901900"
+    },
+    "redisca_kwargs": {
+      "aggregation": "mean",
+      "demean_time": true,
+      "directed_pairs": true,
+      "divide_by_t_minus_1": true,
+      "n_components": null,
+      "rank": null,
+      "rank_tol": 1e-06,
+      "solver": "whitening"
+    },
+    "seed": 20240904,
+    "track": "source_localization"
+  },
+  "rdm": "airi_facevstool",
+  "redisca_kwargs": {
+    "aggregation": "mean",
+    "demean_time": true,
+    "directed_pairs": true,
+    "divide_by_t_minus_1": true,
+    "n_components": null,
+    "rank": null,
+    "rank_tol": 1e-06,
+    "solver": "whitening"
+  },
+  "seed": 20240904,
+  "top10": [
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "lateraloccipital L",
+      "hemisphere": "Cortex L",
+      "rank": 1,
+      "value": 0.7871681077600088,
+      "vertex": 89
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_cuneus L",
+      "Mindboggle": "cuneus L",
+      "hemisphere": "Cortex L",
+      "rank": 2,
+      "value": 0.7752690784202161,
+      "vertex": 138
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "lateraloccipital L",
+      "hemisphere": "Cortex L",
+      "rank": 3,
+      "value": 0.7719757502133382,
+      "vertex": 121
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "cuneus L",
+      "hemisphere": "Cortex L",
+      "rank": 4,
+      "value": 0.7713554244560048,
+      "vertex": 117
+    },
+    {
+      "Brodmann": "V1 L",
+      "Destrieux": "S_calcarine L",
+      "Mindboggle": "pericalcarine L",
+      "hemisphere": "Cortex L",
+      "rank": 5,
+      "value": 0.7705408718508835,
+      "vertex": 235
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "S_parieto_occipital L",
+      "Mindboggle": "cuneus L",
+      "hemisphere": "Cortex L",
+      "rank": 6,
+      "value": 0.7693803949648221,
+      "vertex": 287
+    },
+    {
+      "Brodmann": "unlabeled",
+      "Destrieux": "S_oc_sup_and_transversal L",
+      "Mindboggle": "lateraloccipital L",
+      "hemisphere": "Cortex L",
+      "rank": 7,
+      "value": 0.7692889860045747,
+      "vertex": 145
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "cuneus L",
+      "hemisphere": "Cortex L",
+      "rank": 8,
+      "value": 0.7669836718167344,
+      "vertex": 125
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "lateraloccipital L",
+      "hemisphere": "Cortex L",
+      "rank": 9,
+      "value": 0.7669824294569774,
+      "vertex": 90
+    },
+    {
+      "Brodmann": "V2 L",
+      "Destrieux": "G_occipital_sup L",
+      "Mindboggle": "lateraloccipital L",
+      "hemisphere": "Cortex L",
+      "rank": 10,
+      "value": 0.7666149658068043,
+      "vertex": 91
+    }
+  ]
+}
