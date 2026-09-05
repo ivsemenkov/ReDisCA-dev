@@ -2,6 +2,7 @@
   "stage": "A",
   "working_branch": "cursor/stage-a-reproduction-093e",
   "note": "Inventory of what was actually executed. QUICK_NONREPRO leftovers are not reproduction results.",
+  "narrative_report": "paper/STAGE_A_REPORT.md",
   "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
   "redisca_src_unchanged_from_main": true,
   "method": "AIRI_SPOC via paper.reproduction.common.method.make_redisca",
@@ -30,10 +31,12 @@
       "status": "partial",
       "completed": [
         "SIM-P1 fig4 SNR=0.2 seed 20240904 n_mc=100",
-        "SIM-P1 fig4 SNR=0.1 seed 20240904 n_mc=100"
+        "SIM-P1 fig4 SNR=0.1 seed 20240904 n_mc=100",
+        "SIM-P1 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100"
       ],
-      "in_progress_at_report": "SIM-P1 fig5/fig6 seed 20240904 (process still running)",
+      "in_progress_at_report": null,
       "not_started": [
+        "SIM-P1 fig5/fig6 SNR=0.2 seed 20240904",
         "SIM-P1 remaining seeds 20240905–20240908",
         "SIM-P2",
         "SIM-P3"

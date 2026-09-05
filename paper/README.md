@@ -43,6 +43,9 @@ reduced-MC/B outputs as paper results.
 Data live in gitignored `.reproduction_data/`. Lightweight JSON summaries
 are written to `paper/results/`.
 
+**Stage A scientific report (the 12-point deliverable):**
+[`paper/STAGE_A_REPORT.md`](STAGE_A_REPORT.md).
+
 ## Tracks
 
 | Track | Figures | Entry |
