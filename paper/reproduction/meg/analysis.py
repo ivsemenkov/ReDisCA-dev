@@ -108,7 +108,7 @@ def analyze_rdm(
         idx2 = np.concatenate([prepared["indices"][name] for i, name in enumerate(
             ("face1", "face2", "tool1", "tool2", "nons1", "nons2")
         ) if i in class2])
-        std_map = np.std(prepared["planars_for_std"], axis=2, ddof=0)
+        std_map = np.std(prepared["planars_for_std"], axis=2, ddof=1)
         std_planars = prepared["planars_for_std"] / np.maximum(std_map[..., None], 1e-12)
         airi_time = airi_halfsplit_timecourse(
             std_planars,
