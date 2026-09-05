@@ -284,8 +284,9 @@ def run_fig5_fig6(
     return summary
 
 
-def _out_path(candidate_id: str, name: str, seed: int) -> Path:
-    dest = RESULTS_ROOT / "simulations" / candidate_id / f"{name}_seed{seed}.json"
+def _out_path(candidate_id: str, name: str, seed: int, *, quick: bool = False) -> Path:
+    prefix = "QUICK_NONREPRO_" if quick else ""
+    dest = RESULTS_ROOT / "simulations" / candidate_id / f"{prefix}{name}_seed{seed}.json"
     dest.parent.mkdir(parents=True, exist_ok=True)
     return dest
 
@@ -315,7 +316,7 @@ def run_candidate(
                     snr=snr,
                     include_rsa=include_rsa and candidate_id == "SIM-P1",
                 )
-                path = _out_path(candidate_id, f"fig4_snr{snr}", seed)
+                path = _out_path(candidate_id, f"fig4_snr{snr}", seed, quick=quick)
                 write_json(path, payload)
                 written.append(str(path))
         if candidate_id == "SIM-P1":
@@ -328,7 +329,7 @@ def run_candidate(
                     eval_conditions=(3, 4, 5, 6),
                     include_rsa=include_rsa,
                 )
-                path = _out_path(candidate_id, f"fig5_fig6_snr{snr}", seed)
+                path = _out_path(candidate_id, f"fig5_fig6_snr{snr}", seed, quick=quick)
                 write_json(path, payload)
                 written.append(str(path))
     return {"candidate_id": candidate_id, "quick": quick, "written": written}

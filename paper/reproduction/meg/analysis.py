@@ -108,8 +108,17 @@ def analyze_rdm(
         idx2 = np.concatenate([prepared["indices"][name] for i, name in enumerate(
             ("face1", "face2", "tool1", "tool2", "nons1", "nons2")
         ) if i in class2])
-        std_map = np.std(prepared["planars_for_std"], axis=2, ddof=1)
-        std_planars = prepared["planars_for_std"] / np.maximum(std_map[..., None], 1e-12)
+        # AIRI executable applies the half-split to the full filtered epoch
+        # even though SPoC is fit on trange 600:1500. Paper-window candidates
+        # keep the half-split on the same analysis window as the fit.
+        if prepared["candidate_id"] == "MEG-AIRI":
+            std_source = prepared["planars_for_std"]
+            airi_time_ms = prepared["time_ms_full"]
+        else:
+            std_source = prepared["planars_windowed"]
+            airi_time_ms = prepared["time_ms"]
+        std_map = np.std(std_source, axis=2, ddof=1)
+        std_planars = std_source / np.maximum(std_map[..., None], 1e-12)
         airi_time = airi_halfsplit_timecourse(
             std_planars,
             idx1,
@@ -131,11 +140,12 @@ def analyze_rdm(
         time_ms = prepared["time_ms"]
         payload["temporal_airi"] = {
             "Nmc": nmc_airi,
+            "time_axis": "full_epoch" if prepared["candidate_id"] == "MEG-AIRI" else "analysis_window",
             "intervals_pplus": [
-                _intervals_ms(airi_time["asterisk_positive"][k], time_ms) for k in range(4)
+                _intervals_ms(airi_time["asterisk_positive"][k], airi_time_ms) for k in range(4)
             ],
             "intervals_pminus": [
-                _intervals_ms(airi_time["asterisk_negative"][k], time_ms) for k in range(4)
+                _intervals_ms(airi_time["asterisk_negative"][k], airi_time_ms) for k in range(4)
             ],
         }
         payload["temporal_paper_fwer"] = {

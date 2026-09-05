@@ -143,13 +143,16 @@ def prepare_candidate(bundle: MegBundle, candidate_id: str) -> dict[str, Any]:
         raise ValueError(f"Unknown MEG candidate {candidate_id!r}")
     averages = condition_averages(planars, bundle.indices, time_slice=time_slice)
     trials, labels = extract_used_trials(planars, bundle.indices, time_slice=time_slice)
+    planars_windowed = planars if time_slice is None or time_slice == slice(None) else planars[:, time_slice, :]
     return {
         "candidate_id": candidate_id,
         "averages": averages,
         "used_trials": trials,
         "trial_labels": labels,
         "time_ms": time_ms,
+        "time_ms_full": bundle.time_ms,
         "planars_for_std": planars,
+        "planars_windowed": planars_windowed,
         "filter": filter_desc,
         "n_samples": int(time_ms.size),
         "window_ms": [float(time_ms[0]), float(time_ms[-1])],
