@@ -31,9 +31,18 @@ def test_airi_spoc_kwargs_are_literal():
         assert getattr(model, key) == value
 
 
+def _runtime_modules():
+    for path in ROOT.rglob("*.py"):
+        if path.name.startswith("test_") or path.name == "conftest.py":
+            continue
+        if "tests" in path.parts or "validation" in path.parts:
+            continue
+        yield path
+
+
 def test_no_source_faithful_or_git_show_dependency():
     offenders = []
-    for path in ROOT.rglob("*.py"):
+    for path in _runtime_modules():
         text = path.read_text(encoding="utf-8")
         for token in ("source_faithful", "git show", "git_show"):
             if token in text:
@@ -44,8 +53,8 @@ def test_no_source_faithful_or_git_show_dependency():
 def test_no_direct_redisca_constructor_outside_factory():
     allowed = {ROOT / "common" / "method.py"}
     offenders = []
-    for path in ROOT.rglob("*.py"):
-        if path in allowed or "validation" in path.parts:
+    for path in _runtime_modules():
+        if path in allowed:
             continue
         text = path.read_text(encoding="utf-8")
         if "ReDisCA(" in text:

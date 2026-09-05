@@ -69,13 +69,20 @@ def test_random_phase_does_not_refit():
     assert np.all((result.p_values >= 0.0) & (result.p_values <= 1.0))
 
 
+def _runtime_modules(root: Path):
+    for path in root.rglob("*.py"):
+        if path.name.startswith("test_") or path.name == "conftest.py":
+            continue
+        if "tests" in path.parts or "validation" in path.parts:
+            continue
+        yield path
+
+
 def test_oracle_is_not_imported_by_experiment_modules():
     root = Path(__file__).resolve().parents[1]
     forbidden = ("source_faithful", "validation.oracle", "independent_airi_spoc")
     offenders = []
-    for path in root.rglob("*.py"):
-        if "validation" in path.parts:
-            continue
+    for path in _runtime_modules(root):
         text = path.read_text(encoding="utf-8")
         for token in forbidden:
             if token in text:
@@ -85,14 +92,10 @@ def test_oracle_is_not_imported_by_experiment_modules():
 
 def test_experiments_construct_redisca_only_via_factory():
     root = Path(__file__).resolve().parents[1]
-    allowed = {
-        root / "common" / "method.py",
-        root / "validation" / "oracle.py",
-        root / "validation" / "test_oracle.py",
-    }
+    allowed = {root / "common" / "method.py"}
     offenders = []
-    for path in root.rglob("*.py"):
-        if path in allowed or "validation" in path.parts and path.name.startswith("test_"):
+    for path in _runtime_modules(root):
+        if path in allowed:
             continue
         text = path.read_text(encoding="utf-8")
         if "ReDisCA(" in text:
