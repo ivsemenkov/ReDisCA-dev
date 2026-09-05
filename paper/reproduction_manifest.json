@@ -1,0 +1,221 @@
+{
+  "stage": "A",
+  "frozen_before_full_results": true,
+  "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
+  "airi_sha": "15bc19cdc76989da202714b257f6de4d26a42c51",
+  "spoc_sha": "18e4754aec1411160fd5b7ef0db852f1e0a87d90",
+  "erp_core_sha": "c18b43d70d791ca914d90410afe4ff06d6f7f429",
+  "method": {
+    "id": "AIRI_SPOC",
+    "note": "Exactly one ReDisCA configuration is used everywhere in Stage A.",
+    "kwargs": {
+      "n_components": null,
+      "demean_time": true,
+      "divide_by_t_minus_1": true,
+      "directed_pairs": true,
+      "aggregation": "mean",
+      "solver": "whitening",
+      "rank": null,
+      "rank_tol": 1e-6
+    }
+  },
+  "master_seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
+  "inference": {
+    "primary_component": {
+      "id": "stock_spoc_random_phase",
+      "B": 1000,
+      "source": "svendaehne/matlab_SPoC SPoC/spoc.m + utils/random_phase_surrogate.m; public redisca.random_phase_test",
+      "notes": [
+        "Target sample-standardization as in stock SPoC",
+        "Fixed fitted Cxx / whitening subspace",
+        "null = max(abs(lambda_surrogate))",
+        "p = count / B; no +1; p=0 allowed",
+        "Does not refit the observed estimator"
+      ]
+    },
+    "secondary_component": [
+      {
+        "id": "paper_condition_labels",
+        "kind": "condition_labels",
+        "source": "paper §2.3 / RSA-style permutation of condition labels",
+        "enumeration": "exact when C! is feasible (N170 C=4 → 24; MEG C=6 → 720)"
+      },
+      {
+        "id": "paper_upper_triangle_shuffle",
+        "kind": "upper_triangle_shuffle",
+        "source": "paper wording 'randomly reshuffled upper triangle of the theoretical RDM'",
+        "enumeration": "exact when (C choose 2)! is feasible (N170 C=4 → 720); MEG not enumerated"
+      }
+    ],
+    "meg_temporal_primary_airi": {
+      "id": "airi_halfsplit",
+      "Nmc": 100,
+      "source": "AIRI Redisca_tools_faces_3_random_norm_correct.m"
+    },
+    "meg_temporal_secondary_paper": {
+      "id": "paper_fwer_maxstat",
+      "Nmc_assumed": 100,
+      "source": "paper §4.2.2 subcategory-label permutation + FWER max-stat; Nmc unspecified"
+    }
+  },
+  "candidates": {
+    "simulations": [
+      {
+        "id": "SIM-P1",
+        "coverage": ["fig4", "fig5_C5", "fig5_C6", "fig6"],
+        "values": {
+          "fs_hz": 1000.0,
+          "T_ms": 200,
+          "n_times": 200,
+          "I_c": 40,
+          "butter_order": 6,
+          "butter_cutoff_hz": 2.0,
+          "butter_zero_phase": true,
+          "sigma_delta_rel": 0.15,
+          "n_one_over_f": 1000,
+          "pink_psd_exponent": 1.0,
+          "upsilon_d": "symmetric Gaussian on unique i<j; sigma=0.05*std(D0); clip>=0",
+          "forward": "OSF 8rk67 AD tess_cortex_pial_low + overlapping-spheres Gain; 204 planars; constrained GridOrient",
+          "mne_snr": 3.0,
+          "lcmv_reg_frac": 0.05,
+          "fig4_C": 5,
+          "fig4_snr": [0.2, 0.1],
+          "fig5_C": [5, 6],
+          "fig5_snr": [0.4, 0.2],
+          "fig6_C": [3, 4, 5, 6],
+          "fig6_snr": [0.2, 0.4]
+        },
+        "source_rationale": "Paper-stated T/Butterworth/sigma_delta/1000 1/f/100 MC/min-sep 2 cm. fs, I_c, Upsilon_d, filter phase, forward model, MNE/LCMV regularization are unspecified; this is the smallest MEG-like coherent reconstruction. Fig.5 C=5 vs C=6 is a paper-internal conflict (both run). Fig.6 SNR is unspecified; both Fig.5 SNRs are run.",
+        "status": "primary"
+      },
+      {
+        "id": "SIM-P2",
+        "coverage": ["fig4"],
+        "values": {
+          "inherits": "SIM-P1",
+          "I_c": 80
+        },
+        "source_rationale": "I_c is unspecified. MEG subcategories have 80 epochs. Not a full Cartesian product with Fig.5/6.",
+        "status": "alternate_I_c; run if compute permits"
+      },
+      {
+        "id": "SIM-P3",
+        "coverage": ["fig4_snr0.1"],
+        "values": {
+          "inherits": "SIM-P1",
+          "butter_zero_phase": false
+        },
+        "source_rationale": "Paper does not state filtfilt vs causal Butterworth. Causal is a genuine alternative; not fully crossed.",
+        "status": "alternate_filter_phase; run if compute permits"
+      }
+    ],
+    "n170": [
+      {
+        "id": "N170-UNFILT",
+        "erp_file": "1_N170_erp_ar.erp",
+        "expected_sha256": "53e74e931e6f0adaf1e5be4d606d028fcc3e04ee8b066569c2ed2d033d9bbc72",
+        "source_rationale": "Official ERP CORE Script 7 unfiltered 4-condition average for subject 1. Paper does not mention the extra 20 Hz low-pass.",
+        "windows": {
+          "meaning": {"duration_ms": 150, "sliding_steps_ms": [25.0, 3.90625]},
+          "face": {"duration_ms": 100, "centers_ms": [200.0]},
+          "car": {"duration_ms": 100, "centers_ms": [170.0, 200.0]}
+        },
+        "rdm": "binary_0_1",
+        "channels": "28_scalp",
+        "ica": "already applied; official subject-1 list is components 2 and 7 only; no invented third component"
+      },
+      {
+        "id": "N170-LP20",
+        "erp_file": "1_N170_erp_ar_lpfilt.erp",
+        "expected_sha256": "228b52ad69b9dc9b88f6b4c0b1d32dc778450e0d9aa32850b9ad9a8a61a8b9fe",
+        "source_rationale": "Official ERP CORE Script 7 documented 20 Hz low-pass of the same 4-condition ERP. Plausible published-figure preprocessing.",
+        "windows": "same as N170-UNFILT",
+        "rdm": "binary_0_1",
+        "channels": "28_scalp"
+      }
+    ],
+    "meg": [
+      {
+        "id": "MEG-AIRI",
+        "window": "MATLAB trange 600:1500 inclusive → 99–999 ms, 901 samples",
+        "filter": "butter(3) 0.25–20 Hz filtfilt on all 880 trials before averaging",
+        "n_samples": 901,
+        "rdms": ["airi_face", "airi_tool", "airi_meaning", "airi_facevstool"],
+        "component_inference": "stock_spoc_random_phase B=1000, five seeds",
+        "temporal_inference": "airi_halfsplit Nmc=100, five seeds",
+        "source_rationale": "Literal AIRI executable Redisca_tools_faces_3_random_norm_correct.m"
+      },
+      {
+        "id": "MEG-PAPER-1501",
+        "window": "full public file −500…+1000 ms",
+        "filter": "none (paper MEG methods do not state the AIRI filter)",
+        "n_samples": 1501,
+        "rdms": ["binary_face", "binary_tool", "binary_meaning", "airi_facevstool", "airi_face", "airi_tool", "airi_meaning"],
+        "component_inference": "primary random-phase B=1000 five seeds; secondary exact 720 condition-label permutations",
+        "temporal_inference": "paper FWER max-stat Nmc=100 assumed, five seeds; also AIRI half-split labeled as executable contrast",
+        "source_rationale": "Paper §4.2.2: apply ReDisCA to the entire 1500 ms ERF. Public file has 1501 samples."
+      },
+      {
+        "id": "MEG-PAPER-1500",
+        "window": "first 1500 samples of the public file (−500…+999 ms)",
+        "filter": "none",
+        "n_samples": 1500,
+        "rdms": ["binary_face", "binary_tool", "binary_meaning", "airi_facevstool"],
+        "component_inference": "primary random-phase B=1000 five seeds",
+        "temporal_inference": "paper FWER max-stat Nmc=100 assumed, five seeds",
+        "source_rationale": "Paper prints 204×1500. Not mixed with the AIRI 0.25–20 Hz filter."
+      }
+    ],
+    "source_localization": [
+      {
+        "id": "FIG18-MUSIC",
+        "method": "paper Eq.14 first-principal-angle MUSIC of the Fig.17-relevant facevstool subspace",
+        "patterns_from": "MEG-PAPER-1501 airi_facevstool significant components (same fitted AIRI-SPoC model)",
+        "forward": "individual-AD overlapping-spheres Gain, free-orientation 2D dipole subspace",
+        "source_rationale": "Paper Fig. 18 caption / §2.3 Eq. 14"
+      },
+      {
+        "id": "AIRI-PRECOMP-SLORETA",
+        "method": "abs(ImagingKernel[:, megplanarbst] @ A1[:,3])",
+        "patterns_from": "author-saved topo_face_vs_tool_correct_filt15.mat column 4, and locally fitted MEG-AIRI facevstool patterns",
+        "source_rationale": "AIRI Redisca_source_loc_for_tools_faces_3_random_.m default method='precomp'"
+      },
+      {
+        "id": "AIRI-MUSIC-EYE-NSNS",
+        "method": "AIRI music branch with P=eye(Nsns) (literal P=eye(size(Nsns,1))=eye(1) is non-executable)",
+        "source_rationale": "AIRI source-loc script music case"
+      }
+    ]
+  },
+  "forbidden_in_stage_a": [
+    "unique-pair ReDisCA",
+    "uncentered / printed-Gram ReDisCA",
+    "no-1/(T-1) ReDisCA",
+    "sum aggregation",
+    "generalized solver as an alternative",
+    "current library defaults as a comparison",
+    "a paper core profile",
+    "any other ReDisCA method configuration",
+    "source_faithful.py as experiment implementation",
+    "runtime git show / other-branch / MATLAB oracle dependency"
+  ],
+  "paper_anchors": {
+    "fig10_face": {"t_s": 0.2, "lambda": 0.87209, "p": 0.0, "rdm_corr": 0.81556, "caption_corr": 0.82},
+    "fig11_car": {
+      "caption_t_ms": 170,
+      "panel_t_s": 0.2,
+      "comp1": {"lambda": 0.91639, "p": 0.0, "rdm_corr": 0.99074},
+      "comp2": {"lambda": 0.77036, "p": 0.009, "rdm_corr": 0.93002}
+    },
+    "meg_timing": {
+      "face_c1": "first interval ~65 ms, peak ~160 ms, second ~311 ms",
+      "face_c2": "~218 ms",
+      "face_c3": "~273 ms",
+      "tool_c1": "~210 ms",
+      "tool_c3": "~240 ms",
+      "meaning_c1": "~160 ms",
+      "meaning_c3": "early ~182 ms and late ~675 ms",
+      "facevstool": "first major tool-vs-face difference ~202 ms"
+    }
+  }
+}
