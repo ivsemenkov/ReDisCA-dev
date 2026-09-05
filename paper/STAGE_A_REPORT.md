@@ -109,7 +109,7 @@ This inventory is the reason there is **no final verdict**.
 | Historical AIRI/SPoC validation | **Run** (unit/oracle) |
 | N170 both ERP states × 5 seeds, B=1000 | **Run** |
 | MEG component inference: AIRI / PAPER-1501 / PAPER-1500 × 5 seeds, B=1000 | **Run** |
-| MEG temporal: AIRI-LITERAL-INDEXING and AIRI-CORRECTED-POOLED, Nmc=100, 5 seeds | **Required; companion files in progress** |
+| MEG temporal: AIRI-LITERAL-INDEXING and AIRI-CORRECTED-POOLED, Nmc=100, 5 seeds | **Run** (companion `temporal_airi_seed*.json`; does not replace `seed*.json` *p*-values) |
 | Fig. 18 MUSIC on *p*<0.05 components (2-D when n_sig=2) | Run for seed 20240904 only; **not** the paper Fig. 17 rule |
 | Fig. 18 MUSIC on the three lowest-*p* components (3-D) | **Run** (5 seeds × MEG-PAPER-1501 and MEG-AIRI). Selection and patterns are deterministic across seeds. |
 | SIM-P1 Fig. 4, SNR 0.2 and 0.1, seed 20240904, n_mc=100 | **Run** |
@@ -120,7 +120,7 @@ This inventory is the reason there is **no final verdict**.
 
 Existing `seed*.json` MEG files store a `temporal_airi` block that is the
 **corrected pooled** indexing and must not be labeled “literal AIRI
-executable.” Literal MATLAB indexing is a separate companion run.
+executable.” Both indexings are now in `temporal_airi_seed*.json`.
 
 ## 5. Fixed AIRI-SPoC configuration (everywhere)
 
@@ -250,9 +250,10 @@ ablation.
 
 ### MEG (Figs 12–17)
 
-**Component inference is complete** (5 seeds, B=1000). **Temporal
-AIRI-LITERAL vs AIRI-CORRECTED and paper-faithful Fig. 18 are not.**
-Do not treat the MEG track as closed.
+**Component inference is complete** (5 seeds, B=1000). **Both AIRI
+temporal indexings are complete** (Nmc=100, five seeds). Fig. 18
+lowest-*p* is complete. Simulations are not. Do not treat Stage A as
+closed.
 
 **`n_sig` vs “three components” (corrected reading).**
 
@@ -273,14 +274,14 @@ component. PAPER-1501 under-discovering face (2 vs ≥3) remains a
 mismatch to “first three statistically significant.”
 
 **`MEG-AIRI` (5/5 seeds), first three face components.** First-component
-random-phase *p* median ≈0.006 (range 0.005–0.008). Existing
-`temporal_airi` in `seed*.json` is **corrected pooled indexing**, not
-literal MATLAB. Neither that corrected half-split nor paper FWER
-recovers the paper face onsets at **65 ms** or **160 ms**. Paper-FWER
-face component 1 starts ≈244 ms. Later intervals (≈311 ms, ≈218 ms,
-some tool/meaning late blocks) appear as pieces of longer significant
-segments. Literal-indexing timing is recorded in
-`temporal_airi_seed*.json` when those files exist.
+random-phase *p* median ≈0.006 (range 0.005–0.008).
+
+AIRI temporal, **both** indexings (Nmc=100, five seeds): face component 1
+first *p*− interval is **≈250–355 ms**. Neither literal MATLAB indexing
+nor corrected pooled indexing recovers **65 ms** or **160 ms** as a
+first onset. The two indexings are close to each other on this contrast
+(the max/min-over-time test is the same). Paper-FWER face component 1
+starts ≈244 ms.
 
 **`MEG-PAPER-1501` (5/5).** Face has 2 significant components.
 Paper-FWER face component 1 starts ≈113–115 ms: that interval can cover
@@ -290,25 +291,25 @@ standardization.
 
 **`MEG-PAPER-1500` (5/5).** Matches 1501 to ~10⁻⁴ in λ.
 
-| MEG timing anchor (paper) | MEG-AIRI (corrected temporal / FWER on record) | MEG-PAPER-1501 |
+| MEG timing anchor (paper) | MEG-AIRI literal / corrected | MEG-PAPER-1501 literal / corrected / FWER |
 | --- | --- | --- |
-| Face c1 ~65 ms | no | no |
-| Face c1 peak ~160 ms | no (FWER starts ~244 ms) | inside later FWER block after ~113 ms |
+| Face c1 ~65 ms | no / no | no / no (AIRI *p*− starts ~105–110 ms; FWER ~113 ms) |
+| Face c1 peak ~160 ms | no (AIRI *p*− ~250 ms; FWER ~244 ms) | later block after ~105–113 ms |
 | Face c1 second ~311 ms | yes, inside later block | yes, inside later block |
 | Face c2 ~218 ms | often yes | not as a first onset |
 | Tool c1 ~210 ms | often in AIRI *p*− / FWER | FWER starts ~163–202 ms |
 | Meaning c1 ~160 ms | no | FWER ~129 ms then long later block |
 | Face vs tool ~202 ms | mixed / seed-dependent | FWER ~186–202 ms (long block) |
 
-Literal AIRI indexing is a **B** branch still being compared to the
-same anchors. It does **not** change `max(aa,[],2)` / `min(aa,[],2)`.
+Literal AIRI indexing (**B**) and corrected pooled (**C**) are both
+finished. Neither changes `max(aa,[],2)` / `min(aa,[],2)`. Switching
+the index lookup does not create the 65 ms face onset.
 
 ### Simulations (Figs 3–6)
 
-**Incomplete.** Only three `n_mc=100` files exist. That is not the
-pre-registered five-seed design, and it is not the review-expanded
-generation matrix. Numbers below are interim SIM-P1 seed 20240904
-only. They are **not** a failure verdict.
+**Incomplete.** The pre-registered five-seed design and the
+review-expanded generation matrix are still running. Numbers below are
+interim. They are **not** a failure verdict.
 
 **Fig. 4, `SIM-P1`, seed 20240904, n_mc=100** (not `--quick`):
 
@@ -346,6 +347,11 @@ Paper Fig. 5: patterns much better aligned with true topographies than
 weights. Under **this** SIM-P1 reconstruction, weights are ~0, patterns
 ~0.17, localization stays ~7.5 cm, and error does not fall as C
 increases. That is an interim observation, not a closed Stage A result.
+
+**SIM-P5 (D, norm-15% δ only), Fig. 4, seed 20240904, n_mc=100:**
+AUC 0.519 / 0.519, TPR@FPR0.01 ≈0.008 / 0.007, median loc. 7.08 cm /
+7.90 cm at SNR 0.2 / 0.1. Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not
+produce the published ROC. Other generation branches are still running.
 
 Fig. 5 SNR=0.2, the other four master seeds, SIM-P2/P3, and
 SIM-P4…P8 / SIM-R1 are not finished.
@@ -404,8 +410,9 @@ What can be said without pretending the matrix is finished:
 - **MEG component count (complete inference, corrected reading):**
   AIRI `n_sig >= 3` is compatible with “first three statistically
   significant.” PAPER-1501 face `n_sig=2` is not.
-- **MEG early timing (partial):** neither finished temporal analysis
-  recovers 65 ms. Literal vs corrected AIRI indexing is still running.
+- **MEG early timing (both AIRI indexings finished):** neither literal
+  nor corrected recovers 65 ms. PAPER-1501 AIRI *p*− starts ~105 ms;
+  AIRI window starts ~250 ms.
 - **Fig. 18 (now run on the paper 3-D input):** lowest-*p* three
   components, deterministic across seeds. Peaks remain occipital (left
   V2 for PAPER-1501; right occipital pole for AIRI), not the published
