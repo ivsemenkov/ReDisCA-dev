@@ -364,8 +364,14 @@ or &lt;2 cm Fig. 6 picture.
 AUC 0.519 / 0.524, TPR@0.01 0.009 / 0.017, median 8.21 cm / 7.09 cm
 at SNR 0.2 / 0.1. Doubling I_c does not recover the paper ROC.
 
-Fig. 5 SNR=0.2, remaining seeds, SIM-P3, SIM-P4, SIM-P6…P8, and
-SIM-R1 are still running.
+Second-seed Fig. 4 SNR=0.2 (n_mc=100) is in the same neighborhood:
+SIM-P1 AUC 0.487, median 6.72 cm; SIM-P5 AUC 0.495, median 7.00 cm;
+SIM-P2 seed 20240905 AUC 0.478, median 7.54 cm. The near-chance /
+~7 cm picture is not a one-seed fluke under these reconstructions.
+
+Fig. 5 remaining seeds, SIM-P3, SIM-P4, SIM-P6…P8, and SIM-R1 are
+still running. Global-γ, fixed-loci, I_c=100, C=5-from-scratch, and
+the SIM-R1 composite have not yet produced a finished n_mc=100 file.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
