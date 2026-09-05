@@ -1,0 +1,173 @@
+{
+  "mat_files": {
+    "ibfctfprespm8_AD_run1_raw_tsss_mc.mat": {
+      "path": "/workspace/forensics/airi_matlab/data/ibfctfprespm8_AD_run1_raw_tsss_mc.mat",
+      "size_bytes": 62701,
+      "format": "matlab_v7_or_earlier",
+      "whosmat": [
+        {
+          "name": "D",
+          "shape": [
+            1,
+            1
+          ],
+          "dtype": "struct"
+        }
+      ]
+    },
+    "MEG_AD_run1.mat": {
+      "path": "/workspace/forensics/airi_matlab/data/MEG_AD_run1.mat",
+      "size_bytes": 1243214548,
+      "whosmat_error": "Please use HDF reader for matlab v7.3 files, e.g. h5py",
+      "format": "hdf5_v73",
+      "datasets": {
+        "d": {
+          "shape": [
+            880,
+            1501,
+            207
+          ],
+          "dtype": "float64"
+        }
+      },
+      "top_keys": [
+        "d"
+      ]
+    },
+    "topo_face_vs_tool_correct_filt15.mat": {
+      "path": "/workspace/forensics/airi_matlab/data/topo_face_vs_tool_correct_filt15.mat",
+      "size_bytes": 105738,
+      "format": "matlab_v7_or_earlier",
+      "whosmat": [
+        {
+          "name": "A1",
+          "shape": [
+            204,
+            67
+          ],
+          "dtype": "double"
+        },
+        {
+          "name": "comps_order",
+          "shape": [
+            1,
+            4
+          ],
+          "dtype": "double"
+        }
+      ]
+    },
+    "trial_parsing": {
+      "nTrials": 880,
+      "labels_head": [
+        "181",
+        "200",
+        "190",
+        "120",
+        "190",
+        "151",
+        "190",
+        "110",
+        "230",
+        "171",
+        "181",
+        "130",
+        "181",
+        "130",
+        "200",
+        "200",
+        "140",
+        "110",
+        "120",
+        "140"
+      ],
+      "unique_labels_count": 22,
+      "n_valid": 800,
+      "condition_counts": {
+        "bFaceSimple1": 80,
+        "bFaceSimple2": 80,
+        "bToolSimple1": 80,
+        "bToolSimple2": 80,
+        "bNonsense1": 80,
+        "bNonsense2": 80
+      },
+      "tTrial_digit1_counts": {
+        "1": 720,
+        "2": 160
+      },
+      "tTrial_digit2_counts": {
+        "0": 80,
+        "1": 90,
+        "2": 90,
+        "3": 100,
+        "4": 80,
+        "5": 90,
+        "6": 90,
+        "7": 90,
+        "8": 80,
+        "9": 90
+      }
+    }
+  },
+  "meg_hdf5": {
+    "d": {
+      "shape": [
+        880,
+        1501,
+        207
+      ],
+      "dtype": "float64"
+    }
+  },
+  "trial_info": {
+    "nTrials": 880,
+    "labels_head": [
+      "181",
+      "200",
+      "190",
+      "120",
+      "190",
+      "151",
+      "190",
+      "110",
+      "230",
+      "171",
+      "181",
+      "130",
+      "181",
+      "130",
+      "200",
+      "200",
+      "140",
+      "110",
+      "120",
+      "140"
+    ],
+    "unique_labels_count": 22,
+    "n_valid": 800,
+    "condition_counts": {
+      "bFaceSimple1": 80,
+      "bFaceSimple2": 80,
+      "bToolSimple1": 80,
+      "bToolSimple2": 80,
+      "bNonsense1": 80,
+      "bNonsense2": 80
+    },
+    "tTrial_digit1_counts": {
+      "1": 720,
+      "2": 160
+    },
+    "tTrial_digit2_counts": {
+      "0": 80,
+      "1": 90,
+      "2": 90,
+      "3": 100,
+      "4": 80,
+      "5": 90,
+      "6": 90,
+      "7": 90,
+      "8": 80,
+      "9": 90
+    }
+  }
+}

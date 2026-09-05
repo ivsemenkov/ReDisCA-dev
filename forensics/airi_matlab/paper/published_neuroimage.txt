@@ -1,0 +1,1242 @@
+                                                                            NeuroImage 301 (2024) 120868
+
+
+                                                                   Contents lists available at ScienceDirect
+
+
+                                                                                NeuroImage
+                                                          journal homepage: www.elsevier.com/locate/ynimg
+
+
+
+
+Representational dissimilarity component analysis (ReDisCA)
+Alexei Ossadtchi a,b,c ,∗, Ilia Semenkov a,c , Anna Zhuravleva a,c , Vladimir Kozunov d , Oleg Serikov e ,
+Ekaterina Voloshina a,c
+a Higher School of Economics, Moscow, Russia
+b LIFT, Life Improvement by Future Technologies Institute, Moscow, Russia
+c
+  Artificial Intelligence Research Institute, Moscow, Russia
+d
+  MEG Centre, Moscow State University of Psychology and Education, Russia
+e
+  AI Initiative, King Abdullah University of Science and Technology, Kingdom of Saudi Arabia
+
+
+
+ARTICLE                INFO                               ABSTRACT
+
+Dataset link: https://osf.io/pfde9/                       The principle of Representational Similarity Analysis (RSA) posits that neural representations reflect the struc-
+                                                          ture of encoded information, allowing exploration of spatial and temporal organization of brain information
+Keywords:
+                                                          processing. Traditional RSA when applied to EEG or MEG data faces challenges in accessing activation time
+EEG and MEG
+Spatial–temporal decomposition
+                                                          series at the brain source level due to modeling complexities and insufficient geometric/anatomical data.
+Representational similarity analysis                           To overcome this, we introduce Representational Dissimilarity Component Analysis (ReDisCA), a method
+Source localization                                       for estimating spatial–temporal components in EEG or MEG responses aligned with a target representational
+                                                          dissimilarity matrix (RDM). ReDisCA yields informative spatial filters and associated topographies, offering
+                                                          insights into the location of "representationally relevant" sources. Applied to evoked response time series,
+                                                          ReDisCA produces temporal source activation profiles with the desired RDM. Importantly, while ReDisCA does
+                                                          not require inverse modeling its output is consistent with EEG and MEG observation equation and can be used
+                                                          as an input to rigorous source localization procedures.
+                                                               Demonstrating ReDisCA’s efficacy through simulations and comparison with conventional methods, we
+                                                          show superior source localization accuracy and apply the method to real EEG and MEG datasets, revealing
+                                                          physiologically plausible representational structures without inverse modeling. ReDisCA adds to the family
+                                                          of inverse modeling free methods such as independent component analysis (Makeig, 1995), Spatial spectral
+                                                          decomposition (Nikulin, 2011), and Source power comodulation (Dähne, 2014) designed for extraction sources
+                                                          with desired properties from EEG or MEG data. Extending its utility beyond EEG and MEG analysis, ReDisCA
+                                                          is likely to find application in fMRI data analysis and exploration of representational structures emerging in
+                                                          multilayered artificial neural networks.
+
+
+
+1. Introduction                                                                                2003; Cox and Savoy, 2003) followed by explicitly matching similarity
+                                                                                               patterns of neural activity to the theoretically presupposed represen-
+    Representational Similarity Analysis (RSA) now stands as a piv-                            tational structure (Aguirre, 2007) including the attempts to match the
+otal technique within cognitive neuroscience, offering a profound lens                         representational structure of neural activity across species (Kriegesko-
+into the organization and representation of information in the human                           rte et al., 2008b). Capitalizing on the success of the early application
+brain. This method has revolutionized our capacity to comprehend                               of the RSA principle, a seminal paper by Kriegeskorte et al. (2008a)
+neural bases of cognitive processes by elucidating relationships be-                           provided a step-by-step guide for the use of RSA to link the three
+tween neural representations of stimuli or concepts and relating them                          whales of modern neuroscience: neuronal activity, behavior, and com-
+to behavioral variables and computational modeling (Edelman, 1998;                             putational models. Since then a number of informative studies emerged
+Kriegeskorte et al., 2008a). The largely philosophical concept of rep-                         that utilize the notion of representation (Shea, 2018) and employ RSA
+resentational similarity received its practical implementations in the                         as an instrument to explore informational structure embodied in the
+field of both invasive electrophysiological (Op de Beeck et al., 2001;                         neural substrate (Kriegeskorte and Kievit, 2013).
+Hung et al., 2005; Tsao et al., 2006) and non-invasive functional                                  RSA was extended to merge fMRI and magnetoencephalography
+magnetic resonance imaging (fMRI) based neuroimaging (Carlson et al.,                          (MEG) non-invasive functional neuroimaging modalities (Cichy et al.,
+
+
+
+    ∗ Corresponding author at: Higher School of Economics, Moscow, Russia.
+      E-mail address: ossadtchi@gmail.com (A. Ossadtchi).
+
+https://doi.org/10.1016/j.neuroimage.2024.120868
+Received 21 April 2024; Received in revised form 20 September 2024; Accepted 23 September 2024
+Available online 27 September 2024
+1053-8119/© 2024 The Authors. Published by Elsevier Inc. This is an open access article under the CC BY-NC license (http://creativecommons.org/licenses/by-
+nc/4.0/).
+A. Ossadtchi et al.                                                                                                            NeuroImage 301 (2024) 120868
+
+
+2016). This approach aimed to leverage the typically acknowledged               the techniques that offer a unique time-resolved window into the rapid
+high spatial resolution of fMRI alongside the high temporal resolution          neuronal processes.
+of MEG. MEG channels were used as features for constructing a clas-                 To address this problem and broaden the potential applications of
+sifier to yield the representational dissimilarity matrices (RDMs) cor-         the powerful RSA principle here we propose novel representational
+responding to specific time intervals. These RDMs were then matched             dissimilarity component analysis (ReDisCA) — an inverse modeling
+against those computed from spatial region of interest (ROI) activity           free method designed to estimate the spatial–temporal components
+patterns as measured by fMRI. This study revealed intriguing pat-               in evoked responses that adhere to a specific target (or theoretical)
+terns of temporally persistent and recurrent representations (King and          representational dissimilarity matrix (RDM). The output of this method
+Dehaene, 2014) across the visual processing stream reflecting both              is a set of spatial filters and the associated topographies (or patterns)
+bottom-up and top-down informational flows highlighting the concept             that appear informative of the location of ‘‘representationally relevant’’
+of predictive coding implemented in our brains.                                 sources whose activity exhibits the sought representational profiles.
+    Several years later, MEG alone combined with cortical ROI multi-            Application of the discovered spatial filters to the evoked response time
+variate pattern analysis and powered by the RSA framework (Kozunov              series matrix yields temporal source activation profiles with the desired
+et al., 2018) managed to provide both temporally and spatially in-              RDM over the selected time window. It is worth noting that ReDisCA
+formative maps highlighting the ventral vs. dorsal bifurcation of the           belongs to the class of spatial decomposition methods that resolve the
+visual pathway related to processing images of faces and tools con-             inherent uncertainty of the inverse problem by adding the specific as-
+trasted against meaningless textures. Methodologically, this paper is           sumptions and looking for the number of sources or components whose
+significant as to the best of our knowledge that was the first attempt to       count does not exceed the rank of the data matrix. Thus, ReDisCA looks
+apply RSA to MEG data in the source space. To this end, the authors             for components (or sources) with specific representational dissimilarity
+first computed a fine-grained distributed inverse solution using the            profiles.
+sLORETA technique (Pascual-Marqui et al., 2002). Applying it to each                While ReDisCA does not necessitate an inverse modeling, its foun-
+time slice in the MEG sensor data they obtained cortical distribution           dation lies in the classical linear EEG/MEG observation equation. It
+of activity for each vertex on the cortical mesh model. Then, they              exercises the concept of spatial filtering, akin to already established
+combined vertices into spatially extended coarse ROIs and retained only         techniques like Independent Component Analysis (ICA) (Makeig et al.,
+three principal components of activities in each cortical ROI. Then, a          1995), Spatial–Spectral Decomposition (SSD) (Nikulin et al., 2011), or
+                                                                                Source Power Co-modulation (SPoC) (Dähne et al., 2014). This ensures
+series of region and time-window specific linear discriminant analysis
+                                                                                that the discovered spatial patterns are suitable for implementing a
+(LDA) classifiers were trained to distinguish between stimulus classes
+                                                                                rigorous source localization procedure based on the notion of signal
+and to form regional RDMs. These regional RDMs were then employed
+                                                                                subspace (Mosher et al., 1992) as described for example by Ossadtchi
+within the standard RSA framework and compared against theoretical
+                                                                                et al. (2014) in application to ICA.
+RDMs.
+                                                                                    This compatibility with the linear model positively distinguishes
+    It is important to realize that in the case of fMRI, the source space
+                                                                                ReDisCA from the purely sensor space applications of RSA to EEG or
+signals are readily available after the application of a more or less
+                                                                                MEG data. For example, Mensen et al. (2017) used high-density EEG
+standard collection of analysis steps including data preprocessing and
+                                                                                and highlighted the detailed spatial and temporal patterns of responses
+calculation of the appropriate contrasts. Things are significantly less
+                                                                                underlying various aspects of meaningfulness in the presented visual
+transparent and standardized in the EEG or MEG cases (Mosher et al.,
+                                                                                stimuli. They achieved this by using newly proposed differentiation
+1999; De Munck et al., 2012). Here, to obtain the individual voxel
+                                                                                analysis (DA) and computed temporal and spatial profiles of the cat-
+or ROI activity profiles, the inverse modeling approaches are used to
+                                                                                egory differentiation index (CDI) that can be used to make judgments
+convert sensor signals into the source space activation time series. This
+                                                                                about time windows and approximate spatial locations of the pivotal
+is typically done by applying an inverse operator matrix to EEG/MEG
+                                                                                sources. However, due to their empirical nature, the obtained spatial
+sensor measurements. The inverse operator directly depends on the               CDI maps cannot be rigorously fitted with the electromagnetic model
+forward model. The latter approximates the way the source activity is           of the head and therefore are only tangentially related to the underlying
+mapped to the sensors and is computed by solving Maxwell equations              distribution of cortical sources with target representational properties.
+within the head volume which typically requires approximating the               Therefore, the approach proposed here can be considered as a link
+head with a set of nested surfaces bounding the regions of constant             between the existing purely sensor-space applications of RSA to EEG
+conductivity. The accuracy of the forward model depends on the ex-              and MEG data and the fully-fledged inverse modeling-based technique
+tent to which the geometry as well as conductivity and permeability             described in Kozunov et al. (2018).
+properties of the model align with their real counterparts. Generally               In what follows we first describe the classical RSA formulation and
+unknown conductivity profiles of the tissues comprising the head,               then proceed to the presentation of ReDisCA. As it will become clear,
+the associated anisotropy of the conductivity tensor, and the limited           ReDisCA utilizes formally the same optimization strategy as that used in
+coregistration accuracy of the sensor array to the volume conductor             SPoC (Dähne et al., 2014), a well-established technique for extracting
+model are the sources of the forward model inaccuracies especially              spatial–temporal components corresponding to neuronal sources of
+pronounced when dealing with EEG data. The precision of modeling                rhythmic activity whose power is co-modulated with the user-supplied
+magnetic fields from neuronal sources tends to yield accurate MEG               behavioral variable. To illustrate this connection we provide a table of
+forward models, showcasing an impressive fidelity with an estimated             explicit correspondence between the quantities defined in this paper
+error rate of around 10% (Mosher and Leahy, 1999). Yet, despite this            and those used in SPoC and then describe the optimization strategy
+advantage, MEG systems are notably less accessible compared to their            based on solving the generalized eigenvalue problem with appropri-
+EEG counterparts. Even if the forward model is accurate enough the              ately formed matrices. Next, we evaluate ReDisCA’s performance and
+task of estimating neuronal sources from non-invasively collected EEG           compare it against several versions of the source space RSA imple-
+or MEG data is inherently ill-posed. Fundamentally, for a given set of          mentations in the two simulated scenarios, with either a single source
+measurements, there exist an infinite number of cortical source distri-         or with four simultaneously active sources each with its own RDM.
+butions that perfectly fit the measurements. This problem is resolved           Finally, we apply ReDisCA to the analysis of a real EEG dataset that
+and a unique solution is guaranteed by regularization which makes               lacks the information necessary for source localization, a prerequisite
+the results depend heavily on the apriori assumptions about source              for the source space RSA analysis. We show how the new method can
+distributions. Taken together, all this limits RSA applications in the          be used to discover representationally relevant structure in the EEG
+realm of time-resolved neuroimaging furnished by the EEG and MEG,               and MEG evoked responses without the use of inverse modeling. We
+
+                                                                            2
+A. Ossadtchi et al.                                                                                                               NeuroImage 301 (2024) 120868
+
+
+conclude with a discussion of ReDisCA’s strengths and weaknesses and                 The scores 𝜌𝑅𝑆𝐴
+                                                                                                  𝑚    reflect the similarity between the theoretical and
+relate it to the existing modifications of RSA including accommodation           regional RDMs. They can be visually represented on the cortical surface
+of advanced dissimilarity measures (Walther et al., 2016) and the data-          or within the brain volume by interpolating the scores associated with
+driven estimation of the theoretical RDM (Khaligh-Razavi et al., 2017;           each of the 𝑀 voxels or cortical mesh nodes. Then, to identify the
+Kaniuth and Hebart, 2022).                                                       spots of significant similarity, a statistical testing procedure is applied.
+                                                                                 This procedure should consider the limited spatial resolution inherent
+2. Methods                                                                       in EEG and MEG-based inverse mapping, and correction should be
+                                                                                 made for the effective number of multiple comparisons. This may be
+2.1. Problem statement                                                           accomplished using, for example, the cluster-based permutation testing
+                                                                                 procedure (Maris and Oostenveld, 2007) where the surrogate data are
+    Consider a collection of data matrices denoted as 𝐗𝑐𝑖 , each with            obtained by permuting the labels of 𝐶 conditions which essentially
+dimensions 𝑁 ×𝑇 . These matrices represent recordings of brain activity,         corresponds to computing 𝜌𝑅𝑆𝐴       but for a randomly reshuffled upper
+                                                                                                                𝑚
+specifically EEG, MEG, or potentially ECoG or sEEG, performed with 𝑁             triangle of the theoretical RDM.
+channels over 𝑇 time stamps. The length of the time segment of interest              The diagrams in Fig. 1 schematically show the described process.
+within the entire response is 𝑇 samples and corresponds to the number            In the first case illustrated in panel Fig. 1.a an inverse operator is
+of columns in 𝐗𝑐𝑖 . These recordings are obtained during the 𝑖-th trial          applied to already averaged evoked response data 𝐗𝑝 observed during
+out of a total of 𝐼𝑐 trials, corresponding to the experimental condition         condition 𝑝, 𝑝 = 1, … , 𝐶, and then the empirical RDM entry is calculated
+𝑐 = 1, … , 𝐶.                                                                    as the quadratic difference between the evoked source time series in
+    Averaged evoked response is one of the informative features ex-              condition 𝑝 and 𝑞. In Fig. 1.b we show an alternative approach where
+tracted from electrophysiological recordings obtained in the event-
+                                                                                 the inverse operator is applied to the single (𝑙th) trial data, followed by
+related paradigms. It can be calculated simply by averaging 𝐗𝑐𝑖 over 𝐼𝑐
+                       ∑𝐼𝑐 𝑐 𝑐                                                   computing the quadratic difference that then gets averaged over trials
+trials to get 𝐗𝑐 = 𝐼1 𝑖=1    𝐗𝑖 . 𝐗 emphasizes phasic components of the          within each condition. In our experiments with source space RSA, we
+                     𝑐
+response, i.e. those whose activity phase is consistent with the stimulus        will also distinguish between the use of two different inverse solvers
+onset.                                                                           — Minimum norm estimator (MNE) and Linearly constrained minimum
+    Our objective is to use a set of 𝐗𝑐 observed over 𝐶 conditions               variance beamformer (LCMV BF). This gives us in total four versions of
+and to identify spatial and temporal components or subsequently brain            the source space RSA that we will compare our new approach with.
+regions whose temporal activity profiles exhibit the target differences
+among the 𝐶 experimental conditions. The target differences in our
+case are defined by a predefined theoretical or model-based 𝐶 × 𝐶                2.3. Representational dissimilarity component analysis (ReDisCA)
+representational dissimilarity matrix (RDM) D.
+                                                                                     Here we propose an alternative method for identifying brain activity
+2.2. Source space representational similarity analysis (RSA)                     components with the desired representational dissimilarity. Instead of
+                                                                                 using the pre-computed inverse operator 𝐖𝑀 = {𝐰⊤       𝑚 }, 𝑚 = 1, … , 𝑀
+    For EEG and MEG scenarios, we can achieve this by the two-step               whose 𝑚-th row serves the 𝑚-th cortical vertex and conducting an
+spot-light procedure similar to that used in Kozunov et al. (2018). First        exhaustive search over all 𝑀 cortical vertices (or voxels) as in the
+we use an 𝑀 × 𝑁 inverse operator denoted as 𝐖𝑀 whose 𝑚-th row is                 spotlight source space RSA illustrated in Fig. 1, we analytically seek
+denoted as 𝐰⊤  𝑚 , 𝑚 ∈ 1, … , 𝑀, and acts as a spatial filter tuned to the
+                                                                                 a vector of coefficients 𝐰 such that the empirical RDM of spatially
+𝑚-th voxel or cortical vertex.                                                   filtered data 𝐬𝑐⊤     ⊤ 𝑐
+                                                                                                𝑤 = 𝐰 𝐗 , 𝑐 ∈ 1, … , 𝐶, closely approximates the target
+    This precomputed spatial filter aids in estimating the 1 × 𝑇 vector of       RDM D. Note that this analytically found spatial filter weights vector 𝐰
+the 𝑚-th voxel activity during condition 𝑐 as 𝐬𝑐⊤     ⊤ 𝑐
+                                                𝑚 = 𝐰𝑚 𝐗 , allowing us to        conceptually plays the same role as the rows 𝐰𝑚 of the inverse operator
+derive the time series corresponding to every voxel in the predefined            in the source space RSA.
+volumetric grid based on the sensor-space averaged evoked response                   To implement this we posit and solve the following optimization
+measurements 𝐗𝑐 defined above. Note that here and in the subsequent              problem
+expressions horizontally oriented vectors are marked with transpose                                (       )              (                    )
+                        ( 𝑐 )⊤                                                                       𝑖𝑗 𝑖𝑗                   𝑐⊤     𝑐 ⊤
+superscript, i.e. 𝐬𝑐⊤                                                            𝐰 = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑐𝑜𝑟𝑟 𝑑𝑤    ,𝑑    = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑐𝑜𝑟𝑟 ‖𝐬𝑤𝑖 − 𝐬𝑤𝑗 ‖2 , 𝑑 𝑖𝑗 ,      (3)
+                   𝑚 = 𝐬𝑚 .
+    Next, having obtained regional time series vectors 𝐬𝑐⊤𝑚 we can evalu-        where following (1) to gauge similarity between the empirical RDM
+ate the dissimilarity measure of choice to obtain the 𝑚-th region-specific                  𝑖𝑗
+                                                                                 𝐃𝑤 = {𝑑𝑤      } of the spatially filtered data 𝐬𝑐𝑇     ⊤ 𝑐
+                                                                                                                                 𝑤 = 𝐰 𝐗 and the target
+dissimilarity matrix 𝐃𝑚 = {𝑑𝑚𝑖𝑗 }, 𝑚 = 1, … , 𝑀. In what follows we will
+                                                                                 RDM matrix D we use the Pearson correlation coefficient between
+stick to the square of the Euclidean distance as a measure of response
+                                                                                 the two RDMs upper triangular elements indexed by (𝑖, 𝑗). Also, as
+dissimilarity that can be readily extended to Mahalanobis distance once
+                                                                                 a representational dissimilarity measure we employ the squared Eu-
+the covariance matrix describing the dependencies between the time
+                                                                                 clidean distance between condition-specific spatially filtered temporal
+samples of the regional response is available. Thus
+                                                                                 activation profiles. However, in this case, the spatial filter 𝐰 is unknown
+                      𝑐⊤   𝑐 ⊤
+𝐃𝑚 = {𝑑𝑚𝑖𝑗 } = ‖𝐬𝑚𝑖 − 𝐬𝑚𝑗 ‖2 , 𝑖, 𝑗 = 1, … , 𝐶.                       (1)        and needs to be found by solving this optimization problem. Once
+                                                                                 the weights are found they can be turned into source topographies.
+   Once the regional RDMs are prepared, following the standard RSA
+                                                                                 The relation between spatial filter weights and the associated source
+procedure, we will employ the correlation coefficient 𝜌𝑅𝑆𝐴𝑚 to assess
+                                                                                 topographies has been described in Haufe et al. (2014) and will also be
+the similarity between regional RDMs (𝐃𝑚 ) indexed by 𝑚 and the
+                                                                                 addressed below. The obtained topographies of sources with desired
+theoretical RDM D = {𝑑 𝑖𝑗 } typically supplied by the user.
+                                                                                 RDM profiles can then be used for inverse modeling and localization
+           (           )        2     ∑𝐶 ∑  𝐶
+                                                                                 of the underlying neuronal sources. Note that in (3) we used subscript
+𝜌𝑅𝑆𝐴
+ 𝑚   = 𝑐𝑜𝑟𝑟 𝑑 𝑖𝑗 , 𝑑𝑚𝑖𝑗 =                       𝑑̃𝑖𝑗 𝑑̃𝑚𝑖𝑗            (2)        𝑤 to denote the elements of the empirical RDM corresponding to the
+                             𝐶(𝐶 − 1) 𝑖=1 𝑗=𝑖+1
+                                                                                 spatial filter 𝐰 that we are about to identify, see (2) for comparison.
+where the tilde represents standardized upper triangular elements of                 To solve the optimization problem (3) we use the fact that 𝐬𝑤𝑖 =
+                                                                                                                                                        𝑐⊤
+
+the respective RDM matrices. The standardization operation applied                 ⊤  𝑐
+                                                                                 𝐰 𝐗 𝑖 and rewrite (3) as an explicit function of 𝐰:
+to a vector lies in subtracting its mean and dividing by the standard                                ( (             )(         )⊤     )
+deviation.                                                                       𝐰 = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑐𝑜𝑟𝑟 𝐰⊤ 𝐗𝑐𝑖 − 𝐗𝑐𝑗 𝐗𝑐𝑖 − 𝐗𝑐𝑗 𝐰, 𝑑 𝑖𝑗 .                         (4)
+
+                                                                             3
+A. Ossadtchi et al.                                                                                                                                 NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 1. Source space RSA diagrams. (a) RSA applied to the averaged evoked response (AV). The inverse operator is applied to already averaged evoked response data 𝐗𝑝 observed
+during condition 𝑝, 𝑝 = 1, … , 𝐶, then the empirical RDM entry is calculated as the quadratic difference between the evoked source time series in conditions 𝑐𝑖 = 𝑝 and 𝑐𝑗 = 𝑞. (b)
+RSA applied to single trials (S.T.). The inverse operator is applied to every single 𝑙-th trial in the data, followed by computing the quadratic difference that gets then averaged
+                                                                             (             )
+over trials within each condition. In both cases, different inverse operators 𝐖𝑀 = {𝐰⊤𝑚 } can be used. We experimented with two inverse solvers — MNE and LCMV BF.
+
+                                   (          )(          )⊤
+For compactness, we denote 𝐑𝑖𝑗 = 𝐗𝑐𝑖 − 𝐗𝑐𝑗 𝐗𝑐𝑖 − 𝐗𝑐𝑗 to obtain the                           Table 1
+following optimization problem                                                               Correspondence between main SPoC variables as defined in (Dähne et al., 2014) and
+                                                                                             the variables used to define ReDisCA in this manuscript.
+                   (             )
+𝐰𝑚𝑎𝑥 = 𝑎𝑟𝑔𝑚𝑎𝑥 𝑐𝑜𝑟𝑟 𝐰⊤ 𝐑𝑖𝑗 𝐰, 𝑑 𝑖𝑗 , 𝑖 = 1, … , 𝐶, 𝑗 = 1, … , 𝐶. (5)                           Var. SPoC      Var. ReDisCA      Role in SPoC                Role in ReDisCA
+                                                                                              𝑒              (𝑖, 𝑗)            Time window index           Conditions pair index
+    In Eq. (5), 𝑁 × 𝑁 matrix 𝐑𝑖𝑗 represents the unscaled correlation                          𝐂(𝑒)           𝐑𝑖𝑗               Data correlation matrix     Data diff. corr. matrix
+matrix of the sensor-space time series differences recorded between                           𝑧(𝑒)           𝑑 𝑖𝑗              Desired response pattern    Desired RDM pattern
+condition 𝑖 and condition 𝑗. This expression formally exactly matches
+the optimization problem solved in SPoC (Dähne et al., 2014) where the
+role of 𝐑𝑖𝑗 is played by the time-segment specific sensor data correlation
+matrix.                                                                                      (5) to maximize the correlation coefficient between the empirical and
+    SPoC deals with a collection of time segments (or epochs) indexed                        the desired theoretical RDM profiles. While this is entirely possible, the
+by 𝑒 in the original paper, and aims to find a spatial filter for isolating                  SPoC paper describes a more attractive alternative to approximate the
+a source whose power follows the desired temporal profile 𝑧(𝑒). In our                       correlation coefficient with covariance which allows for a closed-form
+approach, we work with a collection of condition pairs (𝑖, 𝑗) and seek a                     solution.
+                                 𝑖𝑗
+source whose RDM 𝐃𝑤 = {𝑑𝑤           } matches the target RDM D = {𝑑 𝑖𝑗 }.                       To ensure that optimization of covariance (the non-normalized
+While SPoC computes correlation matrices 𝐂(𝑒) specific to the 𝑒-th                           version of the correlation coefficient) is a good approximator of the
+epoch of EEG(MEG) data, in our approach we calculate correlation                             correlation coefficient optimization we
+matrices 𝐑𝑖𝑗 of the difference of EEG (MEG) time series observed during
+the pairs of conditions indexed by (𝑖, 𝑗). The role of index 𝑒 in the                            • use standardized elements of the RDM 𝑑̃𝑖𝑗
+original SPoC is played by the pair of indices (𝑖, 𝑗) whose combinations                         • use the constraint 𝐰⊤ 𝐑𝐰
+                                                                                                                         ̄ ⊤ = 1 where
+enumerate the collection of the upper triangular elements of the RDM.
+                                                                                                              2     ∑𝐶 ∑  𝐶
+One may also express this correspondence as 𝑒 = (𝑖 − 1)𝐶 + 𝑗, 𝑖 > 𝑗, 𝑖 =                             ̄ =
+                                                                                                     𝐑                        𝐑𝑖𝑗                                              (6)
+1, … , 𝐶, 𝑗 = 1, … , 𝐶. Essentially, the 𝑒-th segment time series in SPoC is                               𝐶(𝐶 − 1) 𝑖=1 𝑗=𝑖+1
+replaced by the time series of activation difference between condition
+                                                                                                     is the average correlation matrix.
+pairs (𝑖, 𝑗). The role of the desired power profile 𝑧(𝑒) from the original
+SPoC is played by the elements 𝑑 𝑖𝑗 of the theoretical RDM D driving                            For compactness we also denote the weighted and centered average
+the proposed here representational dissimilarity components analysis                         correlation matrix
+(ReDisCA). This correspondence is summarized in Table 1.
+    There are two ways to solve the optimization problem (5). The first                              ∑
+                                                                                                     𝐶 ∑
+                                                                                                       𝐶
+                                                                                             ̄𝑑 =
+                                                                                             𝐑                            ̄
+                                                                                                              𝑑̃𝑖𝑗 (𝐑𝑖𝑗 − 𝐑)                                                   (7)
+one is to use the gradient descent and to identify 𝐰 as the solution for                             𝑖=1 𝑗=𝑖+1
+
+
+                                                                                         4
+A. Ossadtchi et al.                                                                                                                    NeuroImage 301 (2024) 120868
+
+
+The resulting optimization problem can then be written as                              From the above and given that the matrix of spatial filters 𝐖⊤ is
+             (        )                                                                invertible we can write
+𝐰 = 𝑎𝑟𝑔𝑚𝑎𝑥 𝐰⊤ 𝐑  ̄ 𝑑 𝐰 , 𝑠.𝑡. 𝐰⊤ 𝐑𝐰
+                                 ̄ =1                                       (8)
+                                                                                                                  ∑
+                                                                                                                  𝑁
+
+and can be analytically solved using the method of Lagrange multipli-                  𝐗𝑐 = 𝐖−1 𝐔𝑐⊤ = 𝐀𝐔𝑐⊤ =            𝐚𝑘 𝐮𝑐⊤
+                                                                                                                            𝑘 ,                               (12)
+                                                                                                                  𝑘=1
+ers.
+    The problems formally identical to (8) often arise in the domain                   which shows that after obtaining ReDisCA components, the sensor data
+                                                                                       in the 𝑐-th condition can be reconstructed as a superposition of rank-1
+of multivariate signal processing, see beamforming (Van Veen et al.,
+                                                                                       contributions 𝐚𝑘 𝐮𝑐⊤ of ReDisCA components.
+1997), common spatial patterns (Pfurtscheller et al., 1999), spatial                                     𝑘
+                                                                                           Note that ReDisCA does not require an explicit electromagnetically
+spectral decomposition (SSD) (Nikulin et al., 2011) and SPoC (Dähne
+                                                                                       informed inverse modeling to identify the spatial components within
+et al., 2014) as EEG (MEG) specific examples. The optimal 𝐰 is found
+                                                                                       multichannel EEG (MEG) data that exhibit the desired representational
+as the solution to the following generalized eigenvalue problem corre-
+                                                                                       properties aligned with the user-supplied theoretical RDM.
+sponding to the largest eigenvalue
+                                                                                           However, to compare ReDisCA’s results to those obtained with the
+̄ 𝑑 𝐰 = 𝜆𝐑𝐰
+𝐑        ̄                                                                  (9)        more conventional source space RSA approaches we can apply the
+                                                                                       electromagnetic inverse modeling to the identified spatial topography
+When solving this problem for an 𝑁-channel data we will arrive at an                   vectors 𝐚𝑘 . This allows us to quantitatively assess the locations of
+𝑁 × 𝑁 matrix 𝐖 whose columns are the eigenvectors of matrix pair                       sources underlying each of the components. The simplest way to as-
+ ̄ 𝑑 , 𝐑)
+(𝐑     ̄ or in other words                                                             sociate ReDisCA results with neuronal sources is to compute the cosine
+                                                                                       similarity score between each forward model-based topography vector
+̄ 𝑑 𝐖 = Λ𝐑𝐖,
+𝐑        ̄                                                                 (10)        𝐠𝑚 , 𝑚 = 1, … , 𝑀 corresponding to the 𝑚-th vertex of the cortical mesh
+where Λ = {𝜆𝑛 }, 𝑛 = 1, … , 𝑁 is the diagonal matrix of generalized                    and the ReDisCA-derived pattern 𝐚𝑘 i.e.
+eigenvalues. The above procedure is referred to as the maximization of                          𝐠⊤
+                                                                                                 𝑚 𝐚𝑘
+covariance option in the original SPoC paper (Dähne et al., 2014). In                  𝜌𝐶𝑆
+                                                                                        𝑚 =                .                                                  (13)
+                                                                                              ‖𝐠𝑚 ‖‖𝐚1 ‖
+this case, matrix 𝐖 resulting from solving the generalized eigenvalue
+                                                                                       This procedure can be applied to each statistically significant topogra-
+problem (10) is square and also full rank as we assume that both
+                                                                                       phy.
+𝐑̄ 𝑑 and 𝐑̄ are invertible. Then, 𝐖 can be simply inverted to obtain
+                                  −1 whose rows 𝐚⊤ are the topographies of
+                                                                                          Alternatively, to localize sources corresponding to the entire
+a matrix 𝐀 = {𝐚⊤      𝑛} = 𝐖                        𝑛                                  𝐾-dimensional representational dissimilarity subspace spanned by the
+sources with the desired representational properties. In the case when                 topographies of statistically significant components stored in 𝐀𝐾 we
+the generalized eigenvalue problem (10) is not full rank the described                 can perform a simple multiple signal classification (MUSIC) scan using
+procedure can be performed in the lower dimensional principal space                    subspace correlation metric as
+and the obtained topographies can be transformed back to the original                                    (       )
+sensor space.                                                                          𝜌𝑀𝑈
+                                                                                        𝑚
+                                                                                           𝑆𝐼𝐶
+                                                                                               = 𝑠𝑢𝑏𝑐𝑜𝑟𝑟 𝐠𝑚 , 𝐀𝐾                                           (14)
+     Note, that by solving (10) instead of (9) we obtain 𝑁 spatial filters                Similarly to 𝜌𝑚 used in the classical RSA setting, the scores 𝜌𝑀𝑈 𝑆𝐼𝐶
+                                                                                                                                                         𝑚
+𝐰𝑛 and source topographies 𝐚⊤         𝑛 , 𝑛 = 1, … , 𝑁. The 𝑛-th generalized           and 𝜌𝐶𝑆  can  be visually represented  on the cortical surface or within
+                                                                                            𝑚
+eigenvalue 𝜆𝑛 , 𝑛 = 1, … , 𝑁 reflects the extent to which the empirical                the brain volume by interpolating the scores associated with each of
+RDM corresponding to the time series extracted using spatial filter 𝐰𝑛                 the 𝑀 voxels or cortical mesh nodes. Note also that 𝜌𝑀𝑈 𝑚
+                                                                                                                                                  𝑆𝐼𝐶 is a more
+
+is similar to the desired theoretical RDM D.                                           general measure of similarity between the subspaces of the arbitrary
+     We call the topographies 𝐚⊤     𝑛 combined with the corresponding data            dimensions and reduces to 𝜌𝐶𝑆𝑚 for 𝐾 = 1.
+derived RDM profiles 𝐃        ̂ 𝑛 = {𝑑̂𝑛𝑖𝑗 } = {𝐰⊤ 𝐑𝑖𝑗 𝐰𝑛 } the representational
+                                                 𝑛
+dissimilarity components and the described process of obtaining them the               2.4. Simulations setting
+REpresentational DISsimilarity Component Analysis or ReDisCA.
+     The significance of the similarity between the component-specific                     To validate the proposed ReDisCA approach, we conducted two
+data-derived RDMs 𝐃     ̂ 𝑛 , 𝑛 = 1, … , 𝑁 and the theoretical RDM D can be            sets of simulations. The best way to ensure that ReDisCA derived
+established by the permutation testing procedure suggested in SPoC.                    components are informative with respect to the underlying sources
+The idea of this approach is to solve a large number of surrogate                      is to actually find these sources given the components estimated by
+problems of the form (10) but based on the matrices created from                       ReDisCA. Therefore in both simulations we mapped the obtained to-
+                                                                                       pographies to the source space using (13) and assessed the location of
+the data with permuted condition labels. The mutual correspondence
+                                                                                       the MUSIC scan’s peak with respect to the simulated source location(s).
+between the set of difference correlation matrices 𝐑𝑖𝑗 and the condition
+pair labels (𝑖, 𝑗) is destroyed and the corresponding asymptotic 𝑝-values
+                                                                                       2.4.1. Generation of source activation time series with desired representa-
+are calculated as a fraction of cases when the surrogate generalized
+                                                                                       tional structure
+eigenvalue exceeds that obtained on the original data.
+                                                                                           In both simulations we used the following strategy to generate the
+     The collection of 𝐾 topographies 𝐀𝐾 = [𝐚1 , … , 𝐚𝐾 ] corresponding                source activation time series for each of the 𝐶 conditions and associate
+to the components with significantly high similarity between the data-                 them with the representational structure across 𝐶 conditions.
+derived and the theoretical RDM spans representational dissimilarity
+subspace. These topographies together with the corresponding spatially                     • For each source generate a random mixing matrix 𝐌 by sam-
+filtered ERP time series furnish the decomposition of the evoked re-                         pling its elements from zero mean and unit variance Gaussian
+sponse potential (ERP) data into a set of relevant constituents with                         distribution  (0, 1)
+respect to the used theoretical RDM.                                                       • Generate 𝐶 × 𝑇 matrix 𝐒 of condition-specific source evoked
+     Technically this completes ReDisCA’s description whose result is a                      response potentials as 𝐒 = 𝐌𝐙 where 𝐙 is a 𝐶 × 𝑇 matrix of
+set of spatial component topographies 𝐚𝑘 and the corresponding spatial                       Gaussian random variables whose rows are low-pass filtered by
+filters 𝐰𝑘 that can be used to obtain component-specific response time                       the 6th order Butterworth filter with a cut-off frequency of 2 Hz.
+series vectors 𝐮𝑐⊤    in the 𝑐-th condition as 𝐮𝑐⊤    = 𝐰⊤  𝐗𝑐 . More generally,             We will refer to the 𝑐-th row of this matrix as 𝐬𝑐⊤ for 𝑐 = 1, … , 𝐶.
+                  𝑘                                𝑘      𝑘
+one can write this in a matrix form as                                                     • Compute the resultant dissimilarity profile matrix D0 from the
+                                                                                             obtained condition-specific time series vectors 𝐒 according to
+𝐔𝑐⊤ = 𝐖⊤ 𝐗𝑐 .                                                              (11)              Eq. (1).
+
+                                                                                   5
+A. Ossadtchi et al.                                                                                                                            NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 2. Representational dissimilarity component analysis (ReDisCA) diagram. The problem of finding the spatial components whose output ERP follow the desired RDM is reduced
+to SPoC covariance optimization. Instead of time-window covariance matrices 𝐂(𝑒) and the associated values of behavioral variable 𝑧(𝑒) observed for a set of latency values
+𝑒 = 1, … , 𝐸 ReDisCA uses activation difference covariance matrices 𝐑𝑝𝑞 and the elements 𝑑 𝑝𝑞 of the theoretical RDM correspondingly, see also Table 1.
+
+
+    As described later the noisy version of D0 will be supplied to the                    the desired representational structure defined by the approximate RDM.
+tested here RSA approaches as a theoretical RDM. For each Monte-Carlo                     The approximate RDM is used to simulate the real-world scenario
+iteration we generated a new matrix 𝐙, and thus a new set of condition-                   where we naturally lack precise knowledge of the dissimilarity profile.
+specific source time series 𝐒. In the first set of simulations where we                   To this end, we incorporate a random 𝐶 × 𝐶 noise matrix 𝛶 𝑑 at each
+generated only one active source we kept the mixing matrix 𝑀 constant                     Monte-Carlo iteration. This addition modifies the theoretical RDM D0
+over all Monte-Carlo iterations. In the second set of simulations with                    to D = D0 + 𝛶 𝑑 .
+𝑃 = 4 sources, we used four mixing matrices 𝐌𝑝 , one for each source,                         To verify the result we then apply the source localization procedure
+that remained unchanged throughout Monte-Carlo trials.                                    to the discovered component(s) to determine the location 𝐫̂ of a source
+                                                                                          (or its index, denoted as 𝑚)
+                                                                                                                     ̂ the discovered spatial component pertains
+2.4.2. ReDisCA vs. source space RSA                                                       to and whose activity exhibits the intended theoretical similarity pro-
+    Within the first set of simulations we compared ReDisCA against the                   file. We then use the obtained location to calculate the performance
+source space RSA using a single source scenario. In this comparison,                      metrics as described in Section 3.1. When source space RSA is applied
+to generate the observed EEG (MEG) data we placed a single source                         to this simulated data our goal is to directly identify the cortical source
+iteratively in a node of the cortical mesh whose index was randomly                       of interest using the procedures outlined in Fig. 1.
+generated and activated the source with the condition-specific time
+                                                                                              In our simulations we have chosen 𝑇 = 200 ms as the length of the
+series. Here we used 𝐶 = 5 conditions and generated condition-specific
+                                                                                          window to which RSA is applied. The spectral profiles of the source
+ERP time series. For each source position (iteration) the time series
+                                                                                          evoked activity occupied the frequency range below 2 Hz to impose
+were randomly regenerated from a newly sampled matrix of random
+                                                                                          the smoothness characteristic of the real evoked responses. As we will
+variables according to the procedure described above.
+                                                                                          show in the example of applying ReDisCA to real EEG data the method
+    At each Monte-Carlo iteration corresponding to a specific source
+                                                                                          can be applied in a sliding window mode and remains operable at
+location in the 𝑚0 -th node of the cortical mesh we obtained condition-
+                                                                                          𝑇 = 150 ms. The constraint on the length of the time interval is
+specific source time series observed in the 𝑙-th trial as
+      (        )                                                                          dictated primarily by the condition number of the resultant correlation
+𝐗𝑐𝑙 = 𝐠𝑚0 + 𝛿 𝐬𝑐⊤ + 𝛾𝛶  𝛶 𝑥𝑙 .                                     (15)                   matrices (4) and can be further reduced with proper regularization
+                                                                                          and/or dimension reduction procedures. Alternatively, ReDisCA can be
+In (15) 𝐠𝑚0 is the 𝑁 × 1 forward model vector (or topography) cor-                        applied to the entire evoked response time interval and then a statistical
+responding to the source located in the 𝑚0 -th vertex of the cortical
+                                                                                          testing procedure can be used to determine the intervals of significant
+mesh with coordinate 𝐫𝑚0 . In order to account for inevitable forward
+                                                                                          difference, see Section 4.2.2.
+modeling errors we used normally distributed 𝑁 ×1 source model noise
+                                                                                              To evaluate the performance of ReDisCA in comparison to the four
+vector 𝛿 with covariance matrix 𝐂𝛿 = 𝜎𝛿2 𝐈 and 𝜎𝛿 = 0.15‖𝐠𝑚0 ‖. Row
+                                                                                          versions of the source space RSA, we employed the Receiver Operating
+vector 𝐬𝑐⊤ is the 𝑐-th row of 𝐒 and 𝛶 𝑥𝑙 is a 𝑁 × 𝑇 realistic brain noise
+                                                                                          Characteristic (ROC) curve. This measure, devoid of specific thresholds,
+matrix generated by 1000 randomly seeded cortical sources activated
+                                                                                          gauges the overall informational capacity in the output of these ap-
+with 1∕𝑓 noise, similar to the way it was done in Ossadtchi et al. (2018)
+                                                                                          proaches concerning the detection task. For a detailed explanation of
+with factor 𝛾 controlling the signal-to-noise ratio in the simulated data.
+                                                                                          how the ROC curve is calculated, please refer to Section 3.1.
+Note that each trial had a different realization of the spatially correlated
+noise 𝛶 𝑥𝑙 and new 𝛿 was generated for each Monte-Carlo iteration.
+   We then use the simulated noisy sensor data 𝐗𝑐𝑙 for 𝑙 = 1, … , 𝐼𝑐                      2.4.3. Realistic simulations with multiple sources
+and 𝑐 = 1, … , 𝐶 and we aim to use the approximate RDM of a specific                         Another simulation scenario reproduces the situation when the
+source to find spatial component(s) whose time series, see (11), exhibits                 observed evoked responses are generated by a superposition of several
+
+                                                                                      6
+A. Ossadtchi et al.                                                                                                                           NeuroImage 301 (2024) 120868
+
+
+
+
+                          Fig. 3. Theoretical RDM matrices for each of the four simulated sources generated within an exemplar Monte-Carlo trial.
+
+
+
+
+sources each with its own representational dissimilarity matrix. To this                 3.1. ROC curves
+end we experimented with 𝑃 = 4 sources and their corresponding
+dissimilarity matrices D0𝑝 and their noisy versions D𝑝 , 𝑝 = 1, … , 𝑃 . The                  Within the first set of simulations we evaluated the methods’ perfor-
+ideal RDMs D0𝑝 , 𝑝 = 1, … , 𝑃 of the evoked responses for each of 𝑃 = 4                  mance using area under ROC curve (ROC AUC) metrics. To compute the
+sources among 𝐶 = 6 conditions are shown in Fig. 3. To evaluate the
+                                                                                         ROC curves we first determine the counts of true positives (TP), false
+RSA’s robustness we have also experimented with a subset of 𝐶 = 3, 4, 5
+                                                                                         positives (FP), true negatives (TN), and false negatives (FN).
+conditions.
+                                                                                             To this end as described in Section 2.4 at each 𝑘-th Monte-Carlo
+    At each Monte-Carlo iteration we have randomly seeded four
+                                                                                         iteration corresponding to a neuronal source placed at a randomly
+sources over the cortical mantle with the restriction of no source being
+                                                                                         chosen location 𝐫𝑘 we use the scans 𝜌𝑚 , 𝑚 = 1, … , 𝑀 described in
+closer than 𝛿𝑚𝑖𝑛 = 2 cm to any of the other sources. This gave us 𝑃 = 4
+true source location vectors 𝐫𝑝𝑡𝑟𝑢𝑒 and true source topography vectors                   Section 2 and for each threshold value 𝜃 we find a set of indices >
+𝐠𝑡𝑟𝑢𝑒                                                                                    of cortical vertices 𝑚 for which 𝜌𝑚 ≥ 𝜃. Then, we count the number of
+ 𝑝 , 𝑝 = 1, … , 𝑃 . We have then added noise to these true source
+topographies, projected source activation time series to the sensors and                 vertices in > that fall within a sphere with 𝑟𝑚𝑎𝑥 = 0.01 m centered
+added realistic 1∕𝑓 brain noise similarly to (15) as                                     around the true source location 𝐫𝑘 simulated during the 𝑘-th Monte-
+                                                                                         Carlo iteration and save it to the corresponding true positives count
+       𝑃 (
+       ∑                )
+𝐗𝑐 =         𝐠𝑡𝑟𝑢𝑒 + 𝛿 𝑝 𝐬𝑐⊤   𝛶𝑥                                            (16)        array 𝑇 𝑃𝑘 (𝜃). The count of vertices from > that fall outside the sphere
+              𝑝           𝑝 + 𝛾𝛶 ,
+       𝑝=1                                                                               with radius 𝑟𝑚𝑎𝑥 is added to the false-positives count array 𝐹 𝑃𝑘 (𝜃).
+Overall the approach to constructing the simulated data in this second                       Next we find a complementary set < of cortical vertex indices 𝑚
+experiment matched that of the first one with the exception that in the                  such that 𝜌𝑚 < 𝜃. We then count the number of vertices from < that
+current experiment the simulated data contained the superposition of                     appear within the sphere with 𝑟𝑚𝑎𝑥 = 0.01 m centered around the true
+activity of 𝑃 = 4 simultaneously active task-related sources each with                   source location 𝐫𝑘 and save it to the corresponding false negatives count
+its own RDM.                                                                             array 𝐹 𝑁𝑘 (𝜃). The count of vertices from < outside the sphere with
+                                                                                         radius 𝑟𝑚𝑎𝑥 is saved to the true-negatives count array 𝑇 𝑁𝑘 (𝜃).
+3. Performance metrics                                                                       Then, for each threshold value 𝜃 we compute the average true
+                                                                                         positive rate (𝑇 𝑃 𝑅(𝜃)) or sensitivity and the average false positive rate
+   As we described in Section 2 ReDisCA itself does not require the                      𝐹 𝑃 𝑅(𝜃) equal to 1 − 𝑠𝑝𝑒𝑐𝑖𝑓 𝑖𝑐𝑖𝑡𝑦 as
+electromagnetic inverse modeling, see also Fig. 2. At the same time                                         ∑𝑁𝑚𝑐
+                                                                                                                   𝑇 𝑃𝑘 (𝜃)
+the source space RSA applied to EEG(MEG) data explicitly uses inverse                    𝑇 𝑃 𝑅(𝜃) = ∑𝑁        𝑘=1
+                                                                                                                                                                (17)
+                                                                                                         𝑚𝑐
+modeling as highlighted by the diagrams shown in Fig. 1. Therefore, to                                  𝑘=1
+                                                                                                             𝑇 𝑃𝑘 (𝜃) + 𝐹 𝑁𝑘 (𝜃)
+evaluate ReDisCA’s performance and match it against the source space                                        ∑𝑁𝑚𝑐
+RSA we use components discovered by ReDisCA and fit them with the                                             𝑘=1
+                                                                                                                   𝐹 𝑃𝑘 (𝜃)
+                                                                                         𝐹 𝑃 𝑅(𝜃) = ∑𝑁                                                          (18)
+electromagnetic model as described in Section 2 and Eqs. (13), (14).                                      𝑚𝑐
+                                                                                                             𝐹 𝑃𝑘 (𝜃) + 𝑇 𝑁𝑘 (𝜃)
+                                                                                                        𝑘=1
+
+                                                                                     7
+A. Ossadtchi et al.                                                                                                                    NeuroImage 301 (2024) 120868
+
+
+The pair (𝐹 𝑃 𝑅(𝜃), 𝑇 𝑃 𝑅(𝜃)) parameterized by 𝜃 forms the ROC curve                 nearly 85% of cases at almost zero false alarms rate. Comparing the
+that we use to compare between different RSA approaches studied in                   curves of classical RSA approaches (MNE AV RSA, MNE S.T. RSA, BF AV
+this paper.                                                                          RSA, BF S.T. RSA) across two SNR values (panels (a) and (c) in Fig. 4),
+                                                                                     an interesting finding emerges. We notice an improvement in the per-
+3.2. Performance gauges for realistic simulations                                    formance of the source space RSA methods under low SNR conditions
+                                                                                     compared to higher SNR scenarios in this single-source simulation. Our
+     In the realistic simulations with multiple sources described in Sec-            analysis reveals that this seeming paradox arises due to a decrease in
+tion 2.4.3 we created 𝑃 = 4 simultaneously active sources placed                     false positives in the traditional RSA outputs as SNR decreases. Despite
+randomly on the cortex during each Monte-Carlo iteration, each with                  the use of a realistic brain noise model with spatial correlations, the
+the specific theoretical RDM D𝑝 . In this case, we gauged the perfor-                resulting data matrix appears ‘empty’. This results in the situation
+mance based on the distance between the simulated source locations                   where despite the inverse modeling the sole persistent component of
+and those that were estimated using ReDisCA and the two source                       the single source remains spread across numerous cortical vertices in
+space RSA implementations that performed best during the first set of                the source time series estimates, which leads to a surplus of high
+simulations with a single source, see Section 2.4.2.                                 correlations between the observed and theoretical RDMs. The increased
+     To compute this metric at each Monte-Carlo iteration we used the                noise levels, however, rectify this issue, rendering RDM correlation
+scans 𝜌𝑝𝑚 , 𝑚 = 1, … , 𝑀, 𝑝 = 1, … , 𝑃 corresponding to the 𝑝-th source              scans more specific which in turn improves the corresponding ROC
+RDM D𝑝 and identified the cortical vertex index 𝑚∗ corresponding to                  curves.
+the maximum of 𝜌𝑝𝑚 as 𝑚∗ = 𝑎𝑟𝑔𝑚𝑎𝑥(𝜌𝑝𝑚 ). We then used the coordinates                    This observation aligns with the lower ROC-AUC values observed in
+vector 𝐫 ∗ of the 𝑚∗ vertex and computed the distance between it and                 the source space RSAs based on the averaged ERP data (BF AV and MNE
+the true location of the 𝑝-th source 𝐫𝑝𝑡𝑟𝑢𝑒 , see Section 2.4.3 as 𝜹𝐫𝑝 =             AV) compared to their single-trial counterparts (BF S.T. and MNE S.T.).
+‖𝐫𝑝𝑡𝑟𝑢𝑒 − 𝐫 ∗ ‖. We then plotted the histograms 𝜹𝐫𝑝 observed in the Monte-           In the latter case, dissimilarity scores are computed on individual trials
+Carlo trials for each of the compared methods. At each Monte-Carlo                   before averaging, while in the former the averaging precedes computa-
+iteration we have also computed the correlation coefficients between                 tion of the vertex-specific between-condition dissimilarity scores based
+spatial topography vector 𝐚𝑝1 of the first ReDisCA component and the                 on the inverse modeling of these averaged ERP data (refer to Fig. 1).
+corresponding true source topography vectors 𝐠𝑝𝑡𝑟𝑢𝑒 , 𝑝 = 1, … , 𝑃 . Having          This paradoxical behavior, however, does not manifest in more realistic
+performed a set of Monte-Carlo trials we summarized the observed                     simulations involving multiple cortical sources, as described next.
+correlation coefficient distributions in the form of histograms.                         Next we describe the results of more realistic simulations where
+     Finally, we have compared the target RDMs D𝑝 = {𝑑𝑖𝑗𝑝 } from the                 at each Monte Carlo trial we randomly seeded 𝑀 = 4 sources each
+𝑝-th source to the empirical RDMs 𝐃      ̂ 𝑝 . These empirical RDMs can be           with its own RDM, see Section 2.4.3 for details. The results from 100
+obtained from spatially filtered data using ReDisCA-derived filters 𝐰𝑝               Monte Carlo trials of these realistic simulations for 𝐶 = 5 conditions
+as 𝐃 ̂ 𝑝 = {𝑑̂𝑝 } = {𝐰⊤ 𝐑𝑖𝑗 𝐰𝑝 }, where 𝐑𝑖𝑗 is the 𝑖-th and 𝑗-th condition           are presented in Fig. 5 for two SNR values.
+                𝑖𝑗      𝑝
+difference time series covariance matrix as described in Section 2.3.                    In Fig. 5.a we show the distribution of source localization errors for
+Then, we measured the correlation coefficients between the vectors                   four sources (different colors) for the three methods: ReDisCA, BF S.T.
+derived from the upper triangular elements of D𝑝 and 𝐃       ̂ 𝑝 for each 𝑝-th       RSA, and MNE S.T. RSA. Out of compactness considerations we have
+source, 𝑝 = 1, … , 𝑃 . Using multiple Monte-Carlo trials, we summarized              chosen to present here the results of only two best-performing source
+the distributions of these correlation coefficients in histograms.                   space RSA methods, BF S.T. and MNE S.T. As one can see ReDisCA’s
+                                                                                     distribution appears to have the largest proportion of cases where all
+4. Results                                                                           four sources are localized with errors below 1 cm. The distributions
+                                                                                     of source localization errors delivered by BF S.T. and MNE S.T. are
+4.1. Simulations                                                                     increasingly shifted to the right and result in greater median source
+                                                                                     localization error as compared to ReDisCA.
+    In Fig. 4, we illustrate the outcomes of the first set of our simu-                  Panel (b) shows ReDisCA-specific metrics described in Section 3.2.
+lations where we compared ReDisCA with four versions of the source                   From top to bottom we show the distributions of (1) topography
+space RSA, see Fig. 1 for their detailed diagram. As described before,               correlation coefficient between ReDisCA identified 𝐚1 and the true
+the aim here was to detect a single neuronal source using a noisy                    simulated source topography 𝐠𝑡𝑟𝑢𝑒  𝑝 , (2) ReDisCA weights 𝐰1 and the
+version of its specific RDM. In Fig. 4.a, the blue curve represents                  true topography 𝐠𝑡𝑟𝑢𝑒
+                                                                                                         𝑝   correlation coefficient and finally (3) correlation
+ReDisCA’s performance in the detection of the representational dissim-               coefficient between the target D𝑝 and observed RDMs 𝐃    ̂ 𝑝 for 𝑝 = 1, … , 4.
+ilarity subspace using the averaged evoked response data. This method                    Since the spatial filters derived by ReDisCA get not only tuned to
+significantly outperforms four different versions of the source space                the target source but also attempt to tune away from the interfering
+RSA that employ two different inverse operators: the minimum norm                    sources (Haufe et al., 2014; Petrosyan et al., 2021) the true source
+estimator and the LCMV beamformer. Out of the four source space                      topographies appear to be much better aligned with ReDisCA derived
+RSA approaches LCMV beamformer based on single trials (BF S.T.)                      topographies (patterns) than with the corresponding weight vectors. As
+approach appears to perform best. Importantly, ReDisCA yields better                 evident from the bottom plot in Fig. 5.b the observed RDMs appear to
+ROC AUC values in detecting spatial component linked to the targeted                 be well correlated with the target RDMs for all four sources. Panels (c)
+neuronal source without relying on electromagnetic inverse modeling                  and (d) of Fig. 5 show similar plots but for the decreased Signal-to-
+and with significantly fewer computations as compared to the source                  Noise Ratio (SNR) equal to 0.2, allowing us to observe that ReDisCA
+space RSA. To make this conclusion and enable the comparison we                      remains operable in these harsh conditions. It is important to note
+employed the electromagnetic inverse modeling to align ReDisCA’s                     that in simulations by combining noiseless sensor data with noise data
+results with those of conventional RSAs that operate explicitly in the               matrices, see Eq. (16), we effectively control the SNR based on the
+space of neuronal sources, see expressions (13) and (14). Fig. 4.b                   ratio of root mean powers between these two matrices. Therefore, as
+illustrates noisy (blue) and noise-free (red) averaged ERP time series               the number of sources within the noiseless data matrix increase, the
+and the theoretical dissimilarity matrix used in simulations is shown at             SNR per individual source automatically decreases. Hence, in the case
+the bottom. Figs. 4.c and .d show similar results but for SNR = 0.1. As              of four sources, the SNR of 0.2 represents a notably more challenging
+we can see, in this atypically low SNR case ReDisCA’s performance only               task compared to a single-source scenario with the SNR of 0.1.
+slightly deteriorates and remains superior to that of the other methods.                 Finally, we explore the dependence of localization error on the
+ReDisCA appears capable of accurately locating the target source in                  number of conditions employed in RSA analysis. It is intuitive to
+
+                                                                                 8
+A. Ossadtchi et al.                                                                                                                               NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 4. Results of 100 MC trials of simulations in single source detection scenario. (a) and (c) the ROC curves for ReDisCA and four source space RSA versions, see Section 2 for
+two different SNR levels. (b) and (d) — noisy (blue) and noise-free (red) averaged ERP time series for the two SNR values and the theoretical dissimilarity matrix used in the
+simulations.
+
+
+expect that the increase in the number of conditions should lead to                         were preprocessed and three ICA components corresponding to ocular
+improved source localization performance in the classical RSA scenario                      and cardiac artifacts were removed from the data. Then, the ERP were
+and better identification of the representationally relevant components                     computed by averaging responses within each of the stimulus types.
+by ReDisCA. As before, to align ReDisCA’s results with those of source                      The dataset comprises the EEG data from 40 subjects. In our analysis
+space RSA approaches we fitted a dipole to ReDisCA-derived source                           for demonstration purposes we used single subject data recorded from
+topography vectors 𝐚𝑝1 , 𝑝 = 1, … , 4. The results are presented in Fig. 6
+                                                                                            the first participant with index ‘‘1’’.
+in the form of three graphs corresponding to the average median
+localization error achieved by the three techniques. As expected the                            The second dataset is an Elekta Neuromag 306 MEG dataset from
+increase in the number of conditions leads to the decrease of source                        the first run of the RSA study by Kozunov et al. (2018). In this open-
+localization error. ReDisCA furnishes the best performance for all 𝐶, the                   access article, the authors employed source space RSA and demon-
+mean median error appears to be less than 2 cm for 𝐶 = 6 conditions.                        strated distinct differences in the timing, brain regions involved, and
+                                                                                            dynamics of visual processing of faces and tools during the categoriza-
+4.2. Real data analysis examples                                                            tion stage. They found that face-specific spatiotemporal patterns were
+                                                                                            linked to bilateral activation of ventral occipito-temporal areas during
+    In this section we demonstrated the use of ReDisCA for analy-                           the feature binding stage at 140–170 ms. In contrast, tool-specific
+sis of two real-life datasets. The first dataset is a publicly available
+                                                                                            binding-related activity was observed within the 210–220 ms window,
+low-density EEG N170 dataset available at https://osf.io/pfde9/ and
+                                                                                            located in the intraparietal sulcus of the left hemisphere. Brain activity
+described in Kappenman et al. (2021). In that data the N170 was
+elicited in a face perception task with stimuli from Rossion and Ca-                        common to both categories began at 250 ms and included widely
+harel (2011). In this task, an image of a face, car, scrambled face, or                     distributed assemblies within the parietal, temporal, and prefrontal
+scrambled car was presented on each trial in the center of the screen,                      regions. A more detailed description of the spatial–temporal dynamics
+and participants responded whether the stimulus was an ‘‘object’’ (face                     can be found in Figure 3 of Kozunov et al. (2018). In our analysis we
+or car) or a ‘‘texture’’ (scrambled face or scrambled car). The data                        used the data recorded from the first subject labeled as ‘‘AD’’.
+
+                                                                                        9
+A. Ossadtchi et al.                                                                                                                                       NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 5. Results of 100 MC trials of realistic simulations with 𝑀 = 4 randomly seeded sources and 𝐶 = 6 conditions: (a) Distribution of the true topography and ReDisCA derived
+pattern correlation coefficient, (b) Distribution of the true topography and ReDisCA spatial filter weight vector correlation coefficient, (c) Distribution of the correlation coefficient
+of true RDM and RDMs derived from the multichannel data with the first ReDisCA derived spatial filter, (d) Distribution of ReDisCA source localization error, (e) Distribution of
+the MNE spotlight RSA source localization error.
+
+
+                                                                                                4.2.1. ReDisCA of a low-density EEG dataset
+                                                                                                    We first applied ReDisCA to explore the spatial–temporal structure
+                                                                                                of the response to meaningful versus meaningless stimuli that were
+                                                                                                formed as the scrambled versions of the original images. For that, we
+                                                                                                formed the theoretical RDM shown in Fig. 7.a. Then, scanning over time
+                                                                                                windows of duration 𝑇 = 150 ms and calculating the 𝑝-values we obtain
+                                                                                                their color-coded map shown in Fig. 7.b with rows corresponding to the
+                                                                                                components and columns encode time. We then visualized uncorrected
+                                                                                                𝑝-values corresponding to the first component and identified the time
+                                                                                                interval corresponding to a continuous segment of 𝑝 < 0.05. As can be
+                                                                                                seen from Fig. 7.d we found such a segment at around 𝑡 = 400 ms.
+                                                                                                The corresponding pattern is visualized in panel (c) and has highly
+                                                                                                pronounced occipital topography. This result is in agreement with
+                                                                                                observations made in a high-density EEG-based study (Mensen et al.,
+                                                                                                2017) that demonstrates a statistically significant difference between
+                                                                                                meaningful and meaningless stimuli occurring in the time window
+                                                                                                around 300–500 ms and is localized to the occipital area of the scalp.
+                                                                                                ReDisCA missed the first peak at around 100 ms reported by Mensen
+                                                                                                et al. (2017) but that could be explained by a smaller number of
+Fig. 6. Average median localization error of 4 simultaneously active sources (each
+with its own RDM) as a function of the conditions count 𝐶 for three methods ReDisCA,
+                                                                                                electrodes in the current dataset as compared to the one analyzed
+beamformer-powered single trial RSA, and MNE-powered single trial RSA. As expected              in Mensen et al. (2017). At the same time, our analysis of an MEG
+the increase in the number of conditions leads to the decrease of source localization           dataset, see Fig. 15 in Section 4.2.2, shows a significantly different
+error. ReDisCA furnishes the best performance for all 𝐶, the mean median error appears          activation of ReDisCA component starting at 160 ms and contrasting
+to be less than 2 cm for 𝐶 = 6 conditions.
+                                                                                                the meaningful vs. meaningless visual stimuli. This component has
+                                                                                                dominantly occipital topography.
+                                                                                                    A significant component aligned with the theoretical meaningful
+                                                                                                vs. meaningless RDM was observed over 3 adjacent time windows.
+
+                                                                                           10
+A. Ossadtchi et al.                                                                                                                            NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 7. Meaningful vs. meaningless stimuli perception analysis. (a) Theoretical RDM contrasting the two types of stimuli. (b) Color-coded map of component 𝑝-values, each row
+corresponds to a component and columns encode time. (c) Topography (pattern) of the first and the only significant component during the time interval around 𝑡 = 400 ms. (d)
+Temporal profiles of the uncorrected 𝑝-values corresponding to the first component. The significant segment is marked with asterisks.
+
+
+Fig. 8 shows the discovered topographic patterns of the first ReDisCA                     RSA offers a greater flexibility in imposing the geometric constraints on
+component, the corresponding time courses of this component observed                      the discovered activity using non-binary RDM matrices. See the analysis
+within the four different conditions as well as the observed (or em-                      reported in Figs. 16 and 17 in Section 4.2.2.
+pirical) color-coded RDM in the bottommost panel. As we can see                               According to the large volume of studies N170 ERP component is
+the yellow and violet timecourses corresponding to the meaningless                        considered to be face specific and occurs at around 170 ms latency.
+stimuli appear disentangled from the red and blue ones observed during                    We have therefore selected the time window of duration 𝑇 = 100 ms
+the presentation of meaningful pictures. The topography of the first                      centered at 200 ms and applied ReDisCA to it using the theoretical
+significant ReDisCA component (𝑝 < 0.05) remains highly similar over                      RDM shown in Fig. 9.a. Fig. 10 shows ReDisCA’s output and as we
+the three consecutive time windows. Interestingly, the time series of                     can see from the top panel of 10 the first and the only significant
+this ERP component observed during the presentation of faces (blue)                       ReDisCA component has topography corresponding to a source in the
+exhibits longer-lasting traces as compared to that corresponding to the                   right fusiform gyrus, the area known to be crucial to perception of
+activity during the presentation of cars (red curve) which is consistent                  facial information and differentially activated in response to regular or
+with the findings reported in several studies exploring neural correlates                 scrambled face stimuli (Haist and Anzures, 2017; Kozunov et al., 2018).
+of face perception in humans (Haxby et al., 2000). Consequently, the                          The corresponding ERP components obtained by filtering the mul-
+observed RDMs indeed appear to closely resemble the target RDM, see                       tichannel ERP with a spatial filter derived by ReDisCA are presented
+Fig. 7.a used for the described inquiry. Comparing the evolution of the                   in the panel below the topography. We indeed can observe a burst of
+topography of the first (the only one found significant) ReDisCA com-                     activity around 170 ms in the ‘‘face’’ condition while in the other three
+ponent we can observe its gradual displacement in the sagittal plane                      conditions the response curves do not have such a burst and are very
+moving downwards with time followed by deepening (the topography                          closely aligned implementing the requirement imposed by the RDM
+widens) of the source at the last time stamp. This may correspond to                      matrix. In agreement with other studies, the discovered face-related
+the traveling wave patterns found in the visual area (Sato et al., 2012;                  ERP components remain active over a long duration of response. The
+Benigno et al., 2023).                                                                    observed RDM is shown in the bottommost panel. We can see that it
+    We proceeded by examining the activity associated with particular                     aligns well with the theoretical RDM and exhibits a high correlation
+meaningful stimuli using the RDMs displayed in Fig. 9.a for faces and                     coefficient of 0.82.
+Fig. 9.b for cars, respectively. These RDMs guide our search towards a                        Finally, we performed similar processing but using the theoretical
+component with a distinct activity in one condition (face or car) differ-                 RDM from Fig. 9.b designed to highlight response components specific
+ent from that observed in the remaining three conditions. Additionally,                   to the processing of car images. We have found two significant com-
+unlike what may be the case in the decoding-based multivariate pat-                       ponents with 𝑝 < 0.01 shown in Fig. 11. The first components appear
+tern analysis approaches, the RDMs prescribe the activity during the                      to have a lower occipital topography with the time course exhibiting
+remaining three conditions to be similar. Although a classifier can be                    deflection at around 150 ms that is specific to the second condition (car
+built to enforce a compact representation within each of the classes, the                 images). This reflects activity in the ventral visual pathway during the
+
+                                                                                     11
+A. Ossadtchi et al.                                                                                                                               NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 8. Meaningful vs. meaningless stimuli perception analysis. Topography, spatially filtered timecourses and the observed RDMs for the three consecutive time slices at around
+𝑡 = 400 ms, see also Fig. 7.d.
+
+
+
+
+                                                       Fig. 9. Theoretical RDMs corresponding to faces (a) and cars (b).
+
+
+image perception task. The traces of this ReDisCA component appear to                      processes underlying visual perception. This includes distinguishing be-
+be remarkably similar in the other three conditions not only during the                    tween meaningful and meaningless stimuli, delineation of face-specific
+target interval but also over the entire response duration. The observed                   and car-specific activation considering both the spatial and temporal
+and the theoretical RDM appear highly correlated with a correlation                        aspects of this cognitive process.
+coefficient greater than 0.99.
+    Interestingly, the second component has a pronounced topography                        4.2.2. ReDisCA of the MEG visual stimuli categorization dataset
+that may reflect the activity in the dorsal visual pathway that is known                       To enable a comparison to a more traditional source space RSA
+to accompany visual perception of objects and is hypothesized to                           we applied ReDisCA to the MEG dataset from Kozunov et al. (2018)
+reflect the neural processes of formation of spatial relations between                     corresponding to the first run of their experiment.
+the objects within the scene that is then fed to the ventral visual                            Similarly to Kozunov et al. (2018), we divided the responses within
+stream (Ayzenberg and Behrmann, 2022). It may also be related to                           each category into two equal parts and labeled them numerically as 1
+identifying the car as a graspable tool as far as the steering wheel is                    and 2, resulting in total 6 subcategories labeled ‘‘face 1’’, ‘‘face 2’’, ‘‘tool
+concerned (Almeida et al., 2010).                                                          1’’, ‘‘tool 2’’, ’’nons. 1’’, and ’’nons. 2’’. In each of the subcategory we
+    Based on the above we can conclude that the reported real data                         had 80 epochs and 480 epochs in total. Since ReDisCA operates on the
+analysis results obtained with a direct application of ReDisCA to the                      averaged evoked responses, we averaged the single-trial responses to
+averaged ERP data appear to align well with the existing knowledge                         obtain six evoked response field (ERF) matrices, one for each subcate-
+in the field of neuroimaging related to visual perception of faces and                     gory. Each ERF response is a 204 × 1500 matrix, reflecting the activity
+cars and differentiation between meaningful and meaningless stimuli                        of 204 planar gradiometers over 1500 ms, with 500 ms of pre-stimulus
+including not only spatial but also temporal structure of this process.                    and 1000 ms of post-stimulus intervals.
+    These findings obtained with ReDisCA appear to be in line with                             We have then applied ReDisCA to these six ERFs aiming to eluci-
+what is already known in the field of neuroimaging regarding the brain                     date the components supporting cortical processing of each of the 3
+
+                                                                                      12
+A. Ossadtchi et al.                                                                                                                              NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 10. ReDisCA of face-specific responses using the RDM depicted in Fig. 9.a. The top panel shows the topography (pattern) of the first and the only significant ReDisCA
+component. The topography corresponds to a source in the right fusiform gyrus, the area pivotal to the perception of facial information. In the central panel the corresponding
+ERP components in the four conditions are displayed. The observed RDM is shown in the bottommost panel and exhibits a high correlation coefficient of 0.82 with the theoretical
+RDM.
+
+
+categories. We used the theoretical RDM matrices shown in Fig. 12                          family-wise error rate (FWER) principle operationalized by the max-
+for each of the three categories. This time we applied ReDisCA to the                      imum statistics computed over the entire time interval. The results of
+entire 1500 ms time-window at once. We then used the spatial filters                       the statistical testing are shown with red and blue asterisk lines located
+derived by ReDisCA and computed the time series associated with each                       above and below the time series plots in the top panels of Figs. 13–15.
+of the representation dissimilarity components. In our presentation                        For the reader’s convenience and to facilitate a comparison of Re-
+here we considered only the first three statistically significant ReDisCA                  DisCA results with the source space RSA findings reported in Kozunov
+components.                                                                                et al. (2018), we have also indicated the starting times of the major
+    The top row of Fig. 13 shows the temporal profiles for each of                         significance intervals in each of the time series plots.
+the 6 categories (‘‘face 1’’, ‘‘face 2’’, . . . , ‘‘nons. 2’’, see the legend)                Similarly we have applied ReDisCA using the other two theoretical
+for the face-specific theoretical RDM from Fig. 12.a. Panels (a)–(c) of                    RDMs from Figs. 12.b and .c and generated Figs. 14 and 15 with
+Fig. 13 correspond to the first three ReDisCA components. The title                        ReDisCA results.
+of each panel contains the component’s 𝑝− value. The bottom row of                            The first face category-related ReDisCA component, shown in
+plots in Fig. 13 depicts spatial patterns associated with each ReDisCA                     Fig. 13.a exhibits the early differential response to faces starting at
+component discovered using the face-specific theoretical RDM.                              65 ms, see Susac et al. (2009) for a review of possible reasons. The
+    To determine the intervals of significant difference in component                      response curve has a prominent peak at 160 ms. This peak differentiates
+activation time series between categories, we performed randomization                      the neural response to face stimuli from the responses to the other
+tests. This involved permuting the subcategory labels of individual                        categories. The spatial topography shown in the bottom panel of
+epochs, computing surrogate averages, and applying the corresponding                       Fig. 13.a has maximum over the central and right occipital sensors. This
+spatial filters. We then corrected for multiple comparisons using the                      topography likely corresponds to the neuronal sources in the occipital
+
+                                                                                      13
+A. Ossadtchi et al.                                                                                                                        NeuroImage 301 (2024) 120868
+
+
+
+
+                      Fig. 11. Two significant components discovered by ReDisCA using car detector RDM (Fig. 9.b) applied at 𝑡 = 170 ms latency.
+
+
+
+
+                                      Fig. 12. Three theoretical RDM matrices used for analysis of Kozunov et al. (2018) dataset.
+
+
+pole, inferior occipital and the right fusiform gyrus. Notably, this                   This component augments the first ReDisCA component but does not
+ReDisCA component rises again with the significance interval starting                  exhibit early response to the face stimuli.
+at 311 ms. This component aligns well with the blue face-related                           Fig. 14 shows the results of ReDisCA with the tool-specific theo-
+decoding trace shown in Figure 3 of Kozunov et al. (2018). The second                  retical RDM from Fig. 12.b. ReDisCA component 1 (Fig. 14.a) shows
+ReDisCA component, see Fig. 13.b, demonstrates prominent activation                    a prominent response to the ‘‘tool 1’’ and ‘‘tool 2’’ stimuli that occurs
+of the parietal cortex with the first significance interval starting at                at 210 ms and appears to be localized to the central occipito-parietal
+218 ms. This topography may reflect sources located in the middle                      region also involving the planar gradientometers located over the left
+temporal posterior cortex. The last ReDisCA component shows late and                   (and compactly over the right) central sulcus areas. Later activation
+sustained processing of face-related information starting at 273 ms by                 involves the extended parietal and occipital regions (Component 2,
+neuronal populations located in the bilateral occipital regions involving              Fig. 14.b) localized to the mid-occipital and left parietal cortices.
+some activation of the frontal lobes which may reflect fronto-temporal                 Interestingly, ReDisCA’s Component 3 shows activity starting later at
+interactions associated with visual processing (Pantazatos et al., 2012).              around 240 ms and stemming from the right and left sensory-motor
+
+                                                                                  14
+A. Ossadtchi et al.                                                                                                                                        NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 13. ReDisCA applied to the data from Kozunov et al. (2018) with the face-specific theoretical RDM, see Fig. 12.a. Panels (a)–(c) correspond to the first three ReDisCA
+components. Within each panel the top plot shows temporal profiles for each of the 6 subcategories (‘‘face 1’’, ‘‘face 2’’, ‘‘tools 1’’, ‘‘tools 2’’, ‘‘nons. 1’’ and ‘‘nons. 2’’), see the
+legend and the title for the associated 𝑝-value. The bottom plot shows the component’s spatial pattern.
+
+
+
+
+                              Fig. 14. ReDisCA applied to the data from Kozunov et al. (2018) with the tool-specific theoretical RDM, see Fig. 12.b.
+
+
+
+cortices and sources in the temporal lobe with the prevalence of the                             tools-related curves in Figure 3 of Kozunov et al. (2018) for the IPS,
+right side in contrast to Component 1. These observations align well                             VPM and the MTp cortices.
+with those in Kozunov et al. (2018) where the authors also observed re-                              Next, we explore ReDisCA’s components contrasting the perception
+sponses at similar latency with the left sensory-motor cortex (ReDisCA’s                         of the meaningful (‘‘face’’ and ‘‘tool’’) and the meaningless (‘‘nons.’’)
+component 1) leading the right one (ReDisCA’s component 3), see the                              visual stimuli, see Fig. 12.c for the corresponding theoretical RDM.
+
+                                                                                            15
+A. Ossadtchi et al.                                                                                                                                   NeuroImage 301 (2024) 120868
+
+
+
+
+   Fig. 15. ReDisCA applied to the data from Kozunov et al. (2018) with the RDM contrasting meaningful (‘‘face’’, ‘‘tool’’) vs. meaningless (‘‘nons.’’) categories, see Fig. 12.c.
+
+
+In Fig. 15.a and .b we can see the two components that can be                                 then in the second window starting at 356 ms becomes prominently
+assigned to the ventral and dorsal visual pathways correspondingly.                           distinct from the response in the other categories.
+The activity response to the meaningful stimuli occurred as early as                              We have also performed MUSIC scan in order to highlight the
+160 ms in the occipito-parietal region (Component 1) followed by the                          cortical areas whose source topographies fall into the representational
+prominent response along the dorsal visual pathway (Component 2).                             dissimilarity subspace identified by ReDisCA. To do so we have uti-
+Early (182 ms) and short-lasting as well as the late (675 ms) differential                    lized the forward model built using the individual MRI as described
+response between the meaningful and the meaningless stimuli gets                              in Kozunov et al. (2018) and applied Eq. (14) to compute the subspace
+isolated into a single component with a focal mid-parietal topography,                        correlation 𝜌𝑀𝑈
+                                                                                                            𝑚
+                                                                                                                𝑆𝐼𝐶 between the pair of topographies corresponding
+
+see Component 3 in Fig. 15.c.                                                                 to a freely oriented dipole at each 𝑚-th cortical location and the
+    In the final example we used ReDisCA to impose specific geometric                         representational dissimilarity subspace identified by ReDisCA spanned
+relationships between the resultant components. To do so we used                              by the topographies shown in Fig. 17.
+the non-binary RDM shown in Fig. 16.a which forces ReDisCA to                                     In Fig. 18 we can observe involvement of the dominantly right
+look for the components whose activation is similar within each of                            fusiform gyrus, right insula, left intraparietal sulcus and anterior central
+the three categories (faces, tools, and visually meaningless images).                         gyrus as cortical regions demonstrating the requested geometric rela-
+Simultaneously, it imposes geometric relations on the activation of the                       tionships imposed by the RDM in Fig. 16.a In these regions the response
+                                                                                              to faces and tools appears on the opposite sides w.r.t. their response to
+sought components, requiring that the distance between each meaning-
+                                                                                              nonsense stimuli as schematized in Fig. 16.b and observed in the top
+ful category and the meaningless one is less than the distance between
+                                                                                              panels of Fig. 17.
+the two meaningful categories, see Fig. 16.b. Since ReDisCA currently
+                                                                                                  Overall, application of ReDisCA to the MEG dataset exploring the
+searches for one-dimensional components, the responses to the two
+                                                                                              neural processes underlying visual categorization of faces and tools
+meaningful stimuli (faces and tools) will be positioned on the opposite
+                                                                                              appears to support the main result of the original study (Kozunov
+sides relative to the responses to the nonsensical visual stimuli.
+                                                                                              et al., 2018) and confirms that while perception of faces is dominantly
+    The three components with the lowest 𝑝-values are shown in Fig. 17
+                                                                                              accompanied by the activity in the ventral visual stream, the images of
+in the order they were returned by ReDisCA.
+                                                                                              tools elicit activity along the dorsal visual path and also result in the
+    From 17.a we can observe the rise of the response magnitude in                            activation of hand related sensory-motor areas associated with the use
+the ‘‘tools’’ condition that is significantly different from the response                     of the tools.
+in the ‘‘faces’’ condition (that remains nearly flat over this interval) as
+shown by the asterisks on the top of the plot. The significant difference                     5. Discussion
+starts at 202 ms which nearly exactly matches the results reported in
+Figure 3 of Kozunov et al. (2018). As evident from the topography,                               Conceptually, ReDisCA extends the family of the previously devel-
+the observed response is produced by dominantly left parietal sources                         oped methods for decomposing multichannel EEG and MEG data and
+and possibly sources from the left sensory-motor cortex. Component 2                          extracting the spatial–temporal components with desired properties.
+shows the development of this response in the visual areas of the cortex                      One popular example is the Spatial Spectral Decomposition (SSD)
+which again aligns well with the late (around 260–350 ms) activity                            technique (Nikulin et al., 2011). SSD seeks to maximize the power
+of the fusiform gyrus (FG) in response to the images of ‘‘tools’’. The                        at a frequency band of interest while simultaneously minimizing it
+last component reflects face-specific activity that peaks early at around                     within the side bands. For each specific triplet of frequency bands (one
+160 ms, then mixes with the activity in the other subcategories and                           central and two flanking) the SSD results in a set of spatial components
+
+                                                                                         16
+A. Ossadtchi et al.                                                                                                                                    NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 16. (a) The non-binary theoretical RDM matrix used to impose the specific geometric relationship on the component time series. (b) This matrix requires that the responses
+to ‘‘face’’ and ‘‘tool’’ categories are maximally separated while both are equally distanced from the response to the nonsensical images. The distances in (a) and (b) are identically
+color-coded.
+
+
+
+
+            Fig. 17. Representational dissimilarity components in the dataset by Kozunov et al. (2018) obtained using non-binary theoretical RDM shown in Fig. 16.
+
+
+
+whose time series exhibit the frequency band selective property. In                           activity and extracts its sources whose envelope aligns well with the
+particular, the timecourses of the SSD-derived spatial components are                         target variable. Notably, neither SSD nor SPoC or their early forerun-
+characterized by the maximal ratio of power within the central band to                        ner ICA require forward and inverse modeling machinery to extract
+that within the two flanking sub-bands which justifies the use of SSD for                     target component time series. Theoretically speaking, the design of
+extracting rhythmic components from multichannel EEG or MEG time                              either of these methods does not require that the obtained components
+series. Another popular method is the Source Power Comodulation,                              correspond to a specific neuronal source with a well-defined location.
+or SPoC (Dähne et al., 2014). SPoC aims to find spatial filters and                           In practice, however, the obtained patterns that pertain to individual
+patterns by using in the decomposition process a target behavioral vari-                      components exhibit remarkable alignment with the appropriate dipolar
+able to emphasize the components whose instantaneous power profile                            electromagnetic model and allow for pinpointing a specific cortical
+correlates with the target variable. Typically SPoC targets rhythmic                          location as a source of activity with the desired property.
+
+                                                                                         17
+A. Ossadtchi et al.                                                                                                                                       NeuroImage 301 (2024) 120868
+
+
+
+
+Fig. 18. Cortical map reflecting the first principal angle between the dissimilarity subspace spanned by the topographies from Fig. 17 and the subspaces spanned by the topographies
+of a freely oriented dipole at each cortical location, see Eq. (14). This highlights the potential contribution of the cortical sources to the multivariate activity pertinent to the user
+specified RDM. (14). Letters A,P,S,L,R — anterior, posterior, superior, left, right define the view angle.
+
+
+    In its current version ReDisCA operates with evoked response data                           applied to the patterns (Haufe et al., 2014; Kay, 1997) obtained from
+recorded over several experimental conditions and aims at finding spa-                          the regression weights it is not the essential step in the analysis.
+tial components (each potentially corresponding to a distinct neuronal                              In simulations to compare ReDisCA to the source space RSA we
+source) whose activation time series exhibit the expected represen-                             fitted an electromagnetic model to the signal subspace spanned by
+tational structure. We have started with the Euclidean norm as a                                the topographies of the statistically significant ReDisCA components,
+distance between component activation time series. This continuous                              see Eq. (14) and matched the obtained locations against those of the
+measure of dissimilarity not only allows for an analytic solution of the                        simulated sources. This allowed us to rigorously compare ReDisCA with
+subsequent optimization problem but appears superior (Walther et al.,                           the explicit inverse modeling-driven RSA. ReDisCA has successfully
+2016; Guggenmos et al., 2018) to the simplest forms of more intri-                              identified the signal subspace corresponding to the simulated sources
+cate classification accuracy-based distances. Based on this and using                           and provided higher ROC AUC scores as compared to the source space
+the standard notion of spatial filtering of multichannel EEG or MEG                             RSA based on the exhaustive scan. Note that in our implementation
+data we devised ReDisCA as the approach for dissecting the evoked                               of the source space RSA we analyzed each cortical source separately,
+responses into a set of spatial components with activation time series                          used MNE and LCMV beamformer as inverse solvers and employed the
+that adhere to the user-supplied target (or theoretical) representational                       L2-norm as the dissimilarity measure instead of sLORETA and LDA clas-
+dissimilarity structure.                                                                        sifier used in Kozunov et al. (2018). However, when matching these two
+    To achieve this we have formulated the specific constrained op-                             techniques against each other one has to keep in mind that ReDisCA
+timization problem (5). Its solution gives us the spatial filters whose                         uses less information and does not require inverse modeling which
+application to the multichannel evoked response yields component ac-                            makes it applicable to a broader collection of datasets and modalities.
+tivation timeseries with the expected target representational structure                         For example, ReDisCA may be an interesting option to employ for the
+encoded by the prespecified target RDM. These time series combined                              analysis of ECoG data where forward and inverse modeling are less
+with the spatial patterns corresponding to each of the spatial fil-                             straightforward than it is with non-invasive EEG or MEG data. Also,
+ters (Haufe et al., 2014; Petrosyan et al., 2021; Kay, 1993) give us                            ReDisCA is directly applicable to the averaged evoked responses time
+spatial decomposition of the multichannel evoked responses observed                             series and does not require the presence of single-trial data.
+over the range of experimental conditions. The goodness of fit is given                             In the final example of real-data analysis we have visualized the rep-
+by the corresponding generalized eigenvalue.                                                    resentational dissimilarity subspace discovered by ReDisCA. To this end
+    In contrast to the source space RSA (Kozunov et al., 2018) ReDisCA                          we have performed MUSIC scan and visualized the cosine of the first
+does not require inverse modeling and does not perform an explicit                              principal angle between the dissimilarity subspace and the subspaces
+and exhaustive scan over brain sources in the attempt to pinpoint                               spanned by the topographies of a freely oriented dipole at each cor-
+those whose empirical RDM is close enough to the target RDM. Con-                               tical location. This highlights the potential contribution of the cortical
+ceptually the role of the inverse modeling in ReDisCA is similar to                             sources to the multivariate activity pertinent to the user specified RDM.
+that in the multivariate pattern analysis of EEG or MEG data, see                               More sophisticated analysis of the ReDisCA discovered subspace can be
+for example Clarke et al. (2015). While the inverse modeling can be                             performed using a variety of EEG and MEG inverse problem solving
+
+                                                                                           18
+A. Ossadtchi et al.                                                                                                                        NeuroImage 301 (2024) 120868
+
+
+approaches (Grech et al., 2008) including the advanced hierarchical                         patterns can be used for implementing a rigorous source localization
+Bayesian techniques aimed at recovery of the underlying neuronal                            procedure based on the notion of signal subspace as described for
+current source density e.g. Lucka et al. (2012) and Rezaei et al. (2021)                    example in Mosher et al. (1992). This property positively distinguishes
+or parametric approaches to discover discrete sources (Mäkelä et al.,                       ReDisCA from the sensor space RSA approach described in Mensen et al.
+2018) and their associated time series. Doing so one has to take into                       (2017) where the authors using high-density EEG were able to highlight
+account the importance of accurately modeling individual subject heads                      the detailed spatial and temporal patterns of responses underlying
+and tissue conductivity profiles (Wolters et al., 2006) to improve the                      various aspects of meaningfulness in the presented visual stimuli. They
+source localization accuracy. At the same time, ReDisCA, a spatial                          achieved this using newly proposed differentiation analysis (DA) and
+decomposition method, as opposed to the source-space RSA, does not                          computed temporal and spatial profiles of the category differentiation
+require the inverse modeling and can be used to analyze the datasets                        index (CDI) that can be used to make judgments about time windows
+with no detailed anatomic information, see Section 4.2.1. Although at                       and approximate spatial locations of the pivotal sources. However, due
+the expense of potentially important details, in such a setting ReDisCA                     to their empirical nature, the obtained spatial CDI maps cannot be
+can be useful in non-invasive explorations of the representational drift                    rigorously fitted with an electromagnetic model and therefore are only
+phenomenon (Driscoll et al., 2022) and in the analysis of psychiatric                       tangentially related to the underlying distribution of cortical sources
+conditions, see Seiger et al. (2023).                                                       whose activity exhibits the desired representational properties.
+     Any RSA implementation benefits from the increase in the number                            ReDisCA is formulated to search for a single spatial vector, as
+of experimental conditions. Although we demonstrated that ReDisCA                           indicated by Eq. (5), and evaluates the similarity of activation in the
+outperformed conventional RSA approaches for all tested counts of                           temporal dimension. This places specific constraints on the size of
+conditions (3,4,5,6), the practically useful results can be obtained from                   the temporal window 𝑇 to ensure ReDisCA’s proper functioning. It is
+datasets with no less than four conditions. MNE inverse solver appeared                     crucial to recognize that the size of this window is contingent upon the
+to be a better option as compared to the LCMV beamformer for the                            frequency content of the investigated evoked response. Faster-changing
+number of conditions less than 6. ReDisCA followed by the source                            signals permit more information (pertaining to similarity/dissimilarity)
+localization procedure yielded almost a 2-fold reduction in the mean                        within shorter time intervals.
+source localization error as compared to the exhaustive scanning source                         Additionally, the window size is influenced by the number of sen-
+space RSA. The approach reported in Kozunov et al. (2018) where voxel                       sors employed. In theory, larger sensor arrays necessitate longer win-
+time series obtained with sLORETA are combined into ROIs followed                           dows to ensure the correlation matrices are full rank. Note, however,
+by dimension reduction and LDA classification. This combination may                         that typically, EEG and MEG data are projected into smaller subspaces
+potentially improve the accuracy of the exhaustive scan-based RSA                           with dimensions 10–100. All subsequent operations are conducted
+however, requires significantly more computations and in contrast to                        within this reduced dimensional space to guarantee the full rank of
+ReDisCA is not directly applicable to the averaged evoked responses                         the resulting matrices. An alternative or additional approach involves
+time series.                                                                                employing the Tikhonov regularization strategy when computing the
+     We demonstrate that the optimization problem in ReDisCA is math-                       inverse of the correlation matrix 𝐑.  ̄ It is evident that reducing the
+ematically analogous to that of SPoC, but it utilizes modified input data                   subspace size and increasing the regularization parameter, in addition
+matrices. These matrices are calculated as the difference between the                       to enhancing stability, adversely impacts ReDisCA’s spatial resolution.
+evoked responses recorded for each pair of conditions. In this context,                     At the same time, as illustrated with the last example described in
+the entries of the theoretical RDM formally take on the role of the                         Section 4.2.2 ReDisCA can be applied to the entire response dura-
+behavioral variable, as shown in Table 1.                                                   tion window and automatically provides the time-intervals where the
+     In the future, ReDisCA can potentially adopt cross-validated Eu-                       sought representational dissimilarity structure arises. Guidelines detail-
+clidean distances (Walther et al., 2016). To cope with the inher-                           ing these trade-offs must be developed in the future, drawing upon both
+                                                                             𝑖𝑗
+ent asymmetry one can use a symmetric version of it as 𝑑𝑐.𝑣.                       =        simulations and theoretical analyses followed by verification with real
+       (                    )                        (          𝑐𝑗
+                                                                    )(        𝑐𝑗
+                                                                                  )⊤
+ 1 ⊤
+   𝐰    𝐑 𝑖𝑗
+                 + 𝐑 𝑖𝑗
+                              𝐰,  where   𝐑𝑖𝑗
+                                                  =   𝐗
+                                                        𝑐𝑖
+                                                            − 𝐗       𝐗
+                                                                       𝑐𝑖
+                                                                           − 𝐗              data.
+ 2        [𝐴][𝐵]     [𝐵][𝐴]                [𝐴][𝐵]       [𝐴]     [𝐴]    [𝐵]    [𝐵]
+                 (            𝑐𝑗
+                                  )(          𝑐𝑗
+                                                  )⊤                                            The approaches such as SSD, SPoC and now ReDisCA are designed
+                    𝑐𝑖                𝑐𝑖                     𝑐𝑖
+and 𝐑𝑖𝑗 [𝐵][𝐴]
+               =   𝐗[𝐵]
+                         −  𝐗 [𝐵]
+                                    𝐗 [𝐴]
+                                          − 𝐗 [𝐴]
+                                                     with   𝐗[𝐴]
+                                                                 representing  aver-        to be applied to a single subject. When the conclusion needs to be
+aged responses corresponding to condition 𝑐𝑖 and obtained using base                        drawn from a cohort of subjects, special steps need to be undertaken.
+                             𝑐𝑖
+data partition A and 𝐗[𝐵]         — using validation partition B. Investigation             For example, in the source space RSA approach reported in Kozunov
+of the utility of this cross-validated distance in the ReDisCA setting is                   et al. (2018) pooling across subjects is performed using the standard
+a separate topic that needs to be addressed by future studies.                              in the MEG approach based on warping individual cortex geometries
+     Feature-weighted RSA is a modification of RSA that allows to better                    onto the canonical cortex followed by calculation of the group level
+align the observed and the theoretical RDMs (Kaniuth and Hebart,                            statistics. Given the superiority of ReDisCA demonstrated here as com-
+2022). This is achieved by mixing the RDMs that pertain to the indi-                        pared to the explicit scan in detecting sources with specified RDMs, see
+vidual features, e.g. voxels comprising an ROI, with optimal weights                        Figs. 4 and 5, the source space estimates can be obtained by applying
+maximizing the similarity of this mixed RDM and its theoretical target.                     the individual inverse modeling to the patterns discovered by Re-
+In application to EEG and MEG data the role of individual features                          DisCA followed by warping these individual results onto the canonical
+is played by individual channels and therefore the adaptively tuned                         brain. It is potentially possible to consider development of group-level
+weights may be considered as some sort of spatial filtering. At the same                    approaches, conceptually similar to those reported in Kozunov and
+time, since the weighted RDM matrix entries appear in the form of                           Ossadtchi (2015), Janati et al. (2020) and driven by ReDisCA functional
+non-linearly transformed channel data (squared distances, functions of                      (5).
+classification accuracy, etc.) the coefficients of such a mixing cannot                         ReDisCA’s applications extend beyond EEG and MEG data analysis
+be transformed into electromagnetically meaningful patterns and are                         and potentially include the ROI-based examination of fMRI data. In-
+therefore difficult to interpret (Foged et al., 2022).                                      terpreting the weights that scale individual voxel RDMs, as introduced
+     In contrast, ReDisCA by design seeks for a linear spatial filter                       in Kaniuth and Hebart (2022), poses challenges in converting it into a
+applied directly to the channel data to isolate a source with the desired                   pattern, as discussed in Haufe et al. (2014). Here, the difficulty arises
+representational pattern. Because of this, the weights vector can be                        because the weights in Kaniuth and Hebart (2022) are applied to the
+easily converted to source topography, or pattern (Kay, 1997; Haufe                         Representational Dissimilarity Matrices (RDMs) of individual voxels
+et al., 2014), which takes into account the spatial correlation struc-                      and not to the actual voxel activations. Since the RDM elements are
+ture present in the data. This guarantees that the discovered spatial                       non-linear functions of voxel activation, the weights in Kaniuth and
+
+                                                                                       19
+A. Ossadtchi et al.                                                                                                                        NeuroImage 301 (2024) 120868
+
+
+Hebart (2022) cannot be converted into within ROI activation patterns            Declaration of competing interest
+highlighting the voxels that contribute most to the target RDM.
+    Employing ReDisCA within each ROI may resolve this challenge,                    The authors declare that they have no known competing finan-
+by applying weights to the activation of individual voxels rather than           cial interests or personal relationships that could have appeared to
+to their non-linear functions. This would enable the subsequent trans-           influence the work reported in this paper.
+formation of ReDisCA weights into patterns (Haufe et al., 2014; Parra
+et al., 2003) which could enhance the spatial resolution of fMRI-based           Data availability
+functional mapping by clarifying the delineation of an extended ROI
+into subregions contributing to the improved alignment with the target
+                                                                                     The code is available upon request by emailing at
+RDM.
+                                                                                 ossadtchi@gmail.com. The data used in the MS are publicly available
+    Moreover, ReDisCA can advance the methodology outlined by
+                                                                                 at https://osf.io/pfde9/.
+Laakso and Cottrell (2000), where the RSA principle was used to
+analyze representations emerging in the layers of an artificial neu-
+ral network. An intriguing possibility arises when ReDisCA-derived               References
+weights align with those of a subsequent neuron connected to the
+                                                                                 Aguirre, G.K., 2007. Continuous carry-over designs for fMRI. Neuroimage 35 (4),
+analyzed layer, signifying that the individual neuron appears to be
+                                                                                     1480–1494.
+tuned to track the representational structure encoded in the target              Almeida, J., Mahon, B.Z., Caramazza, A., 2010. The role of the dorsal visual processing
+RDM.                                                                                 stream in tool identification. Psychol. Sci. 21 (6), 772–778.
+                                                                                 Ayzenberg, V., Behrmann, M., 2022. The dorsal visual pathway represents
+6. Conclusion                                                                        object-centered spatial relations for object recognition. J. Neurosci. 42 (23),
+                                                                                     4693–4710.
+    In conclusion, this study introduces and applies the novel technique         Benigno, G.B., Budzinski, R.C., Davis, Z.W., Reynolds, J.H., Muller, L., 2023. Waves
+of Representational Dissimilarity Component Analysis (ReDisCA) to                    traveling over a map of visual space can ignite short-term predictions of sensory
+                                                                                     input. Nature Commun. 14 (1), 3409.
+overcome challenges associated with classical Representational Simi-
+                                                                                 Carlson, T.A., Schrater, P., He, S., 2003. Patterns of activity in the categorical
+larity Analysis (RSA), particularly in EEG and MEG data. By estimating               representations of objects. J. Cogn. Neurosci. 15 (5), 704–717.
+spatial–temporal components aligned with a target representational               Cichy, R.M., Pantazis, D., Oliva, A., 2016. Similarity-based fusion of MEG and fMRI
+dissimilarity matrix (RDM), ReDisCA produces spatial filters and asso-               reveals spatio-temporal dynamics in human cortex during visual object recognition.
+ciated topographies that reveal ‘‘representationally relevant’’ sources.             Cerebral Cortex 26 (8), 3563–3579.
+The application of these spatial filters to evoked response time series          Clarke, A., Devereux, B.J., Randall, B., Tyler, L.K., 2015. Predicting the time course of
+                                                                                     individual objects with MEG. Cerebral Cortex 25 (10), 3602–3612.
+demonstrates superior performance in terms of source localization ac-
+                                                                                 Cox, D.D., Savoy, R.L., 2003. Functional magnetic resonance imaging (fMRI)‘‘brain
+curacy compared to conventional source space RSA, with significantly                 reading’’: detecting and classifying distributed patterns of fMRI activity in human
+fewer computations. Our approach does not require forward modeling                   visual cortex. Neuroimage 19 (2), 261–270.
+and any geometric information but if these are available the obtained            Dähne, S., Meinecke, F.C., Haufe, S., Höhne, J., Tangermann, M., Müller, K.-R.,
+components permit rigorous fits with the electromagnetic model by                    Nikulin, V.V., 2014. SPoC: a novel framework for relating the amplitude of neuronal
+means of a plethora of methods for solving the inverse problem. The                  oscillations to behaviorally relevant parameters. NeuroImage 86, 111–122.
+                                                                                 De Munck, J.C., Wolters, C.H., Clerc, M., 2012. EEG and MEG: forward modeling. In:
+methodology is validated through realistic simulations and applied to
+                                                                                     Handbook of Neural Activity Measurement. Vol. 19, Cambridge University Press
+a real EEG and an MEG dataset, showcasing its potential for discovering              Cambridge, UK, pp. 192–248.
+representational structures without relying on the inverse modeling.             Driscoll, L.N., Duncker, L., Harvey, C.D., 2022. Representational drift: Emerging theories
+In the discussion, we highlighted the limitations of ReDisCA, outlined               for continual learning and experimental future directions. Curr. Opin. Neurobiol.
+potential directions for its further development, and identified novel               76, 102609.
+applications.                                                                    Edelman, S., 1998. Representation is representation of similarities. Behav. Brain Sci.
+                                                                                     21 (4), 449–467.
+Funding                                                                          Foged, M.T., Scherg, M., Fabricius, M., Beniczky, S., 2022. Learn to interpret voltage
+                                                                                     maps: an atlas of topographies. Epileptic Disord. 24 (2), 229–248.
+                                                                                 Grech, R., Cassar, T., Muscat, J., Camilleri, K.P., Fabri, S.G., Zervakis, M., Xanthopou-
+   The article was prepared within the framework of the Basic Re-                    los, P., Sakkalis, V., Vanrumste, B., 2008. Review on solving the inverse problem
+search Program at HSE University.                                                    in EEG source analysis. J. Neuroeng. Rehabil. 5, 1–33.
+                                                                                 Guggenmos, M., Sterzer, P., Cichy, R.M., 2018. Multivariate pattern analysis for MEG:
+Ethics statement                                                                     A comparison of dissimilarity measures. Neuroimage 173, 434–447.
+                                                                                 Haist, F., Anzures, G., 2017. Functional development of the brain’s face-processing
+    In this study we utilized two datasets recorded from human subjects              system. Wiley Interdiscip. Rev.: Cogn. Sci. 8 (1–2), e1423.
+and reported in separate previously published articles. The first ERP170         Haufe, S., Meinecke, F., Görgen, K., Dähne, S., Haynes, J.-D., Blankertz, B., Bieß-
+                                                                                     mann, F., 2014. On the interpretation of weight vectors of linear models in
+EEG dataset is described in Kappenman et al. (2021). This study was
+                                                                                     multivariate neuroimaging. Neuroimage 87, 96–110.
+approved by the Institutional Review Board at the University of Califor-         Haxby, J.V., Hoffman, E.A., Gobbini, M.I., 2000. The distributed human neural system
+nia, Davis, and all participants provided informed consent. All materials            for face perception. Trends Cogn. Sci. 4 (6), 223–233.
+are freely available at https://doi.org/10.18115/D5JW4R. The second              Hung, C.P., Kreiman, G., Poggio, T., DiCarlo, J.J., 2005. Fast readout of object identity
+MEG dataset was previously reported in Kozunov et al. (2018) and                     from macaque inferior temporal cortex. Science 310 (5749), 863–866.
+collected in accordance with the recommendations of the Declaration of           Janati, H., Bazeille, T., Thirion, B., Cuturi, M., Gramfort, A., 2020. Multi-subject
+Helsinki with written informed consent from all subjects. The protocol               MEG/EEG source imaging with sparse multi-task regression. NeuroImage 220,
+                                                                                     116847.
+was approved by the ethics committee of Moscow State University of
+                                                                                 Kaniuth, P., Hebart, M.N., 2022. Feature-reweighted representational similarity analysis:
+Psychology and Education.                                                            A method for improving the fit between computational models, brains, and
+                                                                                     behavior. NeuroImage 257, 119294.
+CRediT authorship contribution statement                                         Kappenman, E.S., Farrens, J.L., Zhang, W., Stewart, A.X., Luck, S.J., 2021. ERP CORE:
+                                                                                     An open resource for human event-related potential research. NeuroImage 225,
+    Alexei Ossadtchi: Writing – review & editing, Writing – original                 117465.
+draft, Visualization, Validation, Supervision, Software, Methodology,            Kay, S.M., 1993. Fundamentals of Statistical Signal Processing: Estimation Theory.
+Funding acquisition, Formal analysis, Data curation, Conceptualization.              Prentice-Hall, Inc..
+                                                                                 Kay, S.M., 1997. Fundamentals of Statistical Signal Processing: Estimation Theory.
+Ilia Semenkov: Writing – review & editing, Validation, Software,
+                                                                                     Prentice Hall.
+Data curation. Anna Zhuravleva: Visualization, Software, Investiga-              Khaligh-Razavi, S.-M., Henriksson, L., Kay, K., Kriegeskorte, N., 2017. Fixed versus
+tion, Data curation. Vladimir Kozunov: Resources. Oleg Serikov:                      mixed RSA: Explaining visual representations by fixed and mixed feature sets from
+Software. Ekaterina Voloshina: Software.                                             shallow and deep computational models. J. Math. Psych. 76, 184–197.
+
+
+                                                                            20
+A. Ossadtchi et al.                                                                                                                                      NeuroImage 301 (2024) 120868
+
+
+King, J.-R., Dehaene, S., 2014. Characterizing the dynamics of mental representations:          Pantazatos, S.P., Yanagihara, T.K., Zhang, X., Meitzler, T., Hirsch, J., 2012.
+    the temporal generalization method. Trends Cogn. Sci. 18 (4), 203–210.                          Frontal–occipital connectivity during visual search. Brain Connect. 2 (3), 164–175.
+Kozunov, V., Nikolaeva, A., Stroganova, T.A., 2018. Categorization for faces and tools—         Parra, L., Alvino, C., Tang, A., Pearlmutter, B., Yeung, N., Osman, A., Sajda, P., 2003.
+    two classes of objects shaped by different experience—differs in processing timing,             Single-trial detection in EEG and MEG: Keeping it linear. Neurocomputing 52,
+    brain areas involved, and repetition effects. Front. Hum. Neurosci. 11, 650.                    177–183.
+Kozunov, V.V., Ossadtchi, A., 2015. GALA: group analysis leads to accuracy, a novel             Pascual-Marqui, R.D., et al., 2002. Standardized low-resolution brain electromagnetic
+    approach for solving the inverse problem in exploratory analysis of group MEG                   tomography (sLORETA): technical details. Methods Find Exp. Clin. Pharmacol. 24
+    recordings. Front. Neurosci. 9, 107.                                                            (Suppl D), 5–12.
+Kriegeskorte, N., Kievit, R.A., 2013. Representational geometry: integrating cognition,         Petrosyan, A., Sinkin, M., Lebedev, M., Ossadtchi, A., 2021. Decoding and interpreting
+    computation, and the brain. Trends Cogn. Sci. 17 (8), 401–412.                                  cortical signals with a compact convolutional neural network. J. Neural Eng. 18
+Kriegeskorte, N., Mur, M., Bandettini, P.A., 2008a. Representational similarity                     (2), 026019.
+    analysis-connecting the branches of systems neuroscience. Front. Syst. Neurosci.            Pfurtscheller, G., Guger, C., Ramoser, H., 1999. EEG-based brain-computer interface
+    4.                                                                                              using subject-specific spatial filters. In: Engineering Applications of Bio-Inspired
+Kriegeskorte, N., Mur, M., Ruff, D.A., Kiani, R., Bodurka, J., Esteky, H., Tanaka, K.,              Artificial Neural Networks: International Work-Conference on Artificial and Natural
+    Bandettini, P.A., 2008b. Matching categorical object representations in inferior                Neural Networks, IWANN’99 Alicante, Spain, June 2–4, 1999 Proceedings, Volume
+    temporal cortex of man and monkey. Neuron 60 (6), 1126–1141.                                    II 5. Springer, pp. 248–254.
+Laakso, A., Cottrell, G., 2000. Content and cluster analysis: assessing representational        Rezaei, A., Lahtinen, J., Neugebauer, F., Antonakakis, M., Piastra, M.C., Koulouri, A.,
+    similarity in neural systems. Philos. Psychol. 13 (1), 47–76.                                   Wolters, C.H., Pursiainen, S., 2021. Reconstructing subcortical and cortical so-
+Lucka, F., Pursiainen, S., Burger, M., Wolters, C.H., 2012. Hierarchical Bayesian                   matosensory activity via the RAMUS inverse source analysis technique using median
+    inference for the EEG inverse problem using realistic FE head models: depth                     nerve SEP data. Neuroimage 245, 118726.
+    localization and source separation for focal primary currents. NeuroImage 61 (4),           Rossion, B., Caharel, S., 2011. ERP evidence for the speed of face categorization in
+    1364–1382.                                                                                      the human brain: Disentangling the contribution of low-level visual cues from face
+Makeig, S., Bell, A., Jung, T.-P., Sejnowski, T.J., 1995. Independent component analysis            perception. Vis. Res. 51 (12), 1297–1311.
+    of electroencephalographic data. Adv. Neural Inf. Process. Syst. 8.                         Sato, T.K., Nauhaus, I., Carandini, M., 2012. Traveling waves in visual cortex. Neuron
+Mäkelä, N., Stenroos, M., Sarvas, J., Ilmoniemi, R.J., 2018. Truncated rap-music                    75 (2), 218–229.
+    (trap-music) for MEG and EEG source localization. NeuroImage 167, 73–83.                    Seiger, R., Reggente, N., Majid, D.-A., Ly, R., Tadayonnejad, R., Strober, M.,
+Maris, E., Oostenveld, R., 2007. Nonparametric statistical testing of EEG-and MEG-data.             Feusner, J.D., 2023. Neural representations of anxiety in adolescents with anorexia
+    J. Neurosci. Methods 164 (1), 177–190.                                                          nervosa: a multivariate approach. Transl. Psychiatry 13 (1), 283.
+Mensen, A., Marshall, W., Tononi, G., 2017. EEG differentiation analysis and stimulus           Shea, N., 2018. Representation in Cognitive Science. Oxford University Press.
+    set meaningfulness. Front. Psychol. 8, 1748.                                                Susac, A., Ilmoniemi, R.J., Pihko, E., Nurminen, J., Supek, S., 2009. Early dissociation
+Mosher, J.C., Leahy, R.M., 1999. Source localization using recursively applied and                  of face and object processing: A magnetoencephalographic study. Hum. Brain Mapp.
+    projected (RAP) MUSIC. IEEE Trans. Signal Process. 47 (2), 332–340.                             30 (3), 917–927.
+Mosher, J.C., Leahy, R.M., Lewis, P.S., 1999. EEG and MEG: forward solutions for                Tsao, D.Y., Freiwald, W.A., Tootell, R.B., Livingstone, M.S., 2006. A cortical region
+    inverse methods. IEEE Trans. Biomed. Eng. 46 (3), 245–259.                                      consisting entirely of face-selective cells. Science 311 (5761), 670–674.
+Mosher, J.C., Lewis, P.S., Leahy, R.M., 1992. Multiple dipole modeling and localization         Van Veen, B., Van Drongelen, W., Yuchtman, M., Suzuki, A., 1997. Localization of brain
+    from spatio-temporal MEG data. IEEE Trans. Biomed. Eng. 39 (6), 541–557.                        electrical activity via linearly constrained minimum variance spatial filtering. IEEE
+Nikulin, V., Nolte, G., Curio, G., 2011. A novel method for reliable and fast extraction            Trans. Biomed. Eng. 44 (9), 867–880.
+    of neuronal EEG/MEG oscillations on the basis of spatio-spectral decomposition.             Walther, A., Nili, H., Ejaz, N., Alink, A., Kriegeskorte, N., Diedrichsen, J., 2016.
+    Neuroimage.                                                                                     Reliability of dissimilarity measures for multi-voxel pattern analysis. Neuroimage
+Op de Beeck, H., Wagemans, J., Vogels, R., 2001. Inferotemporal neurons represent                   137, 188–200.
+    low-dimensional configurations of parameterized shapes. Nat. Neurosci. 4 (12),              Wolters, C.H., Anwander, A., Tricoche, X., Weinstein, D., Koch, M.A., Macleod, R.S.,
+    1244–1252.                                                                                      2006. Influence of tissue conductivity anisotropy on EEG/MEG field and return
+Ossadtchi, A., Altukhov, D., Jerbi, K., 2018. Phase shift invariant imaging of coherent             current computation in a realistic head model: a simulation and visualization study
+    sources (PSIICOS) from MEG data. NeuroImage 183, 950–971.                                       using high-resolution finite element modeling. NeuroImage 30 (3), 813–826.
+Ossadtchi, A., Pronko, P., Baillet, S., Pflieger, M.E., Stroganova, T., 2014. Mutual
+    information spectrum for selection of event-related spatial components. Application
+    to eloquent motor cortex mapping. Front. Neuroinform. 7, 53.
+
+
+
+
+                                                                                           21
+
