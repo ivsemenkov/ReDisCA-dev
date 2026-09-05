@@ -114,7 +114,8 @@ This inventory is the reason there is **no final verdict**.
 | Fig. 18 MUSIC on the three lowest-*p* components (3-D) | **Run** (5 seeds × MEG-PAPER-1501 and MEG-AIRI). Selection and patterns are deterministic across seeds. |
 | SIM-P1 Fig. 4, SNR 0.2 and 0.1, seed 20240904, n_mc=100 | **Run** |
 | SIM-P1 Figs 5–6, SNR 0.4, seed 20240904, n_mc=100 | **Run** |
-| SIM-P1 Figs 5–6, SNR 0.2; seeds 20240905–20240908 | **Required; not finished** |
+| SIM-P1 Figs 5–6, SNR 0.2, seed 20240904 | **Run** (median ~7.2–7.4 cm; 1 uninformative-RDM skip at C=3) |
+| SIM-P1 remaining seeds 20240905–20240908 | **Required; running without RSA** |
 | SIM-P2, SIM-P3 (original freeze) | **Required; not finished** |
 | Review-added SIM-P4…P8 and SIM-R1, 5 seeds, both relevant SNRs | **Required; not finished** |
 
