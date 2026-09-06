@@ -387,11 +387,11 @@ Switching from per-trial γ to one matrix-wide γ does **not** recover
 the paper ROC on any registered seed. SIM-P6 Fig. 5/6 is still
 required. This is an interim observation, not a Stage A verdict.
 
-**SIM-P4 (C, I_c=100, post-review), Fig. 4, SNR=0.2, seed 20240904,
-n_mc=100:** AUC 0.536, TPR@0.01 0.019, median **7.37 cm**. Reading
-the Fig. 4 title “100 trials” as within-condition I_c does **not**,
-on this first seed, recover the paper ROC. Remaining SIM-P4 seeds
-are running.
+**SIM-P4 (C, I_c=100, post-review), Fig. 4, all five seeds × both
+SNRs, n_mc=100 (this branch now complete for Fig. 4).**
+AUC 0.471–0.553; median loc. 6.38–8.31 cm. Reading the Fig. 4
+title “100 trials” as within-condition I_c does **not** recover
+the paper ROC.
 
 **SIM-P3 (C, causal Butterworth; original freeze).** Fig. 4, SNR=0.1,
 n_mc=100, **all five registered seeds finished.**
@@ -414,26 +414,25 @@ stable across the pre-registered seeds.
 Fig. 4 SNR=0.2 is now also complete on all five seeds:
 AUC 0.874–0.887, TPR@0.01 0.348–0.382, median loc. 0.61–0.80 cm.
 
-Figs 5–6 under the same causal generation have started.
-**First file** (SNR=0.4, seed 20240904, n_mc=100, C=6-generated):
+Figs 5–6 under the same causal generation: **two seeds finished**
+at both SNRs (20240904 and 20240905). Remaining three seeds are
+running.
 
-| C | Mean median loc. | Frac. error <1 cm | Mean pattern corr | Mean weight corr | Mean RDM corr |
+| SNR | Seed | C=3 | C=4 | C=5 | C=6 |
 | --- | --- | --- | --- | --- | --- |
-| 3 | 5.49 cm | 0.148 | 0.235 | 0.003 | 1.000 |
-| 4 | 4.59 cm | 0.202 | 0.260 | 0.004 | 0.978 |
-| 5 | 3.88 cm | 0.232 | 0.280 | 0.005 | 0.960 |
-| 6 | 3.46 cm | 0.278 | 0.291 | 0.006 | 0.952 |
+| 0.4 | 20240904 | 5.49 | 4.59 | 3.88 | **3.46 cm** |
+| 0.4 | 20240905 | 5.58 | 4.57 | 3.91 | **3.37 cm** |
+| 0.2 | 20240904 | 5.62 | 4.81 | 4.27 | **4.09 cm** |
+| 0.2 | 20240905 | 5.81 | 4.65 | 4.30 | **3.94 cm** |
 
-SNR=0.2, same seed: C=3…6 medians 5.62 / 4.81 / 4.27 / **4.09 cm**
-(frac&lt;1 cm 0.12–0.22; pattern 0.22–0.28; RDM 0.95–1.00). Same
-C-trend, slightly worse localization than SNR=0.4.
+At SNR=0.4, C=6, frac&lt;1 cm is 0.28–0.29 and mean pattern corr
+is ~0.29 (weights ~0). RDM corr is 0.95–1.00. Error **falls as C
+increases** on both seeds.
 
-Compared with SIM-P1 (~7.5 cm, no C trend, pattern ~0.17): error
-now **falls as C increases**, RDM recovery is excellent, and
-patterns beat weights. Paper Fig. 6 asks for **< 2 cm at C=6**;
-these first seeds are **3.46 cm** (SNR=0.4) and **4.09 cm**
-(SNR=0.2). Remaining seeds are not finished. Do not treat this as
-a reproducing pipeline.
+Compared with SIM-P1 (~7.5 cm, no C trend, pattern ~0.17) this is
+better. Paper Fig. 6 asks for **< 2 cm at C=6**; two seeds are
+**3.37–3.46 cm** (SNR=0.4) and **3.94–4.09 cm** (SNR=0.2). Do not
+treat this as a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
@@ -450,10 +449,13 @@ On 2026-09-06 the addendum therefore expands SIM-P3 to Fig. 4
 SNR=0.2 and Figs 5–6. That expansion is **not** pre-registered.
 ReDisCA kwargs are unchanged.
 
+**SIM-P7 (C, fixed 1000 noise loci)** Fig. 4, three finished
+jobs: AUC 0.50–0.54, median 7.16–7.27 cm. Seeding loci once does
+not, on these seeds, recover the paper ROC.
+
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
-seeds, remaining SIM-P3 seeds and the new P3 Fig. 4 SNR=0.2 /
-Fig. 5–6 jobs, remaining SIM-P4, SIM-P6 Fig. 5/6, SIM-P7, SIM-P8,
-and SIM-R1.
+seeds and Fig. 5/6, remaining SIM-P3 Fig. 5/6 seeds, SIM-P6
+Fig. 5/6, remaining SIM-P7, SIM-P8, and SIM-R1.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
