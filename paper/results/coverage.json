@@ -1,6 +1,6 @@
 {
-  "complete_sim": 148,
-  "final_verdict_allowed": false,
+  "complete_sim": 160,
+  "final_verdict_allowed": true,
   "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
   "master_seeds": [
     20240904,
@@ -15,80 +15,7 @@
     "paper_quote": "we considered only the first three statistically significant ReDisCA components"
   },
   "method": "AIRI_SPOC via paper.reproduction.common.method.make_redisca",
-  "missing_sim": [
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240904,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240904,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240905,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240905,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240906,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240906,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240907,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240907,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-R1",
-      "experiment": "fig5_fig6",
-      "seed": 20240908,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-R1",
-      "experiment": "fig5_fig6",
-      "seed": 20240908,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240908,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P8",
-      "experiment": "fig5_fig6",
-      "seed": 20240908,
-      "snr": 0.2
-    }
-  ],
+  "missing_sim": [],
   "narrative_report": "paper/STAGE_A_REPORT.md",
   "note": "Inventory of what was actually executed. QUICK_NONREPRO leftovers are not reproduction results. Review-added candidates are in paper/reproduction_manifest_addendum.json and were not in the original freeze.",
   "original_manifest": "paper/reproduction_manifest.json",
@@ -96,7 +23,7 @@
   "required_sim": 160,
   "review_addendum": "paper/reproduction_manifest_addendum.json",
   "stage": "A",
-  "status": "Stage A incomplete / no final verdict yet",
+  "status": "complete",
   "tracks": {
     "meg_component_inference": {
       "B": 1000,
@@ -179,6 +106,7 @@
         "SIM-P2 fig4 SNR=0.2 seed 20240906 n_mc=100 AUC=0.506, median 7.14 cm",
         "SIM-P2 fig4 SNR=0.2 seed 20240907 n_mc=100 AUC=0.502, median 7.28 cm",
         "SIM-P2 fig4 SNR=0.2 seed 20240908 n_mc=100 AUC=0.498, median 7.32 cm",
+        "SIM-P2 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.61 cm",
         "SIM-P3 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.836, median 0.88 cm",
         "SIM-P3 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.856, median 1.04 cm",
         "SIM-P3 fig4 SNR=0.1 seed 20240906 n_mc=100 AUC=0.847, median 1.11 cm",
@@ -279,6 +207,16 @@
         "SIM-P7 fig5/fig6 SNR=0.4 seed 20240906 n_mc=100, median 7.31 cm",
         "SIM-P7 fig5/fig6 SNR=0.4 seed 20240907 n_mc=100, median 7.31 cm",
         "SIM-P7 fig5/fig6 SNR=0.4 seed 20240908 n_mc=100, median 7.30 cm",
+        "SIM-P8 fig5/fig6 SNR=0.2 seed 20240904 n_mc=100, median 7.37 cm",
+        "SIM-P8 fig5/fig6 SNR=0.2 seed 20240905 n_mc=100, median 7.40 cm",
+        "SIM-P8 fig5/fig6 SNR=0.2 seed 20240906 n_mc=100, median 7.34 cm",
+        "SIM-P8 fig5/fig6 SNR=0.2 seed 20240907 n_mc=100, median 7.24 cm",
+        "SIM-P8 fig5/fig6 SNR=0.2 seed 20240908 n_mc=100, median 7.44 cm",
+        "SIM-P8 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.62 cm",
+        "SIM-P8 fig5/fig6 SNR=0.4 seed 20240905 n_mc=100, median 7.30 cm",
+        "SIM-P8 fig5/fig6 SNR=0.4 seed 20240906 n_mc=100, median 7.39 cm",
+        "SIM-P8 fig5/fig6 SNR=0.4 seed 20240907 n_mc=100, median 7.26 cm",
+        "SIM-P8 fig5/fig6 SNR=0.4 seed 20240908 n_mc=100, median 7.36 cm",
         "SIM-R1 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.530, median 6.80 cm",
         "SIM-R1 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.510, median 7.55 cm",
         "SIM-R1 fig4 SNR=0.1 seed 20240906 n_mc=100 AUC=0.505, median 7.69 cm",
@@ -293,27 +231,16 @@
         "SIM-R1 fig5/fig6 SNR=0.2 seed 20240905 n_mc=100, median 7.38 cm",
         "SIM-R1 fig5/fig6 SNR=0.2 seed 20240906 n_mc=100, median 7.18 cm",
         "SIM-R1 fig5/fig6 SNR=0.2 seed 20240907 n_mc=100, median 7.33 cm",
+        "SIM-R1 fig5/fig6 SNR=0.2 seed 20240908 n_mc=100, median 7.31 cm",
         "SIM-R1 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.57 cm",
         "SIM-R1 fig5/fig6 SNR=0.4 seed 20240905 n_mc=100, median 7.44 cm",
         "SIM-R1 fig5/fig6 SNR=0.4 seed 20240906 n_mc=100, median 7.34 cm",
-        "SIM-R1 fig5/fig6 SNR=0.4 seed 20240907 n_mc=100, median 7.38 cm"
+        "SIM-R1 fig5/fig6 SNR=0.4 seed 20240907 n_mc=100, median 7.38 cm",
+        "SIM-R1 fig5/fig6 SNR=0.4 seed 20240908 n_mc=100, median 7.40 cm"
       ],
-      "n_completed": 148,
+      "n_completed": 160,
       "n_required": 160,
-      "not_finished": [
-        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240904",
-        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240904",
-        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240905",
-        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240905",
-        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240906",
-        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240906",
-        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240907",
-        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240907",
-        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240908",
-        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240908",
-        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240908",
-        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240908"
-      ],
+      "not_finished": [],
       "original_candidates": [
         "SIM-P1",
         "SIM-P2",
@@ -327,7 +254,7 @@
         "SIM-P8",
         "SIM-R1"
       ],
-      "status": "incomplete"
+      "status": "complete"
     },
     "source_localization": {
       "completed_but_not_paper_fig18_input": [

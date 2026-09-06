@@ -1,17 +1,16 @@
 # Stage A report: ReDisCA paper reproduction
 
-**Status: Stage A incomplete / no final verdict yet.**
+**Status: Stage A complete. A coherent fixed-AIRI-SPoC pipeline does
+not reproduce the complete paper.**
 
 Ossadtchi et al., *NeuroImage* 301 (2024) 120868, using **exactly one**
 ReDisCA configuration: the AIRI → stock-SPoC settings on current `main`.
 
 This is a scientific reproduction report, not a method-development or
 ablation note. The ReDisCA constructor was not changed anywhere.
-
-Do **not** read this file as a claim that no pipeline reproduces the
-paper, or that one candidate has been selected as the winner. The
-pre-registered multi-seed simulation matrix and the review-required
-Fig. 17→18 / AIRI-temporal branches are still being executed.
+`completeness.stage_a_complete` and `final_verdict_allowed` are true
+(160/160 required `n_mc=100` jobs, Fig. 18 lowest-*p*, both AIRI
+temporal indexings). No method ablation has been started.
 
 Machine-readable companions:
 
@@ -21,8 +20,7 @@ Machine-readable companions:
   branches, each marked `added_after_stage_a_review: true`
 - `paper/results/coverage.json` — what was actually executed
 - `paper/results/stage_a_summary.json` — numeric extracts vs paper anchors
-  (`stage_a_status.final_verdict_allowed` is false until the required
-  matrix exists)
+  (`stage_a_status.final_verdict_allowed` is now true)
 - per-run JSON under `paper/results/`
 
 `--quick` leftovers must not be read as reproduction results.
@@ -102,7 +100,7 @@ Added after the Stage A review (not a method change):
 
 ## 4. What was run versus only prepared
 
-This inventory is the reason there is **no final verdict**.
+Required tracks are all executed. The verdict is in §9.
 
 | Track | Status |
 | --- | --- |
@@ -125,8 +123,8 @@ This inventory is the reason there is **no final verdict**.
 | SIM-P7 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance) |
 | SIM-P7 Figs 5–6 both SNRs × 5 seeds | **Run** (C=6 7.20–7.70 cm, no C-trend) |
 | SIM-R1 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance / 6.5–7.9 cm) |
-| SIM-R1 Figs 5–6 eight of ten jobs | **Run** (C=6 7.21–7.65 cm, no C-trend). Seed 08 both SNRs running |
-| SIM-P8 Figs 5–6 | **Unfinished** (required; Fig. 4 is not in the 160) |
+| SIM-R1 Figs 5–6 both SNRs × 5 seeds | **Run** (C=6 7.21–7.65 cm, no C-trend) |
+| SIM-P8 Figs 5–6 both SNRs × 5 seeds | **Run** (C=5 7.20–7.69 cm, no C-trend; Fig. 4 is not in the 160) |
 
 Existing `seed*.json` MEG files store a `temporal_airi` block that is the
 **corrected pooled** indexing and must not be labeled “literal AIRI
@@ -265,8 +263,7 @@ ablation.
 
 **Component inference is complete** (5 seeds, B=1000). **Both AIRI
 temporal indexings are complete** (Nmc=100, five seeds). Fig. 18
-lowest-*p* is complete. Simulations are not. Do not treat Stage A as
-closed.
+lowest-*p* is complete. The required simulation matrix is complete.
 
 **`n_sig` vs “three components” (corrected reading).**
 
@@ -320,10 +317,9 @@ the index lookup does not create the 65 ms face onset.
 
 ### Simulations (Figs 3–6)
 
-**Incomplete (148 / 160 required n_mc=100 jobs).** The pre-registered
-five-seed design and the review-expanded generation matrix are still
-running. Numbers below are interim. They are **not** a failure verdict.
-`stage_a_status.final_verdict_allowed` remains false.
+**Complete (160 / 160 required n_mc=100 jobs).**
+`stage_a_status.final_verdict_allowed` is true. Numbers below are the
+closed matrix, not a retune.
 
 **Fig. 4, `SIM-P1`, seed 20240904, n_mc=100** (not `--quick`):
 
@@ -363,7 +359,8 @@ Paper Fig. 6: ReDisCA mean median error **< 2 cm at C=6**.
 Paper Fig. 5: patterns much better aligned with true topographies than
 weights. Under **this** SIM-P1 reconstruction, weights are ~0, patterns
 ~0.17, localization stays ~7.5 cm, and error does not fall as C
-increases. That is an interim observation, not a closed Stage A result.
+increases. The full five-seed matrix confirms the same picture
+(C=6 7.16–7.55 cm). This is not paper Fig. 6.
 
 **SIM-P5 (D, norm-15% δ only), seed 20240904, n_mc=100:**
 
@@ -542,7 +539,8 @@ and Fig. 5/6 are both complete. That is not a Stage A verdict.
 median 6.52–7.94 cm. I_c=100 + norm-15% δ + global γ + fixed
 loci does **not** recover the paper ROC on any registered seed.
 
-**SIM-R1 Figs 5–6** (eight finished jobs, n_mc=100):
+**SIM-R1 Figs 5–6 is now complete** (all five seeds × both SNRs,
+n_mc=100):
 
 | SNR | Seed | C=3 | C=4 | C=5 | C=6 | Pattern @ C=6 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -550,15 +548,39 @@ loci does **not** recover the paper ROC on any registered seed.
 | 0.4 | 20240905 | 7.51 | 7.53 | 7.30 | **7.42 cm** | 0.168 |
 | 0.4 | 20240906 | 7.47 | 7.37 | 7.32 | **7.21 cm** | 0.181 |
 | 0.4 | 20240907 | 7.27 | 7.37 | 7.27 | **7.59 cm** | 0.176 |
+| 0.4 | 20240908 | 7.31 | 7.43 | 7.41 | **7.44 cm** | 0.177 |
 | 0.2 | 20240904 | 7.30 | 7.32 | 7.31 | **7.54 cm** | 0.173 |
 | 0.2 | 20240905 | 7.47 | 7.34 | 7.44 | **7.26 cm** | 0.192 |
 | 0.2 | 20240906 | 7.22 | 7.11 | 7.13 | **7.25 cm** | 0.181 |
 | 0.2 | 20240907 | 7.44 | 7.42 | 7.12 | **7.32 cm** | 0.189 |
+| 0.2 | 20240908 | 7.33 | 7.41 | 7.17 | **7.31 cm** | 0.184 |
 
-No paper-like C-trend. Pattern ~0.17–0.19. C=6 is **7.21–7.65 cm**
-on finished jobs. The composite D reconstruction does **not**
-produce paper Fig. 6 on these seeds. Remaining: both SNRs for
-seed 20240908.
+No C-trend on any seed. C=6 is **7.21–7.65 cm** (SNR=0.4) and
+**7.25–7.54 cm** (SNR=0.2). The composite D reconstruction does
+**not** produce paper Fig. 6. This branch’s Fig. 4 and Fig. 5/6
+are both complete.
+
+**SIM-P8 Figs 5–6 is now complete** (C, generate C=5 from scratch;
+evaluate C∈{3,4,5}; all five seeds × both SNRs, n_mc=100). Fig. 4
+for SIM-P8 is **not** in the required 160-job matrix.
+
+| SNR | Seed | C=3 | C=4 | C=5 | Pattern @ C=5 |
+| --- | --- | --- | --- | --- | --- |
+| 0.4 | 20240904 | 7.65 | 7.62 | **7.59 cm** | 0.162 |
+| 0.4 | 20240905 | 7.53 | 7.06 | **7.32 cm** | 0.172 |
+| 0.4 | 20240906 | 7.33 | 7.20 | **7.65 cm** | 0.172 |
+| 0.4 | 20240907 | 7.29 | 7.26 | **7.21 cm** | 0.180 |
+| 0.4 | 20240908 | 7.41 | 7.15 | **7.52 cm** | 0.183 |
+| 0.2 | 20240904 | 7.24 | 7.46 | **7.43 cm** | 0.181 |
+| 0.2 | 20240905 | 7.36 | 7.46 | **7.38 cm** | 0.184 |
+| 0.2 | 20240906 | 7.36 | 7.44 | **7.22 cm** | 0.161 |
+| 0.2 | 20240907 | 7.32 | 7.20 | **7.20 cm** | 0.190 |
+| 0.2 | 20240908 | 7.25 | 7.38 | **7.69 cm** | 0.179 |
+
+No C-trend. C=5 is **7.21–7.65 cm** (SNR=0.4) and **7.20–7.69 cm**
+(SNR=0.2). Pattern ~0.16–0.19. Generating C=5 from scratch (the
+body reading of Fig. 5) does **not** produce paper Fig. 5/6. This
+branch still uses zero-phase `filtfilt`, like SIM-P1.
 
 **SIM-P5 (D) Fig. 4 is now complete** (all five seeds × both
 SNRs, n_mc=100): AUC 0.462–0.532, TPR@0.01 0.007–0.026, median
@@ -607,12 +629,12 @@ No C-trend on any seed. C=6 is **7.17–7.55 cm** (SNR=0.4) and
 **not** produce paper Fig. 6. This branch’s Fig. 4 and Fig. 5/6
 are both complete. That is not a Stage A verdict.
 
-**Still unfinished (no final verdict):** remaining SIM-R1 Fig. 5/6
-seed 08 both SNRs, all SIM-P8 Fig. 5/6 (12 required jobs).
-
-Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
-I_c=40, generate C=6) is hash-compatible with the original freeze.
-Review knobs are opt-in.
+The required simulation matrix is finished. Default SIM-P1
+generation (literal δ, per-trial γ, per-epoch loci, I_c=40,
+generate C=6) is hash-compatible with the original freeze.
+Review knobs are opt-in. One extra non-required SIM-P2 Fig. 5/6
+job (SNR=0.4 seed 20240904) exists on disk; it is **not** in the
+160 and is not used in the verdict.
 
 ### Source localization (Fig. 18)
 
@@ -654,38 +676,71 @@ the labeled `P=eye(Nsns)` branch peaks at the right occipital pole.
 
 ## 9. Which external pipeline best reproduces the complete paper?
 
-**No answer yet. Stage A is incomplete. No winner. No failure
-declaration.**
+**None. A coherent fixed-AIRI-SPoC pipeline does not reproduce the
+complete paper.** The factory was never changed. Failures sit in
+external analysis / generation, or in the published claims under
+that frozen fit. This is not a ReDisCA method ablation.
 
-What can be said without pretending the matrix is finished:
+Track-by-track, with A/B/C/D labels:
 
-- **N170 (complete):** `N170-UNFILT` is in the paper’s neighborhood;
-  `N170-LP20` is not. Face RDM corr is 0.95 vs printed 0.82.
-- **MEG component count (complete inference, corrected reading):**
-  AIRI `n_sig >= 3` is compatible with “first three statistically
-  significant.” PAPER-1501 face `n_sig=2` is not.
-- **MEG early timing (both AIRI indexings finished):** neither literal
-  nor corrected recovers 65 ms. PAPER-1501 AIRI *p*− starts ~105 ms;
-  AIRI window starts ~250 ms.
-- **Fig. 18 (now run on the paper 3-D input):** lowest-*p* three
-  components, deterministic across seeds. Peaks remain occipital (left
-  V2 for PAPER-1501; right occipital pole for AIRI), not the published
-  rFG / insula / IPS set. This is one finished track, not a global
-  verdict.
-- **Simulations (148/160, not a verdict):** SIM-P3 causal Butterworth
-  Fig. 4 is paper-like on all five seeds (median 0.88–1.13 cm at
-  published SNR=0.1). SIM-P3 Fig. 5/6 is complete: C-trend present,
-  but C=6 is 3.37–4.00 cm (paper &lt;2 cm). SIM-P1, SIM-P5, and
-  SIM-R1 Fig. 4 are complete and stay near-chance. SIM-P1, SIM-P4,
-  SIM-P5, SIM-P6, and SIM-P7 Fig. 5/6 are complete at C=6
-  7.16–7.55 cm, 7.11–7.56 cm, 7.14–7.66 cm, 7.14–7.59 cm, and
-  7.20–7.70 cm with no C-trend. Eight SIM-R1 Fig. 5/6 jobs are
-  7.21–7.65 cm. Finish the required matrix before any pipeline
-  claim. Do not change ReDisCA.
+- **N170 (A, official ERP CORE, Eq. 2 Pearson, B=1000).**
+  `N170-UNFILT` is the only N170 candidate in the paper’s
+  neighborhood (face λ 0.880 vs 0.872; *p*=0; car λ close). It
+  does **not** recover printed face RDM corr 0.82 (got 0.95).
+  `N170-LP20` is not in the neighborhood. Condition-label
+  permutation does not produce paper-like *p*=0; random-phase
+  does. Meaning has two adjacent 25 ms windows, not three
+  including 375 ms.
+- **MEG component count (A text vs B/C inference).** MEG-AIRI
+  face `n_sig` 4–5 is **compatible** with “first three
+  statistically significant” (`n_sig >= 3`). MEG-PAPER-1501 /
+  1500 face `n_sig=2` is **not** compatible with that sentence.
+- **MEG early timing (B literal AIRI indexing and C corrected
+  pooled; Nmc=100, five seeds).** Neither indexing recovers the
+  65 ms face onset. PAPER-1501 AIRI *p*− starts ~105–113 ms;
+  MEG-AIRI starts ~250 ms. Switching the half-split index does
+  not create 65 ms.
+- **Fig. 18 (A: three lowest-*p* components, 3-D MUSIC).**
+  Selection is `[0, 1, 2]` on every registered seed. Peaks stay
+  occipital (left V2 for PAPER-1501; right occipital pole for
+  AIRI), not the published rFG / insula / IPS / anterior-central
+  set. Individual MRI is not public; OSF AD overlapping-spheres
+  Gain was used.
+- **Simulations (160/160).** SIM-P3 (**C**, causal Butterworth;
+  original freeze) is the **only** generation setting that is
+  not pathologically far from paper Fig. 4: SNR=0.1 AUC
+  0.836–0.862, median **0.88–1.13 cm**; SNR=0.2 AUC 0.874–0.887,
+  median **0.61–0.80 cm**. Its Fig. 5/6 has a C-trend on all
+  five seeds, but C=6 is **3.37–4.00 cm** (SNR=0.4) and
+  **3.93–4.24 cm** (SNR=0.2). Paper Fig. 6 asks for **<2 cm at
+  C=6**. SIM-P3 is therefore **not** a reproducing pipeline.
+
+  Every other required generation branch stays near-chance on
+  Fig. 4 and ~7 cm on Fig. 5/6 with no paper-like C-trend:
+  SIM-P1 (A/C zero-phase literal) C=6 7.16–7.55 cm; SIM-P2
+  (C, I_c=80) Fig. 4 only; SIM-P4 (C, I_c=100) C=6 7.11–7.56 cm;
+  SIM-P5 (D, norm-15% δ) C=6 7.14–7.66 cm; SIM-P6 (C, global γ)
+  C=6 7.14–7.59 cm; SIM-P7 (C, fixed loci) C=6 7.20–7.70 cm;
+  SIM-P8 (C, generate C=5) C=5 7.20–7.69 cm; SIM-R1 (D,
+  composite) C=6 7.21–7.65 cm.
+
+**Closest simulation-generation reading, not a winner:** SIM-P3
+causal `sosfilt`. The paper states a 6th-order 2 Hz Butterworth
+and does **not** say zero-phase; MATLAB `filter` is causal.
+Matched one-MC replay: zero-phase makes source RMS ~10³× larger
+and pattern–topo corr ≈0.07; causal `sosfilt` yields
+pattern–topo corr ≈0.98. That explains why SIM-P3 Fig. 4 is
+paper-like and SIM-P1 is not. It does **not** get Fig. 6 under
+2 cm, and it does not repair N170 / MEG timing / Fig. 18.
+
+There is therefore **no** single coherent external pipeline —
+A, B, C, or D — that reproduces N170 + MEG timing + Fig. 18 +
+Figs 4–6 together under the frozen AIRI-SPoC factory. Do not
+change ReDisCA. Do not start method ablations.
 
 ## 10. Remaining irreducible discrepancies or missing source information
 
-Interim list only. Several items may move after the missing runs.
+Closed list after the required matrix.
 
 - Face RDM corr 0.82 is **not** recovered from official
   `1_N170_erp_ar.erp` with Eq. 2 Pearson (got 0.95). Same mismatch as
@@ -693,18 +748,25 @@ Interim list only. Several items may move after the missing runs.
 - Meaning: two adjacent 25 ms windows, not three including 375 ms.
 - Paper text “three ICA components” vs official ERP CORE subject-1
   list **2 and 7** only.
-- MEG 65 ms face onset is not produced by the finished inferential
-  pieces under the fixed fit.
+- MEG 65 ms face onset is not produced by either AIRI indexing under
+  the fixed fit.
+- PAPER-1501 / 1500 face `n_sig=2` does not match “first three
+  statistically significant.”
+- Fig. 18 3-D MUSIC on the paper lowest-*p* input peaks occipital,
+  not rFG / insula / IPS, on the public OSF AD overlapping-spheres
+  Gain. Individual MRI is not public.
 - Simulation mesh, numeric I_c, fs, Υ_d law, 1/f construction,
   MNE/LCMV details, and Fig. 6 SNR are unspecified. `SIM-P1` is a
   frozen MEG-like reconstruction, not an exact paper recipe.
 - Paper-literal `σ_δ = 0.15‖g‖` with `Σ = σ²I` is destructive in
-  204-D. The **D** alternative is labeled and was **not** used to
-  overwrite the literal branch.
+  204-D. The **D** alternative was labeled and did **not** recover
+  Fig. 4 or Fig. 6.
 - Fig. 5 C=5 vs C=6 is a paper-internal conflict; both generation
-  stories are now instantiated.
-- Individual MRI for Fig. 18 is not public; the OSF AD
-  overlapping-spheres Gain was used.
+  stories were run. Neither yields paper Fig. 6. SIM-P3 (causal)
+  is the only Fig. 4-like branch and still misses &lt;2 cm at C=6.
+- Zero-phase vs causal Butterworth is the mechanism that separates
+  SIM-P1 (~7 cm) from SIM-P3 (~1 cm Fig. 4). The paper does not
+  say zero-phase.
 
 ## 11. Suspected core-library issue
 
@@ -736,6 +798,5 @@ SIM-P1 Fig. 4 / Fig. 5 SNR=0.4 seed 20240904 are not overwritten.
 
 ---
 
-Stage A continues on this branch until the required matrix exists.
-No method ablation has been started. No reproducing-pipeline verdict
-is offered in this revision.
+Stage A is complete on this branch. No method ablation has been
+started. Do not merge to `main`. Do not change ReDisCA.
