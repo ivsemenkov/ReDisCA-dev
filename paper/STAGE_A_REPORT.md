@@ -414,24 +414,25 @@ stable across the pre-registered seeds.
 Fig. 4 SNR=0.2 is now also complete on all five seeds:
 AUC 0.874–0.887, TPR@0.01 0.348–0.382, median loc. 0.61–0.80 cm.
 
-Figs 5–6 under the same causal generation: **two seeds finished**
-at both SNRs (20240904 and 20240905). Remaining three seeds are
-running.
+Figs 5–6 under the same causal generation: **three seeds finished**
+at both SNRs (20240904–20240906). Remaining two seeds are running.
 
 | SNR | Seed | C=3 | C=4 | C=5 | C=6 |
 | --- | --- | --- | --- | --- | --- |
 | 0.4 | 20240904 | 5.49 | 4.59 | 3.88 | **3.46 cm** |
 | 0.4 | 20240905 | 5.58 | 4.57 | 3.91 | **3.37 cm** |
+| 0.4 | 20240906 | 5.56 | 4.62 | 3.65 | **3.52 cm** |
 | 0.2 | 20240904 | 5.62 | 4.81 | 4.27 | **4.09 cm** |
 | 0.2 | 20240905 | 5.81 | 4.65 | 4.30 | **3.94 cm** |
+| 0.2 | 20240906 | 5.58 | 5.08 | 4.56 | **4.06 cm** |
 
-At SNR=0.4, C=6, frac&lt;1 cm is 0.28–0.29 and mean pattern corr
+At SNR=0.4, C=6, frac&lt;1 cm is 0.24–0.29 and mean pattern corr
 is ~0.29 (weights ~0). RDM corr is 0.95–1.00. Error **falls as C
-increases** on both seeds.
+increases** on all three seeds.
 
 Compared with SIM-P1 (~7.5 cm, no C trend, pattern ~0.17) this is
-better. Paper Fig. 6 asks for **< 2 cm at C=6**; two seeds are
-**3.37–3.46 cm** (SNR=0.4) and **3.94–4.09 cm** (SNR=0.2). Do not
+better. Paper Fig. 6 asks for **< 2 cm at C=6**; three seeds are
+**3.37–3.52 cm** (SNR=0.4) and **3.94–4.09 cm** (SNR=0.2). Do not
 treat this as a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
