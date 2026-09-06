@@ -361,11 +361,11 @@ increases. That is an interim observation, not a closed Stage A result.
 Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not produce the published ROC
 or &lt;2 cm Fig. 6 picture.
 
-**SIM-P2 (C, I_c=80), Fig. 4, n_mc=100, four seeds already finished
-(20240904–20240907 at SNR=0.2; 20240904–20240906 at SNR=0.1).**
-AUC stays 0.478–0.530; median localization 7.08–8.43 cm. Doubling
-I_c does not recover the paper ROC. Seeds 20240907 (SNR=0.1) and
-20240908 (both SNRs) are still running.
+**SIM-P2 (C, I_c=80), Fig. 4, all five seeds × both SNRs, n_mc=100
+(this branch now complete for Fig. 4).**
+AUC 0.478–0.530; median localization 7.08–8.43 cm. Doubling I_c
+does not recover the paper ROC on any registered seed. Fig. 5/6
+for SIM-P2 is not in the required verdict matrix.
 
 Second-seed Fig. 4 SNR=0.2 (n_mc=100) is in the same neighborhood:
 SIM-P1 AUC 0.487, median 6.72 cm; SIM-P5 AUC 0.495, median 7.00 cm;
