@@ -372,13 +372,18 @@ SIM-P1 AUC 0.487, median 6.72 cm; SIM-P5 AUC 0.495, median 7.00 cm;
 SIM-P2 seed 20240905 AUC 0.478, median 7.54 cm. The near-chance /
 ~7 cm picture is not a one-seed fluke under these reconstructions.
 
+**SIM-P6 (C, one global γ), Fig. 4, SNR=0.2, seed 20240904, n_mc=100
+(first finished file on this branch):**
+AUC 0.523, TPR@0.01 0.020, median **7.54 cm**. Switching from
+per-trial γ to one matrix-wide γ does **not**, by itself, recover
+the paper ROC on this seed. Remaining SIM-P6 seeds and SNRs are
+running. This is an interim observation, not a verdict.
+
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
-seeds, SIM-P2 last Fig. 4 jobs, all SIM-P3, and every review-added
-generation branch that has no finished file yet (SIM-P4 I_c=100,
-SIM-P6 global γ, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
-SIM-R1 composite). Those branches are required before the
-near-chance / ~7 cm observation can be generalized beyond the
-literal-covariance / per-trial-γ reconstructions already on disk.
+seeds, SIM-P2 last Fig. 4 jobs, all SIM-P3, SIM-P4 I_c=100,
+remaining SIM-P6, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
+and SIM-R1 composite. Those branches are required before the
+near-chance / ~7 cm observation can be generalized.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
