@@ -15561,6 +15561,56 @@
       "added_after_stage_a_review": false,
       "by_C": {
         "3": {
+          "frac_error_lt_1cm": 0.005012531328320802,
+          "mean_median_error_cm": 7.251390275926739,
+          "mean_pattern_corr": 0.19025147804715326,
+          "mean_rdm_corr": 0.32609363989959467,
+          "mean_weight_corr": 0.002244594936840133
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.246989446661452,
+          "mean_pattern_corr": 0.18753928435457887,
+          "mean_rdm_corr": 0.45239032953036257,
+          "mean_weight_corr": 0.0019186019614084316
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.260218737958732,
+          "mean_pattern_corr": 0.1804064806915681,
+          "mean_rdm_corr": 0.5158759834938035,
+          "mean_weight_corr": 0.002021186342945256
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.208360389593548,
+          "mean_pattern_corr": 0.1862671182837296,
+          "mean_rdm_corr": 0.5462602842889944,
+          "mean_weight_corr": 0.0015939932751040337
+        }
+      },
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P1/fig5_fig6_snr0.2_seed20240905.json",
+      "redisca_roc": null,
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": false,
+      "by_C": {
+        "3": {
           "frac_error_lt_1cm": 0.005,
           "mean_median_error_cm": 7.436986036796651,
           "mean_pattern_corr": 0.17358037967839357,
@@ -15874,6 +15924,31 @@
         "tpr_at_fpr_0.05": 0.04933481152993348
       },
       "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "candidate": "SIM-P4",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "i_c": 100,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 7.288572314750756,
+      "median_loc_error_cm": 7.366327709129277,
+      "n_mc": 100,
+      "path": "simulations/SIM-P4/fig4_snr0.2_seed20240904.json",
+      "redisca_roc": {
+        "auc": 0.5357011584173311,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0011940298507462687,
+        "tpr_at_fpr_0.01": 0.018507462686567163,
+        "tpr_at_fpr_0.05": 0.08776119402985075
+      },
+      "seed": 20240904,
       "snr": 0.2
     },
     {
@@ -16385,7 +16460,7 @@
       "mean_loc_error_cm": null,
       "median_loc_error_cm": null,
       "n_mc": null,
-      "path": "simulations/_locks/SIM-P4_fig4_snr0.2_seed20240904.lock/meta.json",
+      "path": "simulations/_locks/SIM-P4_fig4_snr0.1_seed20240904.lock/meta.json",
       "redisca_roc": null,
       "seed": null,
       "snr": null
@@ -17981,12 +18056,6 @@
         "candidate": "SIM-P4",
         "experiment": "fig4",
         "seed": 20240904,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P4",
-        "experiment": "fig4",
-        "seed": 20240904,
         "snr": 0.1
       },
       {
@@ -18071,12 +18140,6 @@
         "candidate": "SIM-P8",
         "experiment": "fig5_fig6",
         "seed": 20240904,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P1",
-        "experiment": "fig5_fig6",
-        "seed": 20240905,
         "snr": 0.2
       },
       {
@@ -18644,7 +18707,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 33,
+    "n_completed_sim_jobs": 35,
     "n_required_sim_jobs": 145,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,
