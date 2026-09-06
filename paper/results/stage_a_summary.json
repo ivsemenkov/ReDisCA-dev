@@ -15517,6 +15517,31 @@
       "candidate": "SIM-P1",
       "experiment": "fig4_single_source",
       "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 6.865045400272713,
+      "median_loc_error_cm": 6.457213437032662,
+      "n_mc": 100,
+      "path": "simulations/SIM-P1/fig4_snr0.1_seed20240908.json",
+      "redisca_roc": {
+        "auc": 0.48625348389080775,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0011337868480725624,
+        "tpr_at_fpr_0.01": 0.022675736961451247,
+        "tpr_at_fpr_0.05": 0.08163265306122448
+      },
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "added_after_stage_a_review": false,
+      "candidate": "SIM-P1",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
       "generation_modes": null,
       "mean_loc_error_cm": 7.447350974979267,
       "median_loc_error_cm": 7.366308583718697,
@@ -15605,6 +15630,31 @@
         "tpr_at_fpr_0.05": 0.04830917874396135
       },
       "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": false,
+      "candidate": "SIM-P1",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 7.136228345779,
+      "median_loc_error_cm": 6.954648067286486,
+      "n_mc": 100,
+      "path": "simulations/SIM-P1/fig4_snr0.2_seed20240908.json",
+      "redisca_roc": {
+        "auc": 0.5089611492514995,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0005543237250554324,
+        "tpr_at_fpr_0.01": 0.012195121951219513,
+        "tpr_at_fpr_0.05": 0.06208425720620843
+      },
+      "seed": 20240908,
       "snr": 0.2
     },
     {
@@ -15755,6 +15805,56 @@
       "path": "simulations/SIM-P1/fig5_fig6_snr0.2_seed20240906.json",
       "redisca_roc": null,
       "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": false,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.567512132542763,
+          "mean_pattern_corr": 0.17424973790962425,
+          "mean_rdm_corr": 0.30736871548516326,
+          "mean_weight_corr": 0.0032389960966966967
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.409162439930426,
+          "mean_pattern_corr": 0.18523930244289688,
+          "mean_rdm_corr": 0.4427840736025721,
+          "mean_weight_corr": 0.0022359235839571213
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.304870894255125,
+          "mean_pattern_corr": 0.17663352434011764,
+          "mean_rdm_corr": 0.5146040462971938,
+          "mean_weight_corr": 0.0014957915850720665
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.159430991622487,
+          "mean_pattern_corr": 0.17195037588797496,
+          "mean_rdm_corr": 0.5085896351111728,
+          "mean_weight_corr": 0.0015180250665951583
+        }
+      },
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P1/fig5_fig6_snr0.2_seed20240907.json",
+      "redisca_roc": null,
+      "seed": 20240907,
       "snr": 0.2
     },
     {
@@ -17255,6 +17355,106 @@
       "added_after_stage_a_review": true,
       "by_C": {
         "3": {
+          "frac_error_lt_1cm": 0.002506265664160401,
+          "mean_median_error_cm": 7.476444297502667,
+          "mean_pattern_corr": 0.17610184945737872,
+          "mean_rdm_corr": 0.41422314109039715,
+          "mean_weight_corr": 0.002650325456018548
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.353776877935101,
+          "mean_pattern_corr": 0.17898065956751466,
+          "mean_rdm_corr": 0.6298963259407973,
+          "mean_weight_corr": 0.0017130999615198122
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.4197792446192485,
+          "mean_pattern_corr": 0.17749786146333812,
+          "mean_rdm_corr": 0.6684927654983042,
+          "mean_weight_corr": 0.0006446211104294635
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.01,
+          "mean_median_error_cm": 7.274848195976821,
+          "mean_pattern_corr": 0.17929322701691444,
+          "mean_rdm_corr": 0.6887744072230768,
+          "mean_weight_corr": 0.001086129775574167
+        }
+      },
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P4/fig5_fig6_snr0.2_seed20240905.json",
+      "redisca_roc": null,
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.330801587193106,
+          "mean_pattern_corr": 0.17582716129327017,
+          "mean_rdm_corr": 0.4191652994735921,
+          "mean_weight_corr": 0.002323644943269703
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.293154350906809,
+          "mean_pattern_corr": 0.17731454796672683,
+          "mean_rdm_corr": 0.5961019855567643,
+          "mean_weight_corr": 0.001744273544907367
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.395838317553768,
+          "mean_pattern_corr": 0.17106380263999918,
+          "mean_rdm_corr": 0.6475607252228985,
+          "mean_weight_corr": 0.001450084052257611
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.259762711705681,
+          "mean_pattern_corr": 0.17049660895337135,
+          "mean_rdm_corr": 0.6664706754796179,
+          "mean_weight_corr": 0.0011178520821392213
+        }
+      },
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P4/fig5_fig6_snr0.2_seed20240906.json",
+      "redisca_roc": null,
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
           "frac_error_lt_1cm": 0.0025,
           "mean_median_error_cm": 7.786039311116977,
           "mean_pattern_corr": 0.17858219841341477,
@@ -17299,6 +17499,106 @@
       "path": "simulations/SIM-P4/fig5_fig6_snr0.4_seed20240904.json",
       "redisca_roc": null,
       "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.537638203186514,
+          "mean_pattern_corr": 0.17936805022349617,
+          "mean_rdm_corr": 0.6816795184997275,
+          "mean_weight_corr": 0.0020974531600200215
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.324808461912154,
+          "mean_pattern_corr": 0.1788970542265063,
+          "mean_rdm_corr": 0.7907756721180489,
+          "mean_weight_corr": 0.0007615463805683667
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.136870857901577,
+          "mean_pattern_corr": 0.18562493014282005,
+          "mean_rdm_corr": 0.8350460546894964,
+          "mean_weight_corr": 0.0010101358971948866
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.33842248574326,
+          "mean_pattern_corr": 0.17610722677920737,
+          "mean_rdm_corr": 0.8323859796875585,
+          "mean_weight_corr": 0.00104909674957898
+        }
+      },
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P4/fig5_fig6_snr0.4_seed20240905.json",
+      "redisca_roc": null,
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.14104422651944,
+          "mean_pattern_corr": 0.17578621450241566,
+          "mean_rdm_corr": 0.6066796577418418,
+          "mean_weight_corr": 0.0027414528110246885
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.177634994008639,
+          "mean_pattern_corr": 0.17269988413413523,
+          "mean_rdm_corr": 0.757191515563258,
+          "mean_weight_corr": 0.0013405465644268776
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.303706274898873,
+          "mean_pattern_corr": 0.1626627899321952,
+          "mean_rdm_corr": 0.7928308329283316,
+          "mean_weight_corr": 0.0007603587311396543
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.325315970434526,
+          "mean_pattern_corr": 0.17563341907847238,
+          "mean_rdm_corr": 0.8021757205923492,
+          "mean_weight_corr": 0.0007626905362238888
+        }
+      },
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P4/fig5_fig6_snr0.4_seed20240906.json",
+      "redisca_roc": null,
+      "seed": 20240906,
       "snr": 0.4
     },
     {
@@ -17503,6 +17803,31 @@
     },
     {
       "added_after_stage_a_review": true,
+      "candidate": "SIM-P5",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": 7.344542195270546,
+      "median_loc_error_cm": 7.1809192124599885,
+      "n_mc": 100,
+      "path": "simulations/SIM-P5/fig4_snr0.2_seed20240908.json",
+      "redisca_roc": {
+        "auc": 0.5224888259718997,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0,
+        "tpr_at_fpr_0.01": 0.010532150776053215,
+        "tpr_at_fpr_0.05": 0.0598669623059867
+      },
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
       "by_C": {
         "3": {
           "frac_error_lt_1cm": 0.0,
@@ -17649,6 +17974,56 @@
       "path": "simulations/SIM-P5/fig5_fig6_snr0.2_seed20240906.json",
       "redisca_roc": null,
       "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.574660073675437,
+          "mean_pattern_corr": 0.17238679475480562,
+          "mean_rdm_corr": 0.4015631630562267,
+          "mean_weight_corr": 0.00327664026507144
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.364508197098778,
+          "mean_pattern_corr": 0.18293455058594488,
+          "mean_rdm_corr": 0.4039910213899877,
+          "mean_weight_corr": 0.0024580956974334773
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.3344320883061265,
+          "mean_pattern_corr": 0.1743873442345537,
+          "mean_rdm_corr": 0.3979917545257649,
+          "mean_weight_corr": 0.0019971278223961373
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.161811026251582,
+          "mean_pattern_corr": 0.1717753523254921,
+          "mean_rdm_corr": 0.3457581169115557,
+          "mean_weight_corr": 0.001839414422178382
+        }
+      },
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P5/fig5_fig6_snr0.2_seed20240907.json",
+      "redisca_roc": null,
+      "seed": 20240907,
       "snr": 0.2
     },
     {
@@ -18949,6 +19324,31 @@
         "tpr_at_fpr_0.05": 0.07692307692307693
       },
       "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "added_after_stage_a_review": true,
+      "candidate": "SIM-R1",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "i_c": 100,
+        "noise_loci_mode": "fixed",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": 6.902523573444094,
+      "median_loc_error_cm": 7.2185497228099536,
+      "n_mc": 100,
+      "path": "simulations/SIM-R1/fig4_snr0.1_seed20240908.json",
+      "redisca_roc": {
+        "auc": 0.5138834324788345,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0,
+        "tpr_at_fpr_0.01": 0.005668934240362812,
+        "tpr_at_fpr_0.05": 0.05555555555555555
+      },
+      "seed": 20240908,
       "snr": 0.1
     },
     {
@@ -20694,18 +21094,6 @@
         "snr": 0.2
       },
       {
-        "candidate": "SIM-P4",
-        "experiment": "fig5_fig6",
-        "seed": 20240905,
-        "snr": 0.4
-      },
-      {
-        "candidate": "SIM-P4",
-        "experiment": "fig5_fig6",
-        "seed": 20240905,
-        "snr": 0.2
-      },
-      {
         "candidate": "SIM-P7",
         "experiment": "fig5_fig6",
         "seed": 20240905,
@@ -20742,18 +21130,6 @@
         "snr": 0.2
       },
       {
-        "candidate": "SIM-P4",
-        "experiment": "fig5_fig6",
-        "seed": 20240906,
-        "snr": 0.4
-      },
-      {
-        "candidate": "SIM-P4",
-        "experiment": "fig5_fig6",
-        "seed": 20240906,
-        "snr": 0.2
-      },
-      {
         "candidate": "SIM-P7",
         "experiment": "fig5_fig6",
         "seed": 20240906,
@@ -20787,12 +21163,6 @@
         "candidate": "SIM-P8",
         "experiment": "fig5_fig6",
         "seed": 20240906,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P1",
-        "experiment": "fig5_fig6",
-        "seed": 20240907,
         "snr": 0.2
       },
       {
@@ -20803,12 +21173,6 @@
       },
       {
         "candidate": "SIM-P4",
-        "experiment": "fig5_fig6",
-        "seed": 20240907,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P5",
         "experiment": "fig5_fig6",
         "seed": 20240907,
         "snr": 0.2
@@ -20851,18 +21215,6 @@
       },
       {
         "candidate": "SIM-P1",
-        "experiment": "fig4",
-        "seed": 20240908,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P1",
-        "experiment": "fig4",
-        "seed": 20240908,
-        "snr": 0.1
-      },
-      {
-        "candidate": "SIM-P1",
         "experiment": "fig5_fig6",
         "seed": 20240908,
         "snr": 0.4
@@ -20882,12 +21234,6 @@
       {
         "candidate": "SIM-P4",
         "experiment": "fig5_fig6",
-        "seed": 20240908,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P5",
-        "experiment": "fig4",
         "seed": 20240908,
         "snr": 0.2
       },
@@ -20920,12 +21266,6 @@
         "experiment": "fig5_fig6",
         "seed": 20240908,
         "snr": 0.2
-      },
-      {
-        "candidate": "SIM-R1",
-        "experiment": "fig4",
-        "seed": 20240908,
-        "snr": 0.1
       },
       {
         "candidate": "SIM-R1",
@@ -20952,7 +21292,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 111,
+    "n_completed_sim_jobs": 121,
     "n_required_sim_jobs": 160,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,
