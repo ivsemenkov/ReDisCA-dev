@@ -18006,6 +18006,56 @@
       "by_C": {
         "3": {
           "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.193102566587581,
+          "mean_pattern_corr": 0.1783895335687521,
+          "mean_rdm_corr": 0.28935995865077824,
+          "mean_weight_corr": 0.0022511489115925078
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.076040348189332,
+          "mean_pattern_corr": 0.18972425836513584,
+          "mean_rdm_corr": 0.39742820980834254,
+          "mean_weight_corr": 0.0019213999759979947
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0075,
+          "mean_median_error_cm": 7.041980590686263,
+          "mean_pattern_corr": 0.18985264172978614,
+          "mean_rdm_corr": 0.4920834340086822,
+          "mean_weight_corr": 0.0020718272855123716
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.4378682450394225,
+          "mean_pattern_corr": 0.17917444097748145,
+          "mean_rdm_corr": 0.514861450366422,
+          "mean_weight_corr": 0.0018106609905260162
+        }
+      },
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P6/fig5_fig6_snr0.2_seed20240906.json",
+      "redisca_roc": null,
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.005,
           "mean_median_error_cm": 7.475983538535815,
           "mean_pattern_corr": 0.1742491607237944,
           "mean_rdm_corr": 0.4537325122473642,
@@ -18149,6 +18199,56 @@
       "path": "simulations/SIM-P6/fig5_fig6_snr0.4_seed20240906.json",
       "redisca_roc": null,
       "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.002506265664160401,
+          "mean_median_error_cm": 7.282848409782329,
+          "mean_pattern_corr": 0.19624121047334384,
+          "mean_rdm_corr": 0.44533483932796236,
+          "mean_weight_corr": 0.0028394446918154066
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.245856615937837,
+          "mean_pattern_corr": 0.19083030438112775,
+          "mean_rdm_corr": 0.6135554240528449,
+          "mean_weight_corr": 0.001651527081889373
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.42980526505264,
+          "mean_pattern_corr": 0.1840336478441445,
+          "mean_rdm_corr": 0.700769509556733,
+          "mean_weight_corr": 0.0010165633002602772
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.254619536612339,
+          "mean_pattern_corr": 0.18159314643846564,
+          "mean_rdm_corr": 0.7358380780075698,
+          "mean_weight_corr": 0.001296099547422052
+        }
+      },
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "literal_covariance",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P6/fig5_fig6_snr0.4_seed20240907.json",
+      "redisca_roc": null,
+      "seed": 20240907,
       "snr": 0.4
     },
     {
@@ -18499,6 +18599,31 @@
         "tpr_at_fpr_0.05": 0.0462085308056872
       },
       "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "candidate": "SIM-R1",
+      "experiment": "fig4_single_source",
+      "generated_C": null,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "i_c": 100,
+        "noise_loci_mode": "fixed",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": 7.271571360415352,
+      "median_loc_error_cm": 7.421729862044841,
+      "n_mc": 100,
+      "path": "simulations/SIM-R1/fig4_snr0.2_seed20240906.json",
+      "redisca_roc": {
+        "auc": 0.5465338169924605,
+        "tpr_at_fpr_0": 0.0,
+        "tpr_at_fpr_0.001": 0.0,
+        "tpr_at_fpr_0.01": 0.022530329289428077,
+        "tpr_at_fpr_0.05": 0.09127671865973426
+      },
+      "seed": 20240906,
       "snr": 0.2
     }
   ],
@@ -20191,12 +20316,6 @@
         "snr": 0.2
       },
       {
-        "candidate": "SIM-P6",
-        "experiment": "fig5_fig6",
-        "seed": 20240906,
-        "snr": 0.2
-      },
-      {
         "candidate": "SIM-P7",
         "experiment": "fig5_fig6",
         "seed": 20240906,
@@ -20205,12 +20324,6 @@
       {
         "candidate": "SIM-P7",
         "experiment": "fig5_fig6",
-        "seed": 20240906,
-        "snr": 0.2
-      },
-      {
-        "candidate": "SIM-R1",
-        "experiment": "fig4",
         "seed": 20240906,
         "snr": 0.2
       },
@@ -20279,12 +20392,6 @@
         "experiment": "fig5_fig6",
         "seed": 20240907,
         "snr": 0.2
-      },
-      {
-        "candidate": "SIM-P6",
-        "experiment": "fig5_fig6",
-        "seed": 20240907,
-        "snr": 0.4
       },
       {
         "candidate": "SIM-P6",
@@ -20461,7 +20568,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 97,
+    "n_completed_sim_jobs": 100,
     "n_required_sim_jobs": 160,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,
