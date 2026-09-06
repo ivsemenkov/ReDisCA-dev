@@ -373,7 +373,53 @@ def write_summary() -> Path:
     }
     dest = RESULTS_ROOT / "stage_a_summary.json"
     write_json(dest, payload)
+    _refresh_coverage(payload["stage_a_status"], sims)
     return dest
+
+
+def _refresh_coverage(completeness: dict[str, Any], sim_rows: list[dict[str, Any]]) -> Path:
+    """Update coverage.json from disk without inventing a final verdict."""
+    path = RESULTS_ROOT / "coverage.json"
+    cov = read_json(path) if path.exists() else {}
+    cov["status"] = completeness["status"]
+    cov["final_verdict_allowed"] = completeness["final_verdict_allowed"]
+    cov["complete_sim"] = completeness["n_completed_sim_jobs"]
+    cov["required_sim"] = completeness["n_required_sim_jobs"]
+    cov["missing_sim"] = completeness["missing_simulations"]
+    tracks = cov.setdefault("tracks", {})
+    sims = tracks.setdefault("simulations", {})
+    sims["status"] = "complete" if completeness["stage_a_complete"] else "incomplete"
+    sims["n_completed"] = completeness["n_completed_sim_jobs"]
+    sims["n_required"] = completeness["n_required_sim_jobs"]
+    completed = []
+    for row in sim_rows:
+        exp = row.get("experiment") or ""
+        kind = "fig4" if exp.startswith("fig4") else ("fig5/fig6" if exp.startswith("fig5") else exp)
+        roc = row.get("redisca_roc") or {}
+        extra = ""
+        if roc.get("auc") is not None:
+            extra = f" AUC={roc['auc']:.3f}"
+        med = row.get("median_loc_error_cm")
+        if med is None and row.get("by_C"):
+            meds = [
+                block.get("mean_median_error_cm")
+                for block in row["by_C"].values()
+                if block.get("mean_median_error_cm") is not None
+            ]
+            med = float(sum(meds) / len(meds)) if meds else None
+        if med is not None:
+            extra += f", median {med:.2f} cm"
+        completed.append(
+            f"{row.get('candidate')} {kind} SNR={row.get('snr')} seed {row.get('seed')} "
+            f"n_mc={row.get('n_mc')}{extra}"
+        )
+    sims["completed"] = completed
+    sims["not_finished"] = [
+        f"{m['candidate']} {m['experiment']} SNR={m['snr']} seed {m['seed']}"
+        for m in completeness["missing_simulations"]
+    ]
+    write_json(path, cov)
+    return path
 
 
 if __name__ == "__main__":

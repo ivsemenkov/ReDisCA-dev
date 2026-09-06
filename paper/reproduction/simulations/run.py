@@ -121,6 +121,11 @@ def run_fig4(
     realization_records = []
     example = None
     for mc in range(config.n_mc):
+        if mc == 0 or (mc + 1) % 10 == 0 or mc + 1 == config.n_mc:
+            print(
+                f"[{candidate_id} fig4 SNR={snr} seed={seed}] mc={mc + 1}/{config.n_mc}",
+                flush=True,
+            )
         rng, child_seed, _ = spawned_generator(seed, "fig4", int(round(snr * 1000)), mc)
         draw = simulate_single_source(forward, rng, mixing, config=config, snr=snr)
         try:
@@ -241,6 +246,11 @@ def run_fig5_fig6(
     mixings = mix_rng.standard_normal((4, n_gen, n_gen))
     by_c: dict[int, list[dict[str, Any]]] = {c: [] for c in eval_conditions}
     for mc in range(config.n_mc):
+        if mc == 0 or (mc + 1) % 10 == 0 or mc + 1 == config.n_mc:
+            print(
+                f"[{candidate_id} fig5 SNR={snr} seed={seed}] mc={mc + 1}/{config.n_mc}",
+                flush=True,
+            )
         rng, child_seed, _ = spawned_generator(seed, "fig5", int(round(snr * 1000)), mc)
         draw = simulate_multi_source(
             forward, rng, mixings, config=config, snr=snr, n_conditions=n_gen
@@ -393,6 +403,7 @@ def run_candidate(
     include_rsa: bool = True,
     experiments: tuple[str, ...] = ("fig4", "fig5"),
     skip_existing: bool = True,
+    snrs: tuple[float, ...] | None = None,
 ) -> dict[str, Any]:
     config = QUICK_CONFIG if quick else config_for_candidate(candidate_id)
     written = []
@@ -412,6 +423,10 @@ def run_candidate(
     if candidate_id == "SIM-P3":
         fig4_snrs = (PAPER_SNR_FIG4_LOW,)
     fig5_snrs = (PAPER_SNR_FIG5_HIGH, PAPER_SNR_FIG5_LOW)
+    if snrs is not None:
+        allowed = {float(s) for s in snrs}
+        fig4_snrs = tuple(s for s in fig4_snrs if float(s) in allowed)
+        fig5_snrs = tuple(s for s in fig5_snrs if float(s) in allowed)
     for seed in seeds:
         if run_fig4_exps:
             for snr in fig4_snrs:
@@ -463,6 +478,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--quick", action="store_true", help="NON-REPRODUCTION: reduced MC/I_c")
     parser.add_argument("--no-rsa", action="store_true")
     parser.add_argument("--experiments", nargs="*", default=["fig4", "fig5"], choices=["fig4", "fig5"])
+    parser.add_argument("--snr", nargs="*", type=float, default=None)
     parser.add_argument("--no-skip-existing", action="store_true")
     args = parser.parse_args(argv)
     if args.quick:
@@ -474,6 +490,7 @@ def main(argv: list[str] | None = None) -> int:
         include_rsa=not args.no_rsa,
         experiments=tuple(args.experiments),
         skip_existing=not args.no_skip_existing,
+        snrs=tuple(args.snr) if args.snr else None,
     )
     print(result)
     return 0

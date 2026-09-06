@@ -83,7 +83,7 @@ gitignored `.reproduction_data/`.
 
 ```text
 python -m paper.reproduction test
-137 passed
+141 passed
 ```
 
 Historical
@@ -361,18 +361,24 @@ increases. That is an interim observation, not a closed Stage A result.
 Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not produce the published ROC
 or &lt;2 cm Fig. 6 picture.
 
-**SIM-P2 (C, I_c=80), Fig. 4, seed 20240904, n_mc=100:**
-AUC 0.519 / 0.524, TPR@0.01 0.009 / 0.017, median 8.21 cm / 7.09 cm
-at SNR 0.2 / 0.1. Doubling I_c does not recover the paper ROC.
+**SIM-P2 (C, I_c=80), Fig. 4, n_mc=100, four seeds already finished
+(20240904–20240907 at SNR=0.2; 20240904–20240906 at SNR=0.1).**
+AUC stays 0.478–0.530; median localization 7.08–8.43 cm. Doubling
+I_c does not recover the paper ROC. Seeds 20240907 (SNR=0.1) and
+20240908 (both SNRs) are still running.
 
 Second-seed Fig. 4 SNR=0.2 (n_mc=100) is in the same neighborhood:
 SIM-P1 AUC 0.487, median 6.72 cm; SIM-P5 AUC 0.495, median 7.00 cm;
 SIM-P2 seed 20240905 AUC 0.478, median 7.54 cm. The near-chance /
 ~7 cm picture is not a one-seed fluke under these reconstructions.
 
-Fig. 5 remaining seeds, SIM-P3, SIM-P4, SIM-P6…P8, and SIM-R1 are
-still running. Global-γ, fixed-loci, I_c=100, C=5-from-scratch, and
-the SIM-R1 composite have not yet produced a finished n_mc=100 file.
+**Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
+seeds, SIM-P2 last Fig. 4 jobs, all SIM-P3, and every review-added
+generation branch that has no finished file yet (SIM-P4 I_c=100,
+SIM-P6 global γ, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
+SIM-R1 composite). Those branches are required before the
+near-chance / ~7 cm observation can be generalized beyond the
+literal-covariance / per-trial-γ reconstructions already on disk.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
@@ -483,6 +489,8 @@ python -m paper.reproduction.simulations.run --candidate SIM-P2
 python -m paper.reproduction.simulations.run --candidate SIM-P3
 python -m paper.reproduction.simulations.run --candidate SIM-P4
 # … SIM-P5 SIM-P6 SIM-P7 SIM-P8 SIM-R1
+# missing required jobs, Fig. 4 first, file-locked:
+python -m paper.reproduction.simulations.queue --prefer fig4
 ```
 
 `--quick` is **non-reproduction**. Do not report reduced MC/B output as

@@ -1,93 +1,1015 @@
 {
-  "stage": "A",
-  "working_branch": "cursor/stage-a-reproduction-093e",
-  "status": "Stage A incomplete / no final verdict yet",
+  "complete_sim": 20,
   "final_verdict_allowed": false,
-  "note": "Inventory of what was actually executed. QUICK_NONREPRO leftovers are not reproduction results. Review-added candidates are in paper/reproduction_manifest_addendum.json and were not in the original freeze.",
-  "narrative_report": "paper/STAGE_A_REPORT.md",
-  "original_manifest": "paper/reproduction_manifest.json",
-  "review_addendum": "paper/reproduction_manifest_addendum.json",
   "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
-  "redisca_src_unchanged_from_main": true,
-  "method": "AIRI_SPOC via paper.reproduction.common.method.make_redisca",
-  "master_seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
+  "master_seeds": [
+    20240904,
+    20240905,
+    20240906,
+    20240907,
+    20240908
+  ],
   "meg_three_components": {
-    "paper_quote": "we considered only the first three statistically significant ReDisCA components",
+    "do_not_penalize_airi_for_fourth_or_fifth_significant": true,
     "n_sig_ge_3_is_compatible": true,
-    "do_not_penalize_airi_for_fourth_or_fifth_significant": true
+    "paper_quote": "we considered only the first three statistically significant ReDisCA components"
   },
+  "method": "AIRI_SPOC via paper.reproduction.common.method.make_redisca",
+  "missing_sim": [
+    {
+      "candidate": "SIM-P3",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240904,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P3",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240905,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240905,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P3",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240906,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240906,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P2",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P3",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240907,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240907,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P1",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P2",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P2",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P3",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P4",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P6",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P7",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig4",
+      "seed": 20240908,
+      "snr": 0.1
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.4
+    },
+    {
+      "candidate": "SIM-P8",
+      "experiment": "fig5_fig6",
+      "seed": 20240908,
+      "snr": 0.2
+    }
+  ],
+  "narrative_report": "paper/STAGE_A_REPORT.md",
+  "note": "Inventory of what was actually executed. QUICK_NONREPRO leftovers are not reproduction results. Review-added candidates are in paper/reproduction_manifest_addendum.json and were not in the original freeze.",
+  "original_manifest": "paper/reproduction_manifest.json",
+  "redisca_src_unchanged_from_main": true,
+  "required_sim": 145,
+  "review_addendum": "paper/reproduction_manifest_addendum.json",
+  "stage": "A",
+  "status": "Stage A incomplete / no final verdict yet",
   "tracks": {
-    "validation": {
-      "status": "complete",
-      "matlab": false,
-      "oracle": "paper/reproduction/validation/oracle.py independent AIRI/SPoC formula check"
-    },
-    "n170": {
-      "status": "complete_full_B1000",
-      "candidates": ["N170-UNFILT", "N170-LP20"],
-      "seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
-      "B": 1000
-    },
     "meg_component_inference": {
-      "status": "complete_full_B1000",
-      "candidates": ["MEG-AIRI", "MEG-PAPER-1501", "MEG-PAPER-1500"],
-      "seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
       "B": 1000,
-      "note": "seed*.json temporal_airi is corrected-pooled indexing, not literal AIRI MATLAB"
+      "candidates": [
+        "MEG-AIRI",
+        "MEG-PAPER-1501",
+        "MEG-PAPER-1500"
+      ],
+      "note": "seed*.json temporal_airi is corrected-pooled indexing, not literal AIRI MATLAB",
+      "seeds": [
+        20240904,
+        20240905,
+        20240906,
+        20240907,
+        20240908
+      ],
+      "status": "complete_full_B1000"
     },
     "meg_temporal_airi_dual_indexing": {
-      "status": "complete_Nmc100_five_seeds",
-      "candidates": ["AIRI-LITERAL-INDEXING", "AIRI-CORRECTED-POOLED"],
-      "added_after_stage_a_review": true,
       "Nmc": 100,
-      "seeds": [20240904, 20240905, 20240906, 20240907, 20240908],
-      "files": "paper/results/meg/*/temporal_airi_seed*.json"
+      "added_after_stage_a_review": true,
+      "candidates": [
+        "AIRI-LITERAL-INDEXING",
+        "AIRI-CORRECTED-POOLED"
+      ],
+      "files": "paper/results/meg/*/temporal_airi_seed*.json",
+      "seeds": [
+        20240904,
+        20240905,
+        20240906,
+        20240907,
+        20240908
+      ],
+      "status": "complete_Nmc100_five_seeds"
+    },
+    "n170": {
+      "B": 1000,
+      "candidates": [
+        "N170-UNFILT",
+        "N170-LP20"
+      ],
+      "seeds": [
+        20240904,
+        20240905,
+        20240906,
+        20240907,
+        20240908
+      ],
+      "status": "complete_full_B1000"
     },
     "simulations": {
-      "status": "incomplete",
-      "original_candidates": ["SIM-P1", "SIM-P2", "SIM-P3"],
-      "review_added_candidates": ["SIM-P4", "SIM-P5", "SIM-P6", "SIM-P7", "SIM-P8", "SIM-R1"],
       "completed": [
-        "SIM-P1 fig4 SNR=0.2 seed 20240904 n_mc=100",
-        "SIM-P1 fig4 SNR=0.1 seed 20240904 n_mc=100",
-        "SIM-P1 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100",
-        "SIM-P1 fig5/fig6 SNR=0.2 seed 20240904 n_mc=100 (median 7.2–7.4 cm; 1 uninformative skip at C=3)",
-        "SIM-P5 fig4 SNR=0.2 seed 20240904 n_mc=100 (norm_15pct; AUC 0.519, median 7.08 cm)",
-        "SIM-P5 fig4 SNR=0.1 seed 20240904 n_mc=100 (norm_15pct; AUC 0.519, median 7.90 cm)",
-        "SIM-P5 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100 (median 7.4–7.6 cm)",
-        "SIM-P2 fig4 SNR=0.2 seed 20240904 n_mc=100 (I_c=80; AUC 0.519, median 8.21 cm)",
-        "SIM-P2 fig4 SNR=0.1 seed 20240904 n_mc=100 (I_c=80; AUC 0.524, median 7.09 cm)",
-        "SIM-P1 fig4 SNR=0.2 seed 20240905 n_mc=100 (AUC 0.487, median 6.72 cm)",
-        "SIM-P1 fig4 SNR=0.1 seed 20240905 n_mc=100 (AUC 0.523, median 6.44 cm)",
-        "SIM-P5 fig4 SNR=0.2 seed 20240905 n_mc=100 (AUC 0.495, median 7.00 cm)",
-        "SIM-P5 fig4 SNR=0.1 seed 20240905 n_mc=100 (AUC 0.532, median 6.23 cm)",
-        "SIM-P5 fig5/fig6 SNR=0.2 seed 20240904 n_mc=100",
-        "SIM-P2 fig4 SNR=0.2 seed 20240905 n_mc=100 (AUC 0.478, median 7.54 cm)",
-        "SIM-P2 fig4 SNR=0.1 seed 20240905 n_mc=100 (AUC 0.517, median 7.08 cm)",
-        "SIM-P2 fig4 SNR=0.2 seed 20240906 n_mc=100 (AUC 0.506, median 7.14 cm)"
+        "SIM-P1 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.522, median 7.91 cm",
+        "SIM-P1 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.523, median 6.44 cm",
+        "SIM-P1 fig4 SNR=0.2 seed 20240904 n_mc=100 AUC=0.527, median 7.37 cm",
+        "SIM-P1 fig4 SNR=0.2 seed 20240905 n_mc=100 AUC=0.487, median 6.72 cm",
+        "SIM-P1 fig5/fig6 SNR=0.2 seed 20240904 n_mc=100, median 7.29 cm",
+        "SIM-P1 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.48 cm",
+        "SIM-P1 fig5/fig6 SNR=0.4 seed 20240905 n_mc=100, median 7.34 cm",
+        "SIM-P2 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.524, median 7.09 cm",
+        "SIM-P2 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.517, median 7.08 cm",
+        "SIM-P2 fig4 SNR=0.1 seed 20240906 n_mc=100 AUC=0.530, median 8.43 cm",
+        "SIM-P2 fig4 SNR=0.2 seed 20240904 n_mc=100 AUC=0.519, median 8.21 cm",
+        "SIM-P2 fig4 SNR=0.2 seed 20240905 n_mc=100 AUC=0.478, median 7.54 cm",
+        "SIM-P2 fig4 SNR=0.2 seed 20240906 n_mc=100 AUC=0.506, median 7.14 cm",
+        "SIM-P2 fig4 SNR=0.2 seed 20240907 n_mc=100 AUC=0.502, median 7.28 cm",
+        "SIM-P5 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.519, median 7.90 cm",
+        "SIM-P5 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.532, median 6.23 cm",
+        "SIM-P5 fig4 SNR=0.2 seed 20240904 n_mc=100 AUC=0.519, median 7.08 cm",
+        "SIM-P5 fig4 SNR=0.2 seed 20240905 n_mc=100 AUC=0.495, median 7.00 cm",
+        "SIM-P5 fig5/fig6 SNR=0.2 seed 20240904 n_mc=100, median 7.32 cm",
+        "SIM-P5 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.49 cm"
       ],
+      "n_completed": 20,
+      "n_required": 145,
       "not_finished": [
-        "SIM-P1 remaining seeds 20240905–20240908 (fig4+fig5, both SNRs; no RSA)",
-        "SIM-P1 remaining seeds 20240905–20240908 both SNRs",
-        "SIM-P2 remaining fig4 seeds and fig5/6",
-        "SIM-P3 fig4 SNR=0.1 all seeds",
-        "SIM-P4 I_c=100 all required jobs",
-        "SIM-P5 norm_15pct delta all required jobs",
-        "SIM-P6 global gamma all required jobs",
-        "SIM-P7 fixed noise loci all required jobs",
-        "SIM-P8 C=5-generated fig5/6 all seeds",
-        "SIM-R1 composite all required jobs"
-      ]
+        "SIM-P3 fig4 SNR=0.1 seed 20240904",
+        "SIM-P4 fig4 SNR=0.2 seed 20240904",
+        "SIM-P4 fig4 SNR=0.1 seed 20240904",
+        "SIM-P4 fig5_fig6 SNR=0.4 seed 20240904",
+        "SIM-P4 fig5_fig6 SNR=0.2 seed 20240904",
+        "SIM-P6 fig4 SNR=0.2 seed 20240904",
+        "SIM-P6 fig4 SNR=0.1 seed 20240904",
+        "SIM-P6 fig5_fig6 SNR=0.4 seed 20240904",
+        "SIM-P6 fig5_fig6 SNR=0.2 seed 20240904",
+        "SIM-P7 fig4 SNR=0.2 seed 20240904",
+        "SIM-P7 fig4 SNR=0.1 seed 20240904",
+        "SIM-P7 fig5_fig6 SNR=0.4 seed 20240904",
+        "SIM-P7 fig5_fig6 SNR=0.2 seed 20240904",
+        "SIM-R1 fig4 SNR=0.2 seed 20240904",
+        "SIM-R1 fig4 SNR=0.1 seed 20240904",
+        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240904",
+        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240904",
+        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240904",
+        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240904",
+        "SIM-P1 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P3 fig4 SNR=0.1 seed 20240905",
+        "SIM-P4 fig4 SNR=0.2 seed 20240905",
+        "SIM-P4 fig4 SNR=0.1 seed 20240905",
+        "SIM-P4 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-P4 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P5 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-P5 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P6 fig4 SNR=0.2 seed 20240905",
+        "SIM-P6 fig4 SNR=0.1 seed 20240905",
+        "SIM-P6 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-P6 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P7 fig4 SNR=0.2 seed 20240905",
+        "SIM-P7 fig4 SNR=0.1 seed 20240905",
+        "SIM-P7 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-P7 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-R1 fig4 SNR=0.2 seed 20240905",
+        "SIM-R1 fig4 SNR=0.1 seed 20240905",
+        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240905",
+        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240905",
+        "SIM-P1 fig4 SNR=0.2 seed 20240906",
+        "SIM-P1 fig4 SNR=0.1 seed 20240906",
+        "SIM-P1 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P1 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P3 fig4 SNR=0.1 seed 20240906",
+        "SIM-P4 fig4 SNR=0.2 seed 20240906",
+        "SIM-P4 fig4 SNR=0.1 seed 20240906",
+        "SIM-P4 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P4 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P5 fig4 SNR=0.2 seed 20240906",
+        "SIM-P5 fig4 SNR=0.1 seed 20240906",
+        "SIM-P5 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P5 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P6 fig4 SNR=0.2 seed 20240906",
+        "SIM-P6 fig4 SNR=0.1 seed 20240906",
+        "SIM-P6 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P6 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P7 fig4 SNR=0.2 seed 20240906",
+        "SIM-P7 fig4 SNR=0.1 seed 20240906",
+        "SIM-P7 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P7 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-R1 fig4 SNR=0.2 seed 20240906",
+        "SIM-R1 fig4 SNR=0.1 seed 20240906",
+        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240906",
+        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240906",
+        "SIM-P1 fig4 SNR=0.2 seed 20240907",
+        "SIM-P1 fig4 SNR=0.1 seed 20240907",
+        "SIM-P1 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P1 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P2 fig4 SNR=0.1 seed 20240907",
+        "SIM-P3 fig4 SNR=0.1 seed 20240907",
+        "SIM-P4 fig4 SNR=0.2 seed 20240907",
+        "SIM-P4 fig4 SNR=0.1 seed 20240907",
+        "SIM-P4 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P4 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P5 fig4 SNR=0.2 seed 20240907",
+        "SIM-P5 fig4 SNR=0.1 seed 20240907",
+        "SIM-P5 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P5 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P6 fig4 SNR=0.2 seed 20240907",
+        "SIM-P6 fig4 SNR=0.1 seed 20240907",
+        "SIM-P6 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P6 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P7 fig4 SNR=0.2 seed 20240907",
+        "SIM-P7 fig4 SNR=0.1 seed 20240907",
+        "SIM-P7 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P7 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-R1 fig4 SNR=0.2 seed 20240907",
+        "SIM-R1 fig4 SNR=0.1 seed 20240907",
+        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240907",
+        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240907",
+        "SIM-P1 fig4 SNR=0.2 seed 20240908",
+        "SIM-P1 fig4 SNR=0.1 seed 20240908",
+        "SIM-P1 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P1 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-P2 fig4 SNR=0.2 seed 20240908",
+        "SIM-P2 fig4 SNR=0.1 seed 20240908",
+        "SIM-P3 fig4 SNR=0.1 seed 20240908",
+        "SIM-P4 fig4 SNR=0.2 seed 20240908",
+        "SIM-P4 fig4 SNR=0.1 seed 20240908",
+        "SIM-P4 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P4 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-P5 fig4 SNR=0.2 seed 20240908",
+        "SIM-P5 fig4 SNR=0.1 seed 20240908",
+        "SIM-P5 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P5 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-P6 fig4 SNR=0.2 seed 20240908",
+        "SIM-P6 fig4 SNR=0.1 seed 20240908",
+        "SIM-P6 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P6 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-P7 fig4 SNR=0.2 seed 20240908",
+        "SIM-P7 fig4 SNR=0.1 seed 20240908",
+        "SIM-P7 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P7 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-R1 fig4 SNR=0.2 seed 20240908",
+        "SIM-R1 fig4 SNR=0.1 seed 20240908",
+        "SIM-R1 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-R1 fig5_fig6 SNR=0.2 seed 20240908",
+        "SIM-P8 fig5_fig6 SNR=0.4 seed 20240908",
+        "SIM-P8 fig5_fig6 SNR=0.2 seed 20240908"
+      ],
+      "original_candidates": [
+        "SIM-P1",
+        "SIM-P2",
+        "SIM-P3"
+      ],
+      "review_added_candidates": [
+        "SIM-P4",
+        "SIM-P5",
+        "SIM-P6",
+        "SIM-P7",
+        "SIM-P8",
+        "SIM-R1"
+      ],
+      "status": "incomplete"
     },
     "source_localization": {
-      "status": "fig18_lowestp_complete_five_seeds",
       "completed_but_not_paper_fig18_input": [
         "fig18_seed20240904.json p<0.05 2-D MUSIC"
       ],
       "completed_paper_path": [
         "FIG18-MUSIC-LOWESTP 3-D, MEG-PAPER-1501 and MEG-AIRI, five seeds; selection [0,1,2] and patterns deterministic"
       ],
-      "other": ["AIRI-PRECOMP-SLORETA", "AIRI-MUSIC-EYE-NSNS"]
+      "other": [
+        "AIRI-PRECOMP-SLORETA",
+        "AIRI-MUSIC-EYE-NSNS"
+      ],
+      "status": "fig18_lowestp_complete_five_seeds"
+    },
+    "validation": {
+      "matlab": false,
+      "oracle": "paper/reproduction/validation/oracle.py independent AIRI/SPoC formula check",
+      "status": "complete"
     }
-  }
+  },
+  "working_branch": "cursor/stage-a-reproduction-093e"
 }

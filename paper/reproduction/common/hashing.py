@@ -33,8 +33,12 @@ def sha256_array(array: ArrayLike) -> str:
 
 
 def write_json(path: Path, payload: Any) -> None:
+    """Write JSON atomically so skip_existing never reads a partial file."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    tmp.replace(path)
 
 
 def read_json(path: Path) -> Any:
