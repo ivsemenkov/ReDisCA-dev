@@ -384,11 +384,16 @@ Switching from per-trial γ to one matrix-wide γ does **not** recover
 the paper ROC on any registered seed. SIM-P6 Fig. 5/6 is still
 required. This is an interim observation, not a Stage A verdict.
 
+**SIM-P4 (C, I_c=100, post-review), Fig. 4, SNR=0.2, seed 20240904,
+n_mc=100:** AUC 0.536, TPR@0.01 0.019, median **7.37 cm**. Reading
+the Fig. 4 title “100 trials” as within-condition I_c does **not**,
+on this first seed, recover the paper ROC. Remaining SIM-P4 seeds
+are running.
+
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
-seeds, SIM-P2 last Fig. 4 jobs, all SIM-P3, SIM-P4 I_c=100,
-remaining SIM-P6, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
-and SIM-R1 composite. Those branches are required before the
-near-chance / ~7 cm observation can be generalized.
+seeds, SIM-P2 last Fig. 4 SNR=0.1 seed, all SIM-P3, remaining
+SIM-P4, SIM-P6 Fig. 5/6, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
+and SIM-R1 composite.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
