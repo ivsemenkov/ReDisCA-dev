@@ -393,19 +393,21 @@ the Fig. 4 title “100 trials” as within-condition I_c does **not**,
 on this first seed, recover the paper ROC. Remaining SIM-P4 seeds
 are running.
 
-**SIM-P3 (C, causal Butterworth; original freeze).** First finished
-file: Fig. 4, SNR=0.1, seed 20240904, n_mc=100.
+**SIM-P3 (C, causal Butterworth; original freeze).** Fig. 4, SNR=0.1,
+n_mc=100, **two seeds finished** (20240904 and 20240905). The third
+seed is running.
 
-| Metric | SIM-P1 zero-phase, same seed/SNR | SIM-P3 causal |
-| --- | --- | --- |
-| AUC | 0.523 | **0.836** |
-| TPR @ FPR=0.01 | 0.022 | **0.296** |
-| Median loc. error | 6.44 cm | **0.88 cm** |
+| Seed | AUC | TPR@0.01 | Median loc. |
+| --- | --- | --- | --- |
+| 20240904 | **0.836** | **0.296** | **0.88 cm** |
+| 20240905 | **0.856** | **0.326** | **1.04 cm** |
+| SIM-P1 zero-phase, seed 20240904, same SNR | 0.523 | 0.022 | 6.44 cm |
 
 This is the first generation setting under the frozen AIRI-SPoC
 factory that is not pathologically far from the paper Fig. 4
-picture. It is **one seed**. The other four registered seeds are
-running. Do not treat this as a reproducing pipeline.
+picture. Two seeds agree. The remaining three registered seeds,
+Fig. 4 SNR=0.2, and Figs 5–6 are **not** finished. Do not treat
+this as a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
