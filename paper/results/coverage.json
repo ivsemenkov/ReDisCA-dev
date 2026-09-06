@@ -1,5 +1,5 @@
 {
-  "complete_sim": 53,
+  "complete_sim": 57,
   "final_verdict_allowed": false,
   "library_main_sha": "f657b954da7d48d05b50f6f4dc967595a155f7ae",
   "master_seeds": [
@@ -114,12 +114,6 @@
     },
     {
       "candidate": "SIM-P3",
-      "experiment": "fig4",
-      "seed": 20240905,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P3",
       "experiment": "fig5_fig6",
       "seed": 20240905,
       "snr": 0.4
@@ -217,18 +211,6 @@
     {
       "candidate": "SIM-P1",
       "experiment": "fig5_fig6",
-      "seed": 20240906,
-      "snr": 0.4
-    },
-    {
-      "candidate": "SIM-P1",
-      "experiment": "fig5_fig6",
-      "seed": 20240906,
-      "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P3",
-      "experiment": "fig4",
       "seed": 20240906,
       "snr": 0.2
     },
@@ -381,12 +363,6 @@
       "experiment": "fig5_fig6",
       "seed": 20240907,
       "snr": 0.2
-    },
-    {
-      "candidate": "SIM-P4",
-      "experiment": "fig4",
-      "seed": 20240907,
-      "snr": 0.1
     },
     {
       "candidate": "SIM-P4",
@@ -729,6 +705,7 @@
         "SIM-P1 fig5/fig6 SNR=0.2 seed 20240905 n_mc=100, median 7.24 cm",
         "SIM-P1 fig5/fig6 SNR=0.4 seed 20240904 n_mc=100, median 7.48 cm",
         "SIM-P1 fig5/fig6 SNR=0.4 seed 20240905 n_mc=100, median 7.34 cm",
+        "SIM-P1 fig5/fig6 SNR=0.4 seed 20240906 n_mc=100, median 7.21 cm",
         "SIM-P2 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.524, median 7.09 cm",
         "SIM-P2 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.517, median 7.08 cm",
         "SIM-P2 fig4 SNR=0.1 seed 20240906 n_mc=100 AUC=0.530, median 8.43 cm",
@@ -745,9 +722,12 @@
         "SIM-P3 fig4 SNR=0.1 seed 20240907 n_mc=100 AUC=0.862, median 1.13 cm",
         "SIM-P3 fig4 SNR=0.1 seed 20240908 n_mc=100 AUC=0.859, median 0.95 cm",
         "SIM-P3 fig4 SNR=0.2 seed 20240904 n_mc=100 AUC=0.877, median 0.63 cm",
+        "SIM-P3 fig4 SNR=0.2 seed 20240905 n_mc=100 AUC=0.874, median 0.67 cm",
+        "SIM-P3 fig4 SNR=0.2 seed 20240906 n_mc=100 AUC=0.877, median 0.80 cm",
         "SIM-P4 fig4 SNR=0.1 seed 20240904 n_mc=100 AUC=0.520, median 7.61 cm",
         "SIM-P4 fig4 SNR=0.1 seed 20240905 n_mc=100 AUC=0.513, median 7.54 cm",
         "SIM-P4 fig4 SNR=0.1 seed 20240906 n_mc=100 AUC=0.471, median 8.31 cm",
+        "SIM-P4 fig4 SNR=0.1 seed 20240907 n_mc=100 AUC=0.521, median 6.81 cm",
         "SIM-P4 fig4 SNR=0.2 seed 20240904 n_mc=100 AUC=0.536, median 7.37 cm",
         "SIM-P4 fig4 SNR=0.2 seed 20240905 n_mc=100 AUC=0.515, median 7.30 cm",
         "SIM-P4 fig4 SNR=0.2 seed 20240906 n_mc=100 AUC=0.527, median 6.38 cm",
@@ -775,7 +755,7 @@
         "_locks  SNR=None seed None n_mc=None",
         "_locks  SNR=None seed None n_mc=None"
       ],
-      "n_completed": 53,
+      "n_completed": 57,
       "n_required": 160,
       "not_finished": [
         "SIM-P3 fig5_fig6 SNR=0.4 seed 20240904",
@@ -794,7 +774,6 @@
         "SIM-R1 fig5_fig6 SNR=0.2 seed 20240904",
         "SIM-P8 fig5_fig6 SNR=0.4 seed 20240904",
         "SIM-P8 fig5_fig6 SNR=0.2 seed 20240904",
-        "SIM-P3 fig4 SNR=0.2 seed 20240905",
         "SIM-P3 fig5_fig6 SNR=0.4 seed 20240905",
         "SIM-P3 fig5_fig6 SNR=0.2 seed 20240905",
         "SIM-P4 fig5_fig6 SNR=0.4 seed 20240905",
@@ -811,9 +790,7 @@
         "SIM-R1 fig5_fig6 SNR=0.2 seed 20240905",
         "SIM-P8 fig5_fig6 SNR=0.4 seed 20240905",
         "SIM-P8 fig5_fig6 SNR=0.2 seed 20240905",
-        "SIM-P1 fig5_fig6 SNR=0.4 seed 20240906",
         "SIM-P1 fig5_fig6 SNR=0.2 seed 20240906",
-        "SIM-P3 fig4 SNR=0.2 seed 20240906",
         "SIM-P3 fig5_fig6 SNR=0.4 seed 20240906",
         "SIM-P3 fig5_fig6 SNR=0.2 seed 20240906",
         "SIM-P4 fig5_fig6 SNR=0.4 seed 20240906",
@@ -839,7 +816,6 @@
         "SIM-P3 fig4 SNR=0.2 seed 20240907",
         "SIM-P3 fig5_fig6 SNR=0.4 seed 20240907",
         "SIM-P3 fig5_fig6 SNR=0.2 seed 20240907",
-        "SIM-P4 fig4 SNR=0.1 seed 20240907",
         "SIM-P4 fig5_fig6 SNR=0.4 seed 20240907",
         "SIM-P4 fig5_fig6 SNR=0.2 seed 20240907",
         "SIM-P5 fig4 SNR=0.2 seed 20240907",

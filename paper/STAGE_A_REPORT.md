@@ -405,12 +405,15 @@ n_mc=100, **all five registered seeds finished.**
 | 20240908 | **0.859** | **0.314** | **0.95 cm** |
 | SIM-P1 zero-phase, seed 20240904, same SNR | 0.523 | 0.022 | 6.44 cm |
 
-Range: AUC 0.836–0.862, TPR@0.01 0.296–0.329, median loc.
-0.88–1.13 cm. This is the first generation setting under the
-frozen AIRI-SPoC factory that is not pathologically far from the
-paper Fig. 4 picture, and it is stable across the pre-registered
-seeds. Fig. 4 SNR=0.2 and Figs 5–6 under the same causal
-generation are **not** finished. Do not treat this as a
+Range at the published SNR=0.1: AUC 0.836–0.862, TPR@0.01
+0.296–0.329, median loc. 0.88–1.13 cm. This is the first
+generation setting under the frozen AIRI-SPoC factory that is
+not pathologically far from the paper Fig. 4 picture, and it is
+stable across the pre-registered seeds.
+
+First addendum Fig. 4 SNR=0.2 file (seed 20240904): AUC **0.877**,
+TPR@0.01 **0.364**, median **0.63 cm**. Remaining SNR=0.2 seeds
+and Figs 5–6 are **not** finished. Do not treat this as a
 reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
