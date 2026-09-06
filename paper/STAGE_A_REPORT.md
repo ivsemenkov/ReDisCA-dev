@@ -113,16 +113,16 @@ This inventory is the reason there is **no final verdict**.
 | Fig. 18 MUSIC on *p*<0.05 components (2-D when n_sig=2) | Run for seed 20240904 only; **not** the paper Fig. 17 rule |
 | Fig. 18 MUSIC on the three lowest-*p* components (3-D) | **Run** (5 seeds × MEG-PAPER-1501 and MEG-AIRI). Selection and patterns are deterministic across seeds. |
 | SIM-P1 Fig. 4 SNR=0.2 seeds 20240904–20240907; SNR=0.1 seeds 20240904–20240907 | **Run** (near-chance / ~7 cm) |
-| SIM-P1 Figs 5–6 both SNRs, seeds 20240904–20240906 | **Run** (~7 cm, no C-trend) |
-| SIM-P1 remaining (Fig. 4 both SNRs seed 08; Fig. 5/6 seeds 07–08) | **Running without RSA** |
+| SIM-P1 Figs 5–6 both SNRs seeds 20240904–20240906; SNR=0.4 seed 20240907 | **Run** (~7 cm, no C-trend) |
+| SIM-P1 remaining (Fig. 4 both SNRs seed 08; Fig. 5/6 0.2/07 and both SNRs seed 08) | **Running without RSA** |
 | SIM-P2 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance). Fig. 5/6 not in the required 160-job matrix |
 | SIM-P3 Fig. 4 both SNRs × 5 seeds | **Run** (paper-like localization) |
 | SIM-P3 Figs 5–6 both SNRs × 5 seeds | **Run** (C-trend on all seeds; C=6 still >2 cm) |
 | SIM-P4 / SIM-P6 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance) |
-| SIM-P6 Figs 5–6 SNR=0.4 seeds 20240904–20240907; SNR=0.2 seeds 20240904–20240906 | **Run** (~7.2–7.6 cm, no C-trend). Remaining P6 / all P4 Fig. 5/6 unfinished |
+| SIM-P6 Figs 5–6 SNR=0.4 seeds 20240904–20240907; SNR=0.2 seeds 20240904–20240907 | **Run** (~7.1–7.6 cm, no C-trend). Remaining P6 / all P4 Fig. 5/6 unfinished |
 | SIM-P5 Fig. 4 both SNRs seeds 20240904–20240907; Figs 5–6 seeds 20240904–20240906 | **Run** (~7 cm). Remaining seeds running |
 | SIM-P7 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance). Fig. 5/6 not started |
-| SIM-R1 Fig. 4 seeds 20240904–20240905 both SNRs; SNR=0.2 seed 20240906 | **Run** (near-chance / ~7–8 cm). Remaining R1 and all SIM-P8 unfinished |
+| SIM-R1 Fig. 4 seeds 20240904–20240906 both SNRs | **Run** (near-chance / ~7–8 cm). Remaining R1 and all SIM-P8 unfinished |
 
 Existing `seed*.json` MEG files store a `temporal_airi` block that is the
 **corrected pooled** indexing and must not be labeled “literal AIRI
@@ -316,7 +316,7 @@ the index lookup does not create the 65 ms face onset.
 
 ### Simulations (Figs 3–6)
 
-**Incomplete (100 / 160 required n_mc=100 jobs).** The pre-registered
+**Incomplete (103 / 160 required n_mc=100 jobs).** The pre-registered
 five-seed design and the review-expanded generation matrix are still
 running. Numbers below are interim. They are **not** a failure verdict.
 `stage_a_status.final_verdict_allowed` remains false.
@@ -391,7 +391,7 @@ n_mc=100 (this branch now complete for Fig. 4):**
 Switching from per-trial γ to one matrix-wide γ does **not** recover
 the paper ROC on any registered seed.
 
-**SIM-P6 Figs 5–6** (seven finished jobs, n_mc=100):
+**SIM-P6 Figs 5–6** (eight finished jobs, n_mc=100):
 
 | SNR | Seed | C=3 | C=4 | C=5 | C=6 | Pattern @ C=6 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -402,6 +402,7 @@ the paper ROC on any registered seed.
 | 0.2 | 20240904 | 7.24 | 7.29 | 7.36 | **7.31 cm** | 0.169 |
 | 0.2 | 20240905 | 7.22 | 7.26 | 7.23 | **7.27 cm** | 0.186 |
 | 0.2 | 20240906 | 7.19 | 7.08 | 7.04 | **7.44 cm** | 0.179 |
+| 0.2 | 20240907 | 7.51 | 7.38 | 7.34 | **7.14 cm** | 0.172 |
 
 No C-trend. Pattern ~0.17–0.19, same neighborhood as zero-phase
 SIM-P1. Global γ alone does **not** produce paper Fig. 6. Remaining
@@ -482,21 +483,21 @@ ReDisCA kwargs are unchanged.
 0.005–0.021, median 6.84–8.15 cm. Seeding loci once does not
 recover the paper ROC. Fig. 5/6 for SIM-P7 is still required.
 
-**SIM-R1 (D, composite)** Fig. 4, five finished jobs, n_mc=100.
-Seed 20240904: SNR=0.2 AUC 0.493 / 7.94 cm; SNR=0.1 AUC 0.530 /
-6.80 cm. Seed 20240905: SNR=0.2 AUC 0.508 / 7.05 cm; SNR=0.1 AUC
-0.510 / 7.55 cm. Seed 20240906 SNR=0.2: AUC 0.547 / 7.42 cm.
-I_c=100 + norm-15% δ + global γ + fixed loci does **not** recover
-the paper ROC on these seeds. Remaining R1 jobs are running.
+**SIM-R1 (D, composite)** Fig. 4, six finished jobs, n_mc=100.
+Seeds 20240904–20240906 both SNRs: AUC 0.493–0.547, TPR@0.01
+0.012–0.023, median 6.80–7.94 cm. Newest SNR=0.1 seed 20240906:
+AUC 0.505 / 7.69 cm. I_c=100 + norm-15% δ + global γ + fixed loci
+does **not** recover the paper ROC on these seeds. Remaining R1
+jobs are running.
 
 **SIM-P5 (D)** Fig. 4 seed 20240907 now has both SNRs: SNR=0.2 AUC
 0.504 / 7.43 cm; SNR=0.1 AUC 0.462 / 7.62 cm. Figs 5–6 seeds
 20240904–20240906 at both SNRs still have C=6 at 7.14–7.66 cm, no
 C-trend.
 
-**SIM-P1** Fig. 4 SNR=0.1 seed 20240907: AUC 0.446, TPR@0.01 0.015,
-median 7.39 cm. Same near-chance neighborhood as the earlier P1
-seeds.
+**SIM-P1** Fig. 5/6 SNR=0.4 seed 20240907: C=6 **7.28 cm**, pattern
+0.18, no C-trend — same neighborhood as seeds 20240904–20240906.
+Fig. 4 SNR=0.1 seed 20240907 remains AUC 0.446 / 7.39 cm.
 
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
 seeds, SIM-P4 / SIM-P6 / SIM-P7 / SIM-P8 Fig. 5/6, and remaining
@@ -564,13 +565,14 @@ What can be said without pretending the matrix is finished:
   V2 for PAPER-1501; right occipital pole for AIRI), not the published
   rFG / insula / IPS set. This is one finished track, not a global
   verdict.
-- **Simulations (100/160, not a verdict):** SIM-P3 causal Butterworth
+- **Simulations (103/160, not a verdict):** SIM-P3 causal Butterworth
   Fig. 4 is paper-like on all five seeds (median 0.88–1.13 cm at
   published SNR=0.1). SIM-P3 Fig. 5/6 is complete: C-trend present,
-  but C=6 is 3.37–4.00 cm (paper &lt;2 cm). Seven SIM-P6 Fig. 5/6
-  jobs are ~7.2–7.6 cm with no C-trend. SIM-R1 Fig. 4 (five jobs)
-  stays near-chance / ~7–8 cm. Finish the required matrix before
-  any pipeline claim. Do not change ReDisCA.
+  but C=6 is 3.37–4.00 cm (paper &lt;2 cm). Eight SIM-P6 Fig. 5/6
+  jobs and SIM-P1 Fig. 5/6 SNR=0.4 seed 20240907 stay ~7.1–7.6 cm
+  with no C-trend. SIM-R1 Fig. 4 (six jobs) stays near-chance /
+  ~7–8 cm. Finish the required matrix before any pipeline claim.
+  Do not change ReDisCA.
 
 ## 10. Remaining irreducible discrepancies or missing source information
 
