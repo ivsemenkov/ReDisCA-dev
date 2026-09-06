@@ -49,6 +49,16 @@ examples/output
 examples/repro_outputs/
 redisca_output
 
+# Stage A reproduction caches (datasets, large arrays)
+.reproduction_data/
+paper/results/**/*.npy
+paper/results/**/*.npz
+paper/results/**/arrays/
+paper/results/**/QUICK_NONREPRO_*
+paper/results/**/_quick_leftovers/
+paper/results/simulations/_locks/
+paper/results/**/*.json.tmp
+
 # Downloaded datasets and generated example artifacts
 examples/data/
 examples/n170/data/
