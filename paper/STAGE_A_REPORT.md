@@ -401,11 +401,12 @@ seed is running.
 | --- | --- | --- | --- |
 | 20240904 | **0.836** | **0.296** | **0.88 cm** |
 | 20240905 | **0.856** | **0.326** | **1.04 cm** |
+| 20240906 | **0.847** | **0.322** | **1.11 cm** |
 | SIM-P1 zero-phase, seed 20240904, same SNR | 0.523 | 0.022 | 6.44 cm |
 
 This is the first generation setting under the frozen AIRI-SPoC
 factory that is not pathologically far from the paper Fig. 4
-picture. Two seeds agree. The remaining three registered seeds,
+picture. Three seeds agree. The remaining two registered seeds,
 Fig. 4 SNR=0.2, and Figs 5–6 are **not** finished. Do not treat
 this as a reproducing pipeline.
 
