@@ -412,6 +412,7 @@ def run_candidate(
     run_fig5_exps = "fig5" in experiments and candidate_id in {
         "SIM-P1",
         "SIM-P2",
+        "SIM-P3",
         "SIM-P4",
         "SIM-P5",
         "SIM-P6",
@@ -420,8 +421,6 @@ def run_candidate(
         "SIM-R1",
     }
     fig4_snrs = (PAPER_SNR_FIG4_HIGH, PAPER_SNR_FIG4_LOW)
-    if candidate_id == "SIM-P3":
-        fig4_snrs = (PAPER_SNR_FIG4_LOW,)
     fig5_snrs = (PAPER_SNR_FIG5_HIGH, PAPER_SNR_FIG5_LOW)
     if snrs is not None:
         allowed = {float(s) for s in snrs}

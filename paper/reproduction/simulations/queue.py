@@ -22,16 +22,17 @@ from paper.reproduction.summarize import _required_sim_jobs
 LOCK_DIR = RESULTS_ROOT / "simulations" / "_locks"
 
 FIG4_PRIORITY = (
+    "SIM-P3",
     "SIM-P6",
     "SIM-P4",
     "SIM-P7",
     "SIM-R1",
-    "SIM-P3",
     "SIM-P1",
     "SIM-P5",
     "SIM-P2",
 )
 FIG5_PRIORITY = (
+    "SIM-P3",
     "SIM-P6",
     "SIM-P4",
     "SIM-P7",

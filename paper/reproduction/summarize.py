@@ -279,7 +279,10 @@ def _required_sim_jobs() -> list[tuple[str, str, float, int]]:
             jobs.append(("SIM-P1", "fig5_fig6", snr, seed))
         for snr in (0.2, 0.1):
             jobs.append(("SIM-P2", "fig4", snr, seed))
-        jobs.append(("SIM-P3", "fig4", 0.1, seed))
+        for snr in (0.2, 0.1):
+            jobs.append(("SIM-P3", "fig4", snr, seed))
+        for snr in (0.4, 0.2):
+            jobs.append(("SIM-P3", "fig5_fig6", snr, seed))
         for cand in ("SIM-P4", "SIM-P5", "SIM-P6", "SIM-P7", "SIM-R1"):
             for snr in (0.2, 0.1):
                 jobs.append((cand, "fig4", snr, seed))

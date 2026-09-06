@@ -30,6 +30,9 @@ def test_addendum_marks_review_candidates():
     assert added["FIG18-MUSIC-LOWESTP"]["category"] == "A_directly_specified_by_paper"
     assert added["SIM-P6"]["category"] == "C_source_supported_ambiguity"
     assert added["SIM-R1"]["category"] == "D_post_review_forensic_because_literal_is_pathological"
+    expansions = {c["id"]: c for c in addendum["coverage_expansions_of_original_candidates"]}
+    assert expansions["SIM-P3"]["added_after_stage_a_review"] is True
+    assert "Fig. 5/6" in expansions["SIM-P3"]["what"]
 
 
 def test_summarize_refuses_a_final_verdict_while_matrix_is_open():

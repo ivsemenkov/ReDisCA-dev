@@ -167,7 +167,10 @@ Review-added branches: `paper/reproduction_manifest_addendum.json`.
   printed formula). Per-trial γ. Noise loci redrawn every epoch.
   Fig. 4 SNR {0.2, 0.1}. Fig. 5/6 from C=6 generation.
 - `SIM-P2` (**C**): I_c=80. After review, Fig. 5/6 coverage is also run.
-- `SIM-P3` (**C**): causal Butterworth; Fig. 4 SNR=0.1.
+- `SIM-P3` (**C**): causal Butterworth. Original freeze: Fig. 4
+  SNR=0.1 only. **2026-09-06 addendum:** also Fig. 4 SNR=0.2 and
+  Figs 5–6, because the first finished seed is the first
+  paper-like simulation localization. Not pre-registered as fig5.
 
 **N170 / MEG / source (original)** — unchanged IDs. See the original
 manifest.
@@ -390,10 +393,39 @@ the Fig. 4 title “100 trials” as within-condition I_c does **not**,
 on this first seed, recover the paper ROC. Remaining SIM-P4 seeds
 are running.
 
+**SIM-P3 (C, causal Butterworth; original freeze).** First finished
+file: Fig. 4, SNR=0.1, seed 20240904, n_mc=100.
+
+| Metric | SIM-P1 zero-phase, same seed/SNR | SIM-P3 causal |
+| --- | --- | --- |
+| AUC | 0.523 | **0.836** |
+| TPR @ FPR=0.01 | 0.022 | **0.296** |
+| Median loc. error | 6.44 cm | **0.88 cm** |
+
+This is the first generation setting under the frozen AIRI-SPoC
+factory that is not pathologically far from the paper Fig. 4
+picture. It is **one seed**. The other four registered seeds are
+running. Do not treat this as a reproducing pipeline.
+
+Mechanism (same vertex / same literal δ on a matched one-MC
+replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
+the fitted pattern **does not** match the used topography
+(pattern–topo corr ≈0.07). Causal `sosfilt` yields a pattern that
+**does** match the used topography (corr ≈0.98). The leadfield
+scan of that recovered topography then peaks near the true vertex
+even though ‖δ‖≈2‖g‖, because MEG columns are correlated. The
+paper states a 6th-order 2 Hz Butterworth and does **not** say
+zero-phase; MATLAB `filter` is causal. SIM-P3 was already in the
+original freeze.
+
+On 2026-09-06 the addendum therefore expands SIM-P3 to Fig. 4
+SNR=0.2 and Figs 5–6. That expansion is **not** pre-registered.
+ReDisCA kwargs are unchanged.
+
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
-seeds, SIM-P2 last Fig. 4 SNR=0.1 seed, all SIM-P3, remaining
-SIM-P4, SIM-P6 Fig. 5/6, SIM-P7 fixed loci, SIM-P8 C=5-from-scratch,
-and SIM-R1 composite.
+seeds, remaining SIM-P3 seeds and the new P3 Fig. 4 SNR=0.2 /
+Fig. 5–6 jobs, remaining SIM-P4, SIM-P6 Fig. 5/6, SIM-P7, SIM-P8,
+and SIM-R1.
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.

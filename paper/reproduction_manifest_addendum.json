@@ -119,6 +119,15 @@
       "added_after_stage_a_review": true,
       "what": "Fig. 5/6 coverage in addition to the original fig4-only plan",
       "why": "I_c changes the ERP average and is scientifically relevant to Figs 5–6; the original freeze left this uncrossed only for compute, not because it was implausible."
+    },
+    {
+      "id": "SIM-P3",
+      "added_after_stage_a_review": true,
+      "added_at_utc_date": "2026-09-06",
+      "what": "Fig. 4 SNR=0.2 and Fig. 5/6 both SNRs, in addition to the original Fig. 4 SNR=0.1-only plan",
+      "why": "The original freeze treated causal Butterworth as a Fig. 4 SNR=0.1 probe. The first finished n_mc=100 file (seed 20240904, SNR=0.1) is the first generation setting under fixed AIRI-SPoC that is not pathologically far from the paper (AUC 0.836, TPR@0.01 0.296, median loc. 0.88 cm). Zero-phase SIM-P1 on the same seed/SNR does not recover the used topography (pattern–topo corr ~0.07); causal SIM-P3 does (~0.98). That makes Figs 5–6 and the other published Fig. 4 SNR scientifically required before a verdict. Same ReDisCA kwargs. Not pre-registered as fig5 coverage. Not a method ablation.",
+      "source": "Paper states a 6th-order 2 Hz Butterworth and does not say filtfilt/zero-phase. MATLAB filter() is causal. SIM-P3 was already in the original freeze.",
+      "category": "C_source_supported_ambiguity"
     }
   ],
   "source_reinspection_2026-09-05": {
