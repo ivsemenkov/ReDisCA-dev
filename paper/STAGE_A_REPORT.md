@@ -450,9 +450,9 @@ On 2026-09-06 the addendum therefore expands SIM-P3 to Fig. 4
 SNR=0.2 and Figs 5–6. That expansion is **not** pre-registered.
 ReDisCA kwargs are unchanged.
 
-**SIM-P7 (C, fixed 1000 noise loci)** Fig. 4, three finished
-jobs: AUC 0.50–0.54, median 7.16–7.27 cm. Seeding loci once does
-not, on these seeds, recover the paper ROC.
+**SIM-P7 (C, fixed 1000 noise loci)** Fig. 4, six finished jobs
+(seeds 20240904–20240906, both SNRs): AUC 0.50–0.54, median
+6.84–7.64 cm. Seeding loci once does not recover the paper ROC.
 
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
 seeds and Fig. 5/6, remaining SIM-P3 Fig. 5/6 seeds, SIM-P6
