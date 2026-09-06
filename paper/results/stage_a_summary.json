@@ -16025,6 +16025,70 @@
       "redisca_roc": null,
       "seed": 20240904,
       "snr": 0.4
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.540585933917995,
+          "mean_pattern_corr": 0.1787666064223842,
+          "mean_rdm_corr": 0.2083791908061554,
+          "mean_weight_corr": 0.0025820497435854123
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0075,
+          "mean_median_error_cm": 7.414265085085536,
+          "mean_pattern_corr": 0.17726405773659537,
+          "mean_rdm_corr": 0.29695506492484197,
+          "mean_weight_corr": 0.00293378657673238
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0075,
+          "mean_median_error_cm": 7.444756719303637,
+          "mean_pattern_corr": 0.17163409255075002,
+          "mean_rdm_corr": 0.3300335124914959,
+          "mean_weight_corr": 0.0021164691788125734
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0075,
+          "mean_median_error_cm": 7.66339714525049,
+          "mean_pattern_corr": 0.17826465329054741,
+          "mean_rdm_corr": 0.3109493789872777,
+          "mean_weight_corr": 0.002000185929875601
+        }
+      },
+      "candidate": "SIM-P5",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "fig5_generate_c": 6,
+        "i_c": 40,
+        "noise_loci_mode": "per_epoch",
+        "snr_gamma_mode": "per_trial"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-P5/fig5_fig6_snr0.4_seed20240905.json",
+      "redisca_roc": null,
+      "seed": 20240905,
+      "snr": 0.4
+    },
+    {
+      "added_after_stage_a_review": false,
+      "candidate": "_locks",
+      "experiment": null,
+      "generated_C": null,
+      "generation_modes": null,
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": null,
+      "path": "simulations/_locks/SIM-P6_fig4_snr0.2_seed20240904.lock/meta.json",
+      "redisca_roc": null,
+      "seed": null,
+      "snr": null
     }
   ],
   "source_localization": [
@@ -17761,12 +17825,6 @@
         "candidate": "SIM-P5",
         "experiment": "fig5_fig6",
         "seed": 20240905,
-        "snr": 0.4
-      },
-      {
-        "candidate": "SIM-P5",
-        "experiment": "fig5_fig6",
-        "seed": 20240905,
         "snr": 0.2
       },
       {
@@ -18358,7 +18416,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 20,
+    "n_completed_sim_jobs": 21,
     "n_required_sim_jobs": 145,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,
