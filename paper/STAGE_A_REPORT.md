@@ -119,10 +119,12 @@ This inventory is the reason there is **no final verdict**.
 | SIM-P3 Fig. 4 both SNRs × 5 seeds | **Run** (paper-like localization) |
 | SIM-P3 Figs 5–6 both SNRs × 5 seeds | **Run** (C-trend on all seeds; C=6 still >2 cm) |
 | SIM-P4 / SIM-P6 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance) |
+| SIM-P4 Figs 5–6 both SNRs × 5 seeds | **Run** (C=6 7.11–7.56 cm, no C-trend) |
 | SIM-P6 Figs 5–6 both SNRs × 5 seeds | **Run** (~7.1–7.6 cm, no C-trend) |
-| SIM-P4 Figs 5–6 seeds 20240904–20240906 both SNRs | **Run** (~7.2–7.5 cm, no paper-like C-trend). Seeds 07–08 running |
-| SIM-P5 Fig. 4 seeds 20240904–20240907 both SNRs plus SNR=0.2 seed 20240908; Figs 5–6 seeds 20240904–20240907 both SNRs | **Run** (~7 cm). Remaining seeds running |
-| SIM-P7 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance). Fig. 5/6 not started |
+| SIM-P5 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance / 6.23–7.90 cm) |
+| SIM-P5 Figs 5–6 seeds 20240904–20240907 both SNRs | **Run** (C=6 7.14–7.66 cm). Seed 20240908 running |
+| SIM-P7 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance) |
+| SIM-P7 Figs 5–6 seed 20240904 both SNRs | **Run** (C=6 7.30–7.70 cm, no C-trend). Seeds 05–08 running |
 | SIM-R1 Fig. 4 both SNRs × 5 seeds | **Run** (near-chance / 6.5–7.9 cm). All SIM-P8 and R1 Fig. 5/6 unfinished |
 
 Existing `seed*.json` MEG files store a `temporal_airi` block that is the
@@ -317,7 +319,7 @@ the index lookup does not create the 65 ms face onset.
 
 ### Simulations (Figs 3–6)
 
-**Incomplete (121 / 160 required n_mc=100 jobs).** The pre-registered
+**Incomplete (128 / 160 required n_mc=100 jobs).** The pre-registered
 five-seed design and the review-expanded generation matrix are still
 running. Numbers below are interim. They are **not** a failure verdict.
 `stage_a_status.final_verdict_allowed` remains false.
@@ -423,22 +425,27 @@ AUC 0.471–0.553; median loc. 6.38–8.31 cm. Reading the Fig. 4
 title “100 trials” as within-condition I_c does **not** recover
 the paper ROC.
 
-**SIM-P4 Figs 5–6** (six finished jobs, seeds 20240904–20240906
-× both SNRs, n_mc=100):
+**SIM-P4 Figs 5–6 is now complete** (all five seeds × both SNRs,
+n_mc=100):
 
-| SNR | Seed | C=6 | Pattern @ C=6 |
-| --- | --- | --- | --- |
-| 0.4 | 20240904 | **7.50 cm** | 0.186 |
-| 0.4 | 20240905 | **7.34 cm** | 0.176 |
-| 0.4 | 20240906 | **7.33 cm** | 0.176 |
-| 0.2 | 20240904 | **7.23 cm** | 0.167 |
-| 0.2 | 20240905 | **7.27 cm** | 0.179 |
-| 0.2 | 20240906 | **7.26 cm** | 0.170 |
+| SNR | Seed | C=3 | C=4 | C=5 | C=6 | Pattern @ C=6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.4 | 20240904 | 7.79 | 7.62 | 7.53 | **7.50 cm** | 0.186 |
+| 0.4 | 20240905 | 7.54 | 7.32 | 7.14 | **7.34 cm** | 0.176 |
+| 0.4 | 20240906 | 7.14 | 7.18 | 7.30 | **7.33 cm** | 0.176 |
+| 0.4 | 20240907 | 7.05 | 7.19 | 7.51 | **7.28 cm** | 0.188 |
+| 0.4 | 20240908 | 7.17 | 7.25 | 7.28 | **7.11 cm** | 0.173 |
+| 0.2 | 20240904 | 7.54 | 7.14 | 7.22 | **7.23 cm** | 0.167 |
+| 0.2 | 20240905 | 7.48 | 7.35 | 7.42 | **7.27 cm** | 0.179 |
+| 0.2 | 20240906 | 7.33 | 7.29 | 7.40 | **7.26 cm** | 0.170 |
+| 0.2 | 20240907 | 7.47 | 7.52 | 7.37 | **7.32 cm** | 0.173 |
+| 0.2 | 20240908 | 7.49 | 7.46 | 7.34 | **7.56 cm** | 0.167 |
 
-No paper-like C-trend. Pattern ~0.17–0.19, same neighborhood as
-zero-phase SIM-P1 / SIM-P6. I_c=100 alone does **not** produce
-paper Fig. 6 on these seeds. Remaining seeds 20240907–20240908
-are running. This is an interim observation, not a Stage A verdict.
+No C-trend on any seed. C=6 is **7.11–7.50 cm** (SNR=0.4) and
+**7.23–7.56 cm** (SNR=0.2). Pattern ~0.17–0.19, same neighborhood
+as zero-phase SIM-P1 / SIM-P6. I_c=100 alone does **not** produce
+paper Fig. 6. This branch’s Fig. 4 and Fig. 5/6 are both complete.
+That is not a Stage A verdict.
 
 **SIM-P3 (C, causal Butterworth; original freeze).** Fig. 4, SNR=0.1,
 n_mc=100, **all five registered seeds finished.**
@@ -506,7 +513,19 @@ ReDisCA kwargs are unchanged.
 **SIM-P7 (C, fixed 1000 noise loci)** Fig. 4 is now complete
 (all five seeds × both SNRs): AUC 0.492–0.544, TPR@0.01
 0.005–0.021, median 6.84–8.15 cm. Seeding loci once does not
-recover the paper ROC. Fig. 5/6 for SIM-P7 is still required.
+recover the paper ROC.
+
+**SIM-P7 Figs 5–6**, first finished seed (20240904, both SNRs,
+n_mc=100):
+
+| SNR | Seed | C=3 | C=4 | C=5 | C=6 | Pattern @ C=6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.4 | 20240904 | 7.86 | 7.61 | 7.64 | **7.70 cm** | 0.171 |
+| 0.2 | 20240904 | 7.40 | 7.13 | 7.29 | **7.30 cm** | 0.165 |
+
+No C-trend. Pattern ~0.17. Fixed 1000 noise loci alone does
+**not** produce paper Fig. 6 on this seed. Remaining seeds
+20240905–20240908 are running.
 
 **SIM-R1 (D, composite) Fig. 4 is now complete** (all five seeds
 × both SNRs, n_mc=100): AUC 0.493–0.547, TPR@0.01 0.003–0.024,
@@ -514,18 +533,21 @@ median 6.52–7.94 cm. I_c=100 + norm-15% δ + global γ + fixed
 loci does **not** recover the paper ROC on any registered seed.
 Fig. 5/6 for SIM-R1 is still required.
 
-**SIM-P5 (D)** Fig. 5/6 seed 20240907 both SNRs: C=6 **7.35 cm**
-(SNR=0.4) and **7.16 cm** (SNR=0.2), no C-trend. Fig. 4 SNR=0.2
-seed 20240908: AUC 0.523 / 7.18 cm. C=6 across finished P5
-Fig. 5/6 jobs stays 7.14–7.66 cm.
+**SIM-P5 (D) Fig. 4 is now complete** (all five seeds × both
+SNRs, n_mc=100): AUC 0.462–0.532, TPR@0.01 0.007–0.026, median
+6.23–7.90 cm. Rescaling ‖δ‖ to 0.15‖g‖ **alone** does not recover
+the paper ROC on any registered seed.
+
+**SIM-P5** Fig. 5/6 seeds 20240904–20240907 both SNRs: C=6
+**7.14–7.66 cm**, no C-trend. Remaining Fig. 5/6: seed 20240908.
 
 **SIM-P1** Fig. 5/6 seed 20240907 both SNRs: C=6 **7.28 cm**
 (SNR=0.4) and **7.16 cm** (SNR=0.2), no C-trend. Remaining Fig.
 5/6: seed 20240908.
 
 **Still unfinished (no final verdict):** SIM-P1 Fig. 5/6 seed 08,
-remaining SIM-P5 Fig. 4 0.1/08 and Fig. 5/6 seed 08, remaining
-SIM-P4 / SIM-P7 / SIM-P8 / SIM-R1 Fig. 5/6.
+SIM-P5 Fig. 5/6 seed 08, remaining SIM-P7 / SIM-P8 / SIM-R1
+Fig. 5/6 (32 required jobs).
 
 Default SIM-P1 generation (literal δ, per-trial γ, per-epoch loci,
 I_c=40, generate C=6) is hash-compatible with the original freeze.
@@ -589,14 +611,15 @@ What can be said without pretending the matrix is finished:
   V2 for PAPER-1501; right occipital pole for AIRI), not the published
   rFG / insula / IPS set. This is one finished track, not a global
   verdict.
-- **Simulations (121/160, not a verdict):** SIM-P3 causal Butterworth
+- **Simulations (128/160, not a verdict):** SIM-P3 causal Butterworth
   Fig. 4 is paper-like on all five seeds (median 0.88–1.13 cm at
   published SNR=0.1). SIM-P3 Fig. 5/6 is complete: C-trend present,
-  but C=6 is 3.37–4.00 cm (paper &lt;2 cm). SIM-P1 and SIM-R1
-  Fig. 4 are now complete and stay near-chance. SIM-P6 Fig. 5/6 is
-  complete at C=6 7.14–7.59 cm with no C-trend. Three SIM-P4
-  Fig. 5/6 seeds are ~7.2–7.5 cm. Finish the required matrix
-  before any pipeline claim. Do not change ReDisCA.
+  but C=6 is 3.37–4.00 cm (paper &lt;2 cm). SIM-P1, SIM-P5, and
+  SIM-R1 Fig. 4 are complete and stay near-chance. SIM-P4 and
+  SIM-P6 Fig. 5/6 are complete at C=6 7.11–7.56 cm and
+  7.14–7.59 cm with no C-trend. First SIM-P7 Fig. 5/6 seed is
+  7.30–7.70 cm. Finish the required matrix before any pipeline
+  claim. Do not change ReDisCA.
 
 ## 10. Remaining irreducible discrepancies or missing source information
 
