@@ -372,12 +372,17 @@ SIM-P1 AUC 0.487, median 6.72 cm; SIM-P5 AUC 0.495, median 7.00 cm;
 SIM-P2 seed 20240905 AUC 0.478, median 7.54 cm. The near-chance /
 ~7 cm picture is not a one-seed fluke under these reconstructions.
 
-**SIM-P6 (C, one global γ), Fig. 4, SNR=0.2, seed 20240904, n_mc=100
-(first finished file on this branch):**
-AUC 0.523, TPR@0.01 0.020, median **7.54 cm**. Switching from
-per-trial γ to one matrix-wide γ does **not**, by itself, recover
-the paper ROC on this seed. Remaining SIM-P6 seeds and SNRs are
-running. This is an interim observation, not a verdict.
+**SIM-P6 (C, one global γ), Fig. 4, all five seeds × both SNRs,
+n_mc=100 (this branch now complete for Fig. 4):**
+
+| SNR | AUC range (5 seeds) | TPR@0.01 range | Median loc. range |
+| --- | --- | --- | --- |
+| 0.2 | 0.482–0.523 | 0.006–0.020 | 6.75–7.65 cm |
+| 0.1 | 0.446–0.523 | 0.004–0.028 | 6.60–7.85 cm |
+
+Switching from per-trial γ to one matrix-wide γ does **not** recover
+the paper ROC on any registered seed. SIM-P6 Fig. 5/6 is still
+required. This is an interim observation, not a Stage A verdict.
 
 **Still unfinished (no final verdict):** remaining SIM-P1 / SIM-P5
 seeds, SIM-P2 last Fig. 4 jobs, all SIM-P3, SIM-P4 I_c=100,
