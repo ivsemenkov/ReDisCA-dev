@@ -414,8 +414,21 @@ stable across the pre-registered seeds.
 Fig. 4 SNR=0.2 is now also complete on all five seeds:
 AUC 0.874–0.887, TPR@0.01 0.348–0.382, median loc. 0.61–0.80 cm.
 
-Figs 5–6 under the same causal generation have started and are
-**not** finished. Do not treat this as a reproducing pipeline.
+Figs 5–6 under the same causal generation have started.
+**First file** (SNR=0.4, seed 20240904, n_mc=100, C=6-generated):
+
+| C | Mean median loc. | Frac. error <1 cm | Mean pattern corr | Mean weight corr | Mean RDM corr |
+| --- | --- | --- | --- | --- | --- |
+| 3 | 5.49 cm | 0.148 | 0.235 | 0.003 | 1.000 |
+| 4 | 4.59 cm | 0.202 | 0.260 | 0.004 | 0.978 |
+| 5 | 3.88 cm | 0.232 | 0.280 | 0.005 | 0.960 |
+| 6 | 3.46 cm | 0.278 | 0.291 | 0.006 | 0.952 |
+
+Compared with SIM-P1 (~7.5 cm, no C trend, pattern ~0.17): error
+now **falls as C increases**, RDM recovery is excellent, and
+patterns beat weights. Paper Fig. 6 asks for **< 2 cm at C=6**;
+this first seed is **3.46 cm**. Remaining seeds and SNR=0.2 are
+not finished. Do not treat this as a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
