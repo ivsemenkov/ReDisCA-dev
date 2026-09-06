@@ -394,8 +394,7 @@ on this first seed, recover the paper ROC. Remaining SIM-P4 seeds
 are running.
 
 **SIM-P3 (C, causal Butterworth; original freeze).** Fig. 4, SNR=0.1,
-n_mc=100, **two seeds finished** (20240904 and 20240905). The third
-seed is running.
+n_mc=100, **all five registered seeds finished.**
 
 | Seed | AUC | TPR@0.01 | Median loc. |
 | --- | --- | --- | --- |
@@ -403,13 +402,16 @@ seed is running.
 | 20240905 | **0.856** | **0.326** | **1.04 cm** |
 | 20240906 | **0.847** | **0.322** | **1.11 cm** |
 | 20240907 | **0.862** | **0.329** | **1.13 cm** |
+| 20240908 | **0.859** | **0.314** | **0.95 cm** |
 | SIM-P1 zero-phase, seed 20240904, same SNR | 0.523 | 0.022 | 6.44 cm |
 
-This is the first generation setting under the frozen AIRI-SPoC
-factory that is not pathologically far from the paper Fig. 4
-picture. Four seeds agree. The last registered seed, Fig. 4
-SNR=0.2, and Figs 5–6 are **not** finished. Do not treat this as
-a reproducing pipeline.
+Range: AUC 0.836–0.862, TPR@0.01 0.296–0.329, median loc.
+0.88–1.13 cm. This is the first generation setting under the
+frozen AIRI-SPoC factory that is not pathologically far from the
+paper Fig. 4 picture, and it is stable across the pre-registered
+seeds. Fig. 4 SNR=0.2 and Figs 5–6 under the same causal
+generation are **not** finished. Do not treat this as a
+reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
