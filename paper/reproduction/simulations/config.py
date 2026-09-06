@@ -75,6 +75,7 @@ class SimulationConfig:
     snr_gamma_mode: SnrGammaMode = "per_trial"
     noise_loci_mode: NoiseLociMode = "per_epoch"
     fig5_generate_c: int = 6
+    eq16_single_matrix: bool = False
     extra_fields: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -131,6 +132,28 @@ def config_for_candidate(candidate_id: str, *, n_mc: int | None = None) -> Simul
             "snr_gamma_mode": "global",
             "noise_loci_mode": "fixed",
         },
+        # Review-2: inherit SIM-P3 (causal Butterworth) and cross remaining
+        # external-generation knobs. Not pre-registered. Same frozen ReDisCA.
+        "SIM-C1": {"butter_zero_phase": False, "i_c": 100},
+        "SIM-C2": {"butter_zero_phase": False, "delta_mode": "norm_15pct"},
+        "SIM-C3": {"butter_zero_phase": False, "snr_gamma_mode": "global"},
+        "SIM-C4": {"butter_zero_phase": False, "noise_loci_mode": "fixed"},
+        "SIM-CR1": {
+            "butter_zero_phase": False,
+            "i_c": 100,
+            "delta_mode": "norm_15pct",
+            "snr_gamma_mode": "global",
+            "noise_loci_mode": "fixed",
+        },
+        "EQ16-CAUSAL": {
+            "butter_zero_phase": False,
+            "eq16_single_matrix": True,
+        },
+        "EQ16-CAUSAL-D": {
+            "butter_zero_phase": False,
+            "eq16_single_matrix": True,
+            "delta_mode": "norm_15pct",
+        },
     }
     if candidate_id not in specs:
         raise ValueError(f"Unknown simulation candidate {candidate_id!r}")
@@ -144,5 +167,31 @@ REVIEW_ADDED_SIM_CANDIDATES: tuple[str, ...] = (
     "SIM-P7",
     "SIM-P8",
     "SIM-R1",
+    "SIM-C1",
+    "SIM-C2",
+    "SIM-C3",
+    "SIM-C4",
+    "SIM-CR1",
+    "EQ16-CAUSAL",
+    "EQ16-CAUSAL-D",
 )
+REVIEW2_SIM_CANDIDATES: tuple[str, ...] = (
+    "SIM-C1",
+    "SIM-C2",
+    "SIM-C3",
+    "SIM-C4",
+    "SIM-CR1",
+    "EQ16-CAUSAL",
+    "EQ16-CAUSAL-D",
+)
+CAUSAL_CROSS_CANDIDATES: tuple[str, ...] = (
+    "SIM-C1",
+    "SIM-C2",
+    "SIM-C3",
+    "SIM-C4",
+    "SIM-CR1",
+)
+EQ16_CANDIDATES: tuple[str, ...] = ("EQ16-CAUSAL", "EQ16-CAUSAL-D")
 ORIGINAL_SIM_CANDIDATES: tuple[str, ...] = ("SIM-P1", "SIM-P2", "SIM-P3")
+ALL_SIM_CANDIDATES: tuple[str, ...] = ORIGINAL_SIM_CANDIDATES + REVIEW_ADDED_SIM_CANDIDATES
+FIG4_SKIP_CANDIDATES: frozenset[str] = frozenset({"SIM-P8", *EQ16_CANDIDATES})

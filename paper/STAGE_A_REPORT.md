@@ -1,26 +1,38 @@
 # Stage A report: ReDisCA paper reproduction
 
-**Status: Stage A complete. A coherent fixed-AIRI-SPoC pipeline does
-not reproduce the complete paper.**
+**Status: Stage A incomplete / no final verdict yet.**
+
+The previous “Stage A complete / no coherent reproducing pipeline”
+closeout is **withdrawn**. The old **160 / 160** count is completion of
+the *pre-review-2* matrix only. It is not a final verdict. New
+source-supported external-generation branches became necessary after
+SIM-P3 showed that causal Butterworth qualitatively changes the
+simulation regime. Those branches were not in the old denominator.
 
 Ossadtchi et al., *NeuroImage* 301 (2024) 120868, using **exactly one**
 ReDisCA configuration: the AIRI → stock-SPoC settings on current `main`.
 
 This is a scientific reproduction report, not a method-development or
 ablation note. The ReDisCA constructor was not changed anywhere.
-`completeness.stage_a_complete` and `final_verdict_allowed` are true
-(160/160 required `n_mc=100` jobs, Fig. 18 lowest-*p*, both AIRI
-temporal indexings). No method ablation has been started.
+`completeness.final_verdict_allowed` is **false** until the expanded
+required set is complete (**280 / 280** full `n_mc=100` jobs: the
+original 160 plus 120 review-2 jobs). Completed old runs are
+**preserved**. No method ablation has been started.
 
 Machine-readable companions:
 
 - `paper/reproduction_manifest.json` — original candidate matrix frozen
   **before** full-result selection. Not rewritten after review.
-- `paper/reproduction_manifest_addendum.json` — review-added forensic
-  branches, each marked `added_after_stage_a_review: true`
+- `paper/reproduction_manifest_addendum.json` — first-review forensic
+  branches, each marked `added_after_stage_a_review: true`. **Not
+  rewritten** to look pre-registered.
+- `paper/reproduction_manifest_addendum_review2.json` — post-SIM-P3
+  causal-cross and Eq. (16) branches. Also
+  `added_after_stage_a_review: true`. Not pre-registered.
 - `paper/results/coverage.json` — what was actually executed
 - `paper/results/stage_a_summary.json` — numeric extracts vs paper anchors
-  (`stage_a_status.final_verdict_allowed` is now true)
+  (`stage_a_status.final_verdict_allowed` is false while review-2 jobs
+  are missing)
 - per-run JSON under `paper/results/`
 
 `--quick` leftovers must not be read as reproduction results.
@@ -81,7 +93,7 @@ gitignored `.reproduction_data/`.
 
 ```text
 python -m paper.reproduction test
-141 passed
+153 passed
 ```
 
 Historical
@@ -97,10 +109,17 @@ Added after the Stage A review (not a method change):
 - simulation-generation branches (I_c=100, norm-15% δ, global γ,
   fixed noise loci, C=5-from-scratch)
 - original-manifest vs addendum provenance
+- review-2 causal inheritance (SIM-C* / SIM-CR1 still frozen AIRI-SPoC)
+- Eq. (16) single-matrix: no hidden I_c averaging
+- dual MEG time-axis mapping (`linspace(-536, 964, 1501)`)
+- completeness: no final verdict while review-2 jobs are missing
 
 ## 4. What was run versus only prepared
 
-Required tracks are all executed. The verdict is in §9.
+The **old** required tracks (160 sim jobs, Fig. 18 lowest-*p*, both
+AIRI temporal indexings) are executed and preserved. Review-2
+causal-cross / Eq. (16) jobs are **in progress**. No final verdict
+until **280 / 280**. See §6a and §9.
 
 | Track | Status |
 | --- | --- |
@@ -160,7 +179,8 @@ p=0 allowed, observed estimator not refit.
 `20240907`, `20240908`. Do not cherry-pick seeds.
 
 Exact original values: `paper/reproduction_manifest.json`.
-Review-added branches: `paper/reproduction_manifest_addendum.json`.
+First-review branches: `paper/reproduction_manifest_addendum.json`.
+Review-2 branches: `paper/reproduction_manifest_addendum_review2.json`.
 
 ### Original freeze (not rewritten)
 
@@ -197,6 +217,47 @@ These were **not** in the original freeze. Each is tagged
 | `SIM-P7` | **C** | 1000 noise loci seeded once | “Randomly seeded” + new time series per trial |
 | `SIM-P8` | **C** | generate C=5 from scratch for Fig. 5 | Body C=5 vs caption C=6 |
 | `SIM-R1` | **D** | I_c=100 + norm-15% + global γ + fixed loci | Coherent composite, **not** tuned to 85% |
+
+### Review-2 additions (after observing SIM-P3; not pre-registered)
+
+Causal Butterworth is already an original source-supported candidate.
+It is the **only** completed generation setting that produces paper-like
+Fig. 4. Therefore testing I_c / δ / γ / loci only on the now-known-bad
+zero-phase branch is insufficient for a final verdict.
+
+These inherit **SIM-P3** and change only declared external knobs.
+Same frozen AIRI-SPoC factory. Combinations were declared **before**
+seeing their results.
+
+| ID | Tag | Inheritance | What changed vs SIM-P3 |
+| --- | --- | --- | --- |
+| `SIM-C1` | **C** | SIM-P3 | I_c=100 |
+| `SIM-C2` | **D** | SIM-P3 | norm-15% δ |
+| `SIM-C3` | **C** | SIM-P3 | global γ |
+| `SIM-C4` | **C** | SIM-P3 | fixed noise loci |
+| `SIM-CR1` | **D** | SIM-P3 | I_c=100 + norm-15% + global γ + fixed loci |
+| `EQ16-CAUSAL` | **C** | SIM-P3 | Eq. (16) single-matrix multi-source (no I_c averaging). Fig. 5/6 only |
+| `EQ16-CAUSAL-D` | **D** | EQ16-CAUSAL | same + norm-15% δ, because the δ reading remains unresolved |
+
+Eq. (16) exact assumptions (not invented after seeing results):
+
+- One `X_c` sensor matrix per condition per Monte-Carlo iteration.
+- **No** within-condition I_c averaging. `I_c` is unused.
+- One newly generated `Upsilon_x` per condition (independent 1000-source
+  1/f draw). Not shared across conditions. Eq. (16) does not index
+  `Upsilon_x` by *c*; this is the conservative “one matrix per `X_c`”
+  reading.
+- C=5 is the first five conditions of a C=6 draw (same as SIM-P3 /
+  Fig. 6 subset reading). Not C=5-from-scratch.
+- Not applied to single-source Fig. 4: Eq. (15) is trial-indexed.
+
+Required coverage for these retained candidates:
+
+- SIM-C* / SIM-CR1: Fig. 4 both SNRs + Fig. 5/6 both SNRs × 5 seeds
+- EQ16-*: Fig. 5/6 both SNRs × 5 seeds
+- n_mc=100
+
+That expands the denominator from 160 to **280**.
 
 ReDisCA kwargs are identical on every branch.
 
@@ -263,7 +324,8 @@ ablation.
 
 **Component inference is complete** (5 seeds, B=1000). **Both AIRI
 temporal indexings are complete** (Nmc=100, five seeds). Fig. 18
-lowest-*p* is complete. The required simulation matrix is complete.
+lowest-*p* is complete. The **old** required simulation matrix is
+complete (160/160). The **expanded** matrix is not.
 
 **`n_sig` vs “three components” (corrected reading).**
 
@@ -286,40 +348,79 @@ mismatch to “first three statistically significant.”
 **`MEG-AIRI` (5/5 seeds), first three face components.** First-component
 random-phase *p* median ≈0.006 (range 0.005–0.008).
 
-AIRI temporal, **both** indexings (Nmc=100, five seeds): face component 1
-first *p*− interval is **≈250–355 ms**. Neither literal MATLAB indexing
-nor corrected pooled indexing recovers **65 ms** or **160 ms** as a
-first onset. The two indexings are close to each other on this contrast
-(the max/min-over-time test is the same). Paper-FWER face component 1
-starts ≈244 ms.
+Masks and sample indices were **not** moved. Times below are the
+already-computed significance intervals remapped onto two
+source-supported axes:
+
+- **A. PAPER/NOMINAL:** `-500 + sample_index` ms (1501 samples →
+  −500…+1000).
+- **B. AIRI-LITERAL-PLOTTING:** committed MATLAB
+  `time_axis = linspace(-536, 964, size(mx{1},2))` =
+  `linspace(-536, 964, 1501)`. Step is exactly 1 ms, so this is a
+  uniform **−36 ms** shift of the nominal axis.
+
+`peak_ms` stored on the intervals is the first True sample of a
+boolean significance run, **not** a component-waveform peak. The
+printed 160 ms “peak” is therefore compared as a waveform-peak claim,
+not as the saved interval-onset field.
+
+AIRI temporal, **both** indexings (Nmc=100, five seeds), MEG-AIRI
+full-epoch masks: face component 1 first *p*− interval is
+**≈250–355 ms nominal / ≈214–319 ms AIRI-literal**. That is not 65 ms
+on either axis.
 
 **`MEG-PAPER-1501` (5/5).** Face has 2 significant components.
-Paper-FWER face component 1 starts ≈113–115 ms: that interval can cover
-160 ms and 311 ms inside a long later block, but **still misses 65 ms**.
-Two-level AIRI vs binary RDMs are identical after target
-standardization.
+AIRI-half-split first face *p*− onsets are **≈105–110 ms nominal**,
+which is **≈69–74 ms on the AIRI-literal plotting axis**. That is
+close to the printed **65 ms**. Paper-FWER face component 1 starts
+≈113–115 ms nominal / ≈77–79 ms AIRI-literal: the long later block
+can cover 160 ms and 311 ms on the nominal axis (124 / 275 ms
+AIRI-literal). Do **not** say “65 ms is not reproduced” under the
+AIRI executable axis.
 
 **`MEG-PAPER-1500` (5/5).** Matches 1501 to ~10⁻⁴ in λ.
 
-| MEG timing anchor (paper) | MEG-AIRI literal / corrected | MEG-PAPER-1501 literal / corrected / FWER |
-| --- | --- | --- |
-| Face c1 ~65 ms | no / no | no / no (AIRI *p*− starts ~105–110 ms; FWER ~113 ms) |
-| Face c1 peak ~160 ms | no (AIRI *p*− ~250 ms; FWER ~244 ms) | later block after ~105–113 ms |
-| Face c1 second ~311 ms | yes, inside later block | yes, inside later block |
-| Face c2 ~218 ms | often yes | not as a first onset |
-| Tool c1 ~210 ms | often in AIRI *p*− / FWER | FWER starts ~163–202 ms |
-| Meaning c1 ~160 ms | no | FWER ~129 ms then long later block |
-| Face vs tool ~202 ms | mixed / seed-dependent | FWER ~186–202 ms (long block) |
+| MEG timing anchor (paper) | Axis | MEG-AIRI literal / corrected | MEG-PAPER-1501 literal / corrected / FWER |
+| --- | --- | --- | --- |
+| Face c1 first onset ~65 ms | nominal | no (~250 ms) | AIRI *p*− ~105–110 ms; FWER ~113 ms |
+| Face c1 first onset ~65 ms | AIRI-literal | no (~214 ms) | AIRI *p*− **~69–74 ms (near 65)**; FWER ~77–79 ms |
+| Face c1 “peak” ~160 ms | both | significance-interval onset is later (~250 / ~214); waveform peak not stored | interval after ~105 / ~69 ms can *contain* 160 nominal / 124 AIRI-literal; this is not a waveform-peak test |
+| Face c1 second ~311 ms | nominal / AIRI | yes, inside later block / 275 ms | yes, inside later block |
+| Face c2 ~218 ms | nominal / AIRI | often yes / 182 ms | not as a first onset |
+| Tool c1 ~210 ms | nominal / AIRI | often in AIRI *p*− / 174 ms | FWER ~163–202 / ~127–166 ms |
+| Meaning c1 ~160 ms | nominal / AIRI | no | FWER ~129 / ~93 ms then later block |
+| Face vs tool ~202 ms | nominal / AIRI | mixed | FWER ~186–202 / ~150–166 ms |
 
 Literal AIRI indexing (**B**) and corrected pooled (**C**) are both
 finished. Neither changes `max(aa,[],2)` / `min(aa,[],2)`. Switching
-the index lookup does not create the 65 ms face onset.
+the index lookup does not create a 65 ms onset on the **nominal**
+axis. On the **AIRI-literal plotting axis**, PAPER-1501 first face
+intervals **are near 65 ms**. MEG-AIRI full-epoch first face
+intervals remain later on both axes.
 
 ### Simulations (Figs 3–6)
 
-**Complete (160 / 160 required n_mc=100 jobs).**
-`stage_a_status.final_verdict_allowed` is true. Numbers below are the
-closed matrix, not a retune.
+**Old matrix complete (160 / 160). Expanded matrix incomplete
+(160 / 280 until review-2 jobs finish).**
+`stage_a_status.final_verdict_allowed` is **false**. Numbers below
+for SIM-P* / SIM-R1 are the preserved old matrix, not a retune.
+
+**Fig. 5 / Fig. 6 paper targets (re-read; not only “C=6 <2 cm”):**
+
+- localization-error **distributions** (Fig. 5 histograms);
+- **proportion** of cases with all four sources below 1 cm (ReDisCA
+  largest among the compared methods);
+- pattern vs true topography correlation (much better than weights);
+- weight vs true topography correlation (lower than patterns);
+- target vs empirical RDM correlation (well correlated for all four
+  sources);
+- C trend: error decreases with C; mean median **< 2 cm at C=6**.
+- Body text presents Fig. 5 at **C=5**; caption says **C=6**.
+
+SIM-P3 already recovers strong RDM correlation and a decreasing
+C-trend, but still has weak pattern correlation and C=6 median
+3.37–4.00 cm. Review-2 candidates must be scored on **all** of these
+gauges.
 
 **Fig. 4, `SIM-P1`, seed 20240904, n_mc=100** (not `--quick`):
 
@@ -629,12 +730,13 @@ No C-trend on any seed. C=6 is **7.17–7.55 cm** (SNR=0.4) and
 **not** produce paper Fig. 6. This branch’s Fig. 4 and Fig. 5/6
 are both complete. That is not a Stage A verdict.
 
-The required simulation matrix is finished. Default SIM-P1
+The **old** required simulation matrix is finished and preserved.
+The **expanded** review-2 matrix is not. Default SIM-P1
 generation (literal δ, per-trial γ, per-epoch loci, I_c=40,
 generate C=6) is hash-compatible with the original freeze.
 Review knobs are opt-in. One extra non-required SIM-P2 Fig. 5/6
 job (SNR=0.4 seed 20240904) exists on disk; it is **not** in the
-160 and is not used in the verdict.
+old 160 and is not used as a verdict.
 
 ### Source localization (Fig. 18)
 
@@ -665,9 +767,34 @@ per MEG candidate and reused.
 | MEG-AIRI | 0, 1, 2 | 0.006, 0.010, 0.017 | 4 (paper rule still takes 3, not 4) | vertex 2595, right occipital pole / lateral occipital, subcorr 0.838 | **No** |
 
 Adding the third (non-significant) PAPER-1501 component does **not**
-move the peak off the 2-D *p*<0.05 scan: same vertex 89. The
-paper-described 3-D input therefore still does not recover the published
-Fig. 18 anatomy on this OSF AD overlapping-spheres Gain.
+move the peak off the 2-D *p*<0.05 scan: same vertex 89.
+
+**Fig. 18 status is not a clean method-pipeline failure.**
+
+Paper Fig. 18 explicitly uses:
+
+- the **individual-MRI** forward model;
+- freely oriented dipoles;
+- MUSIC / first-principal-angle subspace correlation.
+
+The available operator is OSF `8rk67` / AIRI
+`headmodel_surf_os_meg.mat` overlapping-spheres Gain
+(322 × 15006, 3 orientations). The committed AIRI source-loc script
+`Redisca_source_loc_for_tools_faces_3_random_.m` loads **that same
+overlapping-spheres file**. Kozunov et al. 2018 is the MEG RSA source
+study for subject AD; it does not release a separate individual-MRI
+ReDisCA Fig. 18 matrix. No saved author individual-MRI forward was
+found in the public OSF bundle.
+
+Therefore Fig. 18 is classified as:
+
+**unresolved historical forward-model mismatch / unavailable exact
+individual-MRI forward.**
+
+Exact anatomical reproduction (rFG / insula / IPS) is **not testable**
+with the currently identified forward model. Do **not** use the
+occipital MUSIC peak alone as evidence that the frozen AIRI-SPoC
+pipeline fails.
 
 AIRI sLORETA of author-saved `A1(:,4)` and of the local MEG-AIRI
 facevstool pattern peak in lingual / occipital cortex.
@@ -676,10 +803,12 @@ the labeled `P=eye(Nsns)` branch peaks at the right occipital pole.
 
 ## 9. Which external pipeline best reproduces the complete paper?
 
-**None. A coherent fixed-AIRI-SPoC pipeline does not reproduce the
-complete paper.** The factory was never changed. Failures sit in
-external analysis / generation, or in the published claims under
-that frozen fit. This is not a ReDisCA method ablation.
+**No final verdict yet.** Stage A is incomplete until the expanded
+**280 / 280** required full jobs exist. The factory was never changed.
+Do not start method ablations.
+
+The withdrawn 160/160 closeout is still useful as a **partial**
+inventory of the old matrix. It is not a reproduction verdict.
 
 Track-by-track, with A/B/C/D labels:
 
@@ -696,24 +825,30 @@ Track-by-track, with A/B/C/D labels:
   statistically significant” (`n_sig >= 3`). MEG-PAPER-1501 /
   1500 face `n_sig=2` is **not** compatible with that sentence.
 - **MEG early timing (B literal AIRI indexing and C corrected
-  pooled; Nmc=100, five seeds).** Neither indexing recovers the
-  65 ms face onset. PAPER-1501 AIRI *p*− starts ~105–113 ms;
-  MEG-AIRI starts ~250 ms. Switching the half-split index does
-  not create 65 ms.
+  pooled; Nmc=100, five seeds; remapped, not rerun).**
+  PAPER-1501 AIRI *p*− first face onset is ~105–110 ms
+  **nominal** and **~69–74 ms on the AIRI-literal plotting
+  axis**, which is near the printed 65 ms. MEG-AIRI full-epoch
+  first face onset remains ~250 / ~214 ms. The 160 ms printed
+  “peak” is a waveform-peak claim; saved `peak_ms` is only the
+  first True sample of a significance run.
 - **Fig. 18 (A: three lowest-*p* components, 3-D MUSIC).**
   Selection is `[0, 1, 2]` on every registered seed. Peaks stay
-  occipital (left V2 for PAPER-1501; right occipital pole for
-  AIRI), not the published rFG / insula / IPS / anterior-central
-  set. Individual MRI is not public; OSF AD overlapping-spheres
-  Gain was used.
-- **Simulations (160/160).** SIM-P3 (**C**, causal Butterworth;
-  original freeze) is the **only** generation setting that is
-  not pathologically far from paper Fig. 4: SNR=0.1 AUC
-  0.836–0.862, median **0.88–1.13 cm**; SNR=0.2 AUC 0.874–0.887,
-  median **0.61–0.80 cm**. Its Fig. 5/6 has a C-trend on all
-  five seeds, but C=6 is **3.37–4.00 cm** (SNR=0.4) and
-  **3.93–4.24 cm** (SNR=0.2). Paper Fig. 6 asks for **<2 cm at
-  C=6**. SIM-P3 is therefore **not** a reproducing pipeline.
+  occipital on the **available overlapping-spheres Gain**. That
+  Gain is **not proven** to be the paper’s individual-MRI
+  forward. Status: unresolved historical forward-model mismatch.
+  Do not treat this alone as a frozen-pipeline failure.
+- **Simulations (old 160/160 complete; expanded 280 required).**
+  SIM-P3 (**C**, causal Butterworth; original freeze) is the
+  **only completed** generation setting that is not
+  pathologically far from paper Fig. 4: SNR=0.1 AUC 0.836–0.862,
+  median **0.88–1.13 cm**; SNR=0.2 AUC 0.874–0.887, median
+  **0.61–0.80 cm**. Its Fig. 5/6 has a C-trend on all five
+  seeds, but C=6 is **3.37–4.00 cm** (SNR=0.4) and
+  **3.93–4.24 cm** (SNR=0.2), pattern correlation stays weak,
+  and the <1 cm proportion is not paper-like. Review-2
+  causal-cross and Eq. (16) jobs are required before any
+  pipeline verdict.
 
   Every other required generation branch stays near-chance on
   Fig. 4 and ~7 cm on Fig. 5/6 with no paper-like C-trend:
@@ -733,14 +868,16 @@ pattern–topo corr ≈0.98. That explains why SIM-P3 Fig. 4 is
 paper-like and SIM-P1 is not. It does **not** get Fig. 6 under
 2 cm, and it does not repair N170 / MEG timing / Fig. 18.
 
-There is therefore **no** single coherent external pipeline —
-A, B, C, or D — that reproduces N170 + MEG timing + Fig. 18 +
-Figs 4–6 together under the frozen AIRI-SPoC factory. Do not
-change ReDisCA. Do not start method ablations.
+A coherent fixed-AIRI-SPoC external pipeline **cannot be declared**
+until the review-2 causal / Eq. (16) coverage is complete and scored
+on the full Fig. 5/6 gauge set. Do not change ReDisCA. Do not start
+method ablations. STOP after this revised report and wait for review
+once the expanded matrix finishes.
 
 ## 10. Remaining irreducible discrepancies or missing source information
 
-Closed list after the required matrix.
+Open list while the expanded matrix is running. The previous
+“closed list after 160/160” is withdrawn.
 
 - Face RDM corr 0.82 is **not** recovered from official
   `1_N170_erp_ar.erp` with Eq. 2 Pearson (got 0.95). Same mismatch as
@@ -748,13 +885,17 @@ Closed list after the required matrix.
 - Meaning: two adjacent 25 ms windows, not three including 375 ms.
 - Paper text “three ICA components” vs official ERP CORE subject-1
   list **2 and 7** only.
-- MEG 65 ms face onset is not produced by either AIRI indexing under
-  the fixed fit.
+- MEG 65 ms face onset: **not** produced on the nominal −500…1000
+  axis. PAPER-1501 AIRI-half-split first face intervals **are near
+  65 ms** (~69–74 ms) on the AIRI-literal plotting axis. MEG-AIRI
+  full-epoch first face intervals remain later on both axes.
 - PAPER-1501 / 1500 face `n_sig=2` does not match “first three
   statistically significant.”
-- Fig. 18 3-D MUSIC on the paper lowest-*p* input peaks occipital,
-  not rFG / insula / IPS, on the public OSF AD overlapping-spheres
-  Gain. Individual MRI is not public.
+- Fig. 18 3-D MUSIC on the paper lowest-*p* input peaks occipital
+  on the public OSF / AIRI overlapping-spheres Gain. The paper
+  forward is individual-MRI + freely oriented dipoles. Exact
+  anatomical reproduction is **not testable** with the identified
+  Gain. Status: unresolved historical forward-model mismatch.
 - Simulation mesh, numeric I_c, fs, Υ_d law, 1/f construction,
   MNE/LCMV details, and Fig. 6 SNR are unspecified. `SIM-P1` is a
   frozen MEG-like reconstruction, not an exact paper recipe.

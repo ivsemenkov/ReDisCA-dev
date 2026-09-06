@@ -12,7 +12,17 @@ from typing import Any
 from paper.reproduction.common.constants import MASTER_SEEDS
 from paper.reproduction.common.hashing import read_json, write_json
 from paper.reproduction.common.paths import RESULTS_ROOT
-from paper.reproduction.simulations.config import REVIEW_ADDED_SIM_CANDIDATES
+from paper.reproduction.meg.time_axes import (
+    paper_anchors_on_both_axes,
+    remap_interval_list,
+    stored_axis_for_block,
+)
+from paper.reproduction.simulations.config import (
+    CAUSAL_CROSS_CANDIDATES,
+    EQ16_CANDIDATES,
+    REVIEW2_SIM_CANDIDATES,
+    REVIEW_ADDED_SIM_CANDIDATES,
+)
 
 
 def _is_reproduction_payload(payload: dict[str, Any]) -> bool:
@@ -109,9 +119,10 @@ def _meg_rows() -> list[dict[str, Any]]:
                 )
                 paper = rdm.get("temporal_paper_fwer") or companion.get("temporal_paper_fwer") or {}
                 n_sig = rdm.get("n_significant_p05")
+                cand = payload["candidate_id"]
                 rows.append(
                     {
-                        "candidate": payload["candidate_id"],
+                        "candidate": cand,
                         "seed": payload["seed"],
                         "rdm": rdm_key,
                         "n_samples": payload.get("n_samples"),
@@ -127,26 +138,26 @@ def _meg_rows() -> list[dict[str, Any]]:
                             "p_maxabs", []
                         )[:4],
                         "temporal_airi_in_seed_json_is_corrected_not_literal": legacy_only,
-                        **_temporal_block("airi_corrected", cor),
-                        **_temporal_block("airi_literal", lit),
-                        "paper_c1": _first_intervals((paper.get("intervals") or [None])[0]),
-                        "paper_c2": _first_intervals(
-                            (paper.get("intervals") or [None, None])[1]
-                            if len(paper.get("intervals") or []) > 1
-                            else None
-                        ),
-                        "paper_c3": _first_intervals(
-                            (paper.get("intervals") or [None, None, None])[2]
-                            if len(paper.get("intervals") or []) > 2
-                            else None
-                        ),
+                        **_temporal_block("airi_corrected", cor, candidate_id=cand),
+                        **_temporal_block("airi_literal", lit, candidate_id=cand),
+                        **_paper_fwer_block(paper, candidate_id=cand),
                         "paper_qualitative": rdm.get("paper_qualitative"),
                     }
                 )
     return rows
 
 
-def _temporal_block(prefix: str, block: dict[str, Any] | None) -> dict[str, Any]:
+def _remap_first(intervals: list[dict[str, float]] | None, *, candidate_id: str, block: dict[str, Any] | None) -> list[dict[str, Any]]:
+    first = _first_intervals(intervals)
+    return remap_interval_list(first, stored_axis=stored_axis_for_block(block, candidate_id=candidate_id))
+
+
+def _temporal_block(
+    prefix: str,
+    block: dict[str, Any] | None,
+    *,
+    candidate_id: str,
+) -> dict[str, Any]:
     block = block or {}
     pplus = block.get("intervals_pplus") or []
     pminus = block.get("intervals_pminus") or []
@@ -154,13 +165,29 @@ def _temporal_block(prefix: str, block: dict[str, Any] | None) -> dict[str, Any]
         f"{prefix}_indexing": block.get("indexing"),
         f"{prefix}_role": block.get("role"),
         f"{prefix}_time_axis": block.get("time_axis"),
+        f"{prefix}_stored_ms_are_nominal": True,
         f"{prefix}_Nmc": block.get("Nmc"),
-        f"{prefix}_pplus_c1": _first_intervals(pplus[0] if pplus else None),
-        f"{prefix}_pminus_c1": _first_intervals(pminus[0] if pminus else None),
-        f"{prefix}_pplus_c2": _first_intervals(pplus[1] if len(pplus) > 1 else None),
-        f"{prefix}_pminus_c2": _first_intervals(pminus[1] if len(pminus) > 1 else None),
-        f"{prefix}_pplus_c3": _first_intervals(pplus[2] if len(pplus) > 2 else None),
-        f"{prefix}_pminus_c3": _first_intervals(pminus[2] if len(pminus) > 2 else None),
+        f"{prefix}_pplus_c1": _remap_first(pplus[0] if pplus else None, candidate_id=candidate_id, block=block),
+        f"{prefix}_pminus_c1": _remap_first(pminus[0] if pminus else None, candidate_id=candidate_id, block=block),
+        f"{prefix}_pplus_c2": _remap_first(pplus[1] if len(pplus) > 1 else None, candidate_id=candidate_id, block=block),
+        f"{prefix}_pminus_c2": _remap_first(pminus[1] if len(pminus) > 1 else None, candidate_id=candidate_id, block=block),
+        f"{prefix}_pplus_c3": _remap_first(pplus[2] if len(pplus) > 2 else None, candidate_id=candidate_id, block=block),
+        f"{prefix}_pminus_c3": _remap_first(pminus[2] if len(pminus) > 2 else None, candidate_id=candidate_id, block=block),
+    }
+
+
+def _paper_fwer_block(paper: dict[str, Any], *, candidate_id: str) -> dict[str, Any]:
+    intervals = paper.get("intervals") or []
+    return {
+        "paper_c1": _remap_first(
+            intervals[0] if intervals else None, candidate_id=candidate_id, block=paper
+        ),
+        "paper_c2": _remap_first(
+            intervals[1] if len(intervals) > 1 else None, candidate_id=candidate_id, block=paper
+        ),
+        "paper_c3": _remap_first(
+            intervals[2] if len(intervals) > 2 else None, candidate_id=candidate_id, block=paper
+        ),
     }
 
 
@@ -271,7 +298,12 @@ def _source_rows() -> list[dict[str, Any]]:
 
 
 def _required_sim_jobs() -> list[tuple[str, str, float, int]]:
-    """(candidate, experiment_key, snr, seed) that must exist before a verdict."""
+    """(candidate, experiment_key, snr, seed) that must exist before a verdict.
+
+    The original 160-job matrix remains required. Review-2 causal-cross
+    and Eq. (16) jobs are additional required coverage. Completeness is
+    not the old 160/160 count.
+    """
     seeds = list(MASTER_SEEDS)
     jobs: list[tuple[str, str, float, int]] = []
     for seed in seeds:
@@ -292,6 +324,14 @@ def _required_sim_jobs() -> list[tuple[str, str, float, int]]:
                 jobs.append((cand, "fig5_fig6", snr, seed))
         for snr in (0.4, 0.2):
             jobs.append(("SIM-P8", "fig5_fig6", snr, seed))
+        for cand in CAUSAL_CROSS_CANDIDATES:
+            for snr in (0.2, 0.1):
+                jobs.append((cand, "fig4", snr, seed))
+            for snr in (0.4, 0.2):
+                jobs.append((cand, "fig5_fig6", snr, seed))
+        for cand in EQ16_CANDIDATES:
+            for snr in (0.4, 0.2):
+                jobs.append((cand, "fig5_fig6", snr, seed))
     return jobs
 
 
@@ -341,9 +381,12 @@ def _completeness(sim_rows: list[dict[str, Any]], source_rows: list[dict[str, An
         "missing_airi_literal_temporal": temporal_missing,
         "temporal_literal_present": temporal_literal_done,
         "note": (
-            "Do not declare a reproducing pipeline or failure until the "
-            "required candidate runs exist. --quick files are excluded."
+            "Stage A incomplete / no final verdict yet until the expanded "
+            "required set is complete. The old 160/160 count is only the "
+            "pre-review-2 matrix. --quick files are excluded."
         ),
+        "old_required_sim_jobs": 160,
+        "review2_added_sim_candidates": list(REVIEW2_SIM_CANDIDATES),
     }
 
 
@@ -374,6 +417,38 @@ def write_summary() -> Path:
                 "meaning_c3": "early ~182 ms and late ~675 ms",
                 "facevstool": "first major tool-vs-face difference ~202 ms",
             },
+            "meg_timing_both_axes": paper_anchors_on_both_axes(),
+            "fig5_fig6_targets": {
+                "localization_error_distributions": (
+                    "Fig. 5 histograms of localization error for four sources; "
+                    "ReDisCA has the largest proportion of cases where all four "
+                    "sources are localized with errors below 1 cm"
+                ),
+                "proportion_below_1cm": "largest among compared methods (qualitative)",
+                "pattern_vs_true_topography": (
+                    "much better aligned with true topographies than weights"
+                ),
+                "weight_vs_true_topography": "lower than pattern–topo correlation",
+                "target_vs_empirical_rdm": "well correlated for all four sources",
+                "c_trend": (
+                    "mean median localization error decreases with C; "
+                    "< 2 cm at C=6 (Fig. 6)"
+                ),
+                "body_vs_caption_C": "body Fig. 5 C=5; caption Fig. 5 C=6",
+                "do_not_reduce_to": "only C=6 < 2 cm",
+            },
+            "fig18_forward_model": {
+                "paper": "individual-MRI forward; freely oriented dipoles; MUSIC / first principal angle",
+                "available": (
+                    "OSF 8rk67 / AIRI headmodel_surf_os_meg overlapping-spheres "
+                    "Gain (322 x 15006). AIRI source-loc script loads this file."
+                ),
+                "status": (
+                    "unresolved historical forward-model mismatch / "
+                    "unavailable exact individual-MRI forward"
+                ),
+                "do_not_treat_as": "clean method-pipeline failure of frozen AIRI-SPoC",
+            },
         },
     }
     dest = RESULTS_ROOT / "stage_a_summary.json"
@@ -391,6 +466,8 @@ def _refresh_coverage(completeness: dict[str, Any], sim_rows: list[dict[str, Any
     cov["complete_sim"] = completeness["n_completed_sim_jobs"]
     cov["required_sim"] = completeness["n_required_sim_jobs"]
     cov["missing_sim"] = completeness["missing_simulations"]
+    cov["review2_addendum"] = "paper/reproduction_manifest_addendum_review2.json"
+    cov["old_required_sim"] = completeness.get("old_required_sim_jobs", 160)
     tracks = cov.setdefault("tracks", {})
     sims = tracks.setdefault("simulations", {})
     sims["status"] = "complete" if completeness["stage_a_complete"] else "incomplete"

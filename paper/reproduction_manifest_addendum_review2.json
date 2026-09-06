@@ -1,0 +1,160 @@
+{
+  "kind": "stage_a_review2_addendum",
+  "does_not_replace": [
+    "paper/reproduction_manifest.json",
+    "paper/reproduction_manifest_addendum.json"
+  ],
+  "added_after_stage_a_review": true,
+  "added_at_utc_date": "2026-09-06",
+  "not_pre_registered": true,
+  "original_manifest_frozen_before_full_results": true,
+  "first_addendum_not_rewritten": true,
+  "method_unchanged": {
+    "id": "AIRI_SPOC",
+    "kwargs": {
+      "n_components": null,
+      "demean_time": true,
+      "divide_by_t_minus_1": true,
+      "directed_pairs": true,
+      "aggregation": "mean",
+      "solver": "whitening",
+      "rank": null,
+      "rank_tol": 1e-6
+    }
+  },
+  "why_this_addendum_exists": "The completed 160/160 matrix and the first Stage A closeout were premature. Causal Butterworth (SIM-P3) is the only generation branch that produces paper-like Fig. 4. The first-review one-factor candidates SIM-P4/P5/P6/P7 and composite SIM-R1 all inherit the original ZERO-PHASE branch, so they do not test whether remaining Fig. 5/6 discrepancies disappear under a coherent CAUSAL reconstruction. These branches were added after observing SIM-P3. They are not ReDisCA ablations. Combinations were declared before seeing their results.",
+  "candidates_added": [
+    {
+      "id": "SIM-C1",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {"I_c": 100},
+      "category": "C_source_supported_ambiguity",
+      "why_necessary_after_SIM-P3": "I_c=100 was already a source-supported reading (Fig. 4 panel titles). Testing it only on the now-known-bad zero-phase branch is insufficient.",
+      "source": "Fig. 4 panel titles vs caption; paper does not print I_c"
+    },
+    {
+      "id": "SIM-C2",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {"delta_mode": "norm_15pct"},
+      "category": "D_post_review_forensic_because_literal_is_pathological",
+      "not_paper_faithful": true,
+      "why_necessary_after_SIM-P3": "Literal high-D δ remains unresolved. SIM-P3 recovers Fig. 4 localization but still has weak pattern–topo correlation on Fig. 5/6. The forensic norm-15% reading was previously tested only on zero-phase.",
+      "source": "Published Σ=σ²I, σ=0.15||g|| vs preprint variance-equal-to-15%-of-norm"
+    },
+    {
+      "id": "SIM-C3",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {"snr_gamma_mode": "global"},
+      "category": "C_source_supported_ambiguity",
+      "why_necessary_after_SIM-P3": "Eq. (15)–(16) write a single γ; global RMS scaling was previously crossed only with zero-phase.",
+      "source": "Published §4.1 / Eq. (15)–(16) singular γ"
+    },
+    {
+      "id": "SIM-C4",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {"noise_loci_mode": "fixed"},
+      "category": "C_source_supported_ambiguity",
+      "why_necessary_after_SIM-P3": "Fixed 1000 noise loci vs per-epoch redraw remains a source-supported ambiguity; previously tested only on zero-phase.",
+      "source": "Paper §2.4.2 “1000 randomly seeded” cortical 1/f sources"
+    },
+    {
+      "id": "SIM-CR1",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {
+        "I_c": 100,
+        "delta_mode": "norm_15pct",
+        "snr_gamma_mode": "global",
+        "noise_loci_mode": "fixed"
+      },
+      "category": "D_post_review_forensic_because_literal_is_pathological",
+      "not_paper_faithful": true,
+      "why_necessary_after_SIM-P3": "One coherent causal composite declared before seeing results. Not a Cartesian product substitute for the one-factor SIM-C* branches. Not tuned after seeing which combo matches paper Fig. 5/6.",
+      "source": "Same four external ambiguities as SIM-R1, now on the causal Butterworth branch that actually produces paper-like Fig. 4"
+    },
+    {
+      "id": "EQ16-CAUSAL",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "SIM-P3",
+      "inheritance_chain": ["SIM-P1", "SIM-P3"],
+      "values_changed_vs_SIM-P3": {"eq16_single_matrix": true},
+      "category": "C_source_supported_ambiguity",
+      "fig4": "not applicable; Eq. (15) is trial-indexed",
+      "exact_assumptions": {
+        "equation_reading": "Eq. (16) writes X_c = sum_p (g_true_p + delta_p) s_cp^T + gamma Upsilon_x with no trial index l and no I_c. Text says construction matched the first experiment except P=4, so both the trial-average reading and this single-matrix reading remain open.",
+        "X_c": "one sensor matrix per condition per Monte-Carlo iteration",
+        "I_c_averaging": "none; I_c is unused",
+        "Upsilon_x": "newly generated independently per condition (one N×T brain-noise matrix per X_c). Not shared across conditions. Eq. (16) does not index Upsilon_x by c; per-condition generation is the conservative reading of “one matrix per X_c”.",
+        "C5": "generated as the first five conditions of a C=6 draw (same as SIM-P3 / Fig. 6 subset reading). Not C=5-from-scratch.",
+        "P": 4,
+        "RDM": "same theoretical / noisy RDM construction as SIM-P3",
+        "ReDisCA": "frozen AIRI-SPoC factory",
+        "not_applied_to_fig4": true
+      },
+      "why_necessary_after_SIM-P3": "Current Python always builds I_c × C noise epochs and averages before ReDisCA. That is only one reading of an equation that has no trial index. Because causal filtering is the only paper-like Fig. 4 branch, the single-matrix reading must be tested on the causal branch."
+    },
+    {
+      "id": "EQ16-CAUSAL-D",
+      "track": "simulations",
+      "added_after_stage_a_review": true,
+      "not_pre_registered": true,
+      "inherits": "EQ16-CAUSAL",
+      "inheritance_chain": ["SIM-P1", "SIM-P3", "EQ16-CAUSAL"],
+      "values_changed_vs_EQ16-CAUSAL": {"delta_mode": "norm_15pct"},
+      "category": "D_post_review_forensic_because_literal_is_pathological",
+      "not_paper_faithful": true,
+      "why_necessary_after_SIM-P3": "Source inspection still leaves the δ reading unresolved. Literal Σ=σ²I is pathological in 204-D and SIM-P3 still has weak pattern correlation. This is the coherent causal + Eq. (16) + norm-15% branch, declared before seeing its result.",
+      "exact_assumptions": "Same as EQ16-CAUSAL except ||δ|| = 0.15||g||"
+    }
+  ],
+  "meg_time_axis_reinterpretation": {
+    "added_after_stage_a_review": true,
+    "do_not_rerun_stochastic_tests": true,
+    "do_not_move_masks": true,
+    "nominal_axis": "-500 ms + sample_index at 1000 Hz (dataset metadata, −500…+1000 for 1501 samples)",
+    "airi_literal_plotting_axis": "linspace(-536, 964, 1501) from Redisca_tools_faces_3_random_norm_correct.m @ 15bc19cdc76989da202714b257f6de4d26a42c51",
+    "shift_ms": -36,
+    "airi_window": "trange 600:1500 (1-based); half-split still uses the full filtered epoch; stored interval times remain nominal physical times of those samples"
+  },
+  "fig18_forward_model_reclassification": {
+    "added_after_stage_a_review": true,
+    "paper": "Fig. 18 uses the individual-MRI forward model, freely oriented dipoles, MUSIC / first-principal-angle subspace correlation",
+    "available_gain": "OSF 8rk67 subject-AD tess_cortex_pial_low + headmodel_surf_os_meg overlapping-spheres Gain",
+    "airi_source_loc_script": "Redisca_source_loc_for_tools_faces_3_random_.m loads data/headmodel_surf_os_meg.mat — the same overlapping-spheres file, not a named individual-MRI BEM/FEM operator",
+    "kozunov_2018": "source-space RSA on subject AD; does not release a separate individual-MRI ReDisCA Fig. 18 Gain",
+    "status": "unresolved historical forward-model mismatch / unavailable exact individual-MRI forward",
+    "anatomical_reproduction_testable": false,
+    "do_not_use_as_evidence_that_fixed_airi_spoc_fails": true
+  },
+  "fig5_fig6_paper_targets_reread": {
+    "localization_error_distributions": "Fig. 5 histograms; ReDisCA has the largest proportion of cases with all four sources below 1 cm",
+    "proportion_below_1cm": "qualitative “largest proportion … below 1 cm”",
+    "pattern_vs_true_topography": "much better aligned than weights",
+    "weight_vs_true_topography": "lower than pattern correlation",
+    "target_vs_empirical_rdm": "well correlated for all four sources",
+    "c_trend": "error decreases with C; mean median < 2 cm at C=6",
+    "body_vs_caption_C": "body Fig. 5 C=5; caption C=6",
+    "do_not_reduce_target_to": "only C=6 < 2 cm"
+  }
+}

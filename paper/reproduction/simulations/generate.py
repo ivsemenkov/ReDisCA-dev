@@ -399,19 +399,40 @@ def simulate_multi_source(
             delta_mode=config.delta_mode,
         )
     signal = np.einsum("pn,pct->cnt", topographies, sources)
-    noise = cortical_one_over_f_sensor_noise(
-        forward.gain,
-        rng,
-        n_epochs=config.i_c * n_conditions,
-        n_times=config.n_times,
-        n_sources=config.n_noise_sources,
-        fs_hz=config.fs_hz,
-        exponent=config.pink_psd_exponent,
-        loci_mode=config.noise_loci_mode,
-    ).reshape(config.i_c, n_conditions, forward.n_channels, config.n_times)
-    trials, gammas = mix_signal_and_noise(
-        signal, noise, snr, gamma_mode=config.snr_gamma_mode
-    )
+    if config.eq16_single_matrix:
+        # Literal / near-literal Eq. (16): one X_c per condition, no I_c.
+        # Noise is generated independently per condition (one Upsilon_x
+        # matrix per X_c). Not shared across conditions. I_c is unused.
+        noise = cortical_one_over_f_sensor_noise(
+            forward.gain,
+            rng,
+            n_epochs=n_conditions,
+            n_times=config.n_times,
+            n_sources=config.n_noise_sources,
+            fs_hz=config.fs_hz,
+            exponent=config.pink_psd_exponent,
+            loci_mode=config.noise_loci_mode,
+        )
+        noise = noise.reshape(1, n_conditions, forward.n_channels, config.n_times)
+        trials, gammas = mix_signal_and_noise(
+            signal, noise, snr, gamma_mode=config.snr_gamma_mode
+        )
+        averages = np.asarray(trials[0], dtype=np.float64)
+    else:
+        noise = cortical_one_over_f_sensor_noise(
+            forward.gain,
+            rng,
+            n_epochs=config.i_c * n_conditions,
+            n_times=config.n_times,
+            n_sources=config.n_noise_sources,
+            fs_hz=config.fs_hz,
+            exponent=config.pink_psd_exponent,
+            loci_mode=config.noise_loci_mode,
+        ).reshape(config.i_c, n_conditions, forward.n_channels, config.n_times)
+        trials, gammas = mix_signal_and_noise(
+            signal, noise, snr, gamma_mode=config.snr_gamma_mode
+        )
+        averages = trials.mean(axis=0)
     return MultiSourceDraw(
         vertices=vertices,
         mixings=mixings,
@@ -421,7 +442,7 @@ def simulate_multi_source(
         topographies=topographies,
         g_true=g_true,
         trials=trials,
-        averages=trials.mean(axis=0),
+        averages=averages,
         noiseless_average=signal,
         gammas=gammas,
         snr=float(snr),

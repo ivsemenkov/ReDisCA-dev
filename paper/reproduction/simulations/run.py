@@ -19,6 +19,8 @@ from paper.reproduction.common.paths import RESULTS_ROOT, SOURCE_MODEL_DIR, ARRA
 from paper.reproduction.common.provenance import capture_run
 from paper.reproduction.common.rng import spawned_generator
 from paper.reproduction.simulations.config import (
+    ALL_SIM_CANDIDATES,
+    FIG4_SKIP_CANDIDATES,
     PAPER_SNR_FIG4_HIGH,
     PAPER_SNR_FIG4_LOW,
     PAPER_SNR_FIG5_HIGH,
@@ -203,6 +205,8 @@ def run_fig4(
             "snr_gamma_mode": config.snr_gamma_mode,
             "noise_loci_mode": config.noise_loci_mode,
             "i_c": config.i_c,
+            "butter_zero_phase": config.butter_zero_phase,
+            "eq16_single_matrix": config.eq16_single_matrix,
         },
         "config": config.to_dict(),
         "redisca_kwargs": dict(AIRI_SPOC_KWARGS),
@@ -328,6 +332,18 @@ def run_fig5_fig6(
             "noise_loci_mode": config.noise_loci_mode,
             "fig5_generate_c": config.fig5_generate_c,
             "i_c": config.i_c,
+            "butter_zero_phase": config.butter_zero_phase,
+            "eq16_single_matrix": config.eq16_single_matrix,
+            "eq16_c5_from": (
+                "C=6 generated then sliced to first five conditions"
+                if config.fig5_generate_c == 6
+                else "C generated from scratch"
+            ),
+            "eq16_noise_scope": (
+                "one newly generated Upsilon_x per condition; not shared"
+                if config.eq16_single_matrix
+                else "I_c trials per condition, then average"
+            ),
         },
         "eval_conditions": list(eval_conditions),
         "mixing_seed": mix_seed,
@@ -408,18 +424,8 @@ def run_candidate(
     config = QUICK_CONFIG if quick else config_for_candidate(candidate_id)
     written = []
     skipped = []
-    run_fig4_exps = "fig4" in experiments and candidate_id != "SIM-P8"
-    run_fig5_exps = "fig5" in experiments and candidate_id in {
-        "SIM-P1",
-        "SIM-P2",
-        "SIM-P3",
-        "SIM-P4",
-        "SIM-P5",
-        "SIM-P6",
-        "SIM-P7",
-        "SIM-P8",
-        "SIM-R1",
-    }
+    run_fig4_exps = "fig4" in experiments and candidate_id not in FIG4_SKIP_CANDIDATES
+    run_fig5_exps = "fig5" in experiments and candidate_id in set(ALL_SIM_CANDIDATES)
     fig4_snrs = (PAPER_SNR_FIG4_HIGH, PAPER_SNR_FIG4_LOW)
     fig5_snrs = (PAPER_SNR_FIG5_HIGH, PAPER_SNR_FIG5_LOW)
     if snrs is not None:
@@ -471,7 +477,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--candidate",
         default="SIM-P1",
-        choices=["SIM-P1", "SIM-P2", "SIM-P3", "SIM-P4", "SIM-P5", "SIM-P6", "SIM-P7", "SIM-P8", "SIM-R1"],
+        choices=list(ALL_SIM_CANDIDATES),
     )
     parser.add_argument("--seeds", nargs="*", type=int, default=list(MASTER_SEEDS))
     parser.add_argument("--quick", action="store_true", help="NON-REPRODUCTION: reduced MC/I_c")

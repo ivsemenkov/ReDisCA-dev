@@ -4,11 +4,17 @@ from __future__ import annotations
 
 import numpy as np
 
-from paper.reproduction.common.method import fit_redisca
+from paper.reproduction.common.method import AIRI_SPOC_KWARGS, fit_redisca
 from paper.reproduction.simulations.config import (
+    CAUSAL_CROSS_CANDIDATES,
+    EQ16_CANDIDATES,
+    REVIEW2_SIM_CANDIDATES,
     REVIEW_ADDED_SIM_CANDIDATES,
+    SimulationConfig,
     config_for_candidate,
 )
+from paper.reproduction.simulations.forward_model import ForwardModel
+from paper.reproduction.simulations.generate import simulate_multi_source
 from paper.reproduction.simulations.generate import (
     add_symmetric_rdm_noise,
     cortical_one_over_f_sensor_noise,
@@ -113,6 +119,8 @@ def test_review_candidates_are_labeled_and_do_not_change_p1_defaults():
     assert r1.i_c == 100
     assert "SIM-P4" in REVIEW_ADDED_SIM_CANDIDATES
     assert "SIM-P1" not in REVIEW_ADDED_SIM_CANDIDATES
+    assert "SIM-C1" in REVIEW_ADDED_SIM_CANDIDATES
+    assert "EQ16-CAUSAL" in REVIEW2_SIM_CANDIDATES
 
 
 def test_literal_delta_rng_matches_original_formula():
@@ -181,3 +189,142 @@ def test_unknown_candidate_is_rejected():
         assert "SIM-P9" in str(exc)
     else:
         raise AssertionError("expected ValueError")
+
+
+def test_causal_cross_candidates_inherit_sim_p3_and_only_declared_knobs():
+    p3 = config_for_candidate("SIM-P3")
+    assert p3.butter_zero_phase is False
+    expected = {
+        "SIM-C1": {"i_c": 100},
+        "SIM-C2": {"delta_mode": "norm_15pct"},
+        "SIM-C3": {"snr_gamma_mode": "global"},
+        "SIM-C4": {"noise_loci_mode": "fixed"},
+        "SIM-CR1": {
+            "i_c": 100,
+            "delta_mode": "norm_15pct",
+            "snr_gamma_mode": "global",
+            "noise_loci_mode": "fixed",
+        },
+    }
+    compare_keys = (
+        "i_c",
+        "delta_mode",
+        "snr_gamma_mode",
+        "noise_loci_mode",
+        "butter_zero_phase",
+        "eq16_single_matrix",
+        "fig5_generate_c",
+        "n_times",
+        "n_noise_sources",
+        "sigma_delta_rel",
+    )
+    for cid in CAUSAL_CROSS_CANDIDATES:
+        cfg = config_for_candidate(cid)
+        assert cfg.butter_zero_phase is False
+        assert cfg.eq16_single_matrix is False
+        for key in compare_keys:
+            if key in expected[cid] or key == "butter_zero_phase":
+                continue
+            assert getattr(cfg, key) == getattr(p3, key), (cid, key)
+        for key, value in expected[cid].items():
+            assert getattr(cfg, key) == value
+    assert AIRI_SPOC_KWARGS["solver"] == "whitening"
+    assert AIRI_SPOC_KWARGS["directed_pairs"] is True
+    assert AIRI_SPOC_KWARGS["aggregation"] == "mean"
+
+
+def test_eq16_candidates_are_causal_multi_source_only():
+    for cid in EQ16_CANDIDATES:
+        cfg = config_for_candidate(cid)
+        assert cfg.butter_zero_phase is False
+        assert cfg.eq16_single_matrix is True
+        assert cfg.fig5_generate_c == 6
+    assert config_for_candidate("EQ16-CAUSAL").delta_mode == "literal_covariance"
+    assert config_for_candidate("EQ16-CAUSAL-D").delta_mode == "norm_15pct"
+
+
+def _toy_forward(n_channels: int = 8, n_vertices: int = 12) -> ForwardModel:
+    rng = np.random.default_rng(0)
+    vertices = rng.normal(size=(n_vertices, 3))
+    gain = rng.normal(size=(n_channels, n_vertices))
+    return ForwardModel(
+        gain=gain,
+        vertices=vertices,
+        normals=np.tile(np.array([0.0, 0.0, 1.0]), (n_vertices, 1)),
+        channel_index=np.arange(n_channels),
+        n_channels=n_channels,
+        n_vertices=n_vertices,
+        tess_path="toy",
+        headmodel_path="toy",
+        tess_sha256=None,
+        headmodel_sha256=None,
+        surface_file="toy",
+        meg_method="toy",
+        notes=("toy forward for unit tests",),
+    )
+
+
+def test_eq16_single_matrix_has_no_hidden_ic_averaging():
+    forward = _toy_forward()
+    mixings = np.random.default_rng(1).standard_normal((4, 6, 6))
+    cfg = SimulationConfig(
+        n_times=32,
+        i_c=40,
+        n_noise_sources=3,
+        butter_zero_phase=False,
+        eq16_single_matrix=True,
+        n_mc=1,
+    )
+    draw = simulate_multi_source(
+        forward,
+        np.random.default_rng(2),
+        mixings,
+        config=cfg,
+        snr=0.4,
+        n_conditions=6,
+    )
+    assert draw.trials.shape[0] == 1
+    assert draw.averages.shape == (6, forward.n_channels, 32)
+    assert np.allclose(draw.averages, draw.trials[0])
+    assert draw.trials.shape[0] != cfg.i_c
+    cfg_other_ic = SimulationConfig(
+        n_times=32,
+        i_c=100,
+        n_noise_sources=3,
+        butter_zero_phase=False,
+        eq16_single_matrix=True,
+        n_mc=1,
+    )
+    draw_other = simulate_multi_source(
+        forward,
+        np.random.default_rng(2),
+        mixings,
+        config=cfg_other_ic,
+        snr=0.4,
+        n_conditions=6,
+    )
+    assert np.allclose(draw.averages, draw_other.averages)
+    assert np.allclose(draw.trials, draw_other.trials)
+
+
+def test_trial_average_path_still_uses_ic():
+    forward = _toy_forward()
+    mixings = np.random.default_rng(1).standard_normal((4, 6, 6))
+    cfg = SimulationConfig(
+        n_times=16,
+        i_c=5,
+        n_noise_sources=2,
+        butter_zero_phase=False,
+        eq16_single_matrix=False,
+        n_mc=1,
+    )
+    draw = simulate_multi_source(
+        forward,
+        np.random.default_rng(3),
+        mixings,
+        config=cfg,
+        snr=0.4,
+        n_conditions=6,
+    )
+    assert draw.trials.shape[0] == 5
+    assert np.allclose(draw.averages, draw.trials.mean(axis=0))
