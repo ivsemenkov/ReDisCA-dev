@@ -411,10 +411,11 @@ generation setting under the frozen AIRI-SPoC factory that is
 not pathologically far from the paper Fig. 4 picture, and it is
 stable across the pre-registered seeds.
 
-First addendum Fig. 4 SNR=0.2 file (seed 20240904): AUC **0.877**,
-TPR@0.01 **0.364**, median **0.63 cm**. Remaining SNR=0.2 seeds
-and Figs 5–6 are **not** finished. Do not treat this as a
-reproducing pipeline.
+Fig. 4 SNR=0.2 is now also complete on all five seeds:
+AUC 0.874–0.887, TPR@0.01 0.348–0.382, median loc. 0.61–0.80 cm.
+
+Figs 5–6 under the same causal generation have started and are
+**not** finished. Do not treat this as a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
