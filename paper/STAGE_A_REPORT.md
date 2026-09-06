@@ -257,7 +257,33 @@ Required coverage for these retained candidates:
 - EQ16-*: Fig. 5/6 both SNRs × 5 seeds
 - n_mc=100
 
-That expands the denominator from 160 to **280**.
+That expands the denominator from 160 to **280**. Current count:
+**172 / 280** (`final_verdict_allowed` false).
+
+**Interim review-2 results (not a verdict).**
+
+`SIM-C2` Fig. 5/6 is complete (both SNRs × 5 seeds, n_mc=100).
+This is the first *causal* crossing of the forensic norm-15% δ
+reading. Compared with zero-phase SIM-P5 (~7.1–7.7 cm, no C-trend)
+and causal SIM-P3 (C=6 3.37–4.00 cm, weak pattern corr):
+
+| SNR | C=3…6 mean median (cm, 5-seed range at C=6) | C=6 frac &lt;1 cm | C=6 pattern / weight / RDM |
+| --- | --- | --- | --- |
+| 0.4 | decreasing; C=6 **2.28–2.92 cm** | 0.46–0.53 | 0.65–0.69 / ~0.01 / ~0.95 |
+| 0.2 | decreasing; C=6 **2.30–3.04 cm** | 0.45–0.53 | 0.64–0.68 / ~0.005 / ~0.95 |
+
+C-trend is present on every seed. Pattern ≫ weight, RDM recovery is
+strong. C=6 is closer to paper Fig. 6 than SIM-P3 but **still not
+&lt;2 cm**. The &lt;1 cm proportion is substantial (~half of source
+fits), not “almost all four sources below 1 cm.” Fig. 4 for SIM-C2
+is not run yet.
+
+`SIM-CR1` Fig. 5/6: 2 / 10 required jobs (seed 20240904 both SNRs).
+C=6 **2.57 cm** (SNR=0.4) and **2.69 cm** (SNR=0.2); same qualitative
+picture as SIM-C2 so far. I_c=100 jobs are slower and memory-heavy;
+workers were restarted after one OOM kill.
+
+EQ16-* and SIM-C1/C3/C4 have no completed required jobs yet.
 
 ReDisCA kwargs are identical on every branch.
 
@@ -401,7 +427,7 @@ intervals remain later on both axes.
 ### Simulations (Figs 3–6)
 
 **Old matrix complete (160 / 160). Expanded matrix incomplete
-(160 / 280 until review-2 jobs finish).**
+(172 / 280).**
 `stage_a_status.final_verdict_allowed` is **false**. Numbers below
 for SIM-P* / SIM-R1 are the preserved old matrix, not a retune.
 
