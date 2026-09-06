@@ -20300,6 +20300,106 @@
       },
       "seed": 20240908,
       "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.002506265664160401,
+          "mean_median_error_cm": 7.299454919534843,
+          "mean_pattern_corr": 0.17307447834700507,
+          "mean_rdm_corr": 0.21297812991037712,
+          "mean_weight_corr": 0.0030916191274477063
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.320085837693187,
+          "mean_pattern_corr": 0.18072087492012748,
+          "mean_rdm_corr": 0.30706401953446494,
+          "mean_weight_corr": 0.002445360281166575
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0075,
+          "mean_median_error_cm": 7.30923475040945,
+          "mean_pattern_corr": 0.17758745781577973,
+          "mean_rdm_corr": 0.27530804621336746,
+          "mean_weight_corr": 0.002644105314462418
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.005,
+          "mean_median_error_cm": 7.536353101941487,
+          "mean_pattern_corr": 0.17289931916390103,
+          "mean_rdm_corr": 0.2759666526256155,
+          "mean_weight_corr": 0.002097303330175885
+        }
+      },
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "fixed",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-R1/fig5_fig6_snr0.2_seed20240904.json",
+      "redisca_roc": null,
+      "seed": 20240904,
+      "snr": 0.2
+    },
+    {
+      "added_after_stage_a_review": true,
+      "by_C": {
+        "3": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.498702958265088,
+          "mean_pattern_corr": 0.1754129546238569,
+          "mean_rdm_corr": 0.2467228744366542,
+          "mean_weight_corr": 0.002473654240871802
+        },
+        "4": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.470703351336033,
+          "mean_pattern_corr": 0.18387144260949145,
+          "mean_rdm_corr": 0.35771624767662147,
+          "mean_weight_corr": 0.002613576965118947
+        },
+        "5": {
+          "frac_error_lt_1cm": 0.0,
+          "mean_median_error_cm": 7.657173722403249,
+          "mean_pattern_corr": 0.18081602924776446,
+          "mean_rdm_corr": 0.37231096246319767,
+          "mean_weight_corr": 0.00240681198007148
+        },
+        "6": {
+          "frac_error_lt_1cm": 0.0025,
+          "mean_median_error_cm": 7.645897150279385,
+          "mean_pattern_corr": 0.17475176269176104,
+          "mean_rdm_corr": 0.3734226490912239,
+          "mean_weight_corr": 0.0021026776975242955
+        }
+      },
+      "candidate": "SIM-R1",
+      "experiment": "fig5_fig6_multi_source",
+      "generated_C": 6,
+      "generation_modes": {
+        "delta_mode": "norm_15pct",
+        "fig5_generate_c": 6,
+        "i_c": 100,
+        "noise_loci_mode": "fixed",
+        "snr_gamma_mode": "global"
+      },
+      "mean_loc_error_cm": null,
+      "median_loc_error_cm": null,
+      "n_mc": 100,
+      "path": "simulations/SIM-R1/fig5_fig6_snr0.4_seed20240904.json",
+      "redisca_roc": null,
+      "seed": 20240904,
+      "snr": 0.4
     }
   ],
   "source_localization": [
@@ -21883,18 +21983,6 @@
     "missing_fig18_lowestp": [],
     "missing_simulations": [
       {
-        "candidate": "SIM-R1",
-        "experiment": "fig5_fig6",
-        "seed": 20240904,
-        "snr": 0.4
-      },
-      {
-        "candidate": "SIM-R1",
-        "experiment": "fig5_fig6",
-        "seed": 20240904,
-        "snr": 0.2
-      },
-      {
         "candidate": "SIM-P8",
         "experiment": "fig5_fig6",
         "seed": 20240904,
@@ -22015,7 +22103,7 @@
         "snr": 0.2
       }
     ],
-    "n_completed_sim_jobs": 138,
+    "n_completed_sim_jobs": 140,
     "n_required_sim_jobs": 160,
     "note": "Do not declare a reproducing pipeline or failure until the required candidate runs exist. --quick files are excluded.",
     "stage_a_complete": false,
