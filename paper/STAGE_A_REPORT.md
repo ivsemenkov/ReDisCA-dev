@@ -424,11 +424,16 @@ Figs 5–6 under the same causal generation have started.
 | 5 | 3.88 cm | 0.232 | 0.280 | 0.005 | 0.960 |
 | 6 | 3.46 cm | 0.278 | 0.291 | 0.006 | 0.952 |
 
+SNR=0.2, same seed: C=3…6 medians 5.62 / 4.81 / 4.27 / **4.09 cm**
+(frac&lt;1 cm 0.12–0.22; pattern 0.22–0.28; RDM 0.95–1.00). Same
+C-trend, slightly worse localization than SNR=0.4.
+
 Compared with SIM-P1 (~7.5 cm, no C trend, pattern ~0.17): error
 now **falls as C increases**, RDM recovery is excellent, and
 patterns beat weights. Paper Fig. 6 asks for **< 2 cm at C=6**;
-this first seed is **3.46 cm**. Remaining seeds and SNR=0.2 are
-not finished. Do not treat this as a reproducing pipeline.
+these first seeds are **3.46 cm** (SNR=0.4) and **4.09 cm**
+(SNR=0.2). Remaining seeds are not finished. Do not treat this as
+a reproducing pipeline.
 
 Mechanism (same vertex / same literal δ on a matched one-MC
 replay): zero-phase `filtfilt` makes source RMS ~10³× larger and
