@@ -180,8 +180,10 @@ def _sim_rows() -> list[dict[str, Any]]:
     if not root.exists():
         return rows
     for candidate_dir in sorted(p for p in root.iterdir() if p.is_dir()):
+        if candidate_dir.name.startswith("_"):
+            continue
         for path in sorted(candidate_dir.rglob("*.json")):
-            if path.name.startswith("QUICK_NONREPRO_") or "_quick_leftovers" in path.parts:
+            if path.name.startswith("QUICK_NONREPRO_") or "_quick_leftovers" in path.parts or "_locks" in path.parts:
                 continue
             payload = read_json(path)
             if not _is_reproduction_payload(payload):
