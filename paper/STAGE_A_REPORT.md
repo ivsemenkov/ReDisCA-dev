@@ -864,7 +864,7 @@ Track-by-track, with A/B/C/D labels:
   Gain is **not proven** to be the paper’s individual-MRI
   forward. Status: unresolved historical forward-model mismatch.
   Do not treat this alone as a frozen-pipeline failure.
-- **Simulations (old 160/160 complete; expanded 280 required).**
+- **Simulations (old 160/160 complete; expanded 172 / 280 so far).**
   SIM-P3 (**C**, causal Butterworth; original freeze) is the
   **only completed** generation setting that is not
   pathologically far from paper Fig. 4: SNR=0.1 AUC 0.836–0.862,
